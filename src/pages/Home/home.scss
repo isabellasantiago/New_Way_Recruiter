@@ -1,0 +1,127 @@
+@media (max-width: 2890px){
+    header{
+        width: 100%;
+        height: 100px;
+        padding: 0px 42px;
+
+        background: #012E40;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h1{
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 42px;
+            > span{
+                font-style: italic;
+            }
+        }
+        #pages{
+            height:100%;
+            display: flex;
+            align-items: center;
+            a{
+                text-decoration:none;
+                color: #fff;
+                font-weight: 700;
+                font-size: 0.9rem;
+                white-space: nowrap;
+
+
+                height: 100%;
+                width: 130px;
+                border-radius: 8px;
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+
+                transition: 0.2s;
+                cursor: pointer;
+            }
+            a:first-of-type{
+                font-weight: 300;
+            }
+            a:not(:first-child):hover{
+                background: #023859;
+            }
+        }
+    }
+
+    main{
+        
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        width: calc(100% - 21px);
+        
+        margin: 42px;
+
+        div{
+            width: calc(100%/2);
+        }
+        #content{
+            display: flex;
+            flex-direction: column;
+            align-content:space-between;
+
+            height:calc(100%/2 - 21px);
+            
+
+            h1{
+                font-family: "Poppins", sans-serif;
+                color: #012E40;
+
+                align-self: flex-start;
+                margin-bottom: 20px;
+                padding: 0 12px;
+            }
+
+            p{
+                color: #555;
+                font-size: 1.12rem;
+                font-weight: 200;
+                margin-bottom: 20px;
+            }
+
+            #vantagens{
+                height:372px;
+                width:450px;
+
+                background-color: #AED3F2;
+                border-radius: 6px;
+
+                
+                padding: 30px;
+
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: center;
+
+                h2{
+                color: #012E40;
+                font-size: 1.12rem;
+                margin-bottom:10px;
+                }
+
+                p{
+                    color: #000;
+                }
+            }
+            
+
+        }
+
+        #images{
+            img{
+                width: 200px;
+            }
+        }
+    }
+}
