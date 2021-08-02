@@ -21,11 +21,13 @@ export function Home() {
             </header>
             <main>
                 <div id="content">
-                    <h1>Um novo jeito de fazer a melhor escolha.</h1>
-                    <p>Acreditamos que a melhor escolha é importante para a conquista de qualquer objetivo.
-                    Seja o que você estiver trilhando, deixe com a gente. Nós cuidamos disso para você.</p>
+                    <div id="description">
+                        <h1>Um novo jeito de fazer a melhor escolha.</h1>
+                        <p>Acreditamos que a melhor escolha é importante para a conquista de qualquer objetivo.
+                        Seja o que você estiver trilhando, deixe com a gente. Nós cuidamos disso para você.</p>
+                    </div>
 
-                    <div id="vantagens">
+                    <div id="advantages">
                         <h2>Vantagens para empresas:</h2>
                         <p>A plataforma que cuida da sua triagem, entregando a você o candidato com maior aderência a vaga e perfil da empresa!
                             <ul>
@@ -43,10 +45,12 @@ export function Home() {
                     </div>
                 </div>
                 <div id="images">
-                    <img src={hiringImg} id="hiring"/>
-                    <img src={hireImg} id="hire"/>
-                    <img src={resumeImg} id="resume"/>
-                    <img src={aroundTheWorldImg} id="aroundTheWorld"/>
+                    <div>
+                        <img src={hiringImg} id="hiring"/>
+                        <img src={hireImg} id="hire"/>
+                        <img src={resumeImg} id="resume"/>
+                        <img src={aroundTheWorldImg} id="aroundTheWorld"/>
+                    </div>
                 </div>
             </main>
         </div>

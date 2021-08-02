@@ -1,7 +1,7 @@
 @media (max-width: 2890px){
     header{
         width: 100%;
-        height: 100px;
+        height: 70px;
         padding: 0px 42px;
 
         background: #012E40;
@@ -59,42 +59,50 @@
         flex-flow: row nowrap;
         justify-content: center;
         align-items: center;
-        width: calc(100% - 21px);
+        width: calc(100% - 42px);
         
-        margin: 42px;
+        margin: 21px;
 
-        div{
+        >div{
             width: calc(100%/2);
+            padding: 32px;
         }
+
         #content{
             display: flex;
             flex-direction: column;
             align-content:space-between;
+            gap: 150px;
 
-            height:calc(100%/2 - 21px);
+            padding: 0 12px;
+
+            #description{
+                width: 100%;
+                
+                
+
+                h1{
+                    font-family: "Poppins", sans-serif;
+                    color: #012E40;
+    
+                    align-self: flex-start;
+                    margin-bottom: 20px;
+                
+                }
+    
+                p{
+                    color: #555;
+                    font-size: 1.12rem;
+                    font-weight: 200;
+                    margin-bottom: 20px;
+                }
+            }
             
-
-            h1{
-                font-family: "Poppins", sans-serif;
-                color: #012E40;
-
-                align-self: flex-start;
-                margin-bottom: 20px;
-                padding: 0 12px;
-            }
-
-            p{
-                color: #555;
-                font-size: 1.12rem;
-                font-weight: 200;
-                margin-bottom: 20px;
-            }
-
-            #vantagens{
+            #advantages{
                 height:372px;
                 width:450px;
 
-                background-color: #AED3F2;
+                background-color: #AED3F2;;
                 border-radius: 6px;
 
                 
@@ -119,8 +127,25 @@
         }
 
         #images{
+            height: 100vh;
+
             img{
-                width: 200px;
+                max-width: 200px;
+            }
+            #hiring{
+                transform: rotate(-12.13deg);
+            }
+            #hire{
+                transform: rotate(20.39deg);
+            }
+            #resume{
+                width: 150px;
+                transform: rotate(16.95deg);
+                position: relative;
+                top: 0px; left: 10px;
+            }
+            #aroundTheWorld{
+                max-width: 400px;
             }
         }
     }
