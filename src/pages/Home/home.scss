@@ -12,13 +12,18 @@
         justify-content: space-between;
         align-items: center;
 
-        h1{
+       a#logo{
+           text-decoration: none;
+           color: #fff;
+           h1{
             font-size: 1.25rem;
             font-weight: 600;
             line-height: 42px;
             > span{
                 font-style: italic;
             }
+       } 
+        
         }
         #pages{
             height:100%;
@@ -115,11 +120,16 @@
                 h2{
                 color: #012E40;
                 font-size: 1.12rem;
-                margin-bottom:10px;
+                margin:10px 0;
+
                 }
 
                 p{
                     color: #000;
+                }
+
+                ul{
+                    margin-bottom: 10px;
                 }
             }
             
