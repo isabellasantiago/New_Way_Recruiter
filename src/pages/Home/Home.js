@@ -20,7 +20,7 @@ export function Home() {
                 <div id="pages">
                     <a href="/login">Login</a>
                     <a href="#">Sou empresa</a>
-                    <a href="#">Sou candidato</a>
+                    <a href="/candidato">Sou candidato</a>
                 </div>
             </header>
             <main>
