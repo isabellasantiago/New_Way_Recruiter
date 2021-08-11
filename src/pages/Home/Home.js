@@ -6,17 +6,21 @@ import hireImg from '../../assets/images/hire.svg';
 import hiringImg from '../../assets/images/hiring.svg';
 import resumeImg from '../../assets/images/resume.svg';
 
+import {Login} from '../Login/Login';
+
 import './home.scss';
 
 export function Home() {
     return(
-        <div id="page-auth">
+        <div id="page-get-started">
             <header>
-                <h1>New <span>Way</span> Recruiter</h1>
+                <a href="/" id="logo">
+                    <h1>New <span>Way</span> Recruiter</h1>
+                </a>
                 <div id="pages">
-                    <a href="#">Login</a>
+                    <a href="/login">Login</a>
                     <a href="#">Sou empresa</a>
-                    <a href="#">Sou candidato</a>
+                    <a href="/candidato">Sou candidato</a>
                 </div>
             </header>
             <main>
