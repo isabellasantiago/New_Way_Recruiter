@@ -1,5 +1,6 @@
 import {React} from "react";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import { CandidatoForm } from "./pages/CandidatoCadastro/Candidato";
 
 
 import {Home} from "./pages/Home/Home";
@@ -12,6 +13,7 @@ function App() {
     <Switch>
     <Route path="/" exact component={Home}/>
     <Route path="/login" component={Login}/>
+    <Route path="/candidato" component={CandidatoForm}/>
     </Switch>
     </BrowserRouter>
     
