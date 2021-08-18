@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import './login.scss';
 
@@ -34,7 +34,10 @@ export function Login(){
                 </div>
 
                 <button>
-                    <img id="login-icon" src="#"/>
+                    <ExitToAppIcon
+                    color="white"
+                    fontSize="small"
+                    />
                     Entrar
                 </button>
             </div>
