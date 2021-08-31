@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './empresaform.scss';
 import empresaFormImg from '../../assets/images/careerDevelopment.svg'
+import MaskInput from '../../MaskInput';
 
+const initialValues = {
+  cpf:'',
+  cnpj: ''
+};
 
 export function EmpresaForm(){
+
+  const [values,setValues] = useState(initialValues);
+
+    function handleChange(event) {
+      setValues({
+        ...values,
+      [event.target.name]: event.target.value
+      });
+    }
+
   return(
   <div className="empresaform">
     <header className="emp-header">
@@ -31,7 +46,13 @@ export function EmpresaForm(){
 
           <div className="control-group">
           <label>CNPJ*</label>
-          <input type="text" placeholder="Exemplo: 02.614.385/0001-02" className=""/>
+         <MaskInput
+          placeholder="Exemplo: 02.614.385/0001-02"
+          name="cnpj"
+          mask="99.999.999/9999-99"
+          value={values.cnpj}
+          onChange={handleChange}
+         />
           </div>
 
           </div>

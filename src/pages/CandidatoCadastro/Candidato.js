@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './candidato.scss';
 import profile from '../../assets/images/profile.svg';
+import MaskInput from '../../MaskInput';
 
+const initialValues = {
+  cpf:'',
+  cnpj: ''
+};
 
 export function CandidatoForm(){
+
+    const [values,setValues] = useState(initialValues);
+
+    function handleChange(event) {
+      setValues({
+        ...values,
+      [event.target.name]: event.target.value
+      });
+    }
+
   return (
   <div className="cd">
     <header className="cd-header">
@@ -40,7 +55,12 @@ export function CandidatoForm(){
                 
               <div className="control-group">
               <label>CPF*</label>
-              <input type="text"  />
+              <MaskInput
+              name= "cpf"
+              mask= "999.999.999-99"
+              value= {values.cpf}
+              onChange={handleChange}
+              />
               </div>
 
               <div className="control-group">
