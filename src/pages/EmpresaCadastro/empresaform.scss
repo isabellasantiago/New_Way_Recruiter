@@ -53,7 +53,7 @@ div.empresaform{
       align-items: center;
     }
 
-    p{
+    p.pStart{
       
       position: absolute;
       width: 507px;
@@ -206,7 +206,18 @@ div.empresaform{
       padding-left:8px;
       border-radius: 8px;
       border: 1px solid #AFAFAF;
+
+      p {
+        font-family: Poppins;
+        color: #bf1650;
+      }
+      
+      p::before {
+        display: inline;
+        content: "⚠ ";
+      }
     }
+    
     button.candidato-submit{
       
       

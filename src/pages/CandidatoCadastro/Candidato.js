@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './candidato.scss';
 import profile from '../../assets/images/profile.svg';
 import MaskInput from '../../MaskInput';
+import { useForm } from "react-hook-form";
 
 const initialValues = {
   cpf:'',
@@ -9,6 +10,13 @@ const initialValues = {
 };
 
 export function CandidatoForm(){
+
+  const {
+    register,
+    formState: { errors },
+    getValues,
+    handleSubmit
+  } = useForm();
 
     const [values,setValues] = useState(initialValues);
 
@@ -33,20 +41,32 @@ export function CandidatoForm(){
 
           <h2>Faça agora seu cadastro como candidato!</h2>
           
-              <p>Insira seus dados abaixo para efetuar seu cadastro!</p>
+              <p className="form-paragrafo">Insira seus dados abaixo para efetuar seu cadastro!</p>
 
-            <form>
+            <form onSubmit={handleSubmit((data) => console.log(data))}>
 
               <div className="form-start">
                 
              <div className="control-group">
               <label>Nome*</label>
-              <input type="text" />
+              <input type="text" 
+              {...register("nome", { required: "Nome  é obrigatório!" })}
+              />
+              {errors.nome && (
+                <p style={{ color: "red" }}>{errors.nome.message}</p>
+              )}
+
               </div>
                 
               <div className="control-group">
               <label>Sobrenome*</label>
-              <input type="text" />
+              <input type="text"
+              {...register("sobrenome", { required: "Sobrenome  é obrigatório!" })}
+              />
+              {errors.sobrenome && (
+                <p style={{ color: "red" }}>{errors.sobrenome.message}</p>
+              )} 
+
               </div>
 
               </div>
@@ -58,14 +78,24 @@ export function CandidatoForm(){
               <MaskInput
               name= "cpf"
               mask= "999.999.999-99"
-              value= {values.cpf}
-              onChange={handleChange}
+              
+              {...register("cpf", { required: "CPF  é obrigatório!" })}
               />
+              {errors.cpf && (
+                <p style={{ color: "red" }}>{errors.cpf.message}</p>
+              )}
+              
               </div>
 
               <div className="control-group">
               <label>Número de telefone*</label>
-              <input type="phone" />
+              <input type="phone" 
+              {...register("phoneNumber", { required: "Número de telefone é obrigatório!" })}
+              />
+              {errors.phoneNumber && (
+                <p style={{ color: "red" }}>{errors.phoneNumber.message}</p>
+              )}
+
               </div>
 
               </div>
@@ -74,13 +104,45 @@ export function CandidatoForm(){
 
               <div className="form-end">
               <label>E-mail*</label>
-              <input type="email" />
+              <input type="email" 
+              {...register("email", { required: "E-mail é obrigatório!" })}
+              />
+              {errors.email && (
+                <p style={{ color: "red" }}>{errors.email.message}</p>
+              )}
+              
               
               <label>Senha*</label>
-              <input type="password" />
+              <input type="password" 
+              {...register("password", { required: "Senha é obrigatória!", 
+              minLength: { value: 8, message: 'Senha não pode ser menor que 8 caracteres.' }
+             })}
+              
+              />
+              {errors.password && (
+                <p style={{ color: "red" }}>{errors.password.message}</p>
+              )}
+              
               
               <label>Confirmação senha*</label>
-              <input type="password" />
+              <input type="password" 
+               {...register("passwordConfirmation", {
+                required: "Por Favor confirme a senha!",
+                validate: {
+                  matchesPreviousPassword: (value) => {
+                    const { password } = getValues();
+                    return password === value || "As senhas devem corresponder!";
+                  }
+                }
+              })}
+            />
+            {errors.passwordConfirmation && (
+              <p style={{ color: "red" }}>
+                {errors.passwordConfirmation.message}
+              </p>
+            )}
+              
+
             </div>
 
             <button className="candidato-submit" type="submit">Cadastrar</button>
