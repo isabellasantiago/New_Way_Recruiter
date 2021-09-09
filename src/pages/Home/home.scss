@@ -139,24 +139,10 @@
         #images{
             height: 100vh;
 
-            img{
-                max-width: 200px;
-            }
-            #hiring{
-                transform: rotate(-12.13deg);
-            }
-            #hire{
-                transform: rotate(20.39deg);
-            }
-            #resume{
-                width: 150px;
-                transform: rotate(16.95deg);
-                position: relative;
-                top: 0px; left: 10px;
-            }
             #aroundTheWorld{
-                max-width: 400px;
+                max-width: 600px;
             }
+           
         }
     }
 }
