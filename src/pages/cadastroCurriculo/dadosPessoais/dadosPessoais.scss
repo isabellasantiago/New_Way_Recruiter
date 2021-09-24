@@ -1,0 +1,122 @@
+*{
+    font-family: 'Poppins';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+section{
+    box-sizing: border-box;
+    max-width: 90%;
+    min-height: 50vh;
+    height: 70vh;
+    max-height: 80vh;
+
+    border-radius: 8px;
+
+    background: #fff;
+    padding: 20px;
+
+    margin-top: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h1{
+        font-weight: 500;
+    }
+
+    form{
+        font-family: 'Poppins', Arial, Sans-serif;
+        width: 100%;
+        height: 100%;
+
+        max-width: 70%;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        grid-gap: 50px;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-areas: 
+        "image linkedin linkedin"
+        "naturalness gender birthDate"
+        "state city phone"
+        "etnia pcd typePcd"
+        "contactViaWhatsapp . button";
+    
+        > div{
+            display:flex;
+            flex-direction: column;
+
+        }
+        #image{
+            grid-area: image;
+        }
+        #likedin{
+            grid-area: linkedin;
+        }
+        #naturalness{
+            grid-area: naturalness;
+        }
+        #gender{
+            grid-area: gender;
+        }
+        #birthDate{
+            grid-area: birthDate;
+        }
+        #state{
+            grid-area: state;
+        }
+        #city{
+            grid-area: city;
+        }
+        #phone{
+            grid-area: phone;
+        }
+        #contactViaWhatsapp{
+            grid-area: contactViaWhatsapp;
+            white-space: nowrap;
+            &:not(input[type="radio"]){
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            flex-direction: row;
+            }
+        }
+        #pcd{
+            grid-area: pcd;
+            white-space: nowrap;
+        }
+        #typePcd{
+            grid-area: typePcd;
+        }
+        #etnia{
+            grid-area: etnia;
+        }
+    
+        button{
+            grid-area: button;
+        }
+    
+    
+        Select{
+            height: 35px;
+            padding: 5px;
+        }
+    
+        input{
+            font-family: 'Poppins';
+            border: 1px solid #c4c4c4;
+            border-radius: 8px;
+            padding: 5px 15px;
+            max-width: 300px;
+            height: 35px;
+        }
+    }
+}
+

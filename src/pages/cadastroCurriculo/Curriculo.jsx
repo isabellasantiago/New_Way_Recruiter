@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 import { DadosPessoais } from './dadosPessoais/DadosPessoais';
 import { InfoAcademicas } from './infoAcademicas/InfoAcademicas';
-import {HeaderCandidato} from '../../components/HeaderCandidato/HeaderCandidato'
+import {HeaderCandidato} from '../../components/HeaderCandidato/HeaderCandidato';
+import Button from '../../components/Button/Button';
 
 const Cv = styled.div`
     display: flex;
@@ -19,7 +20,7 @@ export function Curriculo(){
     <div id="cabecalho">
         <h1>Cadastre seus dados</h1>
         <p>Lembre-se de sempre manter seu currículo atualizado!</p>
-        <button id="cancelar">Cancelar</button>
+        <Button id="cancelar">Cancelar</Button>
     </div>
     <DadosPessoais/>
     <InfoAcademicas />

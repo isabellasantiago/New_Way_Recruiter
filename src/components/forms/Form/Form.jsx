@@ -23,8 +23,8 @@ justify-content: center;
 .birthDate{
     grid-area: birthDate;
 }
-.uf{
-    grid-area: uf;
+.state{
+    grid-area: state;
 }
 .city{
     grid-area: city;
@@ -49,7 +49,7 @@ gap: 50px;
 grid-template-columns: repeat(3, auto);
 grid-template-rows: repeat(5, auto);
 grid-template-areas: 
-"image linkedin linkedin"
+"image  linkedin"
 "naturalness gender birthDate"
 "uf city phone"
 "etnia pcd typePcd"
@@ -58,6 +58,10 @@ grid-template-areas:
 Select{
     height: 35px;
     padding: 5px;
+}
+
+input{
+
 }
 
 `;
