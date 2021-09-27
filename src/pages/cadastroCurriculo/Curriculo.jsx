@@ -6,6 +6,9 @@ import { InfoAcademicas } from './infoAcademicas/InfoAcademicas';
 import {HeaderCandidato} from '../../components/HeaderCandidato/HeaderCandidato';
 import Button from '../../components/Button/Button';
 
+import './curriculo.scss';
+import { Idiomas } from './idiomas/Idiomas';
+
 const Cv = styled.div`
     display: flex;
     align-items: center;
@@ -24,6 +27,7 @@ export function Curriculo(){
     </div>
     <DadosPessoais/>
     <InfoAcademicas />
+    <Idiomas />
     </Cv>
     );
 }

@@ -2,10 +2,9 @@ import styled from 'styled-components';
 
 const Dados = styled.section`
     box-sizing: border-box;
-    width: 90%;
-    min-height: 50vh;
-    height: 70vh;
-    max-height: 80vh;
+    width: 70%;
+    
+    max-height: 100vh;
 
     border-radius: 8px;
 
@@ -23,6 +22,7 @@ const Dados = styled.section`
     h1{
         font-weight: 500;
     }
+
 `;
 
 export default Dados;

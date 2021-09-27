@@ -6,117 +6,105 @@
 }
 
 
-section{
+#dados-pessoais{
     box-sizing: border-box;
-    max-width: 90%;
-    min-height: 50vh;
-    height: 70vh;
-    max-height: 80vh;
+    width:70%;
+    
+    max-height: 100vh;
 
     border-radius: 8px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 
     background: #fff;
-    padding: 20px;
-
-    margin-top: 40px;
 
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
 
     h1{
         font-weight: 500;
+        margin:20px auto;
     }
 
     form{
         font-family: 'Poppins', Arial, Sans-serif;
-        width: 100%;
-        height: 100%;
+        min-width: 80%;
 
-        max-width: 70%;
-        margin: 0 auto;
-        display: grid;
+        min-height: 50vh;
+        max-height: 95vh;
+        
+        
+        // grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        // grid-template-rows: repeat(5, 1fr);
+        // grid-template-areas: 
+        // "sec1"
+        // "sec2"
+        // "sec3"
+        // "sec4"
+        // "sec5";
+
+        display: flex;
         align-items: center;
-        justify-content: center;
-        grid-gap: 50px;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        grid-template-rows: repeat(5, 1fr);
-        grid-template-areas: 
-        "image linkedin linkedin"
-        "naturalness gender birthDate"
-        "state city phone"
-        "etnia pcd typePcd"
-        "contactViaWhatsapp . button";
-    
-        > div{
-            display:flex;
-            flex-direction: column;
+        gap: 40px;
+        flex-direction: column;
 
-        }
-        #image{
-            grid-area: image;
-        }
-        #likedin{
-            grid-area: linkedin;
-        }
-        #naturalness{
-            grid-area: naturalness;
-        }
-        #gender{
-            grid-area: gender;
-        }
-        #birthDate{
-            grid-area: birthDate;
-        }
-        #state{
-            grid-area: state;
-        }
-        #city{
-            grid-area: city;
-        }
-        #phone{
-            grid-area: phone;
-        }
-        #contactViaWhatsapp{
-            grid-area: contactViaWhatsapp;
-            white-space: nowrap;
-            &:not(input[type="radio"]){
+        > div{
             display: flex;
-            gap: 5px;
-            align-items: center;
-            flex-direction: row;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%;
+        }
+
+        // #sec2{
+        //     grid-area: sec2;
+        // }
+        // #sec3{
+        //     grid-area: sec3;
+        // }
+        // #sec4{
+        //     grid-area: sec4;
+        // }
+        // #sec5{
+        //     grid-area: sec5;
+        // }
+
+        #wrapper{
+        display: flex;               
+        flex-direction: column;
+        white-space: nowrap;
+        width: 60%;
+        }
+
+        #radio-button{
+           display: flex;
+           gap: 5px;
+           align-items: center;
+        }
+    
+        .linkedin{
+            justify-content: flex-end;
+        }
+
+        select, input{
+            &:not(input[type="radio"]){
+            width: 230px
             }
+            
         }
-        #pcd{
-            grid-area: pcd;
-            white-space: nowrap;
-        }
-        #typePcd{
-            grid-area: typePcd;
-        }
-        #etnia{
-            grid-area: etnia;
-        }
-    
-        button{
-            grid-area: button;
-        }
-    
-    
-        Select{
-            height: 35px;
-            padding: 5px;
-        }
-    
+
         input{
             font-family: 'Poppins';
+            font-size: 0.8rem;
             border: 1px solid #c4c4c4;
             border-radius: 8px;
+            ;
             padding: 5px 15px;
-            max-width: 300px;
             height: 35px;
+            max-width: 330px;
         }
+
     }
 }
 
