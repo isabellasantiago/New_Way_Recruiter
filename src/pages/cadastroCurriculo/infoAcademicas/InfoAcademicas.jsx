@@ -52,15 +52,15 @@ export function InfoAcademicas(){
     return(
     <Dados id="info-academicas">
         <h1>Informações acadêmicas</h1>
-        <form id="info-academicas" onSubmit={handleSubmit(infoAcademicas)}>
+        <form id="info-academicas">
             <div id="sec1">
-                <Field.Text  label="Instituição de ensino" type="text" name="instituicao" onChange={onChange} {...register("instituicao")} value={listaFormacao.instituicao}/>
-                <Field.Text  label="Curso" type="text" name="curso" onChange={onChange} {...register("curso")} value={listaFormacao.curso}/>
+                <Field.Text  label="Instituição de ensino" type="text" name="instituicao" onChange={onChange} value={listaFormacao.instituicao}/>
+                <Field.Text  label="Curso" type="text" name="curso" onChange={onChange} value={listaFormacao.curso}/>
             </div>
             <div id="sec2">
                 <Label>
                     <Content>Formação</Content>
-                    <Select {...register("tipoFormacao")} name="tipoFormacao" onChange={onChange} value={listaFormacao.tipoFormacao}>
+                    <Select  name="tipoFormacao" onChange={onChange} value={listaFormacao.tipoFormacao}>
                         <option value="">Selecione</option>
                         <option value="extraCurricular">Extra curricular</option>
                         <option value="tecnico">Tecnico</option>
@@ -79,8 +79,8 @@ export function InfoAcademicas(){
                         <option value="trancado">Trancado</option>
                     </Select>
                 </Label>
-                <Field.Text label="Data de inicio" type="month" {...register("dataInicio")} name="dataInicio" onChange={onChange} value={listaFormacao.dataInicio}/>
-                <Field.Text label="Data de término" type="month" {...register("dataConclusao")} name="dataConclusao" onChange={onChange} value={listaFormacao.dataConclusao}/>
+                <Field.Text label="Data de inicio" type="month" name="dataInicio" onChange={onChange} value={listaFormacao.dataInicio}/>
+                <Field.Text label="Data de término" type="month" name="dataConclusao" onChange={onChange} value={listaFormacao.dataConclusao}/>
                 <Button type="submit">Adicionar</Button>
             </div>
             

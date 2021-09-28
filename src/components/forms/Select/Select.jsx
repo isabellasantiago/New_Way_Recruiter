@@ -3,9 +3,9 @@ import SelectForm from './SelectForm'
 
 
 
-const Select = ({register, name, className}) => {
+const Select = ({onChange, name, className, value}) => {
     return <>
-        <SelectForm ref={register} name={name} className={className}>
+        <SelectForm name={name} className={className} onChange={onChange} value={value}>
             <option value="">Selecione</option>
         </SelectForm>
     </>
