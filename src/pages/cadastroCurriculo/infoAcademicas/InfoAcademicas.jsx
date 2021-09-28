@@ -13,9 +13,7 @@ import Dados from '../dados/Dados';
 import Label from '../../../components/forms/Field/Label/Label';
 import Content from '../../../components/forms/Field/Content/Content';
 import Button from '../../../components/Button/Button';
-import { IconButton} from '@material-ui/core';
-import {AddIcon} from'@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete'
+
 
 
 
