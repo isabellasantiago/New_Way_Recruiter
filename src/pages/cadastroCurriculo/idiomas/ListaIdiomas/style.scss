@@ -3,4 +3,9 @@ div{
         display:flex;
         gap: 50px;
     }
+    button{
+        background: none;
+        border: 0;
+        cursor: pointer;
+    }
 }

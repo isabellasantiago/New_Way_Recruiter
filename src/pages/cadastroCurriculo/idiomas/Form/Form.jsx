@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
 import Field from '../../../../components/forms/Field';
 import Button from '../../../../components/Button/Button';
-import Select from '../../../../components/forms/Select/Select';
 
+import './formIdiomas.scss'
 
 
 export function Form(props){
     const {onSave} = props;
     const [text, setText] = useState('')
-    const [nivel, setNivel] = useState('Básico')
+    const [nivel, setNivel] = useState('')
 
 
     return(
         <>
-        <form action="#" id="idiomas">
-            <div id="sec1">
-                <Field.Text label="Idioma" name="idioma" type="text" onChange={(e) => {setText(e.target.value)}}/>
-                <Select onChange={(e) => {setNivel(e.target.value)}} value={nivel}>
-                    <option value="Basico">Básico</option>
-                    <option value="Intermediario">Intermediario</option>
-                    <option value="Avançado">Avançado</option>
-                    <option value="Fluente">Fluente</option>
-                </Select>
-                <Button type="submit" onClick={(ev) => onSave(ev,text, nivel)}>Adicionar</Button>
-            </div>
-        </form>
+            <form action="#" id="idiomas">
+                <div id="sec1">
+                    <Field.Text label="Idioma" name="idioma" type="text" onChange={(e) => {setText(e.target.value)}}/>
+                    <div id="wrapper">
+                        <label htmlFor="nivel">Nível</label>
+                        <select name="nivel" onChange={(e) => {setNivel(e.target.value)}} value={nivel}>
+                            <option value="">Selecione</option>
+                            <option value="Basico">Básico</option>
+                            <option value="Intermediario">Intermediario</option>
+                            <option value="Avançado">Avançado</option>
+                            <option value="Fluente">Fluente</option>
+                        </select>
+                    </div>
+                    <Button type="submit" onClick={(ev) => onSave(ev,text, nivel)}>Adicionar</Button>
+                </div>
+            </form>
         </>
     )
 }
