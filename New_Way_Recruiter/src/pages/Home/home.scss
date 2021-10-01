@@ -1,0 +1,162 @@
+@media (max-width: 2890px){
+    header{
+        width: 100%;
+        height: 70px;
+        padding: 0px 42px;
+
+        background: #012E40;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+       a#logo{
+           text-decoration: none;
+           color: #fff;
+           h1{
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 42px;
+            > span{
+                font-style: italic;
+            }
+       } 
+        
+        }
+        #pages{
+            height:100%;
+            display: flex;
+            align-items: center;
+            a{
+                text-decoration:none;
+                color: #fff;
+                font-weight: 700;
+                font-size: 0.9rem;
+                white-space: nowrap;
+
+
+                height: 100%;
+                width: 130px;
+                border-radius: 8px;
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+
+                transition: 0.2s;
+                cursor: pointer;
+            }
+            a:first-of-type{
+                font-weight: 300;
+            }
+            a:not(:first-child):hover{
+                background: #023859;
+            }
+        }
+    }
+
+    main{
+        
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        width: calc(100% - 42px);
+        
+        margin: 21px;
+
+        >div{
+            width: calc(100%/2);
+            padding: 32px;
+        }
+
+        #content{
+            display: flex;
+            flex-direction: column;
+            align-content:space-between;
+            gap: 150px;
+
+            padding: 0 12px;
+
+            #description{
+                width: 100%;
+                
+                
+
+                h1{
+                    font-family: "Poppins", sans-serif;
+                    color: #012E40;
+    
+                    align-self: flex-start;
+                    margin-bottom: 20px;
+                
+                }
+    
+                p{
+                    color: #555;
+                    font-size: 1.12rem;
+                    font-weight: 200;
+                    margin-bottom: 20px;
+                }
+            }
+            
+            #advantages{
+                height:372px;
+                width:450px;
+
+                background-color: #AED3F2;;
+                border-radius: 6px;
+
+                
+                padding: 30px;
+
+                display: flex;
+                flex-flow: column wrap;
+                justify-content: center;
+
+                h2{
+                color: #012E40;
+                font-size: 1.12rem;
+                margin:10px 0;
+
+                }
+
+                p{
+                    color: #000;
+                }
+
+                ul{
+                    margin-bottom: 10px;
+                }
+            }
+            
+
+        }
+
+        #images{
+            height: 100vh;
+
+            img{
+                max-width: 200px;
+            }
+            #hiring{
+                transform: rotate(-12.13deg);
+            }
+            #hire{
+                transform: rotate(20.39deg);
+            }
+            #resume{
+                width: 150px;
+                transform: rotate(16.95deg);
+                position: relative;
+                top: 0px; left: 10px;
+            }
+            #aroundTheWorld{
+                max-width: 400px;
+            }
+        }
+    }
+}

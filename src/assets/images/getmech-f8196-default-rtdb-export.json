@@ -1,0 +1,15 @@
+{
+  "users" : {
+    "cliente" : {
+      "cel" : "",
+      "city" : "",
+      "cpf" : "",
+      "email" : "",
+      "end" : "",
+      "imageUrl" : "",
+      "name" : "",
+      "password" : "",
+      "state" : ""
+    }
+  }
+}
