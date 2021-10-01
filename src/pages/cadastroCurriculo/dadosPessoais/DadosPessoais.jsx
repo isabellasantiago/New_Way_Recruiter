@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import schema from '../../../components/forms/FormNew/validation';
 
 
-import './dadosPessoais.scss';
+import './style.js';
 
 import { SelectEstado } from '../../../components/SelectEstado';
 import { SelectCidade } from '../../../components/SelectCidade';
@@ -96,7 +96,7 @@ export function DadosPessoais(){
 
                     <div id="wrapper">
                         <label htmlFor="phone" className="phone">Celular</label>
-                        <input type="text" name="phone" className="phone" {...register('phone')}/>
+                        <input type="tel" name="phone" className="phone" {...register('phone')}/>
                     </div>
                 </div>
                 <div id="sec4">
@@ -132,8 +132,8 @@ export function DadosPessoais(){
                         </div>
                     </div>
                 
-                    <Button>
-                        <a href="#info-academicas"> Próximo passo</a>
+                    <Button as="a" href="#info-academicas">
+                        Próximo passo
                     </Button>
                 </div>
             </form>

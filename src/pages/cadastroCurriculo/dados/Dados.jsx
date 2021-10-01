@@ -4,6 +4,7 @@ const Dados = styled.section`
     box-sizing: border-box;
     width: 70%;
     
+    min-height: 70vh; 
     max-height: 100vh;
 
     border-radius: 8px;
@@ -12,6 +13,7 @@ const Dados = styled.section`
     padding: 20px;
 
     margin-top: 40px;
+    padding: 22px;
 
     display: flex;
     align-items: center;

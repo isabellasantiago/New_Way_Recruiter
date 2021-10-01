@@ -14,6 +14,11 @@ export function Form(props){
     return(
         <>
             <form action="#" id="idiomas">
+                <div id="checkbox">
+                    <input type="checkbox" name="monolinguismo"/>
+                    <span>Não Possuo conhecimentos</span>
+                </div>
+                {}
                 <div id="sec1">
                     <Field.Text label="Idioma" name="idioma" type="text" onChange={(e) => {setText(e.target.value)}}/>
                     <div id="wrapper">
