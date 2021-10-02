@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
+import { useSpring, animated } from '@react-spring/web'; // web.cjs is required for IE 11 support
 import closeImg from '../../assets/images/close.svg';
 import './modal-candidato.scss';
 import Toggle from './Toggle';
