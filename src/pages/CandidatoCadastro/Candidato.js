@@ -3,6 +3,7 @@ import './candidato.scss';
 import profile from '../../assets/images/profile.svg';
 import MaskInput from '../../MaskInput';
 import { useForm } from "react-hook-form";
+import cadastro from '../../services/cadastro';
 
 const initialValues = {
   cpf:'',
@@ -27,6 +28,11 @@ export function CandidatoForm(){
       });
     }
 
+   
+ 
+    
+
+
   return (
   <div className="cd">
     <header className="cd-header">
@@ -43,7 +49,7 @@ export function CandidatoForm(){
           
               <p className="form-paragrafo">Insira seus dados abaixo para efetuar seu cadastro!</p>
 
-            <form onSubmit={handleSubmit((data) => console.log(data))}>
+            <form onSubmit={handleSubmit((data) => save(data))}>
 
               <div className="form-start">
                 
