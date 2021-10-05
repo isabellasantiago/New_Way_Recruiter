@@ -1,7 +1,7 @@
-import styled from '@styled-components';
+import styled from 'styled-components';
 
 
-const DadosPessoais = styled.section`
+export const DadosPessoais = styled.section`
     font-family: 'Poppins';
     margin: 0;
     padding: 0;
@@ -56,13 +56,13 @@ const DadosPessoais = styled.section`
     
 `
 
-const TituloFormulario = styled.h1`
+export const TitleForm = styled.h1`
     font-weight: 500;
     margin:20px auto;
 `;
 
 
-const DadosPessoaisForm = styled.form`
+export const DadosPessoaisForm = styled.form`
     display: flex;
     align-items: center;
     gap: 40px;
@@ -75,7 +75,7 @@ const DadosPessoaisForm = styled.form`
     max-height: 95vh;
 `;
 
-const Grid = styled.div`
+export const Grid = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -83,7 +83,7 @@ const Grid = styled.div`
 `;
 
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
     display: flex;               
     flex-direction: column;
     white-space: nowrap;

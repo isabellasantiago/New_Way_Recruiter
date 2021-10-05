@@ -19,11 +19,9 @@ const Button = styled.button`
     align-items: center;
     justify-content: center;
 
-    a{
-        text-decoration: none;
-        color: #fff;
-        font: 400 0.9rem 'Poppins';
-    }
+    white-space: nowrap;
+    text-decoration: none;
+
 `;
 
 export default Button;
