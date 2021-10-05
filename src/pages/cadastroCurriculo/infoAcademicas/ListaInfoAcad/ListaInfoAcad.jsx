@@ -1,38 +1,40 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import './style.scss';
+import {TableLista, TableHeader, TableTitle, TableBody, TableItem, TableData, TableRow} from './style';
+
+
 
 export function ListaInfoAcad(props){
     const {formacao} = props;
 
     return(
-        <table>
-            <thead>
-                <tr>
-                    <th>Formação</th>
-                    <th>Status</th>
-                    <th>Instituição</th>
-                    <th>Curso</th>
-                    <th>Início</th>
-                    <th>Término</th>
-                </tr>
-            </thead>
-            <tbody>
-            {formacao.map(formacaoInfo => {
+        <TableLista>
+            <TableHeader>
+                <TableRow>
+                    <TableTitle>Formação</TableTitle>
+                    <TableTitle>Status</TableTitle>
+                    <TableTitle>Instituição</TableTitle>
+                    <TableTitle>Curso</TableTitle>
+                    <TableTitle>Início</TableTitle>
+                    <TableTitle>Término</TableTitle>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+            {formacao.map((formacaoInfo, index) => {
                 return(
-                    <tr id="item">
-                        <td>{formacaoInfo.tipoFormacao}</td>
-                        <td>{formacaoInfo.statusFormacao}</td>
-                        <td>{formacaoInfo.instituicao}</td>
-                        <td>{formacaoInfo.curso}</td>
-                        <td>{formacaoInfo.dataInicio}</td>
-                        <td>{formacaoInfo.dataTermino}</td>
-                        <button><DeleteIcon/></button>
-                    </tr>
-                )
-            })}
-            </tbody>   
-        </table>
+                    <TableItem key={index}>
+                        <TableData>{formacaoInfo.tipoFormacao}</TableData>
+                        <TableData>{formacaoInfo.statusFormacao}</TableData>
+                        <TableData>{formacaoInfo.instituicao}</TableData>
+                        <TableData>{formacaoInfo.curso}</TableData>
+                        <TableData>{formacaoInfo.dataInicio}</TableData>
+                        <TableData>{formacaoInfo.dataTermino}</TableData>
+                        <button onClick={() => props.deleteFormacao(index)}><DeleteIcon/></button>
+                    </TableItem>
+                )})
+            }
+            </TableBody>   
+        </TableLista>
     )
 }

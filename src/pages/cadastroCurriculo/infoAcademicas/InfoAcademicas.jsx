@@ -5,8 +5,6 @@ import { ListaInfoAcad } from './ListaInfoAcad/ListaInfoAcad';
 
 
 
-
-
 const valorInicial = {id: 0, instituicao: '', curso:'', tipoFormacao: '', statusFormacao: '', dataInicio: '', dataTermino: ''}
 
 export function InfoAcademicas(){
@@ -23,12 +21,24 @@ export function InfoAcademicas(){
         setListaFormacao([...listaFormacao, {instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino}])
     }
 
+    const deleteFormacao = (index) => {
+        let newListaFormacao = [...listaFormacao]
+        newListaFormacao.splice(index, 1)
+
+        setListaFormacao(newListaFormacao)
+        saveFormacao(newListaFormacao)
+    }
+
+    const saveFormacao = (formacaoToSave) => {
+        localStorage.setItem("listaFormacao", JSON.stringify(formacaoToSave))
+    }
+
     return(
     <Dados id="info-academicas">
         <h1>Informações acadêmicas</h1>
         <FormInfoAcad onSave={addInfoAcademicas}/>
         {console.log(addInfoAcademicas)}
-        <ListaInfoAcad formacao={listaFormacao}/>
+        <ListaInfoAcad formacao={listaFormacao} deleteFormacao={deleteFormacao}/>
     </Dados>
     )
 }
