@@ -5,6 +5,7 @@ export const TableLista = styled.table`
     
     border: 1px solid #000;
     background-color: rgba(255, 255, 255, 0.5);
+    margin-top: 20px;
     
 
     &:not(#header){

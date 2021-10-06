@@ -22,6 +22,7 @@ export function FormInfoAcad(props){
                     <label htmlFor="tipoFormacao">Formação</label>
                     <select name="tipoFormacao" onChange={(e) => {setTipoFormacao(e.target.value)}} value={tipoFormacao || ""}>
                         <option value="">Selecione</option>
+                        <option value="ensinoRegular">Ensino regular</option>
                         <option value="extraCurricular">Extra curricular</option>
                         <option value="tecnico">Tecnico</option>
                         <option value="superior">Superior</option>
@@ -41,8 +42,8 @@ export function FormInfoAcad(props){
                         <option value="trancado">Trancado</option>
                     </select>
                 </Wrapper>
-                <Field.Text label="Data de inicio" type="month" name="dataInicio" onChange={(e) => setDataInicio(e.target.value)} lang="pt-BR" value={dataInicio || ""}/>
-                <Field.Text label="Data de término" type="month" name="dataTermino"  onChange={(e) => setDataTermino(e.target.value)} lang="pt-BR" value={dataTermino || ""}/>
+                <Field.Text label="Data de inicio" type="date" name="dataInicio" onChange={(e) => setDataInicio(e.target.value)} value={dataInicio || ""}/>
+                <Field.Text label="Data de término" type="date" name="dataTermino"  onChange={(e) => setDataTermino(e.target.value)} value={dataTermino || ""}/>
                 <Button type="submit"
                 onClick={(ev) => {
                     setInstituicao("")
