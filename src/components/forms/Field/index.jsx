@@ -5,10 +5,10 @@ import Content from './Content/Content';
 
 
 
-const Text = ({label, type, name, value, className, onChange}) =>{
+const Text = ({label, type, name, value, className, onChange, required}) =>{
     return <Label>
         <Content>{label}</Content>
-        <Input type={type} name={name} onChange={onChange} className={className} value={value}/>
+        <Input type={type} name={name} onChange={onChange} className={className} value={value} required/>
     </Label>
 }
 

@@ -9,13 +9,7 @@ import {TableLista, TableHeader, TableTitle, TableBody, TableItem, TableData, Ta
 export function ListaInfoAcad(props){
     const {formacao} = props;
 
-    const dateValidation = (date, dateFinal) => {
-        if(Number(getYear(date)) > Number(getYear(dateFinal))){
-            throw new Error("Invalid date")
-        }
-
-        return format(dateFinal, 'MMM/yyy')
-    }
+    
 
 
     return(

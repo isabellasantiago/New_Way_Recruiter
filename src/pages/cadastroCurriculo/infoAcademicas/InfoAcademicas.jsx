@@ -49,6 +49,7 @@ export function InfoAcademicas(){
         console.log(listaFormacao)
     }, []);
 
+
     return(
     <Dados id="info-academicas">
         <h1>Informações acadêmicas</h1>

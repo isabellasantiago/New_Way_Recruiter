@@ -14,6 +14,12 @@ import * as yup from 'yup';
     pcd: yup.string().required('PCD é um campo é obrigatório'),//pessoa com deficiendia
     typePcd: yup.string().required('Tipo é um campo é obrigatório'),//tipo da deficiencia
     contactViaWhatsapp: yup.string().required(''),//contato via whatsapp
+    instituicao: yup.string().required('Este campo é um campo é obrigatório'),
+    curso: yup.string().required('Este campo é um campo é obrigatório'),
+    tipoFormacao: yup.string().required('Este campo é um campo é obrigatório'),
+    statusFormacao: yup.string().required('Este campo é um campo é obrigatório'),
+    dataInicio: yup.date().required('Este campo é um campo é obrigatório'),
+    dataTermino: yup.date().required('Este campo é um campo é obrigatório')
 })
 
 export default schema
