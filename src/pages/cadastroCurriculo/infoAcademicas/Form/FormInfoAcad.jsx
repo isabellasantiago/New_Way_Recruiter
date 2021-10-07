@@ -46,13 +46,13 @@ export function FormInfoAcad(props){
                 <Field.Text label="Data de término" type="date" name="dataTermino"  onChange={(e) => setDataTermino(e.target.value)} value={dataTermino || ""}/>
                 <Button type="submit"
                 onClick={(ev) => {
+                    onSave(ev, instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino)
                     setInstituicao("")
                     setCurso("")
                     setTipoFormacao("")
                     setStatusFormacao("")
                     setDataInicio("")
                     setDataTermino("")
-                    onSave(ev, instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino)
                 }}>Adicionar</Button>
             </FormWrapper>
         </Form>

@@ -5,7 +5,6 @@ import { ListaInfoAcad } from './ListaInfoAcad/ListaInfoAcad';
 
 
 
-const valorInicial = {id: 0, instituicao: '', curso:'', tipoFormacao: '', statusFormacao: '', dataInicio: '', dataTermino: ''}
 
 export function InfoAcademicas(){
     
@@ -13,12 +12,12 @@ export function InfoAcademicas(){
         console.log(data)
     };
 
-    const [listaFormacao, setListaFormacao] =  useState([valorInicial])
-    let count = 1;
+    const [listaFormacao, setListaFormacao] =  useState()
 
     const addInfoAcademicas =(ev, instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino) => {
         ev.preventDefault();
-        setListaFormacao([...listaFormacao, {instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino}])
+
+        setListaFormacao([...listaFormacao || [], {instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino}])
 
     }
 
@@ -27,7 +26,6 @@ export function InfoAcademicas(){
         newListaFormacao.splice(index, 1)
 
         setListaFormacao(newListaFormacao)
-
     }
 
     const saveFormacao = (formacaoToSave) => {
@@ -35,22 +33,27 @@ export function InfoAcademicas(){
     }
 
     const loadListaFormacao = () => {
-        const loadedFormacao = JSON.parse(localStorage.getItem("listaFormacao", ))
+        const loadedFormacao = JSON.parse(localStorage.getItem("listaFormacao"))
 
         return loadedFormacao
     }
+    useEffect(()=>{
+        if(listaFormacao){
+            saveFormacao(listaFormacao)
+        }
+    }, [listaFormacao])
 
     useEffect(() => {
-        saveFormacao(listaFormacao)
-
-    }, [listaFormacao])
+        const loadedFormacao = loadListaFormacao();
+        setListaFormacao(loadedFormacao);
+        console.log(listaFormacao)
+    }, []);
 
     return(
     <Dados id="info-academicas">
         <h1>Informações acadêmicas</h1>
         <FormInfoAcad onSave={addInfoAcademicas}/>
-        {console.log(addInfoAcademicas)}
-        <ListaInfoAcad formacao={listaFormacao} deleteFormacao={deleteFormacao}/>
+        {listaFormacao ? <ListaInfoAcad formacao={listaFormacao} deleteFormacao={deleteFormacao}/> : null}
     </Dados>
     )
 }

@@ -41,7 +41,7 @@ export function ListaInfoAcad(props){
                                 <TableData>{formacaoInfo.curso}</TableData>
                                 <TableData>{formacaoInfo.dataInicio}</TableData>
                                 <TableData>{formacaoInfo.dataTermino}</TableData>
-                                <button onClick={() => props.deleteFormacao(index)}><DeleteIcon/></button>
+                                <TableData><button onClick={() => props.deleteFormacao(index)}><DeleteIcon/></button></TableData>
                             </TableItem>
                         )
                     }
