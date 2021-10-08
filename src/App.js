@@ -5,7 +5,13 @@ import { CandidatoForm } from "./pages/CandidatoCadastro/Candidato";
 import { EmpresaForm } from "./pages/EmpresaCadastro/EmpresaForm";
 import {Home} from "./pages/Home/Home";
 import{Login} from "./pages/Login/Login";
+
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
+
+import {Curriculo} from './pages/cadastroCurriculo/Curriculo';
+import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
+
+
 
 function App() {
   return (
