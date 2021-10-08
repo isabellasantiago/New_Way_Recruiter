@@ -1,22 +1,22 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete'
 
-import './style.scss'
+import {Item} from './style.js';
 
 
 export function ListaIdiomas(props){
     const {idiomas} = props;
     return(
         <>
-        {idiomas.map(idioma => {
+        {idiomas.length > 0 && (idiomas.map(idioma => {
             return(
-                <div id="item">
+                <Item id="item">
                 <span>{idioma.idioma}</span>
                 <span>{idioma.nivel}</span>
                 <button><DeleteIcon /></button>
-                </div>
+                </Item>
             )
-        })}
+        }))}
         </>
     )
 }

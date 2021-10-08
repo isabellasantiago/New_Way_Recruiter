@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schema from '../../../components/forms/FormNew/validation';
+import schema from '../../../validation/validation';
 import { SelectEstado } from '../../../components/SelectEstado';
 import { SelectCidade } from '../../../components/SelectCidade';
 import Button from '../../../components/Button/Button';
