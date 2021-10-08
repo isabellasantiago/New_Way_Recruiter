@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { DadosPessoais } from './dadosPessoais/DadosPessoais';
+import { DadosPessoaisSection } from './dadosPessoais/DadosPessoais';
 import { InfoAcademicas } from './infoAcademicas/InfoAcademicas';
 import {HeaderCandidato} from '../../components/HeaderCandidato/HeaderCandidato';
 import Button from '../../components/Button/Button';
@@ -25,7 +25,7 @@ export function Curriculo(){
         <p>Lembre-se de sempre manter seu currículo atualizado!</p>
         <Button id="cancelar">Cancelar</Button>
     </div>
-    <DadosPessoais/>
+    <DadosPessoaisSection/>
     <InfoAcademicas />
     <Idiomas />
     </Cv>
