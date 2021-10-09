@@ -8,15 +8,15 @@ export function ListaIdiomas(props){
     const {idiomas} = props;
     return(
         <>
-        {idiomas.length > 0 && (idiomas.map(idioma => {
+        {idiomas.map((idioma, index) => {
             return(
                 <Item id="item">
                 <span>{idioma.idioma}</span>
                 <span>{idioma.nivel}</span>
-                <button><DeleteIcon /></button>
+                <button onClick={() => props.deleteIdioma(index)}><DeleteIcon /></button>
                 </Item>
             )
-        }))}
+        })}
         </>
     )
 }

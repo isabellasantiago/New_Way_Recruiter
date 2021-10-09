@@ -1,6 +1,5 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {format, getYear} from 'date-fns';
 
 import {TableLista, TableHeader, TableTitle, TableBody, TableItem, TableData, TableRow} from './style';
 

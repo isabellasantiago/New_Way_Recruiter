@@ -8,9 +8,6 @@ import{Login} from "./pages/Login/Login";
 
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 
-import {Curriculo} from './pages/cadastroCurriculo/Curriculo';
-import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
-
 
 
 function App() {

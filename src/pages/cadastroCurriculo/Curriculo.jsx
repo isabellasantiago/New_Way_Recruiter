@@ -5,14 +5,31 @@ import { DadosPessoaisSection } from './dadosPessoais/DadosPessoais';
 import { InfoAcademicas } from './infoAcademicas/InfoAcademicas';
 import {HeaderCandidato} from '../../components/HeaderCandidato/HeaderCandidato';
 import Button from '../../components/Button/Button';
-
-import './curriculo.scss';
 import { Idiomas } from './idiomas/Idiomas';
+import { SkillsInput } from './Skills';
+
 
 const Cv = styled.div`
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
+
+    #cabecalho{
+        margin-top: 20px;
+
+        display: flex;
+        flex-flow: column nowrap;
+
+        text-align: center;
+        gap: 16px;
+        align-items: center;
+        justify-content: center;
+    
+
+        h1{
+            font-weight: 500;
+        }
+    }
 `;
 
 export function Curriculo(){
@@ -28,6 +45,7 @@ export function Curriculo(){
     <DadosPessoaisSection/>
     <InfoAcademicas />
     <Idiomas />
+    <SkillsInput />
     </Cv>
     );
 }

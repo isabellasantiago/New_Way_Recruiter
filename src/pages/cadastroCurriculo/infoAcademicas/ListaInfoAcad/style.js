@@ -48,4 +48,10 @@ export const TableData = styled.td`
     font-size: 12px;
 
     text-transform: capitalize;
+
+    button{
+        background: transparent;
+        border: 0;
+        cursor:pointer;
+    }
 `;
