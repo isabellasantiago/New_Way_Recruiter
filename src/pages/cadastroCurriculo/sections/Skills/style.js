@@ -1,11 +1,5 @@
 import styled from 'styled-components'
 
-export const InputSkill = styled.input`
-    font: 10px "Poppins", Sans-serif;
-    border: none;
-    background: transparent;
-    width: auto;
-`;
 
 export const LabelInput = styled.div`
     display: flex;
@@ -14,6 +8,7 @@ export const LabelInput = styled.div`
     justify-content: center;
 
     width: 100%;
+    margin-bottom: 50px;
 
     > span{
             font: 10px "Poppins", sans-serif;
@@ -31,15 +26,18 @@ export const TitleInput = styled.h1`
 
 export const SkillTags = styled.div`
     display: flex;
-    align-items: flex-start;
-    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
     min-height:48px;
-    height: 64px;
     width: 80%;
 
+    box-sizing: border-box;
     border: 3px solid #e2e2e2;
     border-radius: 8px;
-    padding: 0 8px;
+    padding: 3px 8px;
+    margin-top: 10px;
 
     font: 12px "Poppins", Sans-serif;
 
@@ -54,24 +52,45 @@ export const SkillTags = styled.div`
         align-items: center;
         gap: 8px;
         padding: 8px;
-        width: 100%;
+        width: auto;
 
 
         #item{
             width: auto;
-            height: 30px;
+            height: 28px;
             
             display:flex;
             align-items: center;
             justify-content: center;
             padding: 0 8px;
-            gap: 5px;
+            gap: 2px;
 
             background: #4EA3D9;
             border-radius: 25px;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
             
-            font: 15px "Poppins", Sans-serif;
+            font: 14px "Poppins", Sans-serif;
+
+            text-transform: uppercase;
+
+            button{
+                background: none;
+                border: none;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+    input{
+        font: 12px "Poppins", Sans-serif;
+        border: none;
+        background: transparent;
+        width: auto;
+        height: 30px;
+
+        &:focus{
+            box-shadow: 0 0 0 0;
+            outline: 0;
         }
     }
 `;

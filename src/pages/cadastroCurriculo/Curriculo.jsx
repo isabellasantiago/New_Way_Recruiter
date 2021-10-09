@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { DadosPessoaisSection } from './dadosPessoais/DadosPessoais';
-import { InfoAcademicas } from './infoAcademicas/InfoAcademicas';
+import { DadosPessoaisSection } from './sections/dadosPessoais/DadosPessoais';
+import { InfoAcademicas } from './sections/infoAcademicas/InfoAcademicas';
 import {HeaderCandidato} from '../../components/HeaderCandidato/HeaderCandidato';
 import Button from '../../components/Button/Button';
-import { Idiomas } from './idiomas/Idiomas';
-import { SkillsInput } from './Skills';
+import { Idiomas } from './sections/idiomas/Idiomas';
+import { SkillsInput } from './sections/Skills';
 
 
 const Cv = styled.div`

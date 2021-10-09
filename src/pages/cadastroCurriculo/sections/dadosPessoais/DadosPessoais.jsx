@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schema from '../../../validation/validation';
-import { SelectEstado } from '../../../components/SelectEstado';
-import { SelectCidade } from '../../../components/SelectCidade';
-import Button from '../../../components/Button/Button';
+import schema from '../../../../validation/validation';
+import { SelectEstado } from '../../../../components/SelectEstado';
+import { SelectCidade } from '../../../../components/SelectCidade';
+import Button from '../../../../components/Button/Button';
 
 import {DadosPessoais, TitleForm, DadosPessoaisForm, Grid, Wrapper} from './style.js';
 
@@ -12,7 +12,6 @@ import {DadosPessoais, TitleForm, DadosPessoaisForm, Grid, Wrapper} from './styl
 export function DadosPessoaisSection(){
 
     const [formValues, setFormValues] = useState({});
-    const [pcd, setPcd] = useState(false);
 
 
     const {register, handleSubmit } = useForm({
@@ -29,9 +28,6 @@ export function DadosPessoaisSection(){
         console.log(data)
     };
 
-    const isPcd = () =>{
-        setPcd(true);
-    }
 
     return(
         <DadosPessoais>

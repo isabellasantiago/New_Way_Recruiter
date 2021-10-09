@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Field from '../../../../components/forms/Field';
-import Button from '../../../../components/Button/Button';
+import Field from '../../../../../components/forms/Field';
+import Button from '../../../../../components/Button/Button';
 
 import {FormIdioma, Checkbox, InputWrapper} from'./formIdiomas.js'
 import { Wrapper } from '../../dadosPessoais/style';

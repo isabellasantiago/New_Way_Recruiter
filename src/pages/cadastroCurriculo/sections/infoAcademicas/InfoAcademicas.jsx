@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Dados from '../dados/Dados';
+import Dados from '../../dados/Dados';
 import { FormInfoAcad }from './Form/FormInfoAcad';
 import { ListaInfoAcad } from './ListaInfoAcad/ListaInfoAcad';
 
