@@ -3,7 +3,7 @@
 import { DataTypes } from "sequelize";
 import { newWayDB } from "../database/connectDB";
 
-const candidatoModelo = newWayDB.define ('cadcandidatos', {
+const candidatoModelo = newWayDB.define ('cadcandidato', {
 
     idcandidato: {
         type: DataTypes.INTEGER,
@@ -19,9 +19,14 @@ const candidatoModelo = newWayDB.define ('cadcandidatos', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    email: {
+    telefone: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        unique: true,
     },
     senha: {
         type: DataTypes.STRING,
@@ -30,6 +35,7 @@ const candidatoModelo = newWayDB.define ('cadcandidatos', {
     cpf: {
         type: DataTypes.STRING,
         allowNull: true,
+        unique: true,
     },
 
 })
