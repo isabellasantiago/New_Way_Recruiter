@@ -2,16 +2,22 @@ import React, { useState } from 'react';
 import './candidato.scss';
 import profile from '../../assets/images/profile.svg';
 import MaskInput from '../../MaskInput';
-import { useForm } from "react-hook-form";
-import cadastro from '../../services/cadastro';
+import {useForm} from 'react-hook-form';
+import axios from 'axios';
+
+
 
 const initialValues = {
   cpf:'',
   cnpj: ''
 };
 
-export function CandidatoForm(){
 
+
+export function CandidatoForm(){
+  const [isBusy, setIsBusy] = useState(false);
+
+ 
   const {
     register,
     formState: { errors },
@@ -20,6 +26,7 @@ export function CandidatoForm(){
   } = useForm();
 
     const [values,setValues] = useState(initialValues);
+    
 
     function handleChange(event) {
       setValues({
@@ -27,10 +34,33 @@ export function CandidatoForm(){
       [event.target.name]: event.target.value
       });
     }
-
-   
- 
     
+
+  async function onSubmit (data)  {
+  
+      
+      const URL = 'http://localhost:3333/cadcandidato';
+     await axios(URL, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+          },
+          data: { 
+          nome: data.nome,
+          sobrenome: data.sobrenome,
+          telefone:data.phoneNumber,
+          email:data.email,
+          senha:data.passwordConfirmation,
+          cpf:data.cpf,
+          }
+        })
+          .then(response => response.data)
+          .catch(error => {
+            throw error;
+          });
+    }
+
+ 
 
 
   return (
@@ -49,7 +79,7 @@ export function CandidatoForm(){
           
               <p className="form-paragrafo">Insira seus dados abaixo para efetuar seu cadastro!</p>
 
-            <form onSubmit={handleSubmit((data) => save(data))}>
+            <form onSubmit={handleSubmit(onSubmit)}>
 
               <div className="form-start">
                 
@@ -151,7 +181,7 @@ export function CandidatoForm(){
 
             </div>
 
-            <button className="candidato-submit" type="submit">Cadastrar</button>
+            <button className="candidato-submit"  type="submit">Cadastrar</button>
 
             </form>
 
@@ -161,5 +191,6 @@ export function CandidatoForm(){
 
     </main>
 
-  </div>);
-}
+  </div>
+  );
+            }
