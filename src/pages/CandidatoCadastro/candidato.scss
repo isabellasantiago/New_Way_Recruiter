@@ -55,7 +55,7 @@ div.cd{
                 color: #000000;
               }
 
-              p{
+              p.form-paragrafo{
                 float: top;
                 text-align: center;
                 font-family: Roboto;
@@ -108,7 +108,17 @@ div.cd{
 
                   border-radius: 8px;
                   border: 1px solid #c6c6c6;
-              
+                
+                  p {
+                    
+                    font-family: "Poppins" , sans-serif;
+                    color: #bf1650;
+                  }
+                  
+                  p::before {
+                    display: inline;
+                    content: "⚠ ";
+                  }
               }
 
           button.candidato-submit{
