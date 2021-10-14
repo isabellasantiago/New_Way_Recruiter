@@ -3,12 +3,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { Request, Response } from "express";
-import { newWayDB } from "../database/connectDB";
 import { candidatoModelo } from "../models/candidato";
 
 class candidatoController {
-    async create (req: Request, res: Response) 
-    {
+    async create (req: Request, res: Response) {
         const {cpf, senha, email, telefone, sobrenome, nome} = req.body;
         const candidato = await candidatoModelo.create ({
             nome,
@@ -18,9 +16,44 @@ class candidatoController {
             senha,
             cpf,
         });
-
         return res.status(201).json(candidato);
     }
+
+    async findAll (req: Request, res: Response) {
+        const candi = await candidatoModelo.findAll();
+        return candi.length > 0 ? 
+        res.status(200).json(candi) :
+        res.status(204).send();
+    }
+
+    async findById (req: Request, res: Response) {
+        const { id } = req.params;
+        const candidato = await candidatoModelo.findAll({
+            where: {
+                idcandidato: id,
+            },
+        });
+        return  candidato ? 
+        res.status(200).json(candidato) :
+        res.status(204).send()
+    }
+
+    async update (req: Request, res: Response) {
+        const { id } = req.params;
+        const {telefone, sobrenome, nome} = req.body;
+        const candidato = await candidatoModelo.update ({
+            nome,
+            sobrenome,
+            telefone,
+        },
+            {
+                where: {
+                    idcandidato: id,
+                },
+            });
+        return res.status(201).json(candidato);
+    }
+    
 }
 
 // eslint-disable-next-line new-cap
