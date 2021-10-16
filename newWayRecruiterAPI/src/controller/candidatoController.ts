@@ -53,6 +53,32 @@ class candidatoController {
             });
         return res.status(201).json(candidato);
     }
+
+    async delete (req: Request, res: Response) {
+        const { id } = req.params;
+        const candidato = await candidatoModelo.destroy({
+            where: {
+                idcandidato: id,
+            },
+        });
+        return  res.status(200).json(candidato);
+    }
+
+    async autenticar (req: Request, res: Response) {
+        const { email, senha } = req.body;
+
+        const usuario = await candidatoModelo.findAll({
+            where: {
+                email: email,
+                senha: senha,
+            },
+        });
+        if (!usuario) {
+            return res.status(400).send();
+        }else {
+        return  res.status(200).json(usuario);
+        };
+    }
     
 }
 
