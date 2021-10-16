@@ -27,6 +27,7 @@ const candidatoModelo = newWayDB.define ('cadcandidato', {
         type: DataTypes.STRING,
         allowNull: true,
         unique: true,
+        
     },
     senha: {
         type: DataTypes.STRING,
