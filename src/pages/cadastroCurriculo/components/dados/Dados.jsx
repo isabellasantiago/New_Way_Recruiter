@@ -3,9 +3,6 @@ import styled from 'styled-components';
 const Dados = styled.section`
     box-sizing: border-box;
     width: 70%;
-    
-    min-height: 70vh; 
-    max-height: 100vh;
 
     border-radius: 8px;
 
@@ -23,6 +20,7 @@ const Dados = styled.section`
 
     h1{
         font-weight: 500;
+        font-family: "Poppins", Sans-serif;
     }
 
 `;

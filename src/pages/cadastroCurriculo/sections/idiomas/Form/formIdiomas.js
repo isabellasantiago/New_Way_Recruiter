@@ -7,6 +7,9 @@ export const FormIdioma = styled.form`
     gap: 50px;
     margin-bottom: 20px;
 
+    select{
+        background: #fff;
+    }
 `;
 
 export const Checkbox = styled.div`

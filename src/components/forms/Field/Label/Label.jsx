@@ -11,6 +11,12 @@ const Label = styled.label`
     margin-bottom: 10px;
 
     max-width: 330px;
+
+    ${(props) => props.disable && `
+                cursor: not-allowed;
+                display: none;
+                pointer-events:none;
+    `}
 `;
 
 export default Label;

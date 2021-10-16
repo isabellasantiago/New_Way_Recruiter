@@ -73,6 +73,10 @@ export const DadosPessoaisForm = styled.form`
 
     min-height: 50vh;
     max-height: 95vh;
+
+    select{
+        background: #fff;
+    }
 `;
 
 export const Grid = styled.div`
@@ -80,14 +84,6 @@ export const Grid = styled.div`
     justify-content: space-between;
     gap: 10px;
     width: 100%;
-`;
-
-
-export const Wrapper = styled.div`
-    display: flex;               
-    flex-direction: column;
-    white-space: nowrap;
-    width: 60%;
 `;
         
 

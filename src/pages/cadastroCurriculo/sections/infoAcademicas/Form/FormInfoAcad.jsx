@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import schema from '../../../../../validation/validation';
 import Button from '../../../../../components/Button/Button';
 import Field from '../../../../../components/forms/Field';
-import { Wrapper } from '../../dadosPessoais/style';
+import { Wrapper } from '../../../components/Wrapper';
 import { Form, FormWrapper} from './style';
 
 

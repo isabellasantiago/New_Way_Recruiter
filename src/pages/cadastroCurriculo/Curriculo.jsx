@@ -7,6 +7,7 @@ import {HeaderCandidato} from '../../components/HeaderCandidato/HeaderCandidato'
 import Button from '../../components/Button/Button';
 import { Idiomas } from './sections/idiomas/Idiomas';
 import { SkillsInput } from './sections/Skills';
+import {ProfessionalExpierence} from './sections/professionalExperience/index';
 
 
 const Cv = styled.div`
@@ -46,6 +47,7 @@ export function Curriculo(){
     <InfoAcademicas />
     <Idiomas />
     <SkillsInput />
+    <ProfessionalExpierence />
     </Cv>
     );
 }

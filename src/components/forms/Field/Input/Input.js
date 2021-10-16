@@ -7,6 +7,7 @@ const Input = styled.input`
         padding: 5px 15px;
         max-width: 330px;
         height: 35px;
+
 `;
 
 export default Input;

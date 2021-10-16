@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import Dados from '../../dados/Dados';
+import Dados from '../../components/dados/Dados';
 import {ListaIdiomas} from './ListaIdiomas/ListaIdiomas';
 import {Form} from './Form/Form';
 

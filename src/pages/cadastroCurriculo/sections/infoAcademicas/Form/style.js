@@ -18,6 +18,10 @@ export const Form = styled.form`
     button{
         margin-top: 10px;
     }
+
+    select{
+        background: #fff;
+    }
 `;
 
 export const FormWrapper = styled.div`

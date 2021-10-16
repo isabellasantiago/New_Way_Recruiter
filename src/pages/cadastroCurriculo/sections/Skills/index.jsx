@@ -1,4 +1,4 @@
-import Dados from "../../dados/Dados";
+import Dados from "../../components/dados/Dados";
 import { InputSkills } from "./InputSkills";
 
 

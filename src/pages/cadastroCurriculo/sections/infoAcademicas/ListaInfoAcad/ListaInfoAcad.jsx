@@ -1,16 +1,12 @@
 import React from 'react';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import {TableLista, TableHeader, TableTitle, TableBody, TableItem, TableData, TableRow} from './style';
+import {TableLista, TableHeader, TableTitle, TableBody, TableItem, TableData, TableRow} from '../../../../../components/Table/style';
 
 
 
 export function ListaInfoAcad(props){
     const {formacao} = props;
-
-    
-
-
     return(
         <TableLista>
             <TableHeader>
