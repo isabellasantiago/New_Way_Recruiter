@@ -66,18 +66,15 @@ class candidatoController {
 
     async autenticar (req: Request, res: Response) {
         const { email, senha } = req.body;
-
-        const usuario = await candidatoModelo.findAll({
+        const candidato = await candidatoModelo.findOne({
             where: {
                 email: email,
                 senha: senha,
             },
         });
-        if (!usuario) {
-            return res.status(400).send();
-        }else {
-        return  res.status(200).json(usuario);
-        };
+        return  candidato ? 
+        res.status(200).json("Login efetuado!") :
+        res.status(400).json("Email ou senha incorreto!");
     }
     
 }
