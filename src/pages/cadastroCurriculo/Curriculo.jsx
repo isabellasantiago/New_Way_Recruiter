@@ -8,6 +8,7 @@ import Button from '../../components/Button/Button';
 import { Idiomas } from './sections/idiomas/Idiomas';
 import { SkillsInput } from './sections/Skills';
 import {ProfessionalExpierence} from './sections/professionalExperience/index';
+import { DadosContratacao } from './sections/contratacao';
 
 
 const Cv = styled.div`
@@ -48,6 +49,7 @@ export function Curriculo(){
     <Idiomas />
     <SkillsInput />
     <ProfessionalExpierence />
+    <DadosContratacao />
     </Cv>
     );
 }
