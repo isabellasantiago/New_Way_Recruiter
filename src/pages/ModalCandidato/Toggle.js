@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import api from '../../services/api'
 import perfilImg from '../../assets/images/pexels-ezekixl-akinnewu-1006227.svg';
-import api2 from '../../services/api2';
 import './modal-candidato.scss';
 
 export default function Toggle() {
@@ -9,7 +9,7 @@ export default function Toggle() {
 
   useEffect(() => {
    async function loadUsers(){
-      const response = await api2.get('Data/candidatos2.json')
+      const response = await api.get('Data/candidatos2.json')
       //console.log(response.data);
       setUsers(response.data);
 

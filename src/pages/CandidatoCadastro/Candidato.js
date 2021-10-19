@@ -2,31 +2,18 @@ import React, { useState } from 'react';
 import './candidato.scss';
 import profile from '../../assets/images/profile.svg';
 import MaskInput from '../../MaskInput';
-<<<<<<< HEAD
-import { useForm } from "react-hook-form";
-=======
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
-
->>>>>>> e7dc246c23d002ac3a4b9648cc5787129cb0ce1d
 
 const initialValues = {
   cpf:'',
   cnpj: ''
 };
 
-<<<<<<< HEAD
-export function CandidatoForm(){
-
-=======
-
 
 export function CandidatoForm(){
   const [isBusy, setIsBusy] = useState(false);
-
- 
->>>>>>> e7dc246c23d002ac3a4b9648cc5787129cb0ce1d
   const {
     register,
     formState: { errors },
@@ -35,10 +22,6 @@ export function CandidatoForm(){
   } = useForm();
 
     const [values,setValues] = useState(initialValues);
-<<<<<<< HEAD
-=======
-    
->>>>>>> e7dc246c23d002ac3a4b9648cc5787129cb0ce1d
 
     function handleChange(event) {
       setValues({
@@ -46,9 +29,6 @@ export function CandidatoForm(){
       [event.target.name]: event.target.value
       });
     }
-<<<<<<< HEAD
-=======
-    
 
   async function onSubmit (data)  {
   
@@ -74,9 +54,6 @@ export function CandidatoForm(){
           });
     }
 
- 
-
->>>>>>> e7dc246c23d002ac3a4b9648cc5787129cb0ce1d
 
   return (
   <div className="cd">
@@ -93,12 +70,7 @@ export function CandidatoForm(){
           <h2>Faça agora seu cadastro como candidato!</h2>
           
               <p className="form-paragrafo">Insira seus dados abaixo para efetuar seu cadastro!</p>
-
-<<<<<<< HEAD
-            <form onSubmit={handleSubmit((data) => console.log(data))}>
-=======
             <form onSubmit={handleSubmit(onSubmit)}>
->>>>>>> e7dc246c23d002ac3a4b9648cc5787129cb0ce1d
 
               <div className="form-start">
                 
@@ -196,16 +168,10 @@ export function CandidatoForm(){
                 {errors.passwordConfirmation.message}
               </p>
             )}
-              
 
             </div>
 
-<<<<<<< HEAD
-            <button className="candidato-submit" type="submit">Cadastrar</button>
-=======
             <button className="candidato-submit"  type="submit">Cadastrar</button>
->>>>>>> e7dc246c23d002ac3a4b9648cc5787129cb0ce1d
-
             </form>
 
             <img src={profile} alt="profile-candidato" className="cdprofile"/>
@@ -213,12 +179,6 @@ export function CandidatoForm(){
        </div>
 
     </main>
-
-<<<<<<< HEAD
-  </div>);
-}
-=======
   </div>
   );
-            }
->>>>>>> e7dc246c23d002ac3a4b9648cc5787129cb0ce1d
+}
