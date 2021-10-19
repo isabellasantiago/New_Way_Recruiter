@@ -1,12 +1,8 @@
 import React from 'react';
 
 
-import aroundTheWorldImg from '../../assets/images/aroundTheWorld.svg';
-import hireImg from '../../assets/images/hire.svg';
-import hiringImg from '../../assets/images/hiring.svg';
-import resumeImg from '../../assets/images/resume.svg';
+import aroundTheWorldImg from '../../assets/images/aroundTheWorld.png';
 
-import {Login} from '../Login/Login';
 
 import './home.scss';
 
@@ -19,8 +15,8 @@ export function Home() {
                 </a>
                 <div id="pages">
                     <a href="/login">Login</a>
-                    <a href="#">Sou empresa</a>
-                    <a href="#">Sou candidato</a>
+                    <a href="empresaform">Sou empresa</a>
+                    <a href="/candidato">Sou candidato</a>
                 </div>
             </header>
             <main>
@@ -49,12 +45,7 @@ export function Home() {
                     </div>
                 </div>
                 <div id="images">
-                    <div>
-                        <img src={hiringImg} id="hiring"/>
-                        <img src={hireImg} id="hire"/>
-                        <img src={resumeImg} id="resume"/>
-                        <img src={aroundTheWorldImg} id="aroundTheWorld"/>
-                    </div>
+                        <img src={aroundTheWorldImg} id="aroundTheWorld" alt="imagem que representa o recrutamento no mundo todo"/>
                 </div>
             </main>
         </div>
