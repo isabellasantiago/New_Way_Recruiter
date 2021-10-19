@@ -1,11 +1,47 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import './login.scss';
+import { useAuth } from '../../context/AuthProvider/useAuth';
 
-
+function initialState(){
+    return{
+        user: '',
+        password: ''
+    }
+}
 
 export function Login(){
+    // const [values, setValues] = useState(initialState);
+    const auth = useAuth();
+    const history = useHistory();
+
+    // function onChange(event){
+    //     const { value, name} = event.target
+    //     setValues({
+    //         ...values,
+    //         [name]: value,
+    //     })
+    // }
+    // function onSubmit(event){
+    //     event.preventDefault();
+
+    // }
+    // function login({user, password}){
+    //     if(user){}
+    // }
+
+    async function onSubmit(values){
+        try{
+            await auth.authenticate(values.email, values.password)
+            history.push("/authenticated")
+
+        }catch(err){
+            return err.message
+        }
+    }
+
     return(
         <div id="page-login">
             <div id="image-description">
@@ -23,23 +59,22 @@ export function Login(){
                         <h1>New <span>Way</span> Recruiter</h1>
                     </a>
                 </div>
+                <form  name="login-form" id="login-form" onSubmit={onSubmit}>
                 <div id="inputs-login">
-                    <h2>Login</h2>
-                    <div id="input-labels">
-                        <label>E-mail</label>
-                        <input type="email" id="email"/>
-                        <label>Senha</label>
-                        <input id="password"/>
-                    </div>
+                <h2>Login</h2>
+                    <label htmlFor="email">E-mail</label>
+                    <input type="email" id="email" required/>
+                    <label htmlFor="password">Senha</label>
+                    <input type="password" name="password" id="password" required/>
                 </div>
-
-                <button>
+                <button type="submit">
                     <ExitToAppIcon
                     color="white"
                     fontSize="small"
                     />
                     Entrar
                 </button>
+                </form>
             </div>
         </div>
     );

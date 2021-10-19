@@ -78,67 +78,70 @@
                 }
             }
         }
-        #inputs-login{
+        #login-form{
             display: flex;
-            flex-flow: column nowrap;
             align-items: center;
-            justify-content: center;
-
-            h2{
-                font-size: 2.25rem;
-                margin-bottom: 40px;
-                font-weight: bold;
-            }
-            
-            #input-labels{
+            flex-direction: column;
+            #inputs-login{
                 display: flex;
                 flex-flow: column nowrap;
                 align-items: center;
                 justify-content: center;
-                
-                label{
-                align-self: flex-start;
-                font-size: 1.10rem;
-                margin-bottom: 5px;
+    
+                h2{
+                    font-size: 2.25rem;
+                    margin-bottom: 40px;
+                    font-weight: bold;
                 }
-
-                input{
+                    
+                label{
+                    align-self: flex-start;
+                    font-size: 1.10rem;
+                    margin-bottom: 5px;
+                }
+    
+                > input{
                     width: 360px;
                     height: 40px;
                     margin-bottom: 15px;
+                    padding: 3px 6px;
+
+                    font-family: "Poppins", Sans-serif;
 
                     border-radius: 8px;
                     border: 1px solid #c6c6c6;
+                    color: #000;
+                }
+            }
+            button{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 15px;
+    
+                margin-top: 30px;
+                border: 0;
+                border-radius: 8px;
+    
+                width: 142px;
+                height: 41px;
+    
+                background: #023859;
+    
+                font-family: "Poppins", Sans-serif;
+                font-weight: 520;
+                color: #fff;
+                font-size: 1rem;
+    
+    
+                cursor: pointer;
+    
+                &:hover{
+                    filter: brightness(0.9);
                 }
             }
         }
-        button{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-
-            margin-top: 30px;
-            border: 0;
-            border-radius: 8px;
-
-            width: 142px;
-            height: 41px;
-
-            background: #023859;
-
-            font-family: "Poppins", Sans-serif;
-            font-weight: 520;
-            color: #fff;
-            font-size: 1rem;
-
-
-            cursor: pointer;
-
-            &:hover{
-                filter: brightness(0.9);
-            }
-        }
+        
     }
 
 }
