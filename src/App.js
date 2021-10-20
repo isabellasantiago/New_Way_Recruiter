@@ -1,6 +1,7 @@
 import {React} from "react";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { CandidatoForm } from "./pages/CandidatoCadastro/Candidato";
+import { EditarExcluirCandidato } from "./pages/Editar-Excluir/Candidato/EditarExcluirCandidato";
 import { EmpresaForm } from "./pages/EmpresaCadastro/EmpresaForm";
 
 
@@ -16,6 +17,7 @@ function App() {
     <Route path="/login" component={Login}/>
     <Route path="/candidato" component={CandidatoForm}/>
     <Route path="/empresaform" component={EmpresaForm}/>
+    <Route path="/editdeletecandidato" component={EditarExcluirCandidato}/>
 
     </Switch>
     </BrowserRouter>
