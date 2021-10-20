@@ -139,41 +139,38 @@ div.empresaform{
               width:262px;
             }
             select{
+
+              width:240px;
+              height: 30px;
               text-align: center; /* para firefox */
               text-align-last: center; /* para chrome */
-      
-              
-              
              
               width:250px;
               height: 50px;
               margin-top:4px;
               margin-bottom: 15px;
-              
-              padding-left:8px;
+             
               box-sizing: border-box;
-              border: 3px solid #000000;
+              border: 2px solid #000000;
+              background: #FFFF;
 
-              font-family: Poppins;
+
+              font-family: 'Poppins';
               font-style: normal;
               font-weight: bold;
               font-size: 24px;
               line-height: 36px;
-             
+
+
               cursor: pointer;
 
               color: #000000;
-
-              option{
-              
-               
+       option{ 
                 margin-left:50px;
                 box-sizing: border-box;
                 border: 3px solid #000000;
-
                 font-family: Poppins;
                 font-style: normal;
-                
                 font-size: 24px;
                 line-height: 36px;
                 text-align: center;

@@ -6,18 +6,14 @@ import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
 
-
 const initialValues = {
   cpf:'',
   cnpj: ''
 };
 
 
-
 export function CandidatoForm(){
   const [isBusy, setIsBusy] = useState(false);
-
- 
   const {
     register,
     formState: { errors },
@@ -26,7 +22,6 @@ export function CandidatoForm(){
   } = useForm();
 
     const [values,setValues] = useState(initialValues);
-    
 
     function handleChange(event) {
       setValues({
@@ -34,7 +29,6 @@ export function CandidatoForm(){
       [event.target.name]: event.target.value
       });
     }
-    
 
   async function onSubmit (data)  {
   
@@ -60,8 +54,6 @@ export function CandidatoForm(){
           });
     }
 
- 
-
 
   return (
   <div className="cd">
@@ -78,7 +70,6 @@ export function CandidatoForm(){
           <h2>Faça agora seu cadastro como candidato!</h2>
           
               <p className="form-paragrafo">Insira seus dados abaixo para efetuar seu cadastro!</p>
-
             <form onSubmit={handleSubmit(onSubmit)}>
 
               <div className="form-start">
@@ -177,12 +168,10 @@ export function CandidatoForm(){
                 {errors.passwordConfirmation.message}
               </p>
             )}
-              
 
             </div>
 
             <button className="candidato-submit"  type="submit">Cadastrar</button>
-
             </form>
 
             <img src={profile} alt="profile-candidato" className="cdprofile"/>
@@ -190,7 +179,6 @@ export function CandidatoForm(){
        </div>
 
     </main>
-
   </div>
   );
-            }
+}

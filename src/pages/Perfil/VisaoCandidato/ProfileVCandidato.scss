@@ -1,0 +1,330 @@
+.profilevcand{
+    height: 250vh;
+    background: #C6C6C6;
+    
+  header{
+    width: 100%;
+    height: 70px;
+    padding: 0px 42px;
+
+    background: hsla(197, 97%, 13%, 1);
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+   a#logo{
+       text-decoration: none;
+       color: #fff;
+       h1{
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 42px;
+        > span{
+            font-style: italic;
+        }
+   } 
+    
+    }
+    span.cand{
+      margin-right:800px;
+      font-family: "Poppins", sans-serif;
+      font-style: italic;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 33px;
+      display: flex;
+      align-items: center;
+
+      color: #FFFFFF;
+    }
+    #menus{
+        height:100%;
+        display: flex;
+        align-items: center;
+
+        .selected{
+          color: 
+          hsla(203, 73%, 49%, 1);
+        }
+        a{
+          text-decoration: none;
+          margin-left: 25px;
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 20px;
+          line-height: 30px;
+          display: flex;
+          align-items: center;
+
+          color: #FFFFFF;
+
+        }
+
+    }
+  }
+   section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .profile{
+      margin-top: 112px;
+      width: 858px;
+        height: 283px;
+        left: 274px;
+        top: 215px;
+
+        background: #FEFEFE;
+        border-radius: 8px;
+
+        display: flex;
+        align-items: center;
+        
+        flex-direction:row;
+
+        .profile-description{
+          width:310px;
+          height:283px;
+          display: flex;
+          flex-direction: column;
+          align-items: left;
+          justify-content: center;
+          text-align: left;
+          padding-left:23px;
+       h2{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 42px;
+        display: flex;
+        align-items: center;
+        
+        color: #000000;
+        
+       }
+       p{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        
+        color: #000000;
+       }
+      }
+
+        .control-btn{
+          padding-right:150px;
+          
+          display: flex;
+          align-items: right;
+          justify-content: space-between;
+          text-align: right;
+          flex-direction:column;
+          width:250px;
+          height:283px;
+        .entContato{
+          width: 227px;
+          height: 46px;
+          left: 808px;
+          top: 404px;
+          border-style: none;
+          background: #DADADA;
+          border-radius: 89px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          
+       
+          margin-bottom: 48px;
+        
+
+          span{
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 16px;
+          line-height: 24px;
+          display: flex;
+          align-items: center;
+
+          color: #A9A9A9;
+
+          }
+        }
+
+        .editicon{
+          border-radius:0;
+          width: 33px;
+          height: 33px;
+          margin-left:225px;
+          margin-top: 33px;
+          
+          cursor: pointer;
+         
+        }
+      }
+
+        img{
+          margin-left: 80px;
+          width: 177px;
+          border-radius: 250px;
+        }
+    }
+
+    .experiencias{
+      width: 858px;
+      height: 819px;
+      left: 274px;
+      top: 566px;
+      margin-top:68px;
+      background: #FEFEFE;
+      border-radius: 8px;
+      margin-bottom:77px;
+
+      h2{
+        margin-left:54px;
+        margin-top:22px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 36px;
+        display: flex;
+        align-items: center;
+
+        color: #000000;
+
+      }
+      .center{
+        width: 858px;
+        height: 780px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .first-experience{
+        display: flex;
+        flex-direction: row;
+          width:676px;
+          height: 173px;
+          margin-top:-420px;
+       
+      
+      img{
+        width: 125px;
+        height: 125px;
+        margin-bottom: 50px;
+      }
+      h3{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 36px;
+
+        align-items: center;
+
+        color: #000000;
+
+      }
+      .jobsline{
+        display: flex;
+        flex-direction:column;
+      span{
+        margin-left: 35px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top:64px;
+        width: 450px;
+        height: 0px;
+        left: 551px;
+        top: 786px;
+
+        border: 1px solid #C6C6C6;
+        transform: rotate(0.01deg);
+
+        div.ball{
+          align-items: center;
+          width: 15px;
+          height: 17px;
+          left: 544px;
+          top: 777px;
+          border-radius:100%;
+          background: #023859;
+        }
+        h4{
+          margin-top:20px;
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 15px;
+          line-height: 22px;
+          display: flex;
+          align-items: center;
+
+          color: #000000;
+
+        }
+        p{
+          font-family: Poppins;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 21px;
+          /* identical to box height */
+
+          display: flex;
+          align-items: center;
+          text-align: center;
+
+          color: #000000;
+
+        }
+      }
+
+      }
+    }
+
+    }
+
+
+    .formacoes{
+      width: 858px;
+      height: 344px;
+      left: 274px;
+      top: 1482px;
+
+      background: #FEFEFE;
+      border-radius: 8px;
+
+      h2{
+        margin-left:54px;
+        margin-top:66.68px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 36px;
+        display: flex;
+        align-items: center;
+
+        color: #000000;
+      }
+    }
+   }
+ 
+}
