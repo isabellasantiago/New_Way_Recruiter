@@ -1,4 +1,4 @@
-.profilevcand{
+.profilevemp{
   height: 100vh;
   background: #C6C6C6;
   
@@ -66,7 +66,7 @@ header{
 
   }
 }
- section{
+ section.princ{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,7 +75,7 @@ header{
   .profile{
     margin-top: 112px;
     width: 871px;
-      height: 232px;
+      height: 515px;
       left: 274px;
       top: 215px;
 
@@ -88,30 +88,76 @@ header{
       flex-direction:column;
 
         form{
-          
-          flex-direction:column nowrap;
-          width: 100%;
-        
-          .row{
-            display: flex;
-            flex-direction: column nowrap ;
+          display: flex;
+          flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin-top: -100px;
-            
-            .col{
-              margin-left:40px;
-              width:231px;
+            margin-top: 80px;
+         
+          width: 100%;
+
+          section.colunms1{
+            width: 100%;
+            margin-top: 282px;
+            display: grid;
+            grid-template-columns: 0.1fr 0.1fr;
+            margin-left: 74px;
+          
+              .control-group{
+                margin-right:50px;
+                margin-bottom:30px;
+                text-align:left;
+      
+               
+          }
+        }
+      
+          section.colunms2{
+            width: 100%;
+            display: grid;
+            grid-template-columns: 0.1fr 0.1fr;
+            margin-left: 74px;
+          
+          .control-group{
+            margin-right:50px;
+            margin-bottom:30px;
+            text-align:left;
+      
+            .historia-empresa{
+              height:132px;
+              width: 309px;
+              margin: 0;
+              font-size: 14px;
+              padding-left:8px;
+            }
+      }
+          }
+      
+              section.colunms3{
+                width: 100%;
+                display: grid;
+                grid-template-columns: 0.1fr 0.1fr;
+                margin-left: 74px;
+              
+                .control-group{
+                  margin-right:50px;
+                  margin-bottom:30px;
+                  text-align:left;
+                
+        
+            }
+          }
+
           label{
             font-family: "Poppins" , sans-serif;
             align-self: flex-start;
-            font-size: 12px;
+            font-size: 14px;
             margin-bottom: 5px;
             }
 
             input{
-                width:231px;
-                height: 30px;
+              width: 309px;
+              height: 34px;
                 margin-bottom: 15px;
 
                 border-radius: 8px;
@@ -127,14 +173,13 @@ header{
                   display: inline;
                   content: "⚠ ";
                 }
-              }
-            }
+          
         }
         .save{
           float:left;
           position: absolute;
           margin-left: 150px;
-          margin-top:-288px;
+          margin-top:10px;
           width: 193px;
           height: 39px;
           left: 363px;
@@ -178,9 +223,9 @@ header{
   .DeleteConta{
     float:right;
     position: absolute;
-    margin-top:-288px;
+    margin-top:10px;
     margin-left: 100px;
-    width: 210px;
+    width: 141px;
     height: 39px;
     left: 753px;
     top: 614px;

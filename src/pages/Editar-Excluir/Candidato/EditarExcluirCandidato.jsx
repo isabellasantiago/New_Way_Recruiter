@@ -18,10 +18,12 @@ export function EditarExcluirCandidato(){
     handleSubmit
   } = useForm();
   const [post, setPost] = useState(null);
+
+  
   async function Delete (){
 
     if (window.confirm("Tem certeza que deseja excluir esta conta?") ==  true){
-      await axios.delete('http://localhost:3333/deletecandidato/45')
+      await axios.delete('http://localhost:3333/deletecandidato/46')
         
       .then(response => response.data)
       .catch(error => {
@@ -40,6 +42,7 @@ export function EditarExcluirCandidato(){
         setPost(response.data);
       });
     }, []);
+
     async function UpdateUser(data){
      
     

@@ -3,6 +3,7 @@ import './empresaform.scss';
 import empresaFormImg from '../../assets/images/careerDevelopment.svg'
 import MaskInput from '../../MaskInput';
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 const initialValues = {
   cpf:'',
@@ -31,6 +32,34 @@ export function EmpresaForm(){
       });
     }
 
+    async function onSubmit (data)  {
+  
+      
+      const URL = 'http://localhost:3333/empresa';
+       await axios(URL, {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+            },
+            data: { 
+            razaosocial: data.rzsocial,
+            nomefantasia: data.nameFantasia,
+            senha:data.passwordConfirmation,
+            cnpj:data.cnpj,
+            email:data.email,
+            endereco: data.endereco,
+            sobre:data.sobre,
+            linkedin: data.linkedin,
+            estilo: data.estilo,
+            logoemp: data.logo,
+            }
+          })
+            .then(response => response.data)
+            .catch(error => {
+              throw error;
+            });
+      }
+
   return(
   <div className="empresaform">
     <header className="emp-header">
@@ -46,7 +75,7 @@ export function EmpresaForm(){
       
           <img src={empresaFormImg} className="empresaFormImg" alt="empresaFormImg"/>
 
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <section className="colunms1">
             
           <div >
@@ -113,7 +142,7 @@ export function EmpresaForm(){
             
             <div className="control-group">
              <label>Conte-nos a sua história!</label>
-              <textarea  type="text" className="historia-empresa"/>
+              <textarea {...register("sobre")}  type="text" className="historia-empresa"/>
              </div>
    
              
@@ -124,12 +153,12 @@ export function EmpresaForm(){
    
              <div className="control-group">
              <label>Logo da empresa</label>
-             <input type="text" placeholder="Insira o link da sua logo" className=""/>
+             <input {...register("logo")} type="text" placeholder="Insira o link da sua logo" className=""/>
              </div>
    
              <div className="control-group">
              <label> Linkedin </label>
-             <input type="text"  className=""/>
+             <input {...register("linkedin")} type="text"  className=""/>
              </div>
              </div>
 
@@ -189,7 +218,7 @@ export function EmpresaForm(){
              <div className="control-group">
              <label> Qual é o estilo da sua empresa? </label>
             
-            <select>
+            <select {...register("estilo")}>
 
             <option value="startup">Startup</option>
             <option value="multinacional">Multinacional</option>
