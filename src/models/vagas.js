@@ -1,42 +1,40 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.candidatoModelo = void 0;
+exports.vagasModelo = void 0;
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 const sequelize_1 = require("sequelize");
 const connectDB_1 = require("../database/connectDB");
-const candidatoModelo = connectDB_1.newWayDB.define('cadcandidato', {
-    idcandidato: {
+const vagasModelo = connectDB_1.newWayDB.define('cadvagas', {
+    idvaga: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    nome: {
+    titulo: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    sobrenome: {
+    nivel: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    telefone: {
+    salario: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    email: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: true,
-        unique: true,
-    },
-    senha: {
+    requisito: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    cpf: {
+    beneficios: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true,
-        unique: true,
+        allowNull: false,
+    },
+    area: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
     },
 });
-exports.candidatoModelo = candidatoModelo;
+exports.vagasModelo = vagasModelo;

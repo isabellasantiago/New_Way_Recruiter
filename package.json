@@ -28,6 +28,7 @@
     "react-scripts": "4.0.3",
     "react-spring": "^9.2.4",
     "sass": "^1.35.2",
+    "sequelize": "^6.7.0",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"

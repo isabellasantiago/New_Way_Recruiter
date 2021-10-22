@@ -23,16 +23,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importStar(require("express"));
 const connectDB_1 = require("./database/connectDB");
 const candidatoRoutes_routes_1 = require("./routes/candidatoRoutes.routes");
+const empresaRouter_routes_1 = require("./routes/empresaRoutes.routes");
+const vagasRoutes_routes_1 = require("./routes/vagasRoutes.routes");
 const cors = require('cors');
 const corsOptions ={
-    origin:'http://localhost:3000', 
-    credentials:true,            //access-control-allow-credentials:true
+    origin:'http://localhost:3000',
+    credentials:true,
     optionSuccessStatus:200
 }
 const app = (0, express_1.default)();
 app.use(cors(corsOptions));
 app.use((0, express_1.json)());
 app.use(candidatoRoutes_routes_1.candidatoRouter);
+app.use(empresaRouter_routes_1.empresaRouter);
+app.use(vagasRoutes_routes_1.vagasRouter);
 app.listen(3333, async () => {
     await connectDB_1.newWayDB.sync();
     console.log("Server running on port 3333!");

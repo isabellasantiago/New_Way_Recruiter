@@ -1,0 +1,261 @@
+.profilevemp{
+  height: 100vh;
+  background: #C6C6C6;
+  
+header{
+  width: 100%;
+  height: 70px;
+  padding: 0px 42px;
+
+  background: hsla(197, 97%, 13%, 1);
+  font-family: "Poppins", sans-serif;
+  color: #fff;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+ a#logo{
+     text-decoration: none;
+     color: #fff;
+     h1{
+      font-size: 25px;
+      font-weight: 600;
+      line-height: 42px;
+      > span{
+          font-style: italic;
+      }
+ } 
+  
+  }
+  span.cand{
+    margin-right:800px;
+    font-family: "Poppins", sans-serif;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 33px;
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+  }
+  #menus{
+      height:100%;
+      display: flex;
+      align-items: center;
+
+      .selected{
+        color: 
+        hsla(203, 73%, 49%, 1);
+      }
+      a{
+        text-decoration: none;
+        margin-left: 25px;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 30px;
+        display: flex;
+        align-items: center;
+
+        color: #FFFFFF;
+
+      }
+
+  }
+}
+ section.princ{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .profile{
+    margin-top: 112px;
+    width: 871px;
+      height: 515px;
+      left: 274px;
+      top: 215px;
+
+      background: #FEFEFE;
+      border-radius: 8px;
+
+      display: flex;
+      align-items: center;
+      
+      flex-direction:column;
+
+        form{
+          display: flex;
+          flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+         
+          width: 100%;
+
+          section.colunms1{
+            width: 100%;
+            margin-top: 282px;
+            display: grid;
+            grid-template-columns: 0.1fr 0.1fr;
+            margin-left: 74px;
+          
+              .control-group{
+                margin-right:50px;
+                margin-bottom:30px;
+                text-align:left;
+      
+               
+          }
+        }
+      
+          section.colunms2{
+            width: 100%;
+            display: grid;
+            grid-template-columns: 0.1fr 0.1fr;
+            margin-left: 74px;
+          
+          .control-group{
+            margin-right:50px;
+            margin-bottom:30px;
+            text-align:left;
+      
+            .historia-empresa{
+              height:132px;
+              width: 309px;
+              margin: 0;
+              font-size: 14px;
+              padding-left:8px;
+            }
+      }
+          }
+      
+              section.colunms3{
+                width: 100%;
+                display: grid;
+                grid-template-columns: 0.1fr 0.1fr;
+                margin-left: 74px;
+              
+                .control-group{
+                  margin-right:50px;
+                  margin-bottom:30px;
+                  text-align:left;
+                
+        
+            }
+          }
+
+          label{
+            font-family: "Poppins" , sans-serif;
+            align-self: flex-start;
+            font-size: 14px;
+            margin-bottom: 5px;
+            }
+
+            input{
+              width: 309px;
+              height: 34px;
+                margin-bottom: 15px;
+
+                border-radius: 8px;
+                border: 1px solid #c6c6c6;
+              
+                p {
+                  
+                  font-family: "Poppins" , sans-serif;
+                  color: #bf1650;
+                }
+                
+                p::before {
+                  display: inline;
+                  content: "⚠ ";
+                }
+          
+        }
+        .save{
+          float:left;
+          position: absolute;
+          margin-left: 150px;
+          margin-top:10px;
+          width: 193px;
+          height: 39px;
+          left: 363px;
+          top: 614px;
+          display: flex;
+          align-items: center;
+          border-style: none;
+          justify-content: center;
+          background: #023859;
+          border-radius: 8px;
+          cursor: pointer;
+      
+          span{
+           
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 21px;
+            display: flex;
+            align-items: center;
+      
+            color: #FFFFFF;
+      
+          }
+          
+        }     
+        .save:hover{
+          filter: brightness(0.9);
+        }
+    }
+    .btn{
+      margin-top: 41px;
+      display: flex;
+      
+      align-items: center;
+      justify-content: center;
+      
+  
+  
+  .DeleteConta{
+    float:right;
+    position: absolute;
+    margin-top:10px;
+    margin-left: 100px;
+    width: 141px;
+    height: 39px;
+    left: 753px;
+    top: 614px;
+    display: flex;
+    align-items: center;
+    border-style: none;
+    justify-content: center;
+    background: #E6E6E6;
+    border-radius: 8px;
+    cursor: pointer;
+
+    span{
+      
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    display: flex;
+    align-items: center;
+
+    color: #B60000;
+
+    }
+  }
+  .DeleteConta:hover{
+    filter: brightness(0.9);
+  }
+}
+  }
+ }
+
+}

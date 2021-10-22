@@ -14,7 +14,7 @@ function initialState(){
 
 export function Login(){
     // const [values, setValues] = useState(initialState);
-    const auth = useAuth();
+    const {user, auth} = useAuth();
     const history = useHistory();
 
     // function onChange(event){
@@ -35,7 +35,8 @@ export function Login(){
     async function onSubmit(values){
         try{
             await auth.authenticate(values.email, values.password)
-            history.push("/authenticated")
+            //history.push("/authenticated")
+            console.log(user.email);
 
         }catch(err){
             return err.message
