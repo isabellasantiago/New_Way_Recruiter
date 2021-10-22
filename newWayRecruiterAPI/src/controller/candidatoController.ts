@@ -64,7 +64,7 @@ class candidatoController {
         return  res.status(200).json(candidato);
     }
 
-    async autenticar (req: Request, res: Response) {
+    /*async autenticar (req: Request, res: Response) {
         const { email, senha } = req.body;
         const candidato = await candidatoModelo.findOne({
             where: {
@@ -75,7 +75,7 @@ class candidatoController {
         return  candidato ? 
         res.status(200).json("Login efetuado!") :
         res.status(400).json("Email ou senha incorreto!");
-    }
+    }*/
     
 }
 
