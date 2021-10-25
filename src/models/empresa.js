@@ -1,43 +1,58 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.candidatoModelo = void 0;
+exports.empresaModelo = void 0;
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-unused-vars */
 const sequelize_1 = require("sequelize");
 const connectDB_1 = require("../database/connectDB");
-const candidatoModelo = connectDB_1.newWayDB.define('cadcandidato', {
-    idcandidato: {
+const empresaModelo = connectDB_1.newWayDB.define('cadempresa', {
+    codempresa: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    nome: {
+    razaosocial: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    sobrenome: {
+    nomefantasia: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    telefone: {
+    senha: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
+    },
+    cnpj: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: true,
+        unique: true,
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,
         unique: true,
     },
-    senha: {
+    endereco: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    cpf: {
+    sobre: {
         type: sequelize_1.DataTypes.STRING,
-        allowNull: true,
-        unique: true,
-
+        allowNull: false,
+    },
+    linkedin:{
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    estilo:{
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    logoemp:{
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
     },
 });
-exports.candidatoModelo = candidatoModelo;
+exports.empresaModelo = empresaModelo;

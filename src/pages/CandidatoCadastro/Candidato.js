@@ -31,9 +31,7 @@ export function CandidatoForm(){
     }
 
   async function onSubmit (data)  {
-  
-      
-      const URL = 'http://localhost:3333/cadcandidato';
+    const URL = 'http://localhost:3333/candidato';
      await axios(URL, {
           method: 'POST',
           headers: {
