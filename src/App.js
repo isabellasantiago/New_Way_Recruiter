@@ -10,15 +10,10 @@ import { ProfileVCand } from "./pages/Perfil/VisaoCandidato/ProfileVCandidato";
 import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import {Curriculo} from './pages/cadastroCurriculo/Curriculo';
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
-import StoreProvider from './components/Store/Provider';
-import RoutesPrivate from './components/Routes/Private/Private'
-import { AuthProvider } from "./context/AuthProvider";
-import { ProtectedRoute } from "./components/ProtectedRoute";
 
 
 function App() {
   return (
-    <AuthProvider>
     <BrowserRouter>
     {/* <StoreProvider> */}
     <Switch>
@@ -34,14 +29,8 @@ function App() {
     <Route path="/modal-candidatos" component={ModalCandidato}/>
     <Route path="/empresaform" component={EmpresaForm}/>
     <Route path="/cv" component={Curriculo}/>
-    <Route path="/authenticated">
-      <ProtectedRoute>
-        <h2>Profile</h2>
-      </ProtectedRoute>
-    </Route>
     </Switch>
     </BrowserRouter>
-    </AuthProvider>
   );
 }
 

@@ -169,7 +169,7 @@ export function CandidatoForm(){
 
             </div>
 
-            <button className="candidato-submit"  type="submit">Cadastrar</button>
+            <button className="candidato-submit"  type="submit" >Cadastrar</button>
             </form>
 
             <img src={profile} alt="profile-candidato" className="cdprofile"/>
