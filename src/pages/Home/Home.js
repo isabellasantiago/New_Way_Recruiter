@@ -15,7 +15,7 @@ export function Home() {
                 </a>
                 <div id="pages">
                     <a href="/login">Login</a>
-                    <a href="empresaform">Sou empresa</a>
+                    <a href="/empresaform">Sou empresa</a>
                     <a href="/candidato">Sou candidato</a>
                 </div>
             </header>

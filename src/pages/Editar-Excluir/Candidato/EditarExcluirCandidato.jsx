@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 
-import './EditarExcluirCandidato.scss';
+import authService from '../../../services/auth.service'
 import { HeaderComponent } from '../../../components/HeaderComponent/HeaderComponent'
-
+import { Redirect } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
 
-
+import './EditarExcluirCandidato.scss';
 
 
 export function EditarExcluirCandidato(){
+  const [redirectTo, setRedirectTo] = useState();
+
 
   const {
     register,
@@ -33,7 +35,14 @@ export function EditarExcluirCandidato(){
     }else{
         return false;
     }
-    
+  }
+
+  const componentDidMount = async () => {
+    let loggedUser = await authService.getLoggedUser();
+    if(!loggedUser){
+      console.log("Redirecionou", loggedUser);
+      setRedirectTo("/login")
+    }
      
   
     }
@@ -47,7 +56,7 @@ export function EditarExcluirCandidato(){
     async function UpdateUser(data){
      
     
-      if (window.confirm("Os dados estão corretos?") ==  true){
+      if (window.confirm("Os dados estão corretos?") ===  true){
        
         await axios.put('http://localhost:3333/candidato/46', {
              
@@ -69,8 +78,10 @@ export function EditarExcluirCandidato(){
     }
 
   return(
+    <>
+    {redirectTo && ( <Redirect to={redirectTo}/>)}
     <div className="profilevcand">
-       <HeaderComponent candidato={true}/>
+       <HeaderComponent candidato={true} config="selected"/>
 
             <section >
                 <div className="profile">
@@ -135,5 +146,6 @@ export function EditarExcluirCandidato(){
                 
             </section>
   </div>
+  </>
   );
 }

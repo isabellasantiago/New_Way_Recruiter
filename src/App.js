@@ -1,5 +1,5 @@
 import {React, useState} from "react";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import { CandidatoForm } from "./pages/CandidatoCadastro/Candidato";
 import { EditarExcluirCandidato } from "./pages/Editar-Excluir/Candidato/EditarExcluirCandidato";
 import { EditarExcluirEmpresa } from "./pages/Editar-Excluir/Empresa/EditarExcluirEmpresa";
@@ -11,6 +11,9 @@ import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import {Curriculo} from './pages/cadastroCurriculo/Curriculo';
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 import authService from './services/auth.service';
+import PrivateRoute from './components/PrivateRoute'
+import PublicRoute from './components/PublicRoute'
+import history from './services/history'
 
 
 function App() {
@@ -21,28 +24,23 @@ function App() {
     setUserData(userData)
   }
 
-  function componentDidMount() {
-    this.loadUser()
-  }
-
   return (
-    <BrowserRouter>
-    {/* <StoreProvider> */}
-    <Switch>
-    <Route path="/" exact component={Home}/>
-    <Route path="/login" component={props => <Login {...props} onLogin={() => loadUser()} />}/>
-    <Route path="/candidato" component={CandidatoForm}/>
-    <Route path="/empresaform" component={EmpresaForm}/>
+    <Router history={history}>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route exact path="/login" component={props => <Login {...props} onLogin={() => loadUser()} />}/>
+        <Route exact path="/candidato" component={CandidatoForm}/>
+        <Route exact path="/empresaform" component={EmpresaForm}/>
 
-    <Route path="/editdeletecandidato" component={EditarExcluirCandidato}/>
-    <Route path="/editdeleteempresa" component={EditarExcluirEmpresa}/> 
-    <Route exact path="/profilev_candidato" component={ProfileVCand}/>
-    <Route exact path="/profilev_empresa" component={ProfileVEmp}/>
-    <Route path="/modal-candidatos" component={ModalCandidato}/>
-    <Route path="/empresaform" component={EmpresaForm}/>
-    <Route path="/cv" component={Curriculo}/>
-    </Switch>
-    </BrowserRouter>
+        <PrivateRoute exatc path="/config/candidato" component={EditarExcluirCandidato}/>
+        <Route exact path="/config/empresa" component={EditarExcluirEmpresa}/> 
+        <Route exact path="/profile/candidato" component={ProfileVCand}/>
+        <Route exact path="/profile/empresa" component={ProfileVEmp}/>
+        <Route exact path="/modal-candidatos" component={ModalCandidato}/>
+        <Route exact path="/empresaform" component={EmpresaForm}/>
+        <Route exact path="/cv" component={Curriculo}/>
+      </Switch>
+    </Router>
   );
 }
 
