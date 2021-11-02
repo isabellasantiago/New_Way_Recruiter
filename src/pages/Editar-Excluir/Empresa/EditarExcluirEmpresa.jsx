@@ -70,20 +70,7 @@ export function EditarExcluirEmpresa(){
 
   return(
     <div className="profilevemp">
-       <header>
-                <a href="/" id="logo">
-                    <h1>New <span>Way</span> Recruiter</h1>
-
-                    
-                </a>
-                <span className="cand">empresa</span>
-                <div id="menus">
-                    <NavLink exact to="/editdeleteempresa" >Perfil</NavLink>
-                    <NavLink exact to="/editdeleteempresa" > Vagas</NavLink>
-                    <NavLink  exact to="/editdeleteempresa" > Processos</NavLink>
-                    <NavLink  exact to="/editdeleteempresa" activeClassName="selected" > <SettingsOutlinedIcon/> </NavLink>
-                </div>
-            </header>
+       
 
             <section className="princ" >
 

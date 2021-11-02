@@ -1,4 +1,4 @@
-import {React} from "react";
+import {React, useState} from "react";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { CandidatoForm } from "./pages/CandidatoCadastro/Candidato";
 import { EditarExcluirCandidato } from "./pages/Editar-Excluir/Candidato/EditarExcluirCandidato";
@@ -10,15 +10,27 @@ import { ProfileVCand } from "./pages/Perfil/VisaoCandidato/ProfileVCandidato";
 import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import {Curriculo} from './pages/cadastroCurriculo/Curriculo';
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
+import authService from './services/auth.service';
 
 
 function App() {
+  const [userData, setUserData] = useState()
+
+  function  loadUser() {
+    let userData = authService.getLoggedUser()
+    setUserData(userData)
+  }
+
+  function componentDidMount() {
+    this.loadUser()
+  }
+
   return (
     <BrowserRouter>
     {/* <StoreProvider> */}
     <Switch>
     <Route path="/" exact component={Home}/>
-    <Route path="/login" component={Login}/>
+    <Route path="/login" component={props => <Login {...props} onLogin={() => loadUser()} />}/>
     <Route path="/candidato" component={CandidatoForm}/>
     <Route path="/empresaform" component={EmpresaForm}/>
 
