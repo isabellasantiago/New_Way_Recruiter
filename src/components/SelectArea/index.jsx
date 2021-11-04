@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react';
 import {SelectAreas} from './style.js'
 import { areasAtuacao } from '../../helpers/areaAtuacao'
 
@@ -8,7 +7,7 @@ export const SelectArea = ({className, id, name, onChange=()=>{}}) => {
         <SelectAreas className={className} id={id || name} name={name | id} onChange={onChange}>
             <option value="">Selecione</option>
             {areasAtuacao.map((area) => {
-                const {name } = area;
+                const { name } = area;
                 let label;
                 if(name === "administrativa"){
                     label = "Administrativa"
