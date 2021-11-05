@@ -18,7 +18,7 @@ export function ProfessionalExpierenceForm(props){
     
     return(
         <Form onSubmit={e => e.preventDefault()}>
-            <FormWrapper>
+            <FormWrapper id="row1">
                 <Field.Text label="Nome da empresa" name="nomeEmpresa" type="text" value={nomeEmpresa || ''} onChange={(ev) => setNomeEmpresa(ev.target.value)}/>
                 <Field.Text label="Cargo" name="cargo" type="text" value={cargo || ''} onChange={(ev) => setCargo(ev.target.value)}/>
                 <Wrapper>

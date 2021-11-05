@@ -27,4 +27,10 @@ export const Form = styled.form`
     select{
         background: #fff;
     }
+
+    #row1{
+        input{
+            max-width: 300px;
+        }
+    }
 `;

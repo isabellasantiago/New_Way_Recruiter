@@ -19,7 +19,7 @@ export function Form(props){
         <>
             <FormIdioma action="#" id="idiomas">
                 <Checkbox>
-                    <input type="checkbox" name="monolinguismo" onChange={() => setMonolinguismo(true)}/>
+                    <input type="checkbox" name="monolinguismo" onChange={() => setMonolinguismo(!monolinguismo)}/>
                     <span>Não Possuo conhecimentos</span>
                 </Checkbox>
                 {!monolinguismo && (
