@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import './login.scss';
@@ -6,6 +6,8 @@ import './login.scss';
 
 
 export function Login(){
+
+
     return(
         <div id="page-login">
             <div id="image-description">
@@ -23,23 +25,22 @@ export function Login(){
                         <h1>New <span>Way</span> Recruiter</h1>
                     </a>
                 </div>
+                <form  name="login-form" id="login-form" >
                 <div id="inputs-login">
-                    <h2>Login</h2>
-                    <div id="input-labels">
-                        <label>E-mail</label>
-                        <input type="email" id="email"/>
-                        <label>Senha</label>
-                        <input id="password"/>
-                    </div>
+                <h2>Login</h2>
+                    <label htmlFor="email">E-mail</label>
+                    <input type="email" id="email" required/>
+                    <label htmlFor="password">Senha</label>
+                    <input type="password" name="password" id="password" required/>
                 </div>
-
-                <button>
+                <button type="submit">
                     <ExitToAppIcon
                     color="white"
                     fontSize="small"
                     />
                     Entrar
                 </button>
+                </form>
             </div>
         </div>
     );
