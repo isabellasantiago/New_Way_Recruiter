@@ -11,6 +11,7 @@ import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import {Curriculo} from './pages/cadastroCurriculo/Curriculo';
 
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
+import CustomRoute from './routes/CustomRoutes'
 
 
 function App() {
@@ -19,13 +20,18 @@ function App() {
     {/* <StoreProvider> */}
     <Switch>
     <Route path="/" exact component={Home}/>
-    <Route path="/login" component={Login}/>
+    <CustomRoute
+        path="/login"
+        component={Login}
+        exact
+        isPrivate
+      />
     <Route path="/candidato" component={CandidatoForm}/>
     <Route path="/empresaform" component={EmpresaForm}/>
 
     <Route path="/editdeletecandidato" component={EditarExcluirCandidato}/>
     <Route path="/editdeleteempresa" component={EditarExcluirEmpresa}/> 
-    <Route exact path="/profilev_candidato" component={ProfileVCand}/>
+    <CustomRoute exact path="/profilev_candidato" component={ProfileVCand}/>
     <Route exact path="/profilev_empresa" component={ProfileVEmp}/>
     <Route path="/modal-candidatos" component={ModalCandidato}/>
     <Route path="/empresaform" component={EmpresaForm}/>

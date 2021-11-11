@@ -1,12 +1,29 @@
 import React, {useState} from 'react';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Api from '../../services/mainApi.js';
+import {useHistory} from 'react-router-dom'
 
 import './login.scss';
 
 
 
 export function Login(){
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
 
+    const history = useHistory();
+
+    const handleLogin = async (ev) => {
+        ev.preventDefault()
+       const { data } = await Api.post("/login",{
+            email: email,
+            senha: senha
+        })
+        if (data.auth){
+            localStorage.setItem("@nwr-login" , data.token)
+            history.push("/authenticated")
+        }
+    }
 
     return(
         <div id="page-login">
@@ -29,11 +46,11 @@ export function Login(){
                 <div id="inputs-login">
                 <h2>Login</h2>
                     <label htmlFor="email">E-mail</label>
-                    <input type="email" id="email" required/>
+                    <input type="email" id="email" required value={email} onChange={ev => setEmail(ev.target.value)}/>
                     <label htmlFor="password">Senha</label>
-                    <input type="password" name="password" id="password" required/>
+                    <input type="password" name="password" id="password" required value={senha} onChange={ev => setSenha(ev.target.value)}/>
                 </div>
-                <button type="submit">
+                <button type="submit" onClick={ev => handleLogin(ev)}>
                     <ExitToAppIcon
                     color="white"
                     fontSize="small"
