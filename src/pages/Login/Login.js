@@ -26,7 +26,6 @@ export function Login(){
 
     return(
         <>
-        {redirectTo ? ( <Redirect to={redirectTo}/> ) :
         <div id="page-login">
             
             <div id="image-description">
@@ -44,7 +43,7 @@ export function Login(){
                         <h1>New <span>Way</span> Recruiter</h1>
                     </a>
                 </div>
-                <form  name="login-form" id="login-form" onSubmit={sendLogin}>
+                <form  name="login-form" id="login-form">
                 <div id="inputs-login">
                 <h2>Login</h2>
                     <label htmlFor="email">E-mail</label>
@@ -62,7 +61,6 @@ export function Login(){
                 </form>
             </div>
         </div>
-    }
     </>
     );
 }
