@@ -1,18 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { DadosPessoaisSection } from './dadosPessoais/DadosPessoais';
-import { InfoAcademicas } from './infoAcademicas/InfoAcademicas';
+import { DadosPessoaisSection } from './sections/dadosPessoais/DadosPessoais';
+import { InfoAcademicas } from './sections/infoAcademicas/InfoAcademicas';
 import {HeaderCandidato} from '../../components/HeaderCandidato/HeaderCandidato';
 import Button from '../../components/Button/Button';
+import { Idiomas } from './sections/idiomas/Idiomas';
+import { SkillsInput } from './sections/Skills';
+import {ProfessionalExpierence} from './sections/professionalExperience/index';
+import { DadosContratacao } from './sections/contratacao';
 
-import './curriculo.scss';
-import { Idiomas } from './idiomas/Idiomas';
 
 const Cv = styled.div`
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
+
+    #cabecalho{
+        margin-top: 20px;
+
+        display: flex;
+        flex-flow: column nowrap;
+
+        text-align: center;
+        gap: 16px;
+        align-items: center;
+        justify-content: center;
+    
+
+        h1{
+            font-weight: 500;
+        }
+    }
 `;
 
 export function Curriculo(){
@@ -28,6 +47,9 @@ export function Curriculo(){
     <DadosPessoaisSection/>
     <InfoAcademicas />
     <Idiomas />
+    <SkillsInput />
+    <ProfessionalExpierence />
+    <DadosContratacao />
     </Cv>
     );
 }

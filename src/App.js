@@ -9,6 +9,7 @@ import {Login} from "./pages/Login/Login";
 import { ProfileVCand } from "./pages/Perfil/VisaoCandidato/ProfileVCandidato";
 import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import {Curriculo} from './pages/cadastroCurriculo/Curriculo';
+
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 
 
