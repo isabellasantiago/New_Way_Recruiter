@@ -1,39 +1,28 @@
 import React, {useState} from 'react';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import authService from '../../services/auth.service';
-import { Redirect } from 'react-router-dom';
+import Api from '../../services/mainApi.js';
+import {useHistory} from 'react-router-dom'
+
 import './login.scss';
 
 
-
-export function Login(onLogin){
-
+export function Login(){
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [redirectTo, setRedirectTo] = useState()
+    const [senha, setSenha] = useState('')
 
-    
+    const history = useHistory();
 
-    const sendLogin = async (ev) => {
-        ev.preventDefault();
-        let data = {
+    const handleLogin = async (ev) => {
+        ev.preventDefault()
+       const { data } = await Api.post("/login",{
             email: email,
-            senha: password,
+            senha: senha
+        })
+        if (data.auth){
+            localStorage.setItem("@nwr-login" , data.token)
+            history.push("/authenticated")
         }
-        console.log("data: "+ data.senha);
-        try{
-            let res = await authService.authenticate(data)
-            console.log("res: ", res.data);
-            authService.setLoggedUser(res.data)
-            setRedirectTo("/authenticated", () => onLogin())
-
-        }catch(err){
-            console.log(err)
-            throw new Error("Erro ao efetuar o login")
-        }
-
     }
-
 
     return(
         <>
@@ -59,11 +48,11 @@ export function Login(onLogin){
                 <div id="inputs-login">
                 <h2>Login</h2>
                     <label htmlFor="email">E-mail</label>
-                    <input type="email" id="email" value={email} onChange={(ev) => setEmail(ev.target.value)} required/>
+                    <input type="email" id="email" required value={email} onChange={ev => setEmail(ev.target.value)}/>
                     <label htmlFor="password">Senha</label>
-                    <input type="password" name="password" id="password" value={password} onChange={(ev) => setPassword(ev.target.value)} required/>
+                    <input type="password" name="password" id="password" required value={senha} onChange={ev => setSenha(ev.target.value)}/>
                 </div>
-                <button type="submit">
+                <button type="submit" onClick={ev => handleLogin(ev)}>
                     <ExitToAppIcon
                     color="white"
                     fontSize="small"
