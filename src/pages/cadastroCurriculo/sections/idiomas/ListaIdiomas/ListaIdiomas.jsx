@@ -10,7 +10,7 @@ export function ListaIdiomas(props){
         <>
         {idiomas.map((idioma, index) => {
             return(
-                <Item id="item">
+                <Item id="item" key={index}>
                 <span>{idioma.idioma}</span>
                 <span>{idioma.nivel}</span>
                 <button onClick={() => props.deleteIdioma(index)}><DeleteIcon /></button>

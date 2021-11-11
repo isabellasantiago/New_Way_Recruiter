@@ -9,7 +9,7 @@ export const SelectEstado = ({className, id, name, onChange = ()=>{}}) => {
     }, []);
 
     return (
-        <select class={className} id={id || name} name={name || id} onChange={onChange}>
+        <select className={className} id={id || name} name={name || id} onChange={onChange}>
             <option value="">Seleciona um estado</option>
             {states.map((state)=>{
                 const {label, value} = state;

@@ -53,6 +53,11 @@ export const DadosPessoais = styled.section`
         height: 35px;
         max-width: 330px;
     }
+
+    a{
+        text-decoration: none;
+        color: #fff;
+    }
     
 `
 

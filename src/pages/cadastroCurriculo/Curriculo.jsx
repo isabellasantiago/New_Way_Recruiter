@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 import { DadosPessoaisSection } from './sections/dadosPessoais/DadosPessoais';
@@ -35,6 +35,18 @@ const Cv = styled.div`
 `;
 
 export function Curriculo(){
+    const [dadosPessoais, setDadosPessoais] = useState()
+    const [infoAcademicas, setInfoAcademicas] = useState();
+    const [dadosContratacao, setDadosContratacao] = useState();
+    const [idiomas, setIdiomas] = useState();
+    const [professionalExperience, setProfessionalExperience] = useState();
+
+    const addDados= (ev, dados) => {
+        ev.preventDefault();
+        setDadosPessoais(dados)
+        console.log(dadosPessoais)
+    }
+
     
     return(
     <Cv>
@@ -44,7 +56,7 @@ export function Curriculo(){
         <p>Lembre-se de sempre manter seu currículo atualizado!</p>
         <Button id="cancelar">Cancelar</Button>
     </div>
-    <DadosPessoaisSection/>
+    <DadosPessoaisSection onSave={addDados}/>
     <InfoAcademicas />
     <Idiomas />
     <SkillsInput />
