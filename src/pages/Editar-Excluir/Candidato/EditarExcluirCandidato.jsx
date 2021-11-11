@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import './EditarExcluirCandidato.scss';
-import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
+
+import authService from '../../../services/auth.service'
+import { HeaderComponent } from '../../../components/HeaderComponent/HeaderComponent'
+import { Redirect } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
 
-
+import './EditarExcluirCandidato.scss';
 
 
 export function EditarExcluirCandidato(){
+  const [redirectTo, setRedirectTo] = useState();
+
 
   const {
     register,
@@ -32,7 +35,14 @@ export function EditarExcluirCandidato(){
     }else{
         return false;
     }
-    
+  }
+
+  const componentDidMount = async () => {
+    let loggedUser = await authService.getLoggedUser();
+    if(!loggedUser){
+      console.log("Redirecionou", loggedUser);
+      setRedirectTo("/login")
+    }
      
   
     }
@@ -46,7 +56,7 @@ export function EditarExcluirCandidato(){
     async function UpdateUser(data){
      
     
-      if (window.confirm("Os dados estão corretos?") ==  true){
+      if (window.confirm("Os dados estão corretos?") ===  true){
        
         await axios.put('http://localhost:3333/candidato/46', {
              
@@ -68,38 +78,26 @@ export function EditarExcluirCandidato(){
     }
 
   return(
+    <>
+    {redirectTo && ( <Redirect to={redirectTo}/>)}
     <div className="profilevcand">
-       <header>
-                <a href="/" id="logo">
-                    <h1>New <span>Way</span> Recruiter</h1>
-
-                    
-                </a>
-                <span className="cand">candidato</span>
-                <div id="menus">
-                    <NavLink exact to="/editdeletecandidato" >Perfil</NavLink>
-                    <NavLink exact to="/editdeletecandidato" > Vagas</NavLink>
-                    <NavLink  exact to="/editdeletecandidato" > Processos</NavLink>
-                    <NavLink  exact to="/editdeletecandidato" activeClassName="selected" > <SettingsOutlinedIcon/> </NavLink>
-                </div>
-            </header>
+       <HeaderComponent candidato={true} config="selected"/>
 
             <section >
-
                 <div className="profile">
-                <form onSubmit={handleSubmit(UpdateUser)} >
-              
-              <div className="row">
+                  <form onSubmit={handleSubmit(UpdateUser)} >
                 
-                <div className="col">
-              <label>Nome*</label>
-              <input type="text" 
-              {...register("nome", { required: "Nome  é obrigatório!" })}
-              />
-              {errors.nome && (
-                <p style={{ color: "red" }}>{errors.nome.message}</p>
-              )}
-              </div>
+                  <div className="row">
+                  
+                  <div className="col">
+                  <label>Nome*</label>
+                  <input type="text" 
+                  {...register("nome", { required: "Nome  é obrigatório!" })}
+                  />
+                  {errors.nome && (
+                    <p style={{ color: "red" }}>{errors.nome.message}</p>
+                  )}
+                </div>
 
              
                 
@@ -111,28 +109,32 @@ export function EditarExcluirCandidato(){
               {errors.sobrenome && (
                 <p style={{ color: "red" }}>{errors.sobrenome.message}</p>
               )} 
-</div>
+    </div>
 
 
       
-<div className="col">
-              <label>Número de telefone*</label>
-              <input type="phone" 
-              {...register("telefone", { required: "Número de telefone é obrigatório!" })}
-              />
-              {errors.telefone && (
-                <p style={{ color: "red" }}>{errors.telefone.message}</p>
-              )}
+            <div className="col">
+                <label>Número de telefone*</label>
+                  <input type="phone" 
+                  {...register("telefone", { required: "Número de telefone é obrigatório!" })}
+                  />
+                  {errors.telefone && (
+                    <p style={{ color: "red" }}>{errors.telefone.message}</p>
+                  )}
               </div>
 
             </div>
           
-            <button  type="submit" className="save"> <span>Salvar dados da conta</span></button>
-                </form>
-                <div className="btn">
-                 
-                  <button onClick={Delete} className="DeleteConta"><span>Excluir conta</span> </button>
-                  </div>
+              <button  type="submit" className="save">
+                <span>Salvar dados da conta</span>
+              </button>
+              <div className="btn">
+                  <button onClick={Delete} className="DeleteConta">
+                    <span>Excluir conta</span>
+                  </button>
+                </div>
+          </form>
+                
                    
                     
                     </div>
@@ -143,6 +145,7 @@ export function EditarExcluirCandidato(){
 
                 
             </section>
-    </div>
+  </div>
+  </>
   );
 }
