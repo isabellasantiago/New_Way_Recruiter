@@ -18,10 +18,9 @@ function App() {
 
   return (
     <BrowserRouter>
-    {/* <StoreProvider> */}
     <Switch>
     <Route path="/" exact component={Home}/>
-    <CustomRoute
+    <Route
         path="/login"
         component={Login}
         exact
@@ -30,12 +29,11 @@ function App() {
     <Route path="/candidato" component={CandidatoForm}/>
     <Route path="/empresaform" component={EmpresaForm}/>
 
-    <Route path="/editdeletecandidato" component={EditarExcluirCandidato}/>
-    <Route path="/editdeleteempresa" component={EditarExcluirEmpresa}/> 
-    <CustomRoute exact path="/profilev_candidato" component={ProfileVCand}/>
-    <Route exact path="/profilev_empresa" component={ProfileVEmp}/>
+    <CustomRoute path="/edit_or_delete/candidato" component={EditarExcluirCandidato}/>
+    <CustomRoute path="/edit_or_delete/empresa" component={EditarExcluirEmpresa}/> 
+    <Route exact path="/profile/idcandidato" component={ProfileVCand}/>
+    <Route exact path="/profile/candidato" component={ProfileVEmp}/>
     <Route path="/modal-candidatos" component={ModalCandidato}/>
-    <Route path="/empresaform" component={EmpresaForm}/>
     <Route path="/cv" component={Curriculo}/>
     </Switch>
     </BrowserRouter>

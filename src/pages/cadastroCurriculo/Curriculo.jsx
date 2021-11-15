@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DadosPessoaisSection } from './dadosPessoais/DadosPessoais';
-import { InfoAcademicas } from './infoAcademicas/InfoAcademicas';
+import { DadosPessoaisSection } from './sections/dadosPessoais/DadosPessoais';
+import { InfoAcademicas } from './sections/infoAcademicas/InfoAcademicas';
 import {HeaderComponent} from '../../components/HeaderComponent/HeaderComponent';
 import Button from '../../components/Button/Button';
 import { Idiomas } from './sections/idiomas/Idiomas';

@@ -6,14 +6,13 @@ import { SelectEstado } from '../../../../components/SelectEstado';
 import { SelectCidade } from '../../../../components/SelectCidade';
 import Button from '../../../../components/Button/Button';
 
-import {DadosPessoais, TitleForm, DadosPessoaisForm, Grid} from './style.js';
+import { DadosPessoais, TitleForm, DadosPessoaisForm, Grid} from './style.js';
 import {Wrapper} from '../../components/Wrapper';
 
 
 export function DadosPessoaisSection(){
 
     const [formValues, setFormValues] = useState({});
-
 
     const {register, handleSubmit } = useForm({
         resolver: yupResolver(schema)
