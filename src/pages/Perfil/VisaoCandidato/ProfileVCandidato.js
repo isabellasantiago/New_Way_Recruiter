@@ -3,27 +3,16 @@ import { NavLink } from 'react-router-dom';
 import './ProfileVCandidato.scss';
 import profilephoto  from '../../../assets/images/pexels-vazhnik-7562313.jpg';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import editPencil from  '../../../assets/images/pencil 1.svg'
+import editPencil from  '../../../assets/images/pencil1.svg';
 import neon from '../../../assets/images/neon.svg';
+import { HeaderComponent } from '../../../components/HeaderComponent/HeaderComponent';
 
 
 
 export function ProfileVCand(){
   return(
     <div className="profilevcand">
-       <header>
-                <a href="/" id="logo">
-                    <h1>New <span>Way</span> Recruiter</h1>
-
-                    
-                </a>
-                <span className="cand">candidato</span>
-                <div id="menus">
-                    <NavLink exact to="/profilev_candidato" activeClassName="selected">Perfil</NavLink>
-                    <NavLink exact to="/#" activeClassName="selected"> Vagas</NavLink>
-                    <NavLink  exact to="/#" activeClassName="selected"> Processos</NavLink>
-                </div>
-            </header>
+       <HeaderComponent candidato={true} perfil="selected"/>
 
             <section>
 
@@ -38,7 +27,7 @@ export function ProfileVCand(){
                    
                     <div className="control-btn">
 
-                    <img   className="editicon" src={editPencil}/>
+                    <img alt="editar perfil" className="editicon" src={editPencil}/>
                     <button onClick={()=>{}} className="entContato"><span>Entrar em contato</span></button>
 
                     

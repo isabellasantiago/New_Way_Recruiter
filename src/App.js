@@ -1,4 +1,4 @@
-import {React} from "react";
+import React from "react";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import { CandidatoForm } from "./pages/CandidatoCadastro/Candidato";
 import { EditarExcluirCandidato } from "./pages/Editar-Excluir/Candidato/EditarExcluirCandidato";
@@ -11,24 +11,29 @@ import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import {Curriculo} from './pages/cadastroCurriculo/Curriculo';
 
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
+import CustomRoute from './routes/CustomRoutes'
 
 
 function App() {
+
   return (
     <BrowserRouter>
-    {/* <StoreProvider> */}
     <Switch>
     <Route path="/" exact component={Home}/>
-    <Route path="/login" component={Login}/>
+    <Route
+        path="/login"
+        component={Login}
+        exact
+        isPrivate
+      />
     <Route path="/candidato" component={CandidatoForm}/>
     <Route path="/empresaform" component={EmpresaForm}/>
 
-    <Route path="/editdeletecandidato" component={EditarExcluirCandidato}/>
-    <Route path="/editdeleteempresa" component={EditarExcluirEmpresa}/> 
-    <Route exact path="/profilev_candidato" component={ProfileVCand}/>
-    <Route exact path="/profilev_empresa" component={ProfileVEmp}/>
+    <CustomRoute path="/edit_or_delete/candidato" component={EditarExcluirCandidato}/>
+    <CustomRoute path="/edit_or_delete/empresa" component={EditarExcluirEmpresa}/> 
+    <Route exact path="/profile/idcandidato" component={ProfileVCand}/>
+    <Route exact path="/profile/candidato" component={ProfileVEmp}/>
     <Route path="/modal-candidatos" component={ModalCandidato}/>
-    <Route path="/empresaform" component={EmpresaForm}/>
     <Route path="/cv" component={Curriculo}/>
     </Switch>
     </BrowserRouter>
