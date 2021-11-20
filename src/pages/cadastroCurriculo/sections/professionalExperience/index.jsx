@@ -6,9 +6,8 @@ import { ListaProfessionalExpierence } from './listaProfessionalExperience';
 export function ProfessionalExpierence(){
     const [listExperiences, setListExperiences] = useState();
 
-    const addExperience = (ev, nomeEmpresa, cargo, nivelOperacional, dataInicioEmprego, dataFinalEmprego, trabalhoAqui,descricaoFuncoes) => {
-        ev.preventDefault();
-        setListExperiences([...listExperiences || [], {nomeEmpresa, cargo, nivelOperacional, dataInicioEmprego, dataFinalEmprego, trabalhoAqui, descricaoFuncoes}])
+    const addExperience = (data) => {
+        setListExperiences([...listExperiences || [], {data}])
     }
 
     const deleteExperience = (index) => {

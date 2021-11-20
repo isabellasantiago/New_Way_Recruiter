@@ -8,7 +8,8 @@ const Label = styled.label`
     display: flex;
     flex-flow: column nowrap;
 
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    /* margin-top: 3px; */
 
     max-width: 330px;
 

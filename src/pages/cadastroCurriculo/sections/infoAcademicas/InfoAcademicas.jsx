@@ -14,10 +14,8 @@ export function InfoAcademicas(){
 
     const [listaFormacao, setListaFormacao] =  useState()
 
-    const addInfoAcademicas =(ev, instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino) => {
-        ev.preventDefault();
-
-        setListaFormacao([...listaFormacao || [], {instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino}])
+    const addInfoAcademicas = (data) => {
+        setListaFormacao([...listaFormacao || [], {data}])
 
     }
 

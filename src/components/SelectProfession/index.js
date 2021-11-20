@@ -4,10 +4,9 @@ import { areasAtuacao } from '../../helpers/areaAtuacao';
 
 
 export const SelectProfession = ({className, id, name, onChange=()=>{}, area}) => {
-    const [professions, setProfessions] = useState([])
+    const [professions, setProfessions] = useState()
     useEffect(() => {
         const areaProfissao = areasAtuacao.filter(areaP => areaP.name === area)
-        console.log(areaProfissao)
         if(areaProfissao.length !== 0){
             setProfessions(areaProfissao[0].professions)
         }
@@ -18,7 +17,8 @@ export const SelectProfession = ({className, id, name, onChange=()=>{}, area}) =
             <option value="">Selecione...</option>
             {professions?.map((profession) => {
                 const { name } = profession
-                return (<option key={name} value={name}>{name}</option>)
+                const professionName = name
+                return (<option key={professionName} value={professionName}>{professionName}</option>)
             })}
         </Select>
     )

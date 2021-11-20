@@ -35,4 +35,8 @@ export const FormWrapper = styled.div`
     >div{
         margin-bottom: 18px;
     }
+
+    >label{
+        font-family: "Poppins", Sans-serif;
+    }
 `;

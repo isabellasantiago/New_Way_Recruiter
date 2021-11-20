@@ -5,7 +5,7 @@ import { fetchCitiesForState, parseCity } from '../../helpers/ibge';
 import '../SelectEstado/select.scss';
 
 
-export const SelectCidade = ({className, id, name, state, onChange=()=>{}}) => {
+export const SelectCidade = ({className, id, name, state, onChange=()=>{}, value}) => {
     const [cities, setCities] = useState([]);
     useEffect(()=>{
         fetchCitiesForState(state).then(parseCity).then(setCities)
@@ -16,7 +16,7 @@ export const SelectCidade = ({className, id, name, state, onChange=()=>{}}) => {
             <option value="">Seleciona uma cidade</option>
             {cities.map((city)=>{
                 const {label, value} = city;
-                return(<option key={value} value={value}>{label}</option>)
+                return(<option key={value} value={label}>{label}</option>)
             })}
         </select>
     );

@@ -10,10 +10,8 @@ import {Form} from './Form/Form';
 export function Idiomas(){
 
     const [idiomas, setIdiomas] = useState();
-    const addIdioma = (ev, idioma, nivel) => {
-        ev.preventDefault();
-        setIdiomas([...idiomas || [], {idioma, nivel}])
-        
+    const addIdioma = (dados) => {
+        setIdiomas([...idiomas || [], {dados}])
     }
     const deleteIdioma = (index) => {
         let newIdiomas = [...idiomas]
@@ -45,7 +43,6 @@ export function Idiomas(){
          <h1>Idiomas</h1>
          <Form onSave={addIdioma}/>
          {idiomas ? <ListaIdiomas  idiomas={idiomas} deleteIdioma={deleteIdioma}/> : null}
-         
         </Dados>
     )
 }

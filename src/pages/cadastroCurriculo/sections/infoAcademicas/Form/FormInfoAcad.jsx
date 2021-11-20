@@ -4,7 +4,10 @@ import Button from '../../../../../components/Button/Button';
 import Field from '../../../../../components/forms/Field';
 import { Wrapper } from '../../../components/Wrapper';
 import { Form, FormWrapper} from './style';
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
+//nao ta adicionando e ta dando os campos como obrigatorios
 
 export function FormInfoAcad(props){
     const {onSave} = props;
@@ -15,30 +18,28 @@ export function FormInfoAcad(props){
     const [dataInicio, setDataInicio] = useState('');
     const [dataTermino, setDataTermino] = useState('');
 
+    const {handleSubmit, register, formState: { errors }} = useForm({
+        resolver: yupResolver(schema)
+    })
 
-    const criaFormacao = async (event) =>{
-        event.preventDefault();
-        let formData = {
-            instituicao: event.target[0].value,
-            curso: event.target[1].value,
-            tipoFormacao: event.target[2].value,
-            statusFormacao: event.target[3].value,
-            dataInicio: event.target[4].value,
-            dataTermino: event.target[5].value,
-        }
-        const isValid = await schema.isValid(formData);
-        return isValid();
-    }
+
+
      
  
     return(
-        <Form onSubmit={e => e.preventDefault()}>
+        <Form onSubmit={handleSubmit(onSave)}>
             <FormWrapper>
-                <Field.Text  label="Instituição de ensino" type="text" name="instituicao" onChange={(e) => setInstituicao(e.target.value)} value={instituicao || ""} />
-                <Field.Text  label="Curso" type="text" name="curso" onChange={(e) => setCurso(e.target.value)} value={curso || ""}/>
+                <Wrapper>
+                    <Field.Text  label="Instituição de ensino" type="text" name="instituicao" {...register('instituicao')} onChange={(e) => setInstituicao(e.target.value)} value={instituicao} />
+                    <p>{errors.instituicao?.message}</p>
+                </Wrapper>
+                <Wrapper>
+                    <Field.Text  label="Curso" type="text" name="curso" {...register('curso')} onChange={(e) => setCurso(e.target.value)} value={curso}/>
+                    <p>{errors.curso?.message}</p>
+                </Wrapper>
                 <Wrapper>
                     <label htmlFor="tipoFormacao">Formação</label>
-                    <select id="tipoFormacao" name="tipoFormacao" onChange={(e) => {setTipoFormacao(e.target.value)}} value={tipoFormacao || ""} >
+                    <select id="tipoFormacao" name="tipoFormacao" {...register('tipoFormacao')} onChange={(e) => {setTipoFormacao(e.target.value)}} value={tipoFormacao || ""} >
                         <option value="">Selecione</option>
                         <option value="ensinoRegular">Ensino regular</option>
                         <option value="extraCurricular">Extra curricular</option>
@@ -48,29 +49,37 @@ export function FormInfoAcad(props){
                         <option value="mestrado">Mestrado</option>
                         <option value="doutorado">Doutorado</option>
                     </select>
+                    <p>{errors.tipoFormacao?.message}</p>
                 </Wrapper>
             </FormWrapper>
             <FormWrapper>
                 <Wrapper>
                     <label htmlFor="statusFormacao">Status</label>
-                    <select id="statusFormacao" name="statusFormacao" onChange={(e) => setStatusFormacao(e.target.value)} value={statusFormacao || ""} >
+                    <select id="statusFormacao" name="statusFormacao" {...register('statusFormacao')} onChange={(e) => setStatusFormacao(e.target.value)} value={statusFormacao} >
                         <option value="">Selecione</option>
                         <option value="cursando">Cursando</option>
                         <option value="concluido">Concluído</option>
                         <option value="trancado">Trancado</option>
                     </select>
+                    <p>{errors.statusFormacao?.message}</p>
                 </Wrapper>
-                <Field.Text label="Data de inicio" type="date" name="dataInicio" onChange={(e) => setDataInicio(e.target.value)} value={dataInicio || ""} />
-                <Field.Text label="Data de término" type="date" name="dataTermino"  onChange={(e) => setDataTermino(e.target.value)} value={dataTermino || ""} />
+                <Wrapper>
+                    <Field.Text label="Data de inicio" type="date" name="dataInicio" {...register('dataInicio')} onChange={(e) => setDataInicio(e.target.value)} value={dataInicio} />
+                    <p>{errors.dataInicio?.message}</p>
+                </Wrapper>
+                <Wrapper>
+                    <Field.Text label="Data de término" type="date" name="dataTermino" {...register('dataTermino')} onChange={(e) => setDataTermino(e.target.value)} value={dataTermino} />
+                    <p>{errors.dataTermino?.message}</p>
+                </Wrapper>
                 <Button type="submit"
-                onClick={(ev) => {
-                    onSave(ev, instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino)
+                onClick={() => {
                     setInstituicao("")
                     setCurso("")
                     setTipoFormacao("")
                     setStatusFormacao("")
                     setDataInicio("")
                     setDataTermino("")
+                    console.log(instituicao, tipoFormacao, statusFormacao, dataInicio, dataTermino, curso)
                 }}>Adicionar</Button>
             </FormWrapper>
         </Form>

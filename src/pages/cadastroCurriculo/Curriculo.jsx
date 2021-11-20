@@ -34,14 +34,13 @@ const Cv = styled.div`
 `;
 
 export function Curriculo(){
-    const [dadosPessoais, setDadosPessoais] = useState()
+    const [dadosPessoais, setDadosPessoais] = useState({})
     const [infoAcademicas, setInfoAcademicas] = useState();
     const [dadosContratacao, setDadosContratacao] = useState();
     const [idiomas, setIdiomas] = useState();
     const [professionalExperience, setProfessionalExperience] = useState();
 
-    const addDados= (ev, dados) => {
-        ev.preventDefault();
+    const addDados = (dados) => {
         setDadosPessoais(dados)
         console.log(dadosPessoais)
     }

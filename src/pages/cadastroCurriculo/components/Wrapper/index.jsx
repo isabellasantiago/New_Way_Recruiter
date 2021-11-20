@@ -9,4 +9,10 @@ export const Wrapper = styled.div`
     select{
         font-family: "Poppins", sans-serif;
     }
+
+    p{
+        font-family: "Poppins", sans-serif;
+        color: #F44336;
+        font-size: 10px;
+    }
 `;
