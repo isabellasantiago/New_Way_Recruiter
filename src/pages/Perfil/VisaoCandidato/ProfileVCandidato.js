@@ -1,15 +1,22 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './ProfileVCandidato.scss';
 import profilephoto  from '../../../assets/images/pexels-vazhnik-7562313.jpg';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import editPencil from  '../../../assets/images/pencil1.svg';
-import neon from '../../../assets/images/neon.svg';
+
 import { HeaderComponent } from '../../../components/HeaderComponent/HeaderComponent';
 
+import { Experiencias } from './Components/Experiencias/Experiencias';
+import { Formacaoes } from './Components/Formacoes/Formacoes';
+import { HardSoftSkills } from './Components/HardSoftSkills/HardSoftSkills';
+import { Idiomas } from './Components/Idiomas/Idiomas';
+import { Preferencias } from './Components/Preferencias/Preferencias';
 
-
+import {useHistory} from 'react-router-dom';
 export function ProfileVCand(){
+  const history = useHistory();
+
   return(
     <div className="profilevcand">
        <HeaderComponent candidato={true} perfil="selected"/>
@@ -27,50 +34,23 @@ export function ProfileVCand(){
                    
                     <div className="control-btn">
 
-                    <img alt="editar perfil" className="editicon" src={editPencil}/>
-                    <button onClick={()=>{}} className="entContato"><span>Entrar em contato</span></button>
+                   <Link to='/edit_or_delete/candidato'> <img  alt="editar perfil" className="editicon" src={editPencil}/></Link>
+                    <button onClick={()=>{}}className="entContato"  disabled  ><span>Entrar em contato</span></button>
 
                     
                     </div>
 
                 </div>
 
-                <div className="experiencias">
-                    <h2>Experiências</h2>
-                    <div className="center">
-                        
-                    
-                    <div className="first-experience">
-                            <img src={neon} alt="neon"/>
-                            <h3>Neon</h3>
-                            <div className="jobsline">
-                        
-                            <span>
-                               <div className="ball">
-                                  
-                                   </div>
-                                   
-                               <div className="ball"/>
-                               <div className="ball"/>
-                               
-                            </span>
-                            <h4>Designer UX</h4>
-                            <p>jan. 2021 - o momento</p>
+                <Experiencias/>
+                <Formacaoes/>
+                <HardSoftSkills/>
 
-                            </div>
-                          
-                            
-                    </div>
-                    <hr/>
-                  
-                    </div>
-                    
+                <div className="row">
+                  <Idiomas/>
+                  <Preferencias/>
                 </div>
-
-                <div className="formacoes">
-                    <h2>Formações</h2>
-                </div>
-
+                
             </section>
     </div>
   );

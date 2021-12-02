@@ -1,7 +1,7 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import {makeStyles} from '@material-ui/styles';
+import {makeStyles} from '@mui/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from '@react-spring/web'; // web.cjs is required for IE 11 support
@@ -9,6 +9,7 @@ import closeImg from '../../assets/images/close.svg';
 import './modal-candidato.scss';
 import Toggle from './Toggle';
 import api from "../../services/api";
+import { shadows } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
   modalButton:{
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
    
     background: '#F7F7F7',
     boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+  
   },
   modalcenter:{
     display: 'flex',
