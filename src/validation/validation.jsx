@@ -19,7 +19,17 @@ import * as yup from 'yup';
     tipoFormacao: yup.string().required('Este campo é um campo é obrigatório'),
     statusFormacao: yup.string().required('Este campo é um campo é obrigatório'),
     dataInicio: yup.date().required('Este campo é um campo é obrigatório'),
-    dataTermino: yup.date().required('Este campo é um campo é obrigatório')
+    dataTermino: yup.date().required('Este campo é um campo é obrigatório'),
+    nomeVaga: yup.string().required('campo obrigatório'),
+    salario: yup.string().required('campo obrigatório'),
+    contrato: yup.string().required('campo obrigató'),
+    sobreVaga: yup.string().required('campo obrigatório'),
+    item: yup.string().required('campo obrigatório'),
+    requisitos: yup.array(),
+    genderRadio: yup.boolean().required('campo obrigatório'),
+    etniaRadio: yup.boolean().required('campo obrigatório'),
+    niveis: yup.boolean().required('campo obrigatório'),
+
 })
 
 export default schema
