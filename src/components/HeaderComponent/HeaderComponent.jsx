@@ -30,7 +30,7 @@ export function HeaderComponent({candidato, perfil, vagas, config, processos}){
                 <NavLink exact to="#" activeClassName={perfil}>Perfil</NavLink>
                 <NavLink exact to="#" activeClassName={vagas}> Vagas</NavLink>
                 <NavLink  exact to="/editdeletecandidato" activeClassName={processos}> Processos</NavLink>
-                <NavLink  exact to="/editdeletecandidato" activeClassName={config} > <SettingsOutlinedIcon/> </NavLink>
+                <NavLink  exact to="/edit_or_delete/candidato" activeClassName={config} > <SettingsOutlinedIcon/> </NavLink>
                 <button onClick={ev => logout()}>
                     <LogoutIcon color="white"/>
                 </button>
@@ -47,7 +47,7 @@ export function HeaderComponent({candidato, perfil, vagas, config, processos}){
         <nav id='links'>
                 <NavLink exact to="" >Perfil</NavLink>
                 <NavLink exact to="" > Vagas</NavLink>
-                <NavLink  exact to="/editdeletecandidato" activeClassName="selected" > <SettingsOutlinedIcon/> </NavLink>
+                <NavLink  exact to="/edit_or_delete/empresa" activeClassName="selected" > <SettingsOutlinedIcon/> </NavLink>
                 <button onClick={ev => logout()}>
                     <LogoutIcon color="white"/>
                 </button>
