@@ -39,17 +39,14 @@ const StepSection = styled.div`
 
 export function Steps(props){
     const { steps } = props;
-    const [step, setStep] = useState();
 
     return(
         <StepSection>
             <button onClick={() => {
-                setStep(1)
-                steps(step)}} >Dados</button>
+                steps(1)}} >Dados</button>
             <img src={Seta} alt="linhas em formato de seta que separam os passos de cadastro da vaga" height="44px"/>
             <button onClick={() => {
-                setStep(2)
-                steps(step)
+                steps(2)
                 }}>Filtragem de candidatos</button>
         </StepSection>
     )

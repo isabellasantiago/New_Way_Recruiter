@@ -7,7 +7,7 @@ import { ListaItem } from './lista'
 
 export function List({ label, name, id, items }) {
     
-    const [itemList, setItemList] = useState();
+    const [itemList, setItemList] = useState([]);
     
 
     const addItem = (ev, item) => {

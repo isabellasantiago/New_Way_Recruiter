@@ -87,3 +87,19 @@ export const WrapperVaga = styled.div`
         text-align: center;
     }
 `;
+
+export const ButtonNext = styled.button`
+    height: 33px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #fff;
+    width: 150px;
+
+    background: #023859;
+    border-radius: 8px;
+    border: none;
+
+`;
