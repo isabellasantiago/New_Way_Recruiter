@@ -15,6 +15,7 @@ export function InputSkills(props){
 
     const addTags = (e) => {
         e.preventDefault();
+
         if(e.target.value !== ""){
             setTags([...tags, e.target.value])
             e.target.value = "";
@@ -22,27 +23,6 @@ export function InputSkills(props){
         }
     }
 
-    const saveSkills = (skills) => {
-        localStorage.setItem("tags", JSON.stringify(skills))
-    }
-    const loadedSkills = () => {
-        const loadedSkills = JSON.parse(localStorage.getItem("tags"))
-        return loadedSkills
-    }
-
-    useEffect(() => {
-        const loadSkills = loadedSkills();
-        setTags(loadSkills);
-        console.log(loadSkills);
-    },[])
-
-    useEffect(() => {
-        if(tags){
-            saveSkills(tags)
-        }
-    }, [tags])
-
-console.log(tags)
     return(
         <LabelInput>
             <TitleInput>{label}</TitleInput>
@@ -62,7 +42,7 @@ console.log(tags)
                             )
                         })}
                     </ul> )}
-                    <input type="text" placeholder={placeholder} onKeyUp={e => e.key === "Enter" && ( addTags(e) )}/>
+                    <input type="text" placeholder={placeholder}  onKeyUp={e => e.key === "Enter" && ( addTags(e))} />
                     
             </SkillTags>
             

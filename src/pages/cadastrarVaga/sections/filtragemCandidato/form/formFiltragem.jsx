@@ -18,7 +18,7 @@ export function FormFiltragem(props){
     const [ especificEtnia, setEspecificEtnia] = useState(false)
 
     return(
-        <Form onSubmit={handleSubmit(console.log)}>
+        <Form >
             <Row>
                 <WrapperVaga>
                     <label id="filtragem" htmlFor="genderRadio">Esta vaga é destinada a um gênero específico?*</label>
@@ -73,13 +73,7 @@ export function FormFiltragem(props){
                     </InputWrapper>
                 </WrapperVaga>
             </Row>
-            <Row>
-                <InputSkills label="Quais hardskills a(o) candidata(o) deveria ter?*" placeholder="Adicione uma habilidade" />
-            </Row>
-            <Row>
-                <InputSkills label="Quais softskills a(o) candidata(o) deveria ter?*" placeholder="Adicione uma habilidade"/>
-            </Row>
-            <Button type="submit">Cadastrar</Button>
+            <Button type="submit" >Cadastrar</Button>
         </Form>
     )    
 }

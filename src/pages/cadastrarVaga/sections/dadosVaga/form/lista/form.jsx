@@ -11,16 +11,15 @@ export function FormItem(props) {
     const { name, id, className, label, onSave } = props;
     const [item, setItem] = useState();
 
-    const {handleSubmit, register, formState: { errors }} = useForm({
-        resolver: yupResolver(schema)
-    })
-
     return(
         <Form>
             <WrapperVaga>
             <label htmlFor={id}>{label}</label>
             <ItemInput>
-                <input type="text" name={name} id={id} className={className} value={item} onChange={ev => setItem(ev.target.value)} />
+                <input type="text" name={name} id={id} className={className} value={item} onChange={ev => {
+                    setItem(ev.target.value)
+                    ev.target.value=""
+                    }} />
                 <button type="submit" onClick={ev => onSave(ev, item)} ><AddIcon /></button>
             </ItemInput>
             </WrapperVaga>
