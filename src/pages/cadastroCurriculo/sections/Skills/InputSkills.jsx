@@ -4,7 +4,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 export function InputSkills(props){
     const {label, placeholder} = props;
-    const [tags, setTags] = useState();
+    const [tags, setTags] = useState([]);
     
 
     const deleteTags = (index) => {
@@ -16,7 +16,7 @@ export function InputSkills(props){
     const addTags = (e) => {
         e.preventDefault();
         if(e.target.value !== ""){
-            setTags([...tags || [], e.target.value])
+            setTags([...tags, e.target.value])
             e.target.value = "";
 
         }
@@ -31,22 +31,24 @@ export function InputSkills(props){
     }
 
     useEffect(() => {
-        if(tags){
-            saveSkills(tags)
-        }
-    }, [tags])
-    useEffect(() => {
         const loadSkills = loadedSkills();
         setTags(loadSkills);
         console.log(loadSkills);
     },[])
 
+    useEffect(() => {
+        if(tags){
+            saveSkills(tags)
+        }
+    }, [tags])
+
+console.log(tags)
     return(
         <LabelInput>
             <TitleInput>{label}</TitleInput>
             <SkillTags className="skill">
-                {tags ? <ul type="none">
-                     {tags.map((tag, index) =>{
+                {tags && ( <ul type="none">
+                     {tags?.map((tag, index) =>{
                             return (
                                 <li key={index} id="item">
                                     <span>{tag}</span>
@@ -59,8 +61,8 @@ export function InputSkills(props){
                                 </li>
                             )
                         })}
-                    </ul> : null}
-                    <input type="text" placeholder={placeholder} onKeyUp={e => e.key === "Enter" ? addTags(e) : null}/>
+                    </ul> )}
+                    <input type="text" placeholder={placeholder} onKeyUp={e => e.key === "Enter" && ( addTags(e) )}/>
                     
             </SkillTags>
             

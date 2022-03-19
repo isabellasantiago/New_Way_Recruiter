@@ -13,74 +13,68 @@ import Button from '../../../../../components/Button/Button'
 //nada acontece ao clicar em "cadastrar"
 
 export function FormFiltragem(props){
-    const { onSave } = props;
+    const { register, handleSubmit, errors } = props;
     const [especificGender, setEspecificGender] = useState(false)
     const [ especificEtnia, setEspecificEtnia] = useState(false)
-    const [ especificPcd, setEspecificPcd ] = useState(false)
-    const [especificLevel,setEspecificLevel] = useState(false)
-
-    const {handleSubmit, register, formState: {errors}} = useForm({
-        resolver: yupResolver(schema)
-    })
 
     return(
-        <Form onSubmit={handleSubmit(onSave)}>
+        <Form onSubmit={handleSubmit(console.log)}>
             <Row>
                 <WrapperVaga>
                     <label id="filtragem" htmlFor="genderRadio">Esta vaga é destinada a um gênero específico?*</label>
                     <InputWrapper>
-                        <input type="radio" name="genderRadio" value={true} checked={especificGender === true} {...register('genderRadio')} onChange={ev => setEspecificGender(ev.target.value)}/>Sim
-                        <input type="radio" name="genderRadio" value={false} checked={especificGender === false} {...register('genderRadio')} onChange={ev => setEspecificGender(ev.target.value)} />Não
-                        {especificPcd ? (
+                        <input type="radio" name="genderRadio" value={true} onClick={() => setEspecificGender(true)}/>Sim
+                        <input type="radio" name="genderRadio" value={false} onClick={() => setEspecificGender(false)} />Não
+                        {especificGender && (
                             <Wrapper>
                                 <select name="gender" id="gender" className="gender" {...register('gender')}>
-                                <option value="">Selecione...</option>
-                                <option value="mulher">Mulher</option>
-                                <option value="homem">Homem</option>
-                                <option value="mtrans">Mulher Trans</option>
-                                <option value="htrans">Homem Trans</option>
-                                <option value="outros">Outros</option>
+                                <option value={0}>Mulher Cis</option>
+                                <option value={1}>Mulher Trans</option>
+                                <option value={2}>Pessoas Trans</option>
+                                <option value={3}>Mulher cis e pessoas trans</option>
                                 </select>
                                 {errors.gender?.message}
                             </Wrapper>
-                        ) : null}
+                        )}
                     </InputWrapper>
                 </WrapperVaga>
                 <WrapperVaga>
                     <label id="filtragem" htmlFor="etniaRadio">Esta vaga é destinada a uma Etnia específica?*</label>
                     <InputWrapper>
-                        <input type="radio" name="etniaRadio" value={true} checked={especificEtnia === true} onChange={ev => setEspecificEtnia(ev.target.value)}/>Sim
-                        <input type="radio" name="etniaRadio" value={false} checked={especificEtnia === false} onChange={ev => setEspecificEtnia(ev.target.value)}/>Não
-                    </InputWrapper>
-                        {especificEtnia ?
+                        <input type="radio" name="etniaRadio" value={true} onChange={() => setEspecificEtnia(true)}/>Sim
+                        <input type="radio" name="etniaRadio" value={false} onChange={() => setEspecificEtnia(false)}/>Não
+
+                        {especificEtnia && (
                         <Wrapper>
-                            <select name="etnia" id="entnia" className="etnia" {...register('etnia')}>
-                                <option value="negro">Negro</option>
-                                <option value="indigena">Indígena</option>
+                            <select name="etnia" id="entnia" className="etnia" {...register('ethnicity')}>
+                                <option value={0}>Negra</option>
+                                <option value={1}>Indígena</option>
+                                <option value={2}>Amarela</option>
                             </select>
                             {errors.etnia?.message}
                         </Wrapper>
-                        : null}
+                        )}
+                    </InputWrapper>
                 </WrapperVaga>
             </Row>
             <Row>
                 <WrapperVaga>
                     <label id="filtragem" htmlFor="pcdRadio">Esta vaga é destinada a somente pessoas com deficiência?*</label>
                     <InputWrapper>
-                        <input type="radio" name="pcdRadio" value={true} checked={especificPcd === true} onChange={ev => setEspecificPcd}/>Sim
-                        <input type="radio" name="pcdRadio" value={false} checked={especificPcd === false} onChange={ev => setEspecificPcd}/>Não
+                        <input type="radio" name="pcdRadio" value={true} {...register('pcd')}/>Sim
+                        <input type="radio" name="pcdRadio" value={false} {...register('pcd')}/>Não
                     </InputWrapper>
                 </WrapperVaga>
                 <WrapperVaga>
                     <label id="filtragem" htmlFor="niveis">Aceita candidatura de todos os níveis?*</label>
                     <InputWrapper>
-                        <input type="radio" name="niveis" value={true} checked={especificLevel === true} onChange={ev => setEspecificLevel}/>Sim
-                        <input type="radio" name="niveis" value={false} checked={especificLevel === false} onChange={ev => setEspecificLevel}/>Não
+                        <input type="radio" name="niveis" value={true} {...register('acceptsAllLevels')}/>Sim
+                        <input type="radio" name="niveis" value={false} {...register('acceptsAllLevels')}/>Não
                     </InputWrapper>
                 </WrapperVaga>
             </Row>
             <Row>
-                <InputSkills label="Quais hardskills a(o) candidata(o) deveria ter?*" placeholder="Adicione uma habilidade"/>
+                <InputSkills label="Quais hardskills a(o) candidata(o) deveria ter?*" placeholder="Adicione uma habilidade" />
             </Row>
             <Row>
                 <InputSkills label="Quais softskills a(o) candidata(o) deveria ter?*" placeholder="Adicione uma habilidade"/>
