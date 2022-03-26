@@ -16,6 +16,11 @@ export function FormFiltragem(props){
     const { register, handleSubmit, errors } = props;
     const [especificGender, setEspecificGender] = useState(false)
     const [ especificEtnia, setEspecificEtnia] = useState(false)
+    const [hardSkills, setHardSkills] = useState([])
+    const [softSkills, setSoftSkills] = useState([])
+
+    console.log(hardSkills)
+    console.log(softSkills)
 
     return(
         <Form >
@@ -74,7 +79,16 @@ export function FormFiltragem(props){
                 </WrapperVaga>
             </Row>
             <Row>
-                <InputSkills></InputSkills>
+                <InputSkills 
+                    label="Hard Skills"
+                    setSkills={setHardSkills}
+                />
+            </Row>
+            <Row>
+                <InputSkills 
+                    label="Soft Skills"
+                    setSkills={setSoftSkills}
+                />
             </Row>
             <Button type="submit" >Cadastrar</Button>
         </Form>
