@@ -1,5 +1,5 @@
 .profilevcand{
-    height: 250vh;
+    height: 410vh;
     background: #C6C6C6;
     
   header{
@@ -181,150 +181,17 @@
         }
     }
 
-    .experiencias{
-      width: 858px;
-      height: 819px;
-      left: 274px;
-      top: 566px;
-      margin-top:68px;
-      background: #FEFEFE;
-      border-radius: 8px;
-      margin-bottom:77px;
-
-      h2{
-        margin-left:54px;
-        margin-top:22px;
-        font-family: Poppins;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 24px;
-        line-height: 36px;
+    
+      .row{
+        width:858px;
         display: flex;
-        align-items: center;
-
-        color: #000000;
-
+        flex-direction:row ;
+        align-items:center;
       }
-      .center{
-        width: 858px;
-        height: 780px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .first-experience{
-        display: flex;
-        flex-direction: row;
-          width:676px;
-          height: 173px;
-          margin-top:-420px;
-       
-      
-      img{
-        width: 125px;
-        height: 125px;
-        margin-bottom: 50px;
-      }
-      h3{
-        font-family: Poppins;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 24px;
-        line-height: 36px;
-
-        align-items: center;
-
-        color: #000000;
-
-      }
-      .jobsline{
-        display: flex;
-        flex-direction:column;
-      span{
-        margin-left: 35px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        margin-top:64px;
-        width: 450px;
-        height: 0px;
-        left: 551px;
-        top: 786px;
-
-        border: 1px solid #C6C6C6;
-        transform: rotate(0.01deg);
-
-        div.ball{
-          align-items: center;
-          width: 15px;
-          height: 17px;
-          left: 544px;
-          top: 777px;
-          border-radius:100%;
-          background: #023859;
-        }
-        h4{
-          margin-top:20px;
-          font-family: Poppins;
-          font-style: normal;
-          font-weight: bold;
-          font-size: 15px;
-          line-height: 22px;
-          display: flex;
-          align-items: center;
-
-          color: #000000;
-
-        }
-        p{
-          font-family: Poppins;
-          font-style: normal;
-          font-weight: normal;
-          font-size: 12px;
-          line-height: 21px;
-          /* identical to box height */
-
-          display: flex;
-          align-items: center;
-          text-align: center;
-
-          color: #000000;
-
-        }
-      }
-
-      }
-    }
-
-    }
+    
 
 
-    .formacoes{
-      width: 858px;
-      height: 344px;
-      left: 274px;
-      top: 1482px;
-
-      background: #FEFEFE;
-      border-radius: 8px;
-
-      h2{
-        margin-left:54px;
-        margin-top:66.68px;
-        font-family: Poppins;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 24px;
-        line-height: 36px;
-        display: flex;
-        align-items: center;
-
-        color: #000000;
-      }
-    }
-   }
- 
-}
+    
+   
+  }
+  }
