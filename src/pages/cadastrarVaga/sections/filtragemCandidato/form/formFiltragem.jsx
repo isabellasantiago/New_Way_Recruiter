@@ -73,6 +73,9 @@ export function FormFiltragem(props){
                     </InputWrapper>
                 </WrapperVaga>
             </Row>
+            <Row>
+                <InputSkills></InputSkills>
+            </Row>
             <Button type="submit" >Cadastrar</Button>
         </Form>
     )    

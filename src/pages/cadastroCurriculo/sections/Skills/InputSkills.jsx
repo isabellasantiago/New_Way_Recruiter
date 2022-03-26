@@ -30,7 +30,7 @@ export function InputSkills(props){
                 {tags && ( <ul type="none">
                      {tags?.map((tag, index) =>{
                             return (
-                                <li key={index} id="item">
+                                <li key={tag.id} id="item">
                                     <span>{tag}</span>
                                     <button onClick={() => deleteTags(index)}>
                                         <HighlightOffIcon
