@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, WrapperVaga, InputWrapper, Row } from "../../dadosVaga/form/style";
-import { useForm } from "react-hook-form";
-import schema from '../../../../../validation/validation'
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Wrapper } from '../../../../cadastroCurriculo/components/Wrapper'
 import { InputSkills } from "../../../../cadastroCurriculo/sections/Skills/InputSkills";
 import Button from '../../../../../components/Button/Button'
+import TagsInput from 'react-tagsinput'
+import Api from '../../../../../services/mainApi'
 
 //inputskills nao estao funcionando como deveriam
 //faixa passa o estado somente depois do segundo clique
@@ -18,9 +17,17 @@ export function FormFiltragem(props){
     const [ especificEtnia, setEspecificEtnia] = useState(false)
     const [hardSkills, setHardSkills] = useState([])
     const [softSkills, setSoftSkills] = useState([])
+    const [suggestion, setSuggestion] = useState([])
+
+
+    useEffect(() => {
+        const getSuggestion = async () => {
+            const suggestions = await Api.get()
+        }
+
+    }, [])
 
     console.log(hardSkills)
-    console.log(softSkills)
 
     return(
         <Form >
@@ -79,10 +86,11 @@ export function FormFiltragem(props){
                 </WrapperVaga>
             </Row>
             <Row>
-                <InputSkills 
+                <TagsInput value={hardSkills} onChange={setHardSkills}/>
+                {/* <InputSkills 
                     label="Hard Skills"
                     setSkills={setHardSkills}
-                />
+                /> */}
             </Row>
             <Row>
                 <InputSkills 

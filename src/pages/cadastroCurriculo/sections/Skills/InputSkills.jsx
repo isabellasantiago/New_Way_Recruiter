@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { LabelInput, TitleInput, SkillTags } from './style.js';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import Autosuggest from 'react-tagsinput';
 
 export function InputSkills(props) {
-    const { label, placeholder, setSkills } = props;
+    const { label, setSkills, skills } = props;
     const [tags, setTags] = useState([]);
 
 
@@ -39,10 +40,7 @@ const addTags = (event) => {
 //     console.log(loadSkills);
 // },[])
 
-return (
-    <LabelInput>
-        <TitleInput>{label}</TitleInput>
-        <SkillTags className="skill">
+/* <SkillTags className="skill">
             {tags && (<ul type="none">
                 {tags?.map((tag, index) => {
                     return (
@@ -60,9 +58,15 @@ return (
             </ul>)}
             <input type="text" placeholder={placeholder} onKeyUp={e => (e.key === "Enter" ? addTags(e) : null)} />
 
-        </SkillTags>
+        </SkillTags> */
 
-        <span>Para adicionar uma habilidade pressione Enter</span>
+return (
+    <LabelInput>
+        <TitleInput>{label}</TitleInput>
+        <Autosuggest
+        placeholder="Para adicionar uma habilidade pressione Enter"
+
+        />
 
     </LabelInput>
 )
