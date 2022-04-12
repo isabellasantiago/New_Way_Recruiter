@@ -1,73 +1,71 @@
-import { useState, useEffect } from 'react';
-import { LabelInput, TitleInput, SkillTags } from './style.js';
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import Autosuggest from 'react-tagsinput';
+import Autosuggest from "react-autosuggest";
+import TagsInput from "react-tagsinput";
+import { Container } from  "./style";
 
-export function InputSkills(props) {
-    const { label, setSkills, skills } = props;
-    const [tags, setTags] = useState([]);
+export const InputSkills = ({
+  skillsList,
+  suggestions,
+  setSkills,
+  skills,
+  title,
+}) => {
+  const handleChange = (tags) => {
+    setSkills(tags);
+  };
 
+  const autoComplete = ({ addTag, ...props }) => {
+    //calculando as sugestoes "zerando" elas, deixando-as iguais
+    const inputValue = props.value.trim().toLowerCase();
 
-    const deleteTags = (indexToRemove) => {
-        setTags(tags.filter((index) => index !== indexToRemove));
-    }
+    const inputLength = inputValue.length;
+    suggestions = skillsList.filter(
+      (skill) => skill.name.toLowerCase().slice(0, inputLength) === inputValue
+    );
 
-const addTags = (event) => {
-    if (event.target.value !== "") {
-        setTags([...tags, event.target.value])
-        setSkills([...tags, event.target.value])
-        event.target.value = "";
-    }
-}
+    //calcula o valor do input pra cada sugestao dada
+    const getSuggestionValue = (suggestion) => suggestion.name;
 
-// const saveSkills = (skills) => {
-//     localStorage.setItem("tags", JSON.stringify(skills))
-// }
-// const loadedSkills = () => {
-//     const loadedSkills = JSON.parse(localStorage.getItem("tags"))
-//     return loadedSkills
-// }
+    //estilo do span vem aqui
+    const renderSuggestion = (suggestion) => <span>{suggestion.name}</span>;
 
-// useEffect(() => {
-//     if(tags){
-//         saveSkills(tags)
-//     }
-// }, [tags])
+    const onChange = (e, { newValue, method }) => {
+      if (method === "enter") {
+        e.preventDefault();
+      } else {
+        props.onChange(e);
+      }
+    };
 
-// useEffect(() => {
-//     const loadSkills = loadedSkills();
-//     setTags(loadSkills);
-//     console.log(loadSkills);
-// },[])
+    const inputProps = {
+      ...props,
+      placeholder: "Aperte enter para adicionar uma skill",
+      onChange
+    };
+    return (
+      <Autosuggest
+        ref={props.ref}
+        suggestions={suggestions}
+        shouldRenderSuggestions={(value) => value && value.trim().length > 0}
+        getSuggestionValue={getSuggestionValue}
+        onSuggestionsFetchRequested={() => {}}
+        onSuggestionsClearRequested={() => {}}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+        onSuggestionSelected={(e, { suggestion }) => {
+          addTag(suggestion.name);
+        }}
+      />
+    );
+  };
 
-/* <SkillTags className="skill">
-            {tags && (<ul type="none">
-                {tags?.map((tag, index) => {
-                    return (
-                        <li key={tag.id} id="item">
-                            <span>{tag}</span>
-                            <button onClick={() => deleteTags(index)}>
-                                <HighlightOffIcon
-                                    fontSize="small"
-                                    cursor="pointer"
-                                />
-                            </button>
-                        </li>
-                    )
-                })}
-            </ul>)}
-            <input type="text" placeholder={placeholder} onKeyUp={e => (e.key === "Enter" ? addTags(e) : null)} />
-
-        </SkillTags> */
-
-return (
-    <LabelInput>
-        <TitleInput>{label}</TitleInput>
-        <Autosuggest
-        placeholder="Para adicionar uma habilidade pressione Enter"
-
-        />
-
-    </LabelInput>
-)
-}
+  return (
+    <Container>
+      <h2>{title}</h2>
+      <TagsInput
+        renderInput={autoComplete}
+        value={skills}
+        onChange={handleChange}
+      />
+    </Container>
+  );
+};

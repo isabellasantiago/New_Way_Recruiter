@@ -19,14 +19,24 @@ export function CadastroVaga(){
         resolver: yupResolver(schemaVaga)
     })
 
+    const onClickSubmit = () => {
+        const formData = new FormData();
+
+        formData.append('title')
+        formData.append('salary')
+        formData.append('contractType')
+    }
+
     return(
         <Body>
             <HeaderComponent candidate={false}/>
             <Steps steps={setStep} />
-            {step === 1 ? 
-            <DadosVaga id="dadosVaga" register={register} setStep={setStep} errors={errors} /> : 
-            <FiltragemCandidatos id="filtragemCandidos" register={register} errors={errors} control={control} handleSubmit={handleSubmit}/>
-            }
+            <form >
+                {step === 1 ?
+                <DadosVaga id="dadosVaga" register={register} setStep={setStep} errors={errors} /> :
+                <FiltragemCandidatos id="filtragemCandidos" register={register} errors={errors} />
+                }
+            </form>
         </Body>
     )
 }

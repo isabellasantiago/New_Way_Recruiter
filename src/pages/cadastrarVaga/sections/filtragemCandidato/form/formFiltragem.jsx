@@ -3,7 +3,6 @@ import { Form, WrapperVaga, InputWrapper, Row } from "../../dadosVaga/form/style
 import { Wrapper } from '../../../../cadastroCurriculo/components/Wrapper'
 import { InputSkills } from "../../../../cadastroCurriculo/sections/Skills/InputSkills";
 import Button from '../../../../../components/Button/Button'
-import TagsInput from 'react-tagsinput'
 import Api from '../../../../../services/mainApi'
 
 //inputskills nao estao funcionando como deveriam
@@ -12,25 +11,33 @@ import Api from '../../../../../services/mainApi'
 //nada acontece ao clicar em "cadastrar"
 
 export function FormFiltragem(props){
-    const { register, handleSubmit, errors } = props;
+    const { register, onClickSubmit, errors } = props;
     const [especificGender, setEspecificGender] = useState(false)
     const [ especificEtnia, setEspecificEtnia] = useState(false)
+    const [hardSkillsList, setHardSkillsList] = useState([])
+    const [softSkillsList, setSoftSkillsList] = useState([])
     const [hardSkills, setHardSkills] = useState([])
     const [softSkills, setSoftSkills] = useState([])
-    const [suggestion, setSuggestion] = useState([])
+    const [suggestionsSoftSkills, setSuggestionsSoftSkills] = useState([])
+    const [suggestionsHardSkills, setSuggestionsHardSkills] = useState([])
 
 
     useEffect(() => {
         const getSuggestion = async () => {
-            const suggestions = await Api.get()
+            const suggestions = await Api.get('/hardSkills')
+            setHardSkillsList(suggestions.data)
         }
+        const getSuggestionSoftSkills = async () => {
+            const suggestions = await Api.get('/softskills')
+            setSoftSkillsList(suggestions.data)
+        }
+        getSuggestion()
+        getSuggestionSoftSkills()
 
     }, [])
 
-    console.log(hardSkills)
-
     return(
-        <Form >
+        <Form>
             <Row>
                 <WrapperVaga>
                     <label id="filtragem" htmlFor="genderRadio">Esta vaga é destinada a um gênero específico?*</label>
@@ -45,7 +52,7 @@ export function FormFiltragem(props){
                                 <option value={2}>Pessoas Trans</option>
                                 <option value={3}>Mulher cis e pessoas trans</option>
                                 </select>
-                                {errors.gender?.message}
+                                <span>{errors.gender?.message}</span>
                             </Wrapper>
                         )}
                     </InputWrapper>
@@ -63,7 +70,7 @@ export function FormFiltragem(props){
                                 <option value={1}>Indígena</option>
                                 <option value={2}>Amarela</option>
                             </select>
-                            {errors.etnia?.message}
+                            <span>{errors?.etnia?.message}</span>
                         </Wrapper>
                         )}
                     </InputWrapper>
@@ -86,19 +93,24 @@ export function FormFiltragem(props){
                 </WrapperVaga>
             </Row>
             <Row>
-                <TagsInput value={hardSkills} onChange={setHardSkills}/>
-                {/* <InputSkills 
-                    label="Hard Skills"
+                <InputSkills 
+                    title="Hard Skills"
+                    skillsList={hardSkillsList}
+                    suggestions={suggestionsHardSkills}
+                    skills={hardSkills}
                     setSkills={setHardSkills}
-                /> */}
+                />
             </Row>
             <Row>
                 <InputSkills 
-                    label="Soft Skills"
+                    title="Soft Skills"
+                    skillsList={softSkillsList}
+                    suggestions={suggestionsSoftSkills}
+                    skills={softSkills}
                     setSkills={setSoftSkills}
                 />
             </Row>
-            <Button type="submit" >Cadastrar</Button>
+            <Button type="submit" onClick={onClickSubmit}>Cadastrar</Button>
         </Form>
     )    
 }

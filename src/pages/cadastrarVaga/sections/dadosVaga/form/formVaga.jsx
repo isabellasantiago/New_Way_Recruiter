@@ -26,7 +26,7 @@ export function FormVaga(props){
                 </InputWrapper>
                 <WrapperVaga>
                     <label htmlFor="contrato">Tipo do contrato*</label>
-                    <select name="contrato" id="contrato" {...register('contrato')}>
+                    <select name="contrato" id="contrato" {...register('contractType')}>
                         <option value={0}>PJ</option>
                         <option value={1}>CLT</option>
                         <option value={2}>CLT ou PJ</option>
