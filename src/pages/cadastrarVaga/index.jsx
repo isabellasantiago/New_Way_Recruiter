@@ -25,6 +25,16 @@ export function CadastroVaga(){
         formData.append('title')
         formData.append('salary')
         formData.append('contractType')
+        formData.append('about')
+        formData.append('cityAndState')
+        formData.append('level')
+        formData.append('requirements')
+        formData.append('benefits')
+        formData.append('gender')
+        formData.append('ethnicity')
+        formData.append('pcd')
+        formData.append('acceptsAllLevels')
+        formData.append('softSkills', softSkills)
     }
 
     return(
