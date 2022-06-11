@@ -8,7 +8,7 @@ import { useSpring, animated } from '@react-spring/web'; // web.cjs is required 
 import closeImg from '../../assets/images/close.svg';
 import './modal-candidato.scss';
 import Toggle from './Toggle';
-import api from "../../services/api";
+import Api from '../../services/mainApi';
 import { shadows } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
@@ -93,8 +93,7 @@ export  function ModalCandidato() {
 
   useEffect(() => {
    async function loadUsers(){
-      const response = await api.get('Data/candidatos.json')
-      //console.log(response.data);
+      const response = await Api.get('Data/candidatos.json')
       setUsers(response.data);
 
     }

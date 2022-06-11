@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     flex-direction: column;
     white-space: nowrap;
     width: 60%;
+    font-family: "Poppins", sans-serif;
 
     select{
         font-family: "Poppins", sans-serif;

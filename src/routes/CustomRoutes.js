@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 
-import { isAuthenticated, getToken } from '../services/auth'
+import { isAuthenticated, getToken } from '../services/context/auth'
 
 
 const CustomRoute = ({ isPrivate, ...rest }) => {
-    const history = useHistory()
+    const history = useNavigate()
     const [token, setToken] = useState()
   
     useEffect(() => {

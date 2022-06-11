@@ -4,6 +4,7 @@ import empresaFormImg from '../../assets/images/careerDevelopment.svg'
 import MaskInput from '../../MaskInput';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 const initialValues = {
   cpf:'',
@@ -11,7 +12,7 @@ const initialValues = {
 };
 
 export function EmpresaForm(){
-
+  const history = useNavigate()
   const {
     register,
     formState: { errors },
@@ -32,10 +33,8 @@ export function EmpresaForm(){
       });
     }
     async function onSubmit (data)  {
-  
-      
       const URL = 'http://localhost:3333/empresa';
-       await axios(URL, {
+      const post = await axios(URL, {
             method: 'POST',
             headers: {
               'content-type': 'application/json',
@@ -49,7 +48,7 @@ export function EmpresaForm(){
             endereco: data.endereco,
             sobre:data.sobre,
             linkedin: data.linkedin,
-            estilo: data.estilo,
+            tipoEmpresa: data.estilo,
             logoemp: data.logo,
             }
           })
@@ -57,6 +56,7 @@ export function EmpresaForm(){
             .catch(error => {
               throw error;
             });
+        if(post) history.push('/login')
       }
 
   return(

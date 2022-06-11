@@ -19,7 +19,8 @@ import * as yup from 'yup';
     tipoFormacao: yup.string().required('Este campo é um campo é obrigatório'),
     statusFormacao: yup.string().required('Este campo é um campo é obrigatório'),
     dataInicio: yup.date().required('Este campo é um campo é obrigatório'),
-    dataTermino: yup.date().required('Este campo é um campo é obrigatório')
+    dataTermino: yup.date().required('Este campo é um campo é obrigatório'),
+
 })
 
 export default schema

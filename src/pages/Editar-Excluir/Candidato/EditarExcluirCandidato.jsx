@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import authService from '../../../services/auth.service'
 import { HeaderComponent } from '../../../components/HeaderComponent/HeaderComponent'
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
 
@@ -79,7 +79,7 @@ export function EditarExcluirCandidato(){
 
   return(
     <>
-    {redirectTo && ( <Redirect to={redirectTo}/>)}
+    {redirectTo && ( <Navigate to={redirectTo}/>)}
     <div className="profilevcand">
        <HeaderComponent candidato={true} config="selected"/>
 
