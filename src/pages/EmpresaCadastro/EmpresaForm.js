@@ -4,7 +4,7 @@ import empresaFormImg from '../../assets/images/careerDevelopment.svg'
 import MaskInput from '../../MaskInput';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
-import {useHistory} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 const initialValues = {
   cpf:'',
@@ -12,7 +12,7 @@ const initialValues = {
 };
 
 export function EmpresaForm(){
-  const history = useHistory()
+  const history = useNavigate()
   const {
     register,
     formState: { errors },

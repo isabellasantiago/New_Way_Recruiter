@@ -1,4 +1,7 @@
-#page-login{
+import styled from 'styled-components';
+
+
+export const PageLogin = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,5 +146,39 @@
         }
         
     }
+`;
 
-}
+export const Register = styled.div`
+    display: flex;
+    flex-direction: column;
+    color: #a2a2a2;
+
+    text-align: center;
+
+    strong{   
+        color: #888;
+    }
+
+    span:nth-child(2){
+        font-weight: 600;
+        color: #444;
+    }
+
+    span{
+        a{
+            text-decoration: underline;
+            color: #888;
+        }
+
+        a:visited{
+            color:inherit;
+        }
+
+        a:hover {
+            color: #555;
+        }
+    }
+
+
+    margin-top: 2rem;
+`

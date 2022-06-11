@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router';
+import { Route, Navigate } from 'react-router';
 import authService from '../../services/auth.service'
 
 const PublicRoute = (props) => {
@@ -13,7 +13,7 @@ const PublicRoute = (props) => {
 
     return(
         <>
-        {isLogged ? <Redirect to="/authenticated" /> : <Route {...props}/>}
+        {isLogged ? <Navigate to="/authenticated" /> : <Route {...props}/>}
         </>
     )
 

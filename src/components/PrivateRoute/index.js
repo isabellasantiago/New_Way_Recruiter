@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Navigate } from 'react-router-dom'
 import authService from '../../services/auth.service'
 
 
@@ -17,7 +17,7 @@ const PrivateRoute = (props) => {
         <>
         {isLogged ? (
             <Route {...props} />
-        ): <Redirect to="/login" />
+        ): <Navigate to="/login" />
         }
         </>
     )

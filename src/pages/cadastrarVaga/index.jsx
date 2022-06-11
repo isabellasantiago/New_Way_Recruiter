@@ -34,7 +34,7 @@ export function CadastroVaga(){
         formData.append('ethnicity')
         formData.append('pcd')
         formData.append('acceptsAllLevels')
-        formData.append('softSkills', softSkills)
+        // formData.append('softSkills', softSkills)
     }
 
     return(
