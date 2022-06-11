@@ -1,0 +1,133 @@
+.skills{
+  width: 858px;
+  height: 534px;
+  left: 274px;
+  top: 1482px;
+  margin-top: 77px ;
+  text-align: left;
+
+  background: #FEFEFE;
+  border-radius: 8px;
+
+  h1{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 36px;
+    /* identical to box height */
+    margin-top: 43px;
+    margin-left: 72px;
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+  }
+
+  h3{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height */
+    margin-top: 31px;
+    margin-left: 72px;
+
+    display: flex;
+    align-items: center;
+
+    color: #000000;
+
+  }
+  .center{
+    width: 800px;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-left:72px;
+    text-align: left;
+    align-items:left;
+    justify-content:left;
+    
+    .hardskills{
+      
+      margin-right: 22px;
+      width: 166px;
+      height: 41px;
+      left: 346px;
+      top: 2077px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: #023859;
+      border-radius: 4000px;
+        
+      span{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        /* identical to box height */
+       
+        display: flex;
+        align-items: center;
+
+        color: #FFFFFF;
+      }
+     
+    }
+    
+    .softskills{
+      margin-right: 22px;
+      width: 166px;
+      height: 41px;
+      left: 346px;
+      top: 2077px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: #023859;
+      border-radius: 4000px;
+
+      span{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        /* identical to box height */
+        
+        display: flex;
+        align-items: center;
+
+        color: #FFFFFF;
+      }
+    }
+  
+}
+.row{
+  width: 716px;
+  height: 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left:72px;
+    .hr{
+    width: 716px;
+    height: 0px;
+    left: 346px;
+    top: 2170px;
+
+    border: 1px solid #C4C4C4;
+    }
+  }
+}
