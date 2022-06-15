@@ -32,7 +32,7 @@ function App() {
             element={<Login/>}
         />
         <Route path="/home" exact element={<PrivateRoute Item={HomePage}/>}/>
-        <Route path="/register/candidato" element={<CandidatoForm/>}/>
+        <Route path="/register/candidate" element={<CandidatoForm/>}/>
         <Route path="/register/empresa" element={<EmpresaForm/>}/>
         <Route path="/empresa/register/vaga" element={<PrivateRoute Item={CadastroVaga}/>} />
         <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import './candidato.scss';
+import { Cd } from './styles' ;
 import profile from '../../assets/images/profile.svg';
 import MaskInput from '../../MaskInput';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
+import Api from '../../services/mainApi';
+import { useNavigate } from 'react-router-dom';
 
 
 const initialValues = {
@@ -20,6 +22,7 @@ export function CandidatoForm(){
     getValues,
     handleSubmit
   } = useForm();
+  const navigate = useNavigate();
 
     const [values,setValues] = useState(initialValues);
 
@@ -31,30 +34,23 @@ export function CandidatoForm(){
     }
 
   async function onSubmit (data)  {
-    const URL = 'http://localhost:3333/candidato';
-     await axios(URL, {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json',
-          },
-          data: { 
-          nome: data.nome,
-          sobrenome: data.sobrenome,
-          telefone:data.phoneNumber,
-          email:data.email,
-          senha:data.passwordConfirmation,
-          cpf:data.cpf,
-          }
-        })
-          .then(response => response.data)
-          .catch(error => {
-            throw error;
-          });
+     const response = await Api.post('/candidate', {
+        name: data.nome,
+        lastName: data.sobrenome,
+        cpf:data.cpf,
+        phone:data.phoneNumber,
+        email:data.email,
+        password:data.passwordConfirmation,
+     })
+
+     navigate('/login');
+
+     return response;
     }
 
 
   return (
-  <div className="cd">
+  <Cd className="cd">
     <header className="cd-header">
           <a href="/" id="logo">
               <h1>New <span>Way</span> Recruiter</h1>
@@ -177,6 +173,6 @@ export function CandidatoForm(){
        </div>
 
     </main>
-  </div>
+  </Cd>
   );
 }
