@@ -1,5 +1,8 @@
-div.cd{
-  background-color:#f7f4f4;
+import styled from 'styled-components';
+
+export const Cd = styled.div`
+
+background-color:#f7f4f4;
  
 
   .cd-header{
@@ -155,4 +158,4 @@ div.cd{
       right: 0px;
       top: 728px;
     }
-}
+`;

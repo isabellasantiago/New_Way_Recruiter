@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './ProfileVCandidato.scss';
 import profilephoto  from '../../../assets/images/pexels-vazhnik-7562313.jpg';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import editPencil from  '../../../assets/images/pencil1.svg';
 
 import { HeaderComponent } from '../../../components/HeaderComponent/HeaderComponent';
@@ -13,9 +12,8 @@ import { HardSoftSkills } from './Components/HardSoftSkills/HardSoftSkills';
 import { Idiomas } from './Components/Idiomas/Idiomas';
 import { Preferencias } from './Components/Preferencias/Preferencias';
 
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 export function ProfileVCand(){
-  const history = useHistory();
 
   return(
     <div className="profilevcand">
