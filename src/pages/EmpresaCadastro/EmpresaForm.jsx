@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './empresaform.scss';
+import { EmpresaForms } from './styles';
 import empresaFormImg from '../../assets/images/careerDevelopment.svg'
 import MaskInput from '../../MaskInput';
 import { useForm } from "react-hook-form";
-import axios from 'axios';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import Api from '../../services/mainApi';
 
 const initialValues = {
   cpf:'',
@@ -21,46 +21,32 @@ export function EmpresaForm(){
   } = useForm();
 
   const [values,setValues] = useState(initialValues);
-  
- 
 
-  
-
-    function handleChange(event) {
+  function handleChange(event) {
       setValues({
         ...values,
       [event.target.name]: event.target.value
       });
-    }
-    async function onSubmit (data)  {
-      const URL = 'http://localhost:3333/empresa';
-      const post = await axios(URL, {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json',
-            },
-            data: { 
-            razaosocial: data.rzsocial,
-            nomefantasia: data.nameFantasia,
-            senha:data.passwordConfirmation,
+  }
+
+  async function onSubmit (data)  {
+      const post = await Api.post('/company', {
+            corporateName: data.rzsocial,
+            tradeName: data.nameFantasia,
+            password:data.passwordConfirmation,
             cnpj:data.cnpj,
             email:data.email,
-            endereco: data.endereco,
-            sobre:data.sobre,
-            linkedin: data.linkedin,
-            tipoEmpresa: data.estilo,
-            logoemp: data.logo,
-            }
-          })
-            .then(response => response.data)
-            .catch(error => {
-              throw error;
-            });
-        if(post) history.push('/login')
+            address: data.endereco,
+            aboutCompany:data.sobre,
+            linkedinURL: data.linkedin,
+            type: data.estilo,
+            imageURL: data.logo,
+      })
+        if(post) history('/login')
       }
 
   return(
-  <div className="empresaform">
+  <EmpresaForms className="empresaform">
     <header className="emp-header">
           <a href="/" id="logo">
               <h1>New <span>Way</span> Recruiter</h1>
@@ -220,9 +206,9 @@ export function EmpresaForm(){
             
             <select {...register("estilo")}>
 
-            <option value="startup">Startup</option>
-            <option value="multinacional">Multinacional</option>
-            <option value="tradicional">Tradicional</option>
+            <option value={0}>Startup</option>
+            <option value={1}>Multinacional</option>
+            <option value={2}>Tradicional</option>
            
             </select>
              </div>
@@ -238,7 +224,7 @@ export function EmpresaForm(){
        </div>
      
        
-      </div>
+      </EmpresaForms>
 
   
   );

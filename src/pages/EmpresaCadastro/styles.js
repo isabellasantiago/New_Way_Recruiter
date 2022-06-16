@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 
-div.empresaform{
-  
-  .emp-header{
+export const EmpresaForms = styled.div`
+    .emp-header{
         width: 100%;
         height: 70px;
         padding: 0px 42px;
@@ -242,4 +242,4 @@ div.empresaform{
       filter: brightness(0.9);
   }
   }
-}
+`;
