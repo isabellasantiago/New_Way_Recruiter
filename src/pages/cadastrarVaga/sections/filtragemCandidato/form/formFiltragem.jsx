@@ -4,6 +4,9 @@ import { Wrapper } from '../../../../cadastroCurriculo/components/Wrapper'
 import { InputSkills } from "../../../../cadastroCurriculo/sections/Skills/InputSkills";
 import Button from '../../../../../components/Button/Button'
 import Api from '../../../../../services/mainApi'
+import { useForm } from "react-hook-form";
+import schemaVaga from "../../../../../validation/schemaVaga";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 //inputskills nao estao funcionando como deveriam
 //faixa passa o estado somente depois do segundo clique
@@ -11,7 +14,9 @@ import Api from '../../../../../services/mainApi'
 //nada acontece ao clicar em "cadastrar"
 
 export function FormFiltragem(props){
-    const { register, onClickSubmit, errors } = props;
+    const { register, handleSubmit, formState: { errors}  } = useForm({
+        resolver: yupResolver(schemaVaga)
+    })
     const [especificGender, setEspecificGender] = useState(false)
     const [ especificEtnia, setEspecificEtnia] = useState(false)
     const [hardSkillsList, setHardSkillsList] = useState([])
@@ -110,7 +115,7 @@ export function FormFiltragem(props){
                     setSkills={setSoftSkills}
                 />
             </Row>
-            <Button type="submit" onClick={onClickSubmit}>Cadastrar</Button>
+            <Button type="submit" onClick={handleSubmit}>Cadastrar</Button>
         </Form>
     )    
 }

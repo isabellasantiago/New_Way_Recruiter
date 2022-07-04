@@ -1,19 +1,25 @@
-import React, {useState} from 'react';
+import React, { useContext, useState } from 'react';
+import JobVacancieContext from '../../../../../../services/contexts/registerJobVacancie';
 import { Wrapper } from '../../../../../cadastroCurriculo/components/Wrapper';
 import { FormItem } from './form'
 import { ListaItem } from './lista'
 
 
+const whichItems = (nameList, jobVacancie) => {
+    return nameList === 'requirements' ? jobVacancie.requirements : jobVacancie.benefits
+}
 
-export function List({ label, name, id, items }) {
+export function List({ label, name, id }) {
+
+    const {jobVacancie, setJobVacancie} = useContext(JobVacancieContext);
     
-    const [itemList, setItemList] = useState([]);
+    const [itemList, setItemList] = useState(whichItems(name, jobVacancie));
     
 
     const addItem = (ev, item) => {
         ev.preventDefault()
         setItemList([...itemList || [], item])
-        items = itemList
+        setJobVacancie({...jobVacancie, [name]: itemList})
     }
 
     const deleteItem = (index) => {

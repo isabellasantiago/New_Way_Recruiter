@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import authService from '../../../services/auth.service'
 import { HeaderComponent } from '../../../components/HeaderComponent/HeaderComponent'
 import { Navigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
@@ -36,16 +35,6 @@ export function EditarExcluirCandidato(){
         return false;
     }
   }
-
-  const componentDidMount = async () => {
-    let loggedUser = await authService.getLoggedUser();
-    if(!loggedUser){
-      console.log("Redirecionou", loggedUser);
-      setRedirectTo("/login")
-    }
-     
-  
-    }
     //useEffect usado para monitorar o usuario e seus dados para poder alterar.
     useEffect(() => {
       axios.get(`http://localhost:3333/onecandidato/46`).then((response) => {

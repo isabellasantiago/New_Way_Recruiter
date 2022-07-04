@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import { AuthContext } from '../../services/context/auth2';
+import { AuthContext } from '../../services/contexts/auth';
 import { CandidateHomePage } from './components/pages/candidate/Homepage';
 
 export const HomePage = () => {

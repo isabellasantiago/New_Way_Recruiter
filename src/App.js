@@ -10,7 +10,8 @@ import { ProfileVCand } from "./pages/Perfil/VisaoCandidato/ProfileVCandidato";
 import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import { Curriculo } from './pages/cadastroCurriculo/Curriculo';
 import { CadastroVaga } from "./pages/cadastrarVaga/";
-import { AuthProvider } from "./services/context/auth2";
+import { AuthProvider } from "./services/contexts/auth";
+import { JobVacancieProvider } from "./services/contexts/registerJobVacancie";
 
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 import PrivateRoute from './routes/PrivateRoute'
@@ -24,6 +25,7 @@ function App() {
   return (
     <BrowserRouter>
     <AuthProvider>
+    <JobVacancieProvider>
       <Routes>
         <Route path="/" exact element={<Home/>}/>
         <Route
@@ -34,7 +36,7 @@ function App() {
         <Route path="/home" exact element={<PrivateRoute Item={HomePage}/>}/>
         <Route path="/register/candidate" element={<CandidatoForm/>}/>
         <Route path="/register/company" element={<EmpresaForm/>}/>
-        <Route path="/empresa/register/vaga" element={<PrivateRoute Item={CadastroVaga}/>} />
+        <Route path="/company/register/job-vacancie" element={<PrivateRoute Item={CadastroVaga}/>} />
         <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
         <Route path="/edit-delete/empresa" element={<PrivateRoute Item={EditarExcluirEmpresa}/>}/>
         <Route exact path="/candidato/profile" element={<ProfileVCand/>}/>
@@ -42,6 +44,7 @@ function App() {
         <Route path="/candidatos" element={<ModalCandidato/>}/>
         <Route path="/cv" element={<Curriculo/>}/>
       </Routes>
+      </JobVacancieProvider>
     </AuthProvider>
     </BrowserRouter>
   );

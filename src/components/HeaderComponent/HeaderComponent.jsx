@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Home } from  '../../pages/Home/Home';
 import { NavLink } from 'react-router-dom';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
-import authService from '../../services/auth.service';
+import { AuthContext } from '../../services/contexts/auth';
 
 import './header.scss';
 
 export function HeaderComponent({candidato, perfil, vagas, config, processos}){
     const [candidate, setCandidate] = useState(candidato)
 
-    async function logout(){
-        authService.cleanLoggedUser()
-        await window.location.reload()
+    const {logout} = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logout();
     }
     return (
     <>
@@ -48,7 +49,7 @@ export function HeaderComponent({candidato, perfil, vagas, config, processos}){
                 <NavLink exact to="" >Perfil</NavLink>
                 <NavLink exact to="" > Vagas</NavLink>
                 <NavLink  exact to="/edit_or_delete/empresa" activeClassName="selected" > <SettingsOutlinedIcon/> </NavLink>
-                <button onClick={ev => logout()}>
+                <button onClick={handleLogout}>
                     <LogoutIcon color="white"/>
                 </button>
         </nav>

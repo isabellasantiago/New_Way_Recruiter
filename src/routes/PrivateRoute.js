@@ -1,7 +1,7 @@
 
 import React, { useContext } from "react";
 import { Login } from "../pages/Login/Login";
-import { AuthContext } from "../services/context/auth2";
+import { AuthContext } from "../services/contexts/auth";
 
 const PrivateRoute = ({Item}) => {
     const { authenticated, loading } = useContext(AuthContext); 

@@ -8,7 +8,7 @@ import Content from './Content/Content';
 const Text = ({label, type, name, value, className, onChange, disable, placeholder}) =>{
     return <Label disable={disable}>
         <Content>{label}</Content>
-        <Input type={type} placeholder={placeholder} name={name} onChange={onChange} className={className} value={value}/>
+        <Input value={value} type={type} placeholder={placeholder} name={name} onChange={onChange} className={className}/>
     </Label>
 }
 

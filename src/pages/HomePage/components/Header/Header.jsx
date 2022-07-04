@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { AuthContext } from '../../../../services/context/auth2';
+import { AuthContext } from '../../../../services/contexts/auth';
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import {Header} from './styles'
 
