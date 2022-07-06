@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const schemaVaga = yup.object({
+export const schema = yup.object({
     title: yup.string().required('campo obrigatório'),
     salary: yup.number().positive().required('campo obrigatório'),
     contractType: yup.number().max(3).required('campo obrigató'),
@@ -16,5 +16,3 @@ const schemaVaga = yup.object({
     pcd: yup.boolean().required('Campo obrigatório'),
     acceptsAllLevels: yup.boolean().required('Campo obrigatório'),
 }).required();
-
-export default schemaVaga

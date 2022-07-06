@@ -5,7 +5,7 @@ import { InputSkills } from "../../../../cadastroCurriculo/sections/Skills/Input
 import Button from '../../../../../components/Button/Button'
 import Api from '../../../../../services/mainApi'
 import { useForm } from "react-hook-form";
-import schemaVaga from "../../../../../validation/schemaVaga";
+import { schema } from "../../../../../validation/schemaVaga";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Section } from "../../style";
 
@@ -16,7 +16,7 @@ import { Section } from "../../style";
 
 export function FormFiltragem(props){
     const { register, handleSubmit, formState: { errors}  } = useForm({
-        resolver: yupResolver(schemaVaga)
+        resolver: yupResolver(schema)
     })
     const [especificGender, setEspecificGender] = useState(false)
     const [ especificEtnia, setEspecificEtnia] = useState(false)

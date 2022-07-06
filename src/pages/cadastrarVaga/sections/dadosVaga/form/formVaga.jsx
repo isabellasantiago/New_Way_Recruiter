@@ -1,10 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { schema } from '../../../../../validation/schemaVaga';
 import { Form, InputWrapper, Row, WrapperVaga, ButtonNext, InputDiv, InputText } from './style'
 import { List } from './lista'
 import JobVacancieContext from '../../../../../services/contexts/registerJobVacancie';
-import { useForm } from 'react-hook-form';
-import schemaVaga from '../../../../../validation/schemaVaga'
-import { yupResolver } from '@hookform/resolvers/yup';
 import { Section } from '../../style';
 
 const DEFAULT_VALUE = {
@@ -19,25 +20,24 @@ const DEFAULT_VALUE = {
 }
 
 
-
 export function FormVaga(props){
     const { jobVacancie, setJobVacancie } = useContext(JobVacancieContext);
-    const [form, setForm] = useState(DEFAULT_VALUE);
     const { title, salary, contractType, cityAndState, level, about, requirements, benefits} = jobVacancie;
 
 
-    const { register, handleSubmit, formState: { errors }  } = useForm({
-        resolver: yupResolver(schemaVaga)
-    })
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+      } = useForm({
+        resolver: yupResolver(schema)
+      });
 
     const onSubmit = () => {
+        if(!errors) setJobVacancie({ ...jobVacancie, title, salary, contractType, cityAndState, level, about, requirements, benefits, step: 2})
         console.log(jobVacancie)
-        setJobVacancie({ ...jobVacancie, title, salary, contractType, cityAndState, level, about, requirements, benefits, step: 2})
-    }
-
-    useEffect(() => {
         
-    },[form])
+    }
 
     
 
@@ -47,9 +47,14 @@ export function FormVaga(props){
                 <Row>
                     <WrapperVaga>
                         <InputDiv>
-                            <label>Título da vaga *</label>
-                            <InputText type="text" placeholder='Ex: Designer UX' {...register('title')}/>
-                            {errors.title && (<span>{errors.title?.message}</span>)}
+                        <label> Title </label>
+                        <InputText
+                            type="text"
+                            placeholder='Ex: Designer UX'
+                            onChange={(ev) => setJobVacancie(prevState => ({...prevState, title: ev.target.value}) )}
+                            {...register('title')}
+                        />
+                        <span>{errors?.title?.message}</span>
                         </InputDiv>
                     </WrapperVaga>
                     <InputWrapper>
@@ -81,7 +86,7 @@ export function FormVaga(props){
                             <InputDiv>
                                 <label htmlFor="sobreVaga">Sobre a vaga</label>
                                 <textarea onChange={(ev) => setJobVacancie({...jobVacancie, about: ev.target.value})} name="sobreVaga" cols="400" row="50" id="sobreVaga" placeholder="Escreva aqui detalhes sobre a vaga" {...register('about')}/>
-                                <p>{errors?.about?.message}</p>
+                                <span>{errors?.about?.message}</span>
                             </InputDiv>
                     </WrapperVaga>
                     <WrapperVaga>
@@ -109,7 +114,7 @@ export function FormVaga(props){
                     <List label="Benefícios" items={benefits} name={benefits} {...register('benefits')} />
                 </Row>
                 <Row alignItems="flex-end">
-                    <ButtonNext onClick={onSubmit}>Próximo</ButtonNext>
+                    <ButtonNext type="submit">Próximo</ButtonNext>
                 </Row>
             </Form>
         </Section>

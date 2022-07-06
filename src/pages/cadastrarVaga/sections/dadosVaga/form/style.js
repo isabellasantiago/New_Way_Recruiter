@@ -109,7 +109,6 @@ export const InputDiv = styled.label`
 
     > span {
         color: #C73E1D;
-        position: absolute;
     }
 
     > label{
