@@ -88,6 +88,48 @@ export const WrapperVaga = styled.div`
     }
 `;
 
+
+export const InputDiv = styled.label`
+    display: flex;
+    flex-direction: column;
+    font: 400 1rem 'Poppins' ;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    margin-bottom: 10px;
+
+    max-width: 330px;
+
+    ${(props) => props.disable && `
+                cursor: not-allowed;
+                display: none;
+                pointer-events:none;
+    `}
+
+    > span {
+        color: #C73E1D;
+        position: absolute;
+    }
+
+    > label{
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+`;
+
+export const InputText = styled.input`
+font-family: 'Poppins', 'Roboto', Sans-serif;
+border: 1px solid #c4c4c4;
+border-radius: 8px;
+padding: 5px 15px;
+max-width: 330px;
+height: 35px;
+
+`;
+
+
+
 export const ButtonNext = styled.button`
     height: 33px;
     font-family: 'Poppins';

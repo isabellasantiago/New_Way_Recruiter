@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Field from '../../../../../components/forms/Field';
+
 import Button from '../../../../../components/Button/Button';
 
 import {FormIdioma, Checkbox, InputWrapper} from'./formIdiomas.js'
@@ -24,7 +24,7 @@ export function Form(props){
                 </Checkbox>
                 {!monolinguismo && (
                     <InputWrapper>
-                    <Field.Text label="Idioma" name="idioma" type="text" onChange={(e) => {setText(e.target.value)}}/>
+                    {/* <Field.Text label="Idioma" name="idioma" type="text" onChange={(e) => {setText(e.target.value)}}/> */}
                     <Wrapper>
                         <label htmlFor="nivel">Nível</label>
                         <select name="nivel" onChange={(e) => {setNivel(e.target.value)}} value={nivel}>

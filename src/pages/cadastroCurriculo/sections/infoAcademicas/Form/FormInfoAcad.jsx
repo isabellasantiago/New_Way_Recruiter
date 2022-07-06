@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import schema from '../../../../../validation/validation';
 import Button from '../../../../../components/Button/Button';
-import Field from '../../../../../components/forms/Field';
+// import Field from '../../../../../components/forms/Field';
 import { Wrapper } from '../../../components/Wrapper';
 import { Form, FormWrapper} from './style';
 
@@ -34,8 +34,8 @@ export function FormInfoAcad(props){
     return(
         <Form onSubmit={e => e.preventDefault()}>
             <FormWrapper>
-                <Field.Text  label="Instituição de ensino" type="text" name="instituicao" onChange={(e) => setInstituicao(e.target.value)} value={instituicao || ""} />
-                <Field.Text  label="Curso" type="text" name="curso" onChange={(e) => setCurso(e.target.value)} value={curso || ""}/>
+                {/* <Field.Text  label="Instituição de ensino" type="text" name="instituicao" onChange={(e) => setInstituicao(e.target.value)} value={instituicao || ""} />
+                <Field.Text  label="Curso" type="text" name="curso" onChange={(e) => setCurso(e.target.value)} value={curso || ""}/> */}
                 <Wrapper>
                     <label htmlFor="tipoFormacao">Formação</label>
                     <select id="tipoFormacao" name="tipoFormacao" onChange={(e) => {setTipoFormacao(e.target.value)}} value={tipoFormacao || ""} >
@@ -60,8 +60,8 @@ export function FormInfoAcad(props){
                         <option value="trancado">Trancado</option>
                     </select>
                 </Wrapper>
-                <Field.Text label="Data de inicio" type="date" name="dataInicio" onChange={(e) => setDataInicio(e.target.value)} value={dataInicio || ""} />
-                <Field.Text label="Data de término" type="date" name="dataTermino"  onChange={(e) => setDataTermino(e.target.value)} value={dataTermino || ""} />
+                {/* <Field.Text label="Data de inicio" type="date" name="dataInicio" onChange={(e) => setDataInicio(e.target.value)} value={dataInicio || ""} />
+                <Field.Text label="Data de término" type="date" name="dataTermino"  onChange={(e) => setDataTermino(e.target.value)} value={dataTermino || ""} /> */}
                 <Button type="submit"
                 onClick={(ev) => {
                     onSave(ev, instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino)

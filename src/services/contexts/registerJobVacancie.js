@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useCallback, useEffect } from "react";
 
 const DEFAULT_VALUE = {
     jobVacancie: {
@@ -26,11 +26,12 @@ const JobVacancieContext = createContext(DEFAULT_VALUE);
 export const JobVacancieProvider = ({children}) => {
     const [jobVacancie, setJobVacancie] = useState(DEFAULT_VALUE.jobVacancie);
 
+
     return(
         <JobVacancieContext.Provider
             value={{
                 jobVacancie,
-                setJobVacancie
+                setJobVacancie,
             }}
         >
             {children}
