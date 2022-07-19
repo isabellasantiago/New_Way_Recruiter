@@ -9,11 +9,13 @@ const whichItems = (nameList, jobVacancie) => {
     return nameList === 'requirements' ? jobVacancie.requirements : jobVacancie.benefits
 }
 
-export function List({ label, name, id }) {
+export function List({ label, name, id, register }) {
 
     const {jobVacancie, setJobVacancie} = useContext(JobVacancieContext);
     
     const [itemList, setItemList] = useState(whichItems(name, jobVacancie));
+
+    console.log(itemList)
     
 
     const addItem = (ev, item) => {
@@ -31,7 +33,7 @@ export function List({ label, name, id }) {
 
     return(
         <Wrapper>
-        <FormItem onSave={addItem} label={label} name={name} id={id}/>
+        <FormItem onSave={addItem} label={label} name={name} id={id} register={register}/>
         {itemList ? <ListaItem itens={itemList} deleteItem={deleteItem}/> : null}
         </Wrapper>
     )

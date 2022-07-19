@@ -108,6 +108,7 @@ export const InputDiv = styled.label`
     `}
 
     > span {
+        white-space: nowrap;
         color: #C73E1D;
     }
 
@@ -129,7 +130,7 @@ height: 35px;
 
 
 
-export const ButtonNext = styled.button`
+export const ButtonNext = styled.input`
     height: 33px;
     font-family: 'Poppins';
     font-style: normal;
@@ -138,6 +139,8 @@ export const ButtonNext = styled.button`
     line-height: 24px;
     color: #fff;
     width: 150px;
+
+    cursor: pointer;
 
     background: #023859;
     border-radius: 8px;

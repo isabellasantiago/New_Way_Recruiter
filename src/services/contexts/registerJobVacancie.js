@@ -2,7 +2,6 @@ import { useState, createContext, useCallback, useEffect } from "react";
 
 const DEFAULT_VALUE = {
     jobVacancie: {
-        step: 1,
         title: '',
         salary: 0,
         contractType: 0,

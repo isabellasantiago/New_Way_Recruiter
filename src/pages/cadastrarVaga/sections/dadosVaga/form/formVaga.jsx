@@ -1,12 +1,15 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import { schema } from '../../../../../validation/schemaVaga';
 import { Form, InputWrapper, Row, WrapperVaga, ButtonNext, InputDiv, InputText } from './style'
 import { List } from './lista'
+
 import JobVacancieContext from '../../../../../services/contexts/registerJobVacancie';
 import { Section } from '../../style';
+import { HeaderComponent } from '../../../../../components/HeaderComponent/HeaderComponent';
+import { Body } from '../../../style';
+import { useNavigate } from 'react-router-dom';
 
 const DEFAULT_VALUE = {
     title: '',
@@ -20,103 +23,132 @@ const DEFAULT_VALUE = {
 }
 
 
-export function FormVaga(props){
+export function FormVaga(props) {
     const { jobVacancie, setJobVacancie } = useContext(JobVacancieContext);
-    const { title, salary, contractType, cityAndState, level, about, requirements, benefits} = jobVacancie;
+    const { title, salary, contractType, cityAndState, level, about, requirements, benefits } = jobVacancie;
+    const [formsState, setFormsState] = useState(DEFAULT_VALUE);
+
+    const navigate = useNavigate();
 
 
     const {
         register,
         handleSubmit,
         formState: { errors }
-      } = useForm({
+    } = useForm({
+        mode: 'onBlur',
         resolver: yupResolver(schema)
-      });
+    });
 
-    const onSubmit = () => {
-        if(!errors) setJobVacancie({ ...jobVacancie, title, salary, contractType, cityAndState, level, about, requirements, benefits, step: 2})
-        console.log(jobVacancie)
-        
+    const onSubmit = (data) => {
+        console.log(data)
+        navigate('/company/register/job-vacancie/step2')
     }
+    // setJobVacancie({ ...data, step: 2})
 
-    
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
 
+        setFormsState((prevState) => ({
+            ...prevState,
+            [name]: value
+        }))
+    }
+    // console.log(watch())
     return (
+        <Body>
+        <HeaderComponent candidate={false}/>
         <Section>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Row>
-                    <WrapperVaga>
-                        <InputDiv>
+                    <InputDiv>
                         <label> Title </label>
                         <InputText
+                            name="title"
                             type="text"
                             placeholder='Ex: Designer UX'
-                            onChange={(ev) => setJobVacancie(prevState => ({...prevState, title: ev.target.value}) )}
+                            onChange={handleInputChange}
                             {...register('title')}
                         />
                         <span>{errors?.title?.message}</span>
-                        </InputDiv>
-                    </WrapperVaga>
+                    </InputDiv>
                     <InputWrapper>
                         <p id="cifrao">R$</p>
-                        <WrapperVaga>
-                            <InputDiv>
+                        <InputDiv>
                             <label> Salário</label>
-                            <InputText placeholder="3.000,00" {...register('salary')} style={{maxWidth: '100px'}}/>
+                            <InputText
+                                name='salary'
+                                onChange={handleInputChange}
+                                placeholder="3000"
+                                {...register('salary')}
+                                style={{ maxWidth: '100px' }} />
                             <span>{errors.salary?.message}</span>
-                            </InputDiv>
-            
-                        </WrapperVaga>
+                        </InputDiv>
                     </InputWrapper>
+                    <InputDiv>
+                        <label htmlFor="contrato">Tipo do contrato*</label>
+                        <select
+                            style={{ maxWidth: '130px' }}
+                            name="contractType"
+                            onChange={handleInputChange}
+                            {...register('contractType')}>
+                            <option value={1}>PJ</option>
+                            <option value={2}>CLT</option>
+                            <option value={3}>CLT ou PJ</option>
+                            <option value={4}>OUTROS</option>
+                        </select>
+                        <span>{errors?.contractType?.message}</span>
+                    </InputDiv>
+                </Row>
+                <Row>
+
+                    <InputDiv>
+                        <label htmlFor="sobreVaga">Sobre a vaga</label>
+                        <textarea
+                            onChange={handleInputChange}
+                            name="about"
+                            cols="400"
+                            row="50"
+                            placeholder="Escreva aqui detalhes sobre a vaga"
+                            {...register('about')} />
+                        <span>{errors?.about?.message}</span>
+                    </InputDiv>
                     <WrapperVaga>
                         <InputDiv>
-                            <label htmlFor="contrato">Tipo do contrato*</label>
-                            <select style={{ maxWidth: '130px'}}name="contrato" id="contrato" onChange={(ev) => setJobVacancie({...jobVacancie, contractType: ev.target.value})} {...register('contractType')}>
-                                <option value={0}>PJ</option>
-                                <option value={1}>CLT</option>
-                                <option value={2}>CLT ou PJ</option>
-                                <option value={3}>OUTROS</option>
+                            <label>Local *</label>
+                            <InputText
+                                name="cityAndState"
+                                onChange={handleInputChange}
+                                style={{ maxWidth: '240px' }}
+                                placeholder="São Paulo, São Paulo"
+                                {...register('cityAndState')} />
+                            <span>{errors.cityAndState?.message}</span>
+                        </InputDiv>
+                        <InputDiv>
+                            <label htmlFor="nivel">Nível</label>
+                            <select
+                                onChange={handleInputChange}
+                                name="level"
+                                {...register('level')}>
+                                <option value={1}>ESTÁGIO</option>
+                                <option value={2}>JR</option>
+                                <option value={3}>PL</option>
+                                <option value={4}>SR</option>
                             </select>
-                            <span>{errors?.contractType?.message}</span>
+                            {errors?.level?.message}
                         </InputDiv>
                     </WrapperVaga>
                 </Row>
                 <Row>
-                    <WrapperVaga>
-                            <InputDiv>
-                                <label htmlFor="sobreVaga">Sobre a vaga</label>
-                                <textarea onChange={(ev) => setJobVacancie({...jobVacancie, about: ev.target.value})} name="sobreVaga" cols="400" row="50" id="sobreVaga" placeholder="Escreva aqui detalhes sobre a vaga" {...register('about')}/>
-                                <span>{errors?.about?.message}</span>
-                            </InputDiv>
-                    </WrapperVaga>
-                    <WrapperVaga>
-                            <WrapperVaga>
-                                <InputDiv>
-                                <label>Local *</label>
-                                <InputText style={{maxWidth: '240px'}} placeholder="São Paulo, São Paulo" {...register('cityAndState')}/>
-                                <span>{errors.cityAndState?.message}</span>
-                                </InputDiv>
-                            </WrapperVaga>
-                            <WrapperVaga>
-                                <label htmlFor="nivel">Nível</label>
-                                <select onChange={(ev) => setJobVacancie({...jobVacancie, level: ev.target.value})} name="nivel" id="nivel" {...register('level')}>
-                                    <option value={0}>ESTÁGIO</option>
-                                    <option value={1}>JR</option>
-                                    <option value={2}>PL</option>
-                                    <option value={3}>SR</option>
-                                </select>
-                                {errors?.level?.message}
-                            </WrapperVaga>
-                    </WrapperVaga>
-                </Row>
-                <Row>
-                    <List label="Requisitos" items={requirements} name="requirements" {...register('requirements')}/>
-                    <List label="Benefícios" items={benefits} name={benefits} {...register('benefits')} />
+                    <List label="Requisitos" items={requirements} name="requirements" register={register} errors={errors} />
+                    <List label="Benefícios" items={benefits} name="benefits" register={register} errors={errors} />
                 </Row>
                 <Row alignItems="flex-end">
-                    <ButtonNext type="submit">Próximo</ButtonNext>
+                    <ButtonNext type="submit" value="Próximo" />
                 </Row>
             </Form>
         </Section>
+        </Body>
     )
 }
+/**/
