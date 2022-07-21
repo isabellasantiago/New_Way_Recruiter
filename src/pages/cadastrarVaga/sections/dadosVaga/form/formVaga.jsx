@@ -1,32 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from '../../../../../validation/schemaVaga';
 import { Form, InputWrapper, Row, WrapperVaga, ButtonNext, InputDiv, InputText } from './style'
 import { List } from './lista'
 
-import JobVacancieContext from '../../../../../services/contexts/registerJobVacancie';
-import { Section } from '../../style';
+import { useJobVacancie } from '../../../../../services/contexts/registerJobVacancie';
 import { HeaderComponent } from '../../../../../components/HeaderComponent/HeaderComponent';
-import { Body } from '../../../style';
+import { Body, Section } from '../../../style';
 import { useNavigate } from 'react-router-dom';
-
-const DEFAULT_VALUE = {
-    title: '',
-    salary: '',
-    contractType: 0,
-    cityAndState: '',
-    level: 0,
-    about: '',
-    requirements: [],
-    benefits: [],
-}
+import { Steps } from '../../steps';
 
 
 export function FormVaga(props) {
-    const { jobVacancie, setJobVacancie } = useContext(JobVacancieContext);
+    const { jobVacancie, setValues } = useJobVacancie();
     const { title, salary, contractType, cityAndState, level, about, requirements, benefits } = jobVacancie;
-    const [formsState, setFormsState] = useState(DEFAULT_VALUE);
 
     const navigate = useNavigate();
 
@@ -36,28 +24,31 @@ export function FormVaga(props) {
         handleSubmit,
         formState: { errors }
     } = useForm({
+        defaultValues: {
+            title,
+            salary,
+            about,
+            level,
+            cityAndState,
+            contractType,
+            requirements,
+            benefits,
+        },
         mode: 'onBlur',
         resolver: yupResolver(schema)
     });
 
     const onSubmit = (data) => {
-        console.log(data)
+        setValues({...data, step: 2})
         navigate('/company/register/job-vacancie/step2')
     }
     // setJobVacancie({ ...data, step: 2})
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-
-        setFormsState((prevState) => ({
-            ...prevState,
-            [name]: value
-        }))
-    }
     // console.log(watch())
     return (
         <Body>
         <HeaderComponent candidate={false}/>
+        <Steps />
         <Section>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Row>
@@ -67,7 +58,6 @@ export function FormVaga(props) {
                             name="title"
                             type="text"
                             placeholder='Ex: Designer UX'
-                            onChange={handleInputChange}
                             {...register('title')}
                         />
                         <span>{errors?.title?.message}</span>
@@ -78,7 +68,6 @@ export function FormVaga(props) {
                             <label> Salário</label>
                             <InputText
                                 name='salary'
-                                onChange={handleInputChange}
                                 placeholder="3000"
                                 {...register('salary')}
                                 style={{ maxWidth: '100px' }} />
@@ -90,7 +79,6 @@ export function FormVaga(props) {
                         <select
                             style={{ maxWidth: '130px' }}
                             name="contractType"
-                            onChange={handleInputChange}
                             {...register('contractType')}>
                             <option value={1}>PJ</option>
                             <option value={2}>CLT</option>
@@ -105,7 +93,6 @@ export function FormVaga(props) {
                     <InputDiv>
                         <label htmlFor="sobreVaga">Sobre a vaga</label>
                         <textarea
-                            onChange={handleInputChange}
                             name="about"
                             cols="400"
                             row="50"
@@ -118,7 +105,7 @@ export function FormVaga(props) {
                             <label>Local *</label>
                             <InputText
                                 name="cityAndState"
-                                onChange={handleInputChange}
+
                                 style={{ maxWidth: '240px' }}
                                 placeholder="São Paulo, São Paulo"
                                 {...register('cityAndState')} />
@@ -127,7 +114,7 @@ export function FormVaga(props) {
                         <InputDiv>
                             <label htmlFor="nivel">Nível</label>
                             <select
-                                onChange={handleInputChange}
+
                                 name="level"
                                 {...register('level')}>
                                 <option value={1}>ESTÁGIO</option>
@@ -135,13 +122,20 @@ export function FormVaga(props) {
                                 <option value={3}>PL</option>
                                 <option value={4}>SR</option>
                             </select>
-                            {errors?.level?.message}
+                            <span>{errors?.level?.message}</span>
                         </InputDiv>
                     </WrapperVaga>
                 </Row>
                 <Row>
-                    <List label="Requisitos" items={requirements} name="requirements" register={register} errors={errors} />
-                    <List label="Benefícios" items={benefits} name="benefits" register={register} errors={errors} />
+                    <InputDiv style={{width: '100%'}}>
+                        <List label="Requisitos" items={requirements} name="requirements" register={register} errors={errors} />
+                        <span>{errors?.requirements?.message}</span>
+                    </InputDiv>
+                    
+                    <InputDiv style={{width: '100%'}}>
+                        <List label="Benefícios" items={benefits} name="benefits" register={register} errors={errors} />
+                        <span>{errors?.benefits?.message}</span>
+                    </InputDiv>
                 </Row>
                 <Row alignItems="flex-end">
                     <ButtonNext type="submit" value="Próximo" />

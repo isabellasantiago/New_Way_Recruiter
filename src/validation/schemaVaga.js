@@ -10,10 +10,10 @@ setLocale({
 
 export let schema = yup.object({
     title: yup.string().required('campo obrigatório'),
-    salary: yup.number().positive('Tipo inválido').required('campo obrigatório'),
-    contractType: yup.number().max(4).required('campo obrigatório'),
+    salary: yup.number().positive('somente números').required('campo obrigatório').min(1, 'campo obrigatório'),
+    contractType: yup.number('campo obrigatório').max(4).required('campo obrigatório').positive().integer().min(1, 'campo obrigatório'),
     about: yup.string().required('campo obrigatório'),
-    level: yup.number().max(4).required('campo obrigatório').positive().integer().min(1),
+    level: yup.number().max(4).required('campo obrigatório').positive().integer().min(1, 'campo obrigatório'),
     cityAndState: yup.string().required('campo obrigatório'),
     requirements: yup.array().of(yup.string()),
     benefits: yup.array().of(yup.string()),
@@ -22,8 +22,10 @@ export let schema = yup.object({
 export let schema2 = yup.object({
     softSkills: yup.array().of(yup.string()),
     hardSkills: yup.array().of(yup.string()),
-    ethnicity: yup.number().max(2).required('campo obrigatório').positive().integer().min(1),
-    gender: yup.number().max(3).required('campo obrigatório').positive().integer().min(1),
+    especificGender: yup.boolean().required('campo obrigatório'),
+    especifEthnicity: yup.boolean().required('campo obrigatório'),
+    ethnicity: yup.number().max(2).required('campo obrigatório').positive().integer().min(1, 'campo obrigatório'),
+    gender: yup.number().max(3).required('campo obrigatório').positive().integer().min(1, 'campo obrigatório'),
     pcd: yup.boolean().required('Campo obrigatório'),
     acceptsAllLevels: yup.boolean().required('Campo obrigatório'),
 })

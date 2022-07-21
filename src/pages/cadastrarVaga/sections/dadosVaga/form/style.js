@@ -86,11 +86,21 @@ export const WrapperVaga = styled.div`
         width: 300px;
         text-align: center;
     }
+
+    > span {
+        font-size: 0.8rem;
+        white-space: nowrap;
+        color: #C73E1D;
+        position: absolute;
+        bottom: -18px;
+    }
 `;
 
 
 export const InputDiv = styled.label`
+    position: relative;
     display: flex;
+    
     flex-direction: column;
     font: 400 1rem 'Poppins' ;
 
@@ -108,8 +118,11 @@ export const InputDiv = styled.label`
     `}
 
     > span {
+        font-size: 0.8rem;
         white-space: nowrap;
         color: #C73E1D;
+        position: absolute;
+        bottom: -18px;
     }
 
     > label{

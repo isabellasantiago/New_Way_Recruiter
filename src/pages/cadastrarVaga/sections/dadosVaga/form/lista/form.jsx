@@ -5,7 +5,7 @@ import { WrapperVaga } from '../style';
 
 
 export function FormItem(props) {
-    const { name, id, label, onSave, register } = props;
+    const { id, label, onSave } = props;
     const [item, setItem] = useState();
 
     return(
@@ -15,13 +15,12 @@ export function FormItem(props) {
             <ItemInput>
                 <input 
                     type="text"
+                    value={item}
                     onChange={ev => {
                         setItem(ev.target.value)
                         ev.target.value=""
                     }}
-                    id={id}
-                    {...register(name)}
-                    
+                    id={id}                    
                 />
                 <button type="submit" onClick={ev => {
                     onSave(ev, item)

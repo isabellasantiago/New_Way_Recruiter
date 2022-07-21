@@ -17,6 +17,7 @@ import PrivateRoute from './routes/PrivateRoute'
 import { HomePage } from "./pages/HomePage";
 import { FormVaga } from "./pages/cadastrarVaga/sections/dadosVaga/form/formVaga";
 import { FormFiltragem } from "./pages/cadastrarVaga/sections/filtragemCandidato/form/formFiltragem";
+import { Result } from "./pages/cadastrarVaga/sections/result";
 
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="/register/company" element={<EmpresaForm/>}/>
         <Route path="/company/register/job-vacancie/step1" element={<PrivateRoute Item={FormVaga}/>} />
         <Route path="/company/register/job-vacancie/step2" element={<PrivateRoute Item={FormFiltragem}/>}/>
+        <Route path="/company/register/job-vacancie/result" element={<PrivateRoute Item={Result}/>}/>
         <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
         <Route path="/edit-delete/empresa" element={<PrivateRoute Item={EditarExcluirEmpresa}/>}/>
         <Route exact path="/candidato/profile" element={<ProfileVCand/>}/>

@@ -5,9 +5,10 @@ export const StepButton = styled.button`
 `;
 
 export const StepSection = styled.div`
+    gap: 2px;
     box-sizing: border-box;
     
-    width: 430px;
+    width: 450px;
     height: 45px;
     border-radius: 15px;
 

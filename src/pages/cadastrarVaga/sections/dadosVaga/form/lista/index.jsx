@@ -11,17 +11,15 @@ const whichItems = (nameList, jobVacancie) => {
 
 export function List({ label, name, id, register }) {
 
-    const {jobVacancie, setJobVacancie} = useContext(JobVacancieContext);
+    const {jobVacancie, setValues} = useContext(JobVacancieContext);
     
     const [itemList, setItemList] = useState(whichItems(name, jobVacancie));
-
-    console.log(itemList)
     
 
     const addItem = (ev, item) => {
         ev.preventDefault()
         setItemList([...itemList || [], item])
-        setJobVacancie({...jobVacancie, [name]: itemList})
+        setValues({[name]: itemList})
     }
 
     const deleteItem = (index) => {
