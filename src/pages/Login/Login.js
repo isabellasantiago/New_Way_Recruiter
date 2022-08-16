@@ -12,7 +12,7 @@ export function Login(){
     const [senha, setSenha] = useState('')
     const [showRegister, setShowRegister] = useState(false);
 
-    const { authenticated, login } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
 
     const handleLogin = async (ev) => {
         ev.preventDefault();
@@ -60,9 +60,9 @@ export function Login(){
                 </button>
                 {showRegister && (
                     <Register>
-                        <span>Registre-se aqui <strong><a href='/register/candidato'>candidato.</a></strong></span>
+                        <span>Registre-se aqui <strong><a href='/register/candidate'>candidato.</a></strong></span>
                         <span>OU</span>
-                        <span>Registre-se aqui <strong><a href='/register/empresa'>empresa.</a></strong></span>
+                        <span>Registre-se aqui <strong><a href='/register/company'>empresa.</a></strong></span>
                     </Register>
                 )}
                 </form>

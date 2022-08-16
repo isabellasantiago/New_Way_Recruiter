@@ -1,4 +1,24 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
+
+export const Section = styled.div`
+    width: 350px;
+    left: 35%;
+    position: absolute;
+
+    background:white;
+    border-radius: 10px;
+    border: 1px solid #000;
+
+
+    @media (min-width: 1380px){
+        max-width: 40%;
+        height: 70vh;
+    };
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
 export const Form = styled.form`
 
@@ -8,12 +28,8 @@ export const Form = styled.form`
     }
 
     width: 100%;
-    height: 95%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    height: 100%;
+    
 
     background: none;
 
@@ -52,23 +68,18 @@ export const Form = styled.form`
         
         padding: 12px;
     }
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
 `
 
 export const InputWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 5px;
-`;
-
-
-export const Row = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    width: 70%;
-    gap: 40px;
-    margin: 20px;
-
 `;
 
 export const WrapperVaga = styled.div`
@@ -96,12 +107,11 @@ export const WrapperVaga = styled.div`
     }
 `;
 
-
 export const InputDiv = styled.label`
     position: relative;
     display: flex;
+    margin-top: 10px;
     
-    flex-direction: column;
     font: 400 1rem 'Poppins' ;
 
     display: flex;
@@ -140,8 +150,6 @@ max-width: 330px;
 height: 35px;
 
 `;
-
-
 
 export const ButtonNext = styled.input`
     height: 33px;

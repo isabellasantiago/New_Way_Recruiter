@@ -1,57 +1,95 @@
 import React from 'react';
+import Modal from '@material-ui/core/Modal';
+import Api from '../../services/mainApi';
+import toast from 'react-hot-toast'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from '../../../../../validation/schemaVaga';
-import { Form, InputWrapper, Row, WrapperVaga, ButtonNext, InputDiv, InputText } from './style'
-import { List } from './lista'
-
-import { useJobVacancie } from '../../../../../services/contexts/registerJobVacancie';
-import { HeaderComponent } from '../../../../../components/HeaderComponent/HeaderComponent';
-import { Body, Section } from '../../../style';
+import { schema } from '../../validation/schemaVaga';
 import { useNavigate } from 'react-router-dom';
-import { Steps } from '../../steps';
+import { useContext } from 'react';
+import { AuthContext } from '../../services/contexts/auth';
+import { Section, Form, InputWrapper, WrapperVaga, ButtonNext, InputDiv, InputText } from './style';
 
 
-export function FormVaga(props) {
-    const { jobVacancie, setValues } = useJobVacancie();
-    const { title, salary, contractType, cityAndState, level, about, requirements, benefits } = jobVacancie;
+const notify = (message, type) => {
+    type === 'success' ? toast.success(message, {
+        duration: 3500}) : toast.error(message, {
+            duration: 3500})
+}
+
+const JobVacancieModal = ({
+    open,
+    setOpen,
+    data,
+    update,
+    successMessage, 
+}) => {
 
     const navigate = useNavigate();
+    const {authenticated, user } = useContext(AuthContext);
+    const token = localStorage.getItem('token');
+    
 
+    if(!authenticated || !user || !token) {
+        navigate('/login')
+    }
+
+    const defaultFormValues = () => {
+        if(data){
+            return {
+                title: data.title,
+                salary: data.salary,
+                about: data.about,
+                level: data.level,
+                cityAndState: data.cityAndState,
+                contractType: data.contractType
+            }
+        }
+
+        return {
+            title: '',
+            salary: 0,
+            about: '',
+            level: 1,
+            cityAndState: 'remoto',
+            contractType: 1,
+        }
+    }
 
     const {
         register,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
     } = useForm({
-        defaultValues: {
-            title,
-            salary,
-            about,
-            level,
-            cityAndState,
-            contractType,
-            requirements,
-            benefits,
-        },
+        defaultValues: defaultFormValues,
         mode: 'onBlur',
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = (data) => {
-        setValues({...data, step: 2})
-        navigate('/company/register/job-vacancie/step2')
-    }
-    // setJobVacancie({ ...data, step: 2})
+    const handleClose = () => setOpen(false);
 
-    // console.log(watch())
-    return (
-        <Body>
-        <HeaderComponent candidate={false}/>
-        <Steps />
+    const onSubmit = async (data) => {
+        try{
+            const response = await Api.post('/jobVacancie', {
+                ...data,
+                companyID: user.id,
+            }, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            if(response.status === 201) {
+                notify(successMessage || 'vaga cadastrada!', 'success');
+                setOpen(false);
+            };
+        }catch(err){
+            if(err) notify(`${err.message}`, 'error');
+        }
+    }
+
+    const form = (
         <Section>
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <Row>
                     <InputDiv>
                         <label> Title </label>
                         <InputText
@@ -71,10 +109,9 @@ export function FormVaga(props) {
                                 placeholder="3000"
                                 {...register('salary')}
                                 style={{ maxWidth: '100px' }} />
-                            <span>{errors.salary?.message}</span>
+                            <span>{errors?.salary?.message}</span>
                         </InputDiv>
-                    </InputWrapper>
-                    <InputDiv>
+                        <InputDiv>
                         <label htmlFor="contrato">Tipo do contrato*</label>
                         <select
                             style={{ maxWidth: '130px' }}
@@ -87,8 +124,8 @@ export function FormVaga(props) {
                         </select>
                         <span>{errors?.contractType?.message}</span>
                     </InputDiv>
-                </Row>
-                <Row>
+                    </InputWrapper>
+                    
 
                     <InputDiv>
                         <label htmlFor="sobreVaga">Sobre a vaga</label>
@@ -125,24 +162,24 @@ export function FormVaga(props) {
                             <span>{errors?.level?.message}</span>
                         </InputDiv>
                     </WrapperVaga>
-                </Row>
-                <Row>
-                    <InputDiv style={{width: '100%'}}>
-                        <List label="Requisitos" items={requirements} name="requirements" register={register} errors={errors} />
-                        <span>{errors?.requirements?.message}</span>
-                    </InputDiv>
-                    
-                    <InputDiv style={{width: '100%'}}>
-                        <List label="Benefícios" items={benefits} name="benefits" register={register} errors={errors} />
-                        <span>{errors?.benefits?.message}</span>
-                    </InputDiv>
-                </Row>
-                <Row alignItems="flex-end">
-                    <ButtonNext type="submit" value="Próximo" />
-                </Row>
+                    <ButtonNext type="submit" value="Cadastrar Vaga" />
             </Form>
         </Section>
-        </Body>
+    )
+
+
+    return(
+        <>
+        <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby='simple-modal-description'
+        >
+         {form}   
+        </Modal>
+        </>
     )
 }
-/**/
+
+export default JobVacancieModal;

@@ -10,14 +10,12 @@ import { ProfileVCand } from "./pages/Perfil/VisaoCandidato/ProfileVCandidato";
 import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import { Curriculo } from './pages/cadastroCurriculo/Curriculo';
 import { AuthProvider } from "./services/contexts/auth";
-import { JobVacancieProvider } from "./services/contexts/registerJobVacancie";
 
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 import PrivateRoute from './routes/PrivateRoute'
 import { HomePage } from "./pages/HomePage";
-import { FormVaga } from "./pages/cadastrarVaga/sections/dadosVaga/form/formVaga";
-import { FormFiltragem } from "./pages/cadastrarVaga/sections/filtragemCandidato/form/formFiltragem";
-import { Result } from "./pages/cadastrarVaga/sections/result";
+import { FormVaga } from "./pages/cadastrarVaga/index.jsx";
+
 
 
 
@@ -27,7 +25,6 @@ function App() {
   return (
     <BrowserRouter>
     <AuthProvider>
-    <JobVacancieProvider>
       <Routes>
         <Route path="/" exact element={<Home/>}/>
         <Route
@@ -38,9 +35,7 @@ function App() {
         <Route path="/home" exact element={<PrivateRoute Item={HomePage}/>}/>
         <Route path="/register/candidate" element={<CandidatoForm/>}/>
         <Route path="/register/company" element={<EmpresaForm/>}/>
-        <Route path="/company/register/job-vacancie/step1" element={<PrivateRoute Item={FormVaga}/>} />
-        <Route path="/company/register/job-vacancie/step2" element={<PrivateRoute Item={FormFiltragem}/>}/>
-        <Route path="/company/register/job-vacancie/result" element={<PrivateRoute Item={Result}/>}/>
+        <Route path="/company/register/job-vacancie" element={<PrivateRoute Item={FormVaga}/>} />
         <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
         <Route path="/edit-delete/empresa" element={<PrivateRoute Item={EditarExcluirEmpresa}/>}/>
         <Route exact path="/candidato/profile" element={<ProfileVCand/>}/>
@@ -48,7 +43,6 @@ function App() {
         <Route path="/candidatos" element={<ModalCandidato/>}/>
         <Route path="/cv" element={<Curriculo/>}/>
       </Routes>
-      </JobVacancieProvider>
     </AuthProvider>
     </BrowserRouter>
   );

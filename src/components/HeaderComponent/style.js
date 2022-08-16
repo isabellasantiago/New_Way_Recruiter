@@ -1,4 +1,8 @@
-header{
+import styled from 'styled-components'
+
+export const HeaderStyle = styled.div`
+    width: 100%;
+    header{
     width: 100%;
     background: #012E40;
     color: #fff;
@@ -29,8 +33,8 @@ header{
 
     nav{
         display: flex;
-        gap: 80px;
-        a{
+        gap: 50px;
+        a {
             color: #fff;
             text-decoration: none;
 
@@ -47,3 +51,4 @@ header{
         cursor: pointer;
     }
 }
+`;
