@@ -10,6 +10,9 @@ export const HomePageCompany = () => {
             <S.Container>
                 <S.CoverContainer>
                     cover
+                    <S.ProfilePicContainer>
+                        <S.ProfilePic src=""/>
+                    </S.ProfilePicContainer>
                 </S.CoverContainer>
                 <S.Content>
                 <S.EditBtn>
