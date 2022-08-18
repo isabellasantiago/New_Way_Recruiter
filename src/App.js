@@ -14,7 +14,6 @@ import { AuthProvider } from "./services/contexts/auth";
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 import PrivateRoute from './routes/PrivateRoute'
 import { HomePage } from "./pages/HomePage";
-import { FormVaga } from "./pages/cadastrarVaga/index.jsx";
 
 
 
@@ -35,7 +34,6 @@ function App() {
         <Route path="/home" exact element={<PrivateRoute Item={HomePage}/>}/>
         <Route path="/register/candidate" element={<CandidatoForm/>}/>
         <Route path="/register/company" element={<EmpresaForm/>}/>
-        <Route path="/company/register/job-vacancie" element={<PrivateRoute Item={FormVaga}/>} />
         <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
         <Route path="/edit-delete/empresa" element={<PrivateRoute Item={EditarExcluirEmpresa}/>}/>
         <Route exact path="/candidato/profile" element={<ProfileVCand/>}/>

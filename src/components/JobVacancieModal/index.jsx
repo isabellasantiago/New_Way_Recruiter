@@ -61,7 +61,7 @@ const JobVacancieModal = ({
         handleSubmit,
         formState: { errors },
     } = useForm({
-        defaultValues: defaultFormValues,
+        defaultValues: defaultFormValues(),
         mode: 'onBlur',
         resolver: yupResolver(schema)
     });

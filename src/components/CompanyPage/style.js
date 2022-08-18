@@ -13,8 +13,3 @@ export const Body = styled.div`
     align-items: center;
     gap: 10px;
 `;
-
-export const ButtonContainer = styled.div`
-    display: flex;
-    justify-self: end;
-`;

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Button from '../../components/Button/Button';
-import { Body, ButtonContainer } from '../../components/CompanyPage/style';
+import { Body } from '../../components/CompanyPage/style';
 import { HeaderComponent } from '../../components/HeaderComponent/HeaderComponent';
 import { Toaster } from 'react-hot-toast';
 import JobVacancieModal from '../JobVacancieModal';
@@ -25,11 +24,6 @@ const CompanyPage = ({
             candidate={false}
             setOpenModal={setOpenModal}
         />
-        <ButtonContainer>
-            <Button onClick={() => setOpen(true)}>
-                Cadastrar vaga
-            </Button>
-        </ButtonContainer>
             {children}
         </Body>
         <Toaster />
