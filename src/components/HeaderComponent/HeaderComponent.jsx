@@ -57,7 +57,6 @@ export function HeaderComponent({
                 <p>Empresa</p>
             </div>
             <nav id='links'>
-                    <NavLink exact to="" >Perfil</NavLink>
                     <JobVacancieDropDown setOpenModal={setOpenModal}/>
                     <NavLink  exact to="/edit_or_delete/empresa" activeClassName="selected" > <SettingsOutlinedIcon/> </NavLink>
                     <button onClick={handleLogout}>
