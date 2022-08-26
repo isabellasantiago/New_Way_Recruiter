@@ -9,12 +9,12 @@ import { Login } from "./pages/Login/Login";
 import { ProfileVCand } from "./pages/Perfil/VisaoCandidato/ProfileVCandidato";
 import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import { Curriculo } from './pages/cadastroCurriculo/Curriculo';
-import { CadastroVaga } from "./pages/cadastrarVaga/";
-import { AuthProvider } from "./services/context/auth2";
+import { AuthProvider } from "./services/contexts/auth";
 
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 import PrivateRoute from './routes/PrivateRoute'
 import { HomePage } from "./pages/HomePage";
+
 
 
 
@@ -34,7 +34,6 @@ function App() {
         <Route path="/home" exact element={<PrivateRoute Item={HomePage}/>}/>
         <Route path="/register/candidate" element={<CandidatoForm/>}/>
         <Route path="/register/company" element={<EmpresaForm/>}/>
-        <Route path="/empresa/register/vaga" element={<PrivateRoute Item={CadastroVaga}/>} />
         <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
         <Route path="/edit-delete/empresa" element={<PrivateRoute Item={EditarExcluirEmpresa}/>}/>
         <Route exact path="/candidato/profile" element={<ProfileVCand/>}/>

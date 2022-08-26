@@ -3,7 +3,6 @@ import { Cd } from './styles' ;
 import profile from '../../assets/images/profile.svg';
 import MaskInput from '../../MaskInput';
 import {useForm} from 'react-hook-form';
-import axios from 'axios';
 import Api from '../../services/mainApi';
 import { useNavigate } from 'react-router-dom';
 

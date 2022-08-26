@@ -1,11 +1,10 @@
 import React, {useState, useContext} from 'react';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {useNavigate} from 'react-router-dom'
 
 import { PageLogin, Register } from './styles.js';
 import {ReactComponent as LoginPic} from '../../assets/images/loginPic.svg';
-import { AuthContext } from '../../services/context/auth2.js';
-import { getUserByEmail } from '../../shared/functions/getUserByEmail.js';
+import { AuthContext } from '../../services/contexts/auth.js';
+import { getUserByEmail } from '../../shared/functions/user';
 
 
 export function Login(){
@@ -13,7 +12,7 @@ export function Login(){
     const [senha, setSenha] = useState('')
     const [showRegister, setShowRegister] = useState(false);
 
-    const { authenticated, login } = useContext(AuthContext);
+    const { login } = useContext(AuthContext);
 
     const handleLogin = async (ev) => {
         ev.preventDefault();
@@ -61,9 +60,9 @@ export function Login(){
                 </button>
                 {showRegister && (
                     <Register>
-                        <span>Registre-se aqui <strong><a href='/register/candidato'>candidato.</a></strong></span>
+                        <span>Registre-se aqui <strong><a href='/register/candidate'>candidato.</a></strong></span>
                         <span>OU</span>
-                        <span>Registre-se aqui <strong><a href='/register/empresa'>empresa.</a></strong></span>
+                        <span>Registre-se aqui <strong><a href='/register/company'>empresa.</a></strong></span>
                     </Register>
                 )}
                 </form>

@@ -10,4 +10,12 @@ export const Wrapper = styled.div`
     select{
         font-family: "Poppins", sans-serif;
     }
+
+    > span {
+        font-size: 0.8rem;
+        white-space: nowrap;
+        color: #C73E1D;
+        position: absolute;
+        bottom: -18px;
+    }
 `;

@@ -33,6 +33,7 @@ export function Idiomas(){
             saveIdioma(idiomas)
         }
     },[idiomas])
+    
     useEffect(()=>{
         const loadedIdiomas = loadedIdioma();
         setIdiomas(loadedIdiomas);

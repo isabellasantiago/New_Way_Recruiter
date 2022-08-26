@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Form} from './style';
-import Field from '../../../../../components/forms/Field';
+// import Field from '../../../../../components/forms/Field';
 import {Wrapper} from '../../../components/Wrapper';
 import Button from '../../../../../components/Button/Button'
 import {FormWrapper} from '../../infoAcademicas/Form/style'
@@ -19,8 +19,8 @@ export function ProfessionalExpierenceForm(props){
     return(
         <Form onSubmit={e => e.preventDefault()}>
             <FormWrapper id="row1">
-                <Field.Text label="Nome da empresa" name="nomeEmpresa" type="text" value={nomeEmpresa || ''} onChange={(ev) => setNomeEmpresa(ev.target.value)}/>
-                <Field.Text label="Cargo" name="cargo" type="text" value={cargo || ''} onChange={(ev) => setCargo(ev.target.value)}/>
+                {/* <Field.Text label="Nome da empresa" name="nomeEmpresa" type="text" value={nomeEmpresa || ''} onChange={(ev) => setNomeEmpresa(ev.target.value)}/>
+                <Field.Text label="Cargo" name="cargo" type="text" value={cargo || ''} onChange={(ev) => setCargo(ev.target.value)}/> */}
                 <Wrapper>
                     <label htmlFor="nivelOperacional">Nível operacional</label>
                     <select name="nivelOperacional" id="nivelOperacional" value={nivelOperacional || ''} onChange={(ev) => setNivelOperacional(ev.target.value)}>
@@ -39,8 +39,8 @@ export function ProfessionalExpierenceForm(props){
                 </Wrapper>
             </FormWrapper>
             <FormWrapper>
-                <Field.Text type="date" label="Data de inicio" name="dataInicioEmprego" value={dataInicioEmprego || ''} onChange={(ev) => setDataInicioEmprego(ev.target.value)}/>
-                <Field.Text type="date" label="Data final" name="dataFinalEmprego" value={dataFinalEmprego || ''} onChange={(ev) => setDataFinalEmprego(ev.target.value)} disable={trabalhoAqui ? true : false}/>
+                {/* <Field.Text type="date" label="Data de inicio" name="dataInicioEmprego" value={dataInicioEmprego || ''} onChange={(ev) => setDataInicioEmprego(ev.target.value)}/>
+                <Field.Text type="date" label="Data final" name="dataFinalEmprego" value={dataFinalEmprego || ''} onChange={(ev) => setDataFinalEmprego(ev.target.value)} disable={trabalhoAqui ? true : false}/> */}
                 <div id="checkbox">
                 <input type="checkbox" name="trabalhoAqui" onChange={() => setTrabalhoAqui(!trabalhoAqui)}/>
                 <span>Trabalho aqui</span>
