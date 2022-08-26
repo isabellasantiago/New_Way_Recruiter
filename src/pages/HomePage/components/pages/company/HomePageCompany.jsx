@@ -2,13 +2,16 @@ import React, { useMemo, useState } from 'react';
 import CompanyPage from '../../../../../components/CompanyPage';
 import * as S from './style';
 import EditIcon from '@material-ui/icons/Edit';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useEffect } from 'react';
 import { getCurrentUser } from '../../../../../shared/functions/user';
 import { Info } from './components/Info';
+import { EditModal } from './components/Info/EditModal';
 
 
 export const HomePageCompany = () => {
     const [company, setCompany] = useState();
+    const [open, setOpen] = useState(false);
 
     const infos = useMemo(() => {
         return [
@@ -27,21 +30,24 @@ export const HomePageCompany = () => {
         getUser();
     }, [])
 
+    const photo = company?.imageURL || <AccountCircleIcon />;
+    const cover = company?.cover || '';
+
     console.log(company);
     return (
-        <CompanyPage>
+        <>
+                    <CompanyPage
+            companyID={company?.id}
+        >
             <S.Container>
-                <S.CoverContainer>
-                    
-                    <S.ProfilePicContainer>
-                        
-                    </S.ProfilePicContainer>
+                <S.CoverContainer cover={cover}>
+                    <S.Cover src={cover}/>
                 </S.CoverContainer>
+                <S.ProfilePic src={photo}/>
                 <S.Content>
-                <S.EditBtn>
+                <S.EditBtn onClick={() => setOpen(true)}>
                     <EditIcon />
                 </S.EditBtn>
-                <S.ProfilePic src={company?.imageURL}/>
                 <S.CompanyName>
                     {company?.corporateName}
                 </S.CompanyName>
@@ -61,5 +67,14 @@ export const HomePageCompany = () => {
                 </S.Content>
             </S.Container>
         </CompanyPage>
+        {open && (
+            <EditModal 
+                company={company}
+                open={open}
+                setOpen={setOpen}
+                successMessage="Perfil atualizado"
+            />
+        )}
+        </>
     )
 }

@@ -1,32 +1,26 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import Api from '../../services/mainApi';
-import toast from 'react-hot-toast'
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from '../../validation/schemaVaga';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../services/contexts/auth';
-import { Section, Form, InputWrapper, WrapperVaga, ButtonNext, InputDiv, InputText } from './style';
-
-
-const notify = (message, type) => {
-    type === 'success' ? toast.success(message, {
-        duration: 3500}) : toast.error(message, {
-            duration: 3500})
-}
+import { Section, Form, InputWrapper, WrapperVaga, ButtonNext, InputDiv, InputText } from './style'; 
+import { notify } from '../../shared/functions/notify/notify.js';
 
 const JobVacancieModal = ({
     open,
     setOpen,
     data,
     update,
-    successMessage, 
+    successMessage,
+    companyID 
 }) => {
 
     const navigate = useNavigate();
-    const {authenticated, user } = useContext(AuthContext);
+    const { authenticated, user } = useContext(AuthContext);
     const token = localStorage.getItem('token');
     
 
@@ -72,7 +66,7 @@ const JobVacancieModal = ({
         try{
             const response = await Api.post('/jobVacancie', {
                 ...data,
-                companyID: user.id,
+                companyID,
             }, {
                 headers:{
                     'Authorization': `Bearer ${token}`
@@ -125,8 +119,6 @@ const JobVacancieModal = ({
                         <span>{errors?.contractType?.message}</span>
                     </InputDiv>
                     </InputWrapper>
-                    
-
                     <InputDiv>
                         <label htmlFor="sobreVaga">Sobre a vaga</label>
                         <textarea
@@ -142,7 +134,6 @@ const JobVacancieModal = ({
                             <label>Local *</label>
                             <InputText
                                 name="cityAndState"
-
                                 style={{ maxWidth: '240px' }}
                                 placeholder="São Paulo, São Paulo"
                                 {...register('cityAndState')} />
@@ -151,7 +142,6 @@ const JobVacancieModal = ({
                         <InputDiv>
                             <label htmlFor="nivel">Nível</label>
                             <select
-
                                 name="level"
                                 {...register('level')}>
                                 <option value={1}>ESTÁGIO</option>

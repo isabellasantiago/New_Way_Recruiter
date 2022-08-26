@@ -12,7 +12,6 @@ import { HardSoftSkills } from './Components/HardSoftSkills/HardSoftSkills';
 import { Idiomas } from './Components/Idiomas/Idiomas';
 import { Preferencias } from './Components/Preferencias/Preferencias';
 
-import {useNavigate} from 'react-router-dom';
 export function ProfileVCand(){
 
   return(

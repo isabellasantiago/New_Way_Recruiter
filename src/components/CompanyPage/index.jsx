@@ -7,7 +7,7 @@ import JobVacancieModal from '../JobVacancieModal';
 
 const CompanyPage = ({
     children,
-    setOpen
+    companyID
 }) => {
     const [openModal, setOpenModal] = useState(false);
 
@@ -17,6 +17,7 @@ const CompanyPage = ({
             <JobVacancieModal 
                 open={openModal}
                 setOpen={setOpenModal}
+                companyID={companyID}
             />
         )}
         <Body>

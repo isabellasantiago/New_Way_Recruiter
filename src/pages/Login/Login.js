@@ -4,7 +4,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { PageLogin, Register } from './styles.js';
 import {ReactComponent as LoginPic} from '../../assets/images/loginPic.svg';
 import { AuthContext } from '../../services/contexts/auth.js';
-import { getUserByEmail } from '../../shared/functions/getUserByEmail.js';
+import { getUserByEmail } from '../../shared/functions/user';
 
 
 export function Login(){
