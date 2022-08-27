@@ -43,6 +43,7 @@ export const ProfilePic = styled.img`
     border: 8px solid #f4f4f4;
     background-color: #fff;
     z-index: 1;
+    object-fit: cover;
 `;
 
 export const EditBtn = styled.button`    
