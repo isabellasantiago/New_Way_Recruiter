@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { JobVacancieDropDown } from './components/JobVacancieDropDown';
-import { Home } from  '../../pages/Home/Home';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../../services/contexts/auth';
 
@@ -51,14 +50,13 @@ export function HeaderComponent({
         <HeaderStyle>
             <header>
             <div>
-                <a href={Home} id='logo'>
+                <NavLink extact to="/home" id='logo'>
                     <h1>New <span>Way</span> Recuiter</h1>
-                </a>
+                </NavLink>
                 <p>Empresa</p>
             </div>
             <nav id='links'>
                     <JobVacancieDropDown setOpenModal={setOpenModal}/>
-                    <NavLink  exact to="/edit_or_delete/empresa" activeClassName="selected" > <SettingsOutlinedIcon/> </NavLink>
                     <button onClick={handleLogout}>
                         <LogoutIcon color="white"/>
                     </button>

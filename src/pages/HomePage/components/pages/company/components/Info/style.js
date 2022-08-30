@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 500px;
-    height: 110px;
+    width: 450px;
+    height: 120px;
     border-radius: 30px;
 
     display: flex;
@@ -15,6 +15,7 @@ export const Container = styled.div`
 
 export const Text = styled.p`
     font: 500 13px 'Poppins', sans-serif;
+    margin-bottom: 5px;
 `;
 
 export const Title = styled.h1`

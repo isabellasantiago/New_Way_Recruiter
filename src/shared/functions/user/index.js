@@ -6,9 +6,9 @@ export const getCurrentUser = async () => {
     const userLoggedIn = JSON.parse(window.localStorage.getItem('user'));
     
     if(userLoggedIn.type === UserTypeEnum.COMPANY){
-        const user = await Api.get(`/company/userID/${userLoggedIn.id}`)
+        const user = await Api.get(`/company/${userLoggedIn.id}`)
 
-        if(!user) throw Error('Not found')
+        if(!user) throw Error('Not found');
 
         return user;
     }
@@ -16,7 +16,7 @@ export const getCurrentUser = async () => {
     if(userLoggedIn.type === UserTypeEnum.CANDIDATE){
         const user = await Api.get(`/candidate/${userLoggedIn.id}`);
 
-        if(!user) throw Error('Not found')
+        if(!user) throw Error('Not found');
 
         return user;
     }

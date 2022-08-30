@@ -1,15 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { EmpresaForms } from './styles';
 import empresaFormImg from '../../assets/images/careerDevelopment.svg'
 import MaskInput from '../../MaskInput';
 import { useForm } from "react-hook-form";
 import {useNavigate} from 'react-router-dom';
 import Api from '../../services/mainApi';
-
-const initialValues = {
-  cpf:'',
-  cnpj: '',
-};
 
 export function EmpresaForm(){
   const history = useNavigate()
@@ -20,19 +15,10 @@ export function EmpresaForm(){
     handleSubmit
   } = useForm();
 
-  const [values,setValues] = useState(initialValues);
-
-  function handleChange(event) {
-      setValues({
-        ...values,
-      [event.target.name]: event.target.value
-      });
-  }
-
   async function onSubmit (data)  {
       const post = await Api.post('/company', {
-            corporateName: data.rzsocial,
-            tradeName: data.nameFantasia,
+            corporateName: data.nameFantasia,
+            tradeName: data.rzsocial,
             password:data.passwordConfirmation,
             cnpj:data.cnpj,
             email:data.email,
