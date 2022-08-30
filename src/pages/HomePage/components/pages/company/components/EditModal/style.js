@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 export const Section = styled.div`
     width: 700px;
-    height: 600px;
+    height: 650px;
     background-color: #fff;
     border-radius: 8px;
 
     padding: 15px;
     box-sizing: border-box;
-    margin: 30px auto;
+    margin: 10px auto;
 
     display: flex;
     flex-direction: column;
@@ -57,7 +57,7 @@ export const Input = styled.input`
     border: 1px solid #AFAFAF;
     border-radius: 8px;
     font: 400 14px 'Poppins', sans-serif;
-    padding: 2px 3px;
+    padding: 3px 4px;
     overflow-x: hidden;
     text-overflow: ellipsis;
 `;
@@ -84,8 +84,23 @@ export const TextArea = styled.textarea`
     border: 1px solid #AFAFAF;
     border-radius: 8px;
     font-family: 'Poppins', sans-serif;
-    padding: 2px 3px;
+    padding: 4px 5px;
     resize: none;
 `;
 
 export const Limit = styled.div``;
+
+export const RemoveAccount = styled.button`
+    width: 110px;
+    height: 28px;
+    color: #ff0000;
+    background-color: #cccc;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+
+    &:hover{
+        background-color: #c9c9c9;
+    }
+`;

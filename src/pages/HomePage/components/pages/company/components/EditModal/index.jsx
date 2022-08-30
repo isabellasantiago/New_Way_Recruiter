@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Modal from '@material-ui/core/Modal';
 import * as S from './style';
 import * as yup from 'yup';
 import Api from '../../../../../../../services/mainApi';
+import SubmitButton from '../../../../../../../components/SubmitButton';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { URL } from '../../../../../../../shared/regex/url';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../../../../../services/contexts/auth';
 import { notify } from '../../../../../../../shared/functions/notify/notify';
-import SubmitButton from '../../../../../../../components/SubmitButton';
+
 
 
 let schema = yup.object().shape({
@@ -31,7 +32,10 @@ export const EditModal = ({
     open,
     setOpen,
     successMessage,
+    setReload,
 }) => {
+    const [openModal, setOpenModal] = useState(false);
+
     const navigate = useNavigate();
     const { authenticated, user } = useContext(AuthContext);
     const token = localStorage.getItem('token');
@@ -69,8 +73,9 @@ export const EditModal = ({
             })
             if(response.status === 201 || response.status === 200) {
                 notify(successMessage || 'Perfil atualizado com sucesso', 'success');
-                setOpen(false);
                 navigate('/home');
+                setOpen(false);
+                setReload(true);
             };
         }catch(err){  
             if(err) notify(`${err.message}`, 'error');
@@ -78,6 +83,10 @@ export const EditModal = ({
     }
 
     const handleClose = () => setOpen(false);
+
+    const removeAccount = () => {
+
+    }
 
     const form = (
         <S.Section>
@@ -166,6 +175,9 @@ export const EditModal = ({
                 </S.FormContainer>
                     <SubmitButton type="submit" value="Salvar"/>
             </S.Form>
+            <S.Limit>
+                <S.RemoveAccount >Excluir conta</S.RemoveAccount>
+            </S.Limit>
         </S.Section>
 
     )
@@ -180,6 +192,9 @@ export const EditModal = ({
             >
                 {form}
             </Modal>
+            {
+
+            }
         </>
     )
 }

@@ -15,6 +15,7 @@ export const HomePageCompany = () => {
     const [company, setCompany] = useState();
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [open, setOpen] = useState(false);
+    const [reload, setReload] = useState(false);
 
     const companyRef = useRef();
 
@@ -49,6 +50,14 @@ export const HomePageCompany = () => {
         getUser();
     }, [])
 
+    const needsReload = () => {
+        if(reload){
+            window.location.reload(true);
+            setReload(false);
+            window.location.reload(false);
+        }
+    }
+
     const photo = company?.imageURL || <AccountCircleIcon />;
     const cover = company?.cover || '';
 
@@ -61,6 +70,7 @@ export const HomePageCompany = () => {
                 company={company}
                 open={open}
                 setOpen={setOpen}
+                setReload={setReload}
                 successMessage="Perfil atualizado"
             />
         )}
@@ -96,6 +106,7 @@ export const HomePageCompany = () => {
             </S.Container>
         </CompanyPage>
         <Toaster />
+        {needsReload()}
         </>
     )
 }
