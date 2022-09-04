@@ -62,7 +62,6 @@ export const EditModal = ({
     })
 
     const onSubmit = async (data) => {
-        console.log('data', data)
         try{
             const response = await Api.put(`/company/${company?.id}`, {
                 ...data,
@@ -84,11 +83,38 @@ export const EditModal = ({
 
     const handleClose = () => setOpen(false);
 
-    const removeAccount = () => {
+
+
+    const removeAccount = async () => {
+        try{
+            const response = await Api.delete(`/company/${company?.id}`, {
+                headers:{
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            if(response.status === 200){
+                navigate('/home');
+                setOpen(false);
+                setOpenModal(false);
+            }
+        }catch(err){
+            console.log(err)
+            if(err) notify(`${err.message}`, 'error');
+        }
 
     }
 
+
+    const secondModal = (
+        <S.Section height="200px" width="330px">
+            <S.Title bold>Tem certeza que deseja excluir a sua conta?</S.Title>
+            <S.YesNoBtn onClick={() => removeAccount()}>Sim</S.YesNoBtn>
+            <S.YesNoBtn onClick={() => setOpenModal(false)}>Não</S.YesNoBtn>
+        </S.Section>
+    )
+
     const form = (
+        <>
         <S.Section>
             <S.Limit><S.Title>Editar perfil</S.Title></S.Limit>
             <S.Form onSubmit={handleSubmit(onSubmit)}>
@@ -176,9 +202,22 @@ export const EditModal = ({
                     <SubmitButton type="submit" value="Salvar"/>
             </S.Form>
             <S.Limit>
-                <S.RemoveAccount >Excluir conta</S.RemoveAccount>
+                <S.RemoveAccount onClick={() => setOpenModal(true)}>Excluir conta</S.RemoveAccount>
             </S.Limit>
         </S.Section>
+        {openModal && (
+            <Modal
+                open={openModal}
+                onClose={() => setOpenModal(false)}
+                aria-labelledby="simple-modal-title"
+                aria-describedby='simple-modal-description'
+            >
+                {secondModal}
+            </Modal>
+        )
+
+        }
+        </>
 
     )
 
