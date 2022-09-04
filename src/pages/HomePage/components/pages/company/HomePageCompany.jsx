@@ -1,10 +1,9 @@
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useState, useRef, useEffect } from 'react';
 import CompanyPage from '../../../../../components/CompanyPage';
 import * as S from './style';
 import EditIcon from '@material-ui/icons/Edit';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { isEqual }  from 'lodash';
-import { useEffect } from 'react';
 import { getCurrentUser } from '../../../../../shared/functions/user';
 import { Info } from './components/Info';
 import { EditModal } from './components/EditModal';
@@ -60,8 +59,6 @@ export const HomePageCompany = () => {
 
     const photo = company?.imageURL || <AccountCircleIcon />;
     const cover = company?.cover || '';
-
-    console.log(company)
 
     return (
         <>
