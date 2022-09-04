@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 
 export const Section = styled.div`
-    width: 700px;
-    height: 650px;
+    width: ${({width}) => width || '700px'};
+    height: ${({height}) => height || '650px'};
     background-color: #fff;
     border-radius: 8px;
 
@@ -44,7 +44,8 @@ export const Content = styled.div`
 
 export const Title = styled.h1`
     font: 400 16px 'Poppins', sans-serif;
-    text-align: 'center';
+    text-align: ${({align}) => align|| 'center'};
+    font-weight: ${({bold}) => bold ? '600' : '400'};
 `;
 
 
@@ -99,6 +100,20 @@ export const RemoveAccount = styled.button`
     border-radius: 4px;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
+
+    &:hover{
+        background-color: #c9c9c9;
+    }
+`;
+
+export const YesNoBtn = styled.button`
+    border: 1px solid #ccc;
+    background: none;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    color: #000;
+    width: 50px;
+    border-radius: 4px;
 
     &:hover{
         background-color: #c9c9c9;
