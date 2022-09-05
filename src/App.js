@@ -14,6 +14,7 @@ import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 import PrivateRoute from './routes/PrivateRoute'
 import { HomePage } from "./pages/HomePage";
 import { JobVacanciesList } from "./pages/JobVacancieList";
+import { JobVacancieProfile } from "./pages/JobVacancieProfile";
 
 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/home" exact element={<PrivateRoute Item={HomePage}/>}/>
         <Route path="/register/candidate" element={<CandidatoForm/>}/>
         <Route path="/register/company" element={<EmpresaForm/>}/>
+        <Route path="/job-vacancie/profile/:id" element={<JobVacancieProfile />} />
         <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
         <Route exact path="/candidato/profile" element={<ProfileVCand/>}/>
         <Route exact path="/profile" element={<ProfileVEmp/>}/>

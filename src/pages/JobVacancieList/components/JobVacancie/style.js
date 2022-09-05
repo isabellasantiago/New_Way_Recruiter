@@ -14,6 +14,7 @@ export const Container = styled.div`
 
     background: linear-gradient(90deg, #0067AA 33.09%, rgba(3, 103, 165, 0.75) 68.12%, rgba(3, 103, 165, 0.74) 104.5%);
     border-radius: 10px;
+    cursor: pointer;
 `;
 
 export const Title = styled.h3`
@@ -33,6 +34,9 @@ export const LocalContainer = styled.div`
 export const Local = styled.span`
     font: 400 12px 'Poppins', sans-serif;
     color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
 `;
 
 export const Salary = styled.span`

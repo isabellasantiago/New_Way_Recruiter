@@ -54,8 +54,6 @@ export const JobVacanciesList = () => {
         getList();
     }, [company?.id])
 
-    console.log(list)
-
 
     return(
         <>
@@ -74,6 +72,7 @@ export const JobVacanciesList = () => {
                                 <Item
                                 key={jv.id}
                                     jobVacancie={jv}
+                                    company={company}
                                 />
                             ))
                         )}
