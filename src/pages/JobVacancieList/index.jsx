@@ -4,7 +4,7 @@ import CompanyPage from '../../components/CompanyPage';
 import { isEqual }  from 'lodash';
 import { getCurrentUser } from '../../shared/functions/user';
 import { HeaderCompanyPage } from '../../components/HeaderCompanyPage';
-import { getJobVacancieList } from '../../shared/functions/company';
+import { getJobVacancieList } from '../../shared/functions/jobVacancie';
 import { Item } from './components/JobVacancie';
 
 export const JobVacanciesList = () => {

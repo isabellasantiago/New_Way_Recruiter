@@ -7,8 +7,6 @@ import { useNavigate } from 'react-router-dom';
 export const Item = ({jobVacancie}) => {
     const navigate = useNavigate();
 
-
-
     const handleClick = (id) => {
         navigate(`/job-vacancie/profile/${id}`)
     }

@@ -9,15 +9,11 @@ import { ProfileVCand } from "./pages/Perfil/VisaoCandidato/ProfileVCandidato";
 import { ProfileVEmp } from "./pages/Perfil/VisaoEmpresa/ProfileVEmp";
 import { Curriculo } from './pages/cadastroCurriculo/Curriculo';
 import { AuthProvider } from "./services/contexts/auth";
-
 import { ModalCandidato } from "./pages/ModalCandidato/ModalCandidato";
 import PrivateRoute from './routes/PrivateRoute'
 import { HomePage } from "./pages/HomePage";
 import { JobVacanciesList } from "./pages/JobVacancieList";
 import { JobVacancieProfile } from "./pages/JobVacancieProfile";
-
-
-
 
 
 function App() {

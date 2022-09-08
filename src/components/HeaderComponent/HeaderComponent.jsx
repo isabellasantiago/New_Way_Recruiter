@@ -38,8 +38,8 @@ export function HeaderComponent({
             <nav id='links'>
                     <NavLink exact to="#" activeClassName={perfil}>Perfil</NavLink>
                     <NavLink exact to="#" activeClassName={vagas}> Vagas</NavLink>
-                    <NavLink  exact to="/editdeletecandidato" activeClassName={processos}> Processos</NavLink>
-                    <NavLink  exact to="/edit_or_delete/candidato" activeClassName={config} > <SettingsOutlinedIcon/> </NavLink>
+                    <NavLink exact to="/editdeletecandidato" activeClassName={processos}> Processos</NavLink>
+                    <NavLink exact to="/edit_or_delete/candidato" activeClassName={config} > <SettingsOutlinedIcon/> </NavLink>
                     <button onClick={ev => logout()}>
                         <LogoutIcon color="white"/>
                     </button>
@@ -50,7 +50,7 @@ export function HeaderComponent({
         <HeaderStyle>
             <header>
             <div>
-                <NavLink extact to="/home" id='logo'>
+                <NavLink exact to="/home" id='logo'>
                     <h1>New <span>Way</span> Recuiter</h1>
                 </NavLink>
                 <p>Empresa</p>
