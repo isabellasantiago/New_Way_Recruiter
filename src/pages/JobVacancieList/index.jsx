@@ -70,7 +70,7 @@ export const JobVacanciesList = () => {
                         {list?.length > 0 && (
                             list?.map(jv => (
                                 <Item
-                                key={jv.id}
+                                    key={jv.id}
                                     jobVacancie={jv}
                                     company={company}
                                 />

@@ -9,16 +9,18 @@ import { useContext } from 'react';
 import { AuthContext } from '../../services/contexts/auth';
 import { Section, Form, InputWrapper, WrapperVaga, ButtonNext, InputDiv, InputText } from './style'; 
 import { notify } from '../../shared/functions/notify/notify.js';
+import { contract, level } from '../../shared/functions/convert';
+
 
 const JobVacancieModal = ({
     open,
     setOpen,
-    data,
+    jobVacancie,
     update,
     successMessage,
-    companyID 
+    companyID,
+    setReload,
 }) => {
-
     const navigate = useNavigate();
     const { authenticated, user } = useContext(AuthContext);
     const token = localStorage.getItem('token');
@@ -29,15 +31,16 @@ const JobVacancieModal = ({
     }
 
     const defaultFormValues = () => {
-        if(update && data){
-            return {
-                title: data.title,
-                salary: data.salary,
-                about: data.about,
-                level: data.level,
-                cityAndState: data.cityAndState,
-                contractType: data.contractType
+        if(update && jobVacancie){
+            const response = {
+                title: jobVacancie.title,
+                salary: jobVacancie.salary,
+                about: jobVacancie.about,
+                level: level(jobVacancie?.level),
+                cityAndState: jobVacancie.cityAndState,
+                contractType: contract(jobVacancie?.contractType)
             }
+            return response
         }
 
         return {
@@ -64,6 +67,23 @@ const JobVacancieModal = ({
 
     const onSubmit = async (data) => {
         try{
+            if(update) {
+                const response = await Api.put(`/jobVacancie/${jobVacancie.id}`,
+                {
+                    ...data,
+                    companyID,
+                },{
+                    headers:{
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if(response.status === 201 || response.status === 200) {
+                    notify(successMessage || 'vaga cadastrada!', 'success');
+                    setOpen(false);
+                    setReload(true);
+                };
+            }
             const response = await Api.post('/jobVacancie', {
                 ...data,
                 companyID,
@@ -72,9 +92,10 @@ const JobVacancieModal = ({
                     'Authorization': `Bearer ${token}`
                 }
             })
-            if(response.status === 201) {
+            if(response.status === 201 || response.status === 200) {
                 notify(successMessage || 'vaga cadastrada!', 'success');
                 setOpen(false);
+                setReload(true);
             };
         }catch(err){
             if(err) notify(`${err.message}`, 'error');

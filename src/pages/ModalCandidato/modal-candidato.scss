@@ -1,121 +1,137 @@
 div#modalcenter{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   text-align: center;
-h2{
-  margin-top: -20px;
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 28px;
-  line-height: 42px;
-  text-align: center;
-
-  color: #000000;
-}
-p{
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 21px;
-  
-
-  color: #000000;
-
-}
-div.candidatos{
-  align-items: center;
-  
-  display: flex;
-  flex-direction:row;
-  margin-top: 60px;
-  width: 706px;
-  height: 107px;
-  left: 367px;
-  top: 248px;
-
-  background: #FFFFFF;
-  border: 2px solid #0367A5;
-  border-radius: 10px;
-
-  .perfilImg{
-    
-    display: flex;
-    margin-left: 30px;
-    width: 77.51px;
-    height: 82px;
-    left: 396.88px;
-    top: 261px;
 
 
-    border-radius: 213px;
-      
-    img{
-      border-radius: 213px;
-    }
-  }
-
-  .info{
-    margin-left:40px;
-    align-items: left;
-    justify-content: left;
-    text-align:left;
-    
-  }
-
-  .percent{
-    align-items: center;
-    margin-left:150px;
+  h2{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 42px;
     text-align: center;
-    h2{
-      font-family: Poppins;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 30px;
-      line-height: 42px;
-      text-align: center;
 
-      color: #0367A5;
-    }
-    h3{
-      font-family: Poppins;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 18px;
-      
-      text-align: center;
+    color: #000000;
+  }
+  p{
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+    
 
-      color: #0367A5;
-    }
-    a{
-      
-      font-family: Poppins;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 18px;
+    color: #000000;
+
+  }
+
+  div.titleBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  div.candidatos{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+    justify-content: space-around;
+
+    width: 706px;
+    height: 107px;
+    
+
+    background: #FFFFFF;
+    border: 2px solid #0367A5;
+    border-radius: 10px;
+
+    .photoBox{
+      width: 330px;
       display: flex;
       align-items: center;
-      text-align: center;
-      text-decoration-line: underline;
-
-      color: #000000;
-
+      justify-content: space-between;
     }
-  }
 
-}
-.toggleButton{
-  margin-top:10px;
-  width: 143px;
-  height: 33px;
-  left: 645px;
-  top: 854px;
-  border-style: none;
-  background: #FEFEFE;
-  border-radius: 8px;
-  cursor: pointer;
-}
+    .perfilImg{
+      width: 80px;
+      height: 80px;
+      display: flex;
+        
+      img{
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+      }
+    }
+
+    .info{
+      align-items: left;
+      justify-content: left;
+      text-align:left;
+      
+    }
+
+    .percent{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      text-align: center;
+
+      h2{
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 42px;
+        text-align: center;
+
+        color: #0367A5;
+      }
+      h3{
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        
+        text-align: center;
+
+        color: #0367A5;
+      }
+      a{
+        
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        text-decoration-line: underline;
+
+        color: #000000;
+
+      }
+    }
+
+  }
+  .toggleButton{
+    margin-top:10px;
+    width: 143px;
+    height: 33px;
+    left: 645px;
+    top: 854px;
+    border-style: none;
+    background: #FEFEFE;
+    border-radius: 8px;
+    cursor: pointer;
+  }
 }

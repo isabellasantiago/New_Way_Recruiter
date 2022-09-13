@@ -71,8 +71,11 @@ export const ProfilePic = styled.img`
 `;
 
 export const Candidates = styled(ProfilePic)`
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
+    margin: 0;
+    margin-left: -23px;
+    border: none;
 `;
 
 export const Name = styled.h1`
@@ -90,7 +93,7 @@ export const Label = styled(CompanyName)`
     font-weight: 600;
     font-size: ${({fontSize}) => fontSize};
     line-height: 14px;
-    margin-left: ${({ml}) => ml || '0'};
+    margin-left: ${({ml}) => ml || '0px'};
     
     ${({color}) => color && (css`
         color: ${color};
@@ -125,7 +128,7 @@ export const LabelValueContainer = styled.div`
 `;
 
 export const IconContainer = styled.div`
-    width: 50px;
+    width: 70px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -157,4 +160,15 @@ export const Btn = styled.button`
     font-weight: ${({bold}) => bold && ('550')};
 
     cursor: pointer;
+`;
+
+export const PhotoContainer = styled.div`
+    width: 160px;
+    height: 60px;
+
+    display: flex;
+    flex-flow: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
 `;

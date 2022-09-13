@@ -7,15 +7,52 @@ import { UserTypeEnum } from "../../shared/enums/userType.enum";
 import * as S from './style';
 import { useNavigate, useParams } from "react-router-dom";
 import { getJobVacancieByID } from "../../shared/functions/jobVacancie";
-import { companyType, contract, level } from "../../shared/functions/convert";
+import { companyTypeDescription, contractDescription, levelDescription } from "../../shared/functions/convert";
 import { YesNoModal } from "../../components/YesNoModal";
 import { notify } from "../../shared/functions/notify/notify";
 import Api from "../../services/mainApi";
+import JobVacancieModal from "../../components/JobVacancieModal";
+import { ModalCandidato } from "../ModalCandidato/ModalCandidato";
+
+const candidates = [
+    {
+        name: 'Chandler',
+        lastName: 'Bing',
+        role: 'Ninguém sabe',
+        experienceTime: '1 e 2 meses',
+        imageURL: 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg',
+        percent: '98%',
+    },
+    {
+        name: 'Chandler',
+        lastName: 'Bing',
+        role: 'Office boy',
+        experienceTime: '9 meses',
+        imageURL: 'https://rollingstone.uol.com.br/media/_versions/chandle-bing-reproducao-imdb_widelg.jpg',
+        percent: '98%',
+    },
+    {
+        name: 'Chandler',
+        lastName: 'Bing',
+        role: 'Ator',
+        experienceTime: '1 ano',
+        percent: '98%',
+        imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
+    },
+    {
+        name: 'Chandler',
+        lastName: 'Bing',
+        role: 'Gogo boy',
+        experienceTime: '5 meses',
+        percent: '98%',
+        imageURL: 'https://claudia.abril.com.br/wp-content/uploads/2019/08/chandler.jpg'
+    }
+]
 
 export const JobVacancieProfile = () => {
     const navigate = useNavigate();
     const { id } = useParams();
-    const { logout } = useContext(AuthContext);
+
     const [company, setCompany] = useState({
         imageURL: '',
         corporateName: '',
@@ -29,7 +66,10 @@ export const JobVacancieProfile = () => {
         about: '',
     });
     const [show, setShow] = useState(false);
+    const [showUpdateModal, setShowUpdateModal] = useState(false);
+    const [showCandidatesModal, setShowCandidatesModal] = useState(false);
     const { authenticated, user } = useContext(AuthContext);
+    const [reload, setReload] = useState(false);
     const token = localStorage.getItem('token');
 
     useLayoutEffect(() => {
@@ -41,9 +81,6 @@ export const JobVacancieProfile = () => {
         getJobVacancie();
     }, [id]);
 
-    console.log('jv', jobVacancie)
-    console.log('company', company)
-
     const deleteJobVacancie = async () => {
         try{
             const response = await Api.delete(`/jobVacancie/${id}`, {
@@ -51,7 +88,7 @@ export const JobVacancieProfile = () => {
                     'Authorization': `Bearer ${token}`
                 }
             })
-            console.log('response', response)
+
             if(response.data === true) {
                 notify('Vaga encerrada', 'success')
                 navigate('/job-vacancies-list')
@@ -62,10 +99,16 @@ export const JobVacancieProfile = () => {
         }
     }
 
-    console.log('user', user)
-
     if(!authenticated || !user || !token) {
         navigate('/login');
+    }
+
+    const needsReload = () => {
+        if(reload){
+            window.location.reload(true);
+            setReload(false);
+            window.location.reload(false);
+        }
     }
 
     const profile = (
@@ -84,7 +127,7 @@ export const JobVacancieProfile = () => {
                         <S.Name>{jobVacancie?.title}</S.Name>
                         <S.LabelValueContainer justify="flex-start">
                             <S.Label>Nível:</S.Label>
-                            <S.Value color="#012E40">{level(jobVacancie?.level)}</S.Value>
+                            <S.Value color="#012E40">{levelDescription(jobVacancie?.level)}</S.Value>
                         </S.LabelValueContainer>
                         </S.LabelValueContainer>
                         
@@ -103,8 +146,8 @@ export const JobVacancieProfile = () => {
                                     <AssignmentIcon fontSize="medium"/>
                                 </div>
                                 <S.IconContainer>
-                                    <S.Label ml="10px">Contrato</S.Label>
-                                    <S.Value>{contract(jobVacancie?.contractType || '')}</S.Value>
+                                    <S.Label>Contrato</S.Label>
+                                    <S.Value>{contractDescription(jobVacancie?.contractType || '')}</S.Value>
                                 </S.IconContainer>
                             </S.IconBox>
                         </S.LabelValueContainer>
@@ -122,7 +165,7 @@ export const JobVacancieProfile = () => {
                         <S.LabelValueContainer>
                             <S.LabelValueContainer>
                             <S.Label>Empresa</S.Label>
-                            <S.Value>{companyType(company?.type)}</S.Value>
+                            <S.Value>{companyTypeDescription(company?.type)}</S.Value>
                             </S.LabelValueContainer>
                             
                         </S.LabelValueContainer>
@@ -137,10 +180,12 @@ export const JobVacancieProfile = () => {
             </S.Container>
             <S.BtnBox>
             <S.Btn onClick={() => setShow(true)}>Encerrar vaga</S.Btn>
-            <S.Btn>Editar vaga</S.Btn>
+            <S.Btn onClick={() => setShowUpdateModal(true)}>Editar vaga</S.Btn>
             <S.Label color="#023859">Conheça os candidatos!</S.Label>
-            <span>foto foto foto</span>
-            <S.Btn w="150px" h="22px" bold> conhecer candidatos</S.Btn>
+            <S.PhotoContainer>
+                {candidates.map(({imageURL}) => <S.Candidates src={imageURL}/>)}
+            </S.PhotoContainer>
+            <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>
             </S.BtnBox>
             {show && (
                 <YesNoModal
@@ -149,7 +194,26 @@ export const JobVacancieProfile = () => {
                     open={show}
                     width="330px"
                     height="180px"
-                    onYes={() =>deleteJobVacancie()}
+                    onYes={() => deleteJobVacancie()}
+                />
+            )}
+            {showUpdateModal && (
+                <JobVacancieModal 
+                    open={showUpdateModal}
+                    setOpen={setShowUpdateModal}
+                    jobVacancie={jobVacancie}
+                    update={true}
+                    successMessage="Vaga atualizada!"
+                    companyID={company?.id}
+                    setReload={setReload}
+                />
+            )}
+            {showCandidatesModal && (
+                <ModalCandidato
+                    candidates={candidates}
+                    setOpen={setShowCandidatesModal}
+                    open={showCandidatesModal}
+                    title={jobVacancie?.title}
                 />
             )}
         </S.Content>
@@ -163,11 +227,10 @@ export const JobVacancieProfile = () => {
         </>
     )
 
-    if(!user) logout();
-
     return(
         <>
         {user?.type === UserTypeEnum.COMPANY ? (bodyCompany) : 'uhu'}
+        {needsReload()}
         </>
     )
 }
