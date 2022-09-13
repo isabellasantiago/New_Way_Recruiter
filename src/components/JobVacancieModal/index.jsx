@@ -29,7 +29,7 @@ const JobVacancieModal = ({
     }
 
     const defaultFormValues = () => {
-        if(data){
+        if(update && data){
             return {
                 title: data.title,
                 salary: data.salary,

@@ -1,19 +1,21 @@
-import React, { useEffect, useState, useLayoutEffect, useContext } from "react";
+import React, { useState, useLayoutEffect, useContext } from "react";
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import CompanyPage from '../../components/CompanyPage';
 import { AuthContext } from "../../services/contexts/auth";
 import { UserTypeEnum } from "../../shared/enums/userType.enum";
 import * as S from './style';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getJobVacancieByID } from "../../shared/functions/jobVacancie";
 import { companyType, contract, level } from "../../shared/functions/convert";
+import { YesNoModal } from "../../components/YesNoModal";
+import { notify } from "../../shared/functions/notify/notify";
+import Api from "../../services/mainApi";
 
 export const JobVacancieProfile = () => {
-    
+    const navigate = useNavigate();
     const { id } = useParams();
     const { logout } = useContext(AuthContext);
-    const [hide, setHide] = useState(false);
     const [company, setCompany] = useState({
         imageURL: '',
         corporateName: '',
@@ -26,12 +28,9 @@ export const JobVacancieProfile = () => {
         cityAndState: '',
         about: '',
     });
-
-    const user = JSON.parse(localStorage.getItem('user'));
-
-    useLayoutEffect(() => {
-        if(user.type === UserTypeEnum.CANDIDATE ) setHide(value =>!value);        
-    },[user])
+    const [show, setShow] = useState(false);
+    const { authenticated, user } = useContext(AuthContext);
+    const token = localStorage.getItem('token');
 
     useLayoutEffect(() => {
         const getJobVacancie = async () => {
@@ -45,6 +44,30 @@ export const JobVacancieProfile = () => {
     console.log('jv', jobVacancie)
     console.log('company', company)
 
+    const deleteJobVacancie = async () => {
+        try{
+            const response = await Api.delete(`/jobVacancie/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            console.log('response', response)
+            if(response.data === true) {
+                notify('Vaga encerrada', 'success')
+                navigate('/job-vacancies-list')
+            }
+
+        }catch(err){
+            if(err) notify(`${err.message}`, 'error');
+        }
+    }
+
+    console.log('user', user)
+
+    if(!authenticated || !user || !token) {
+        navigate('/login');
+    }
+
     const profile = (
         <S.Content>
             <S.Container>
@@ -57,9 +80,9 @@ export const JobVacancieProfile = () => {
                         </S.ProfilePicBox>
                     <S.DataBox>
                         <S.CompanyName>{company?.corporateName}</S.CompanyName>
-                        <S.LabelValueContainer justify="space-between">
+                        <S.LabelValueContainer justify="space-between" flow="row wrap">
                         <S.Name>{jobVacancie?.title}</S.Name>
-                        <S.LabelValueContainer >
+                        <S.LabelValueContainer justify="flex-start">
                             <S.Label>Nível:</S.Label>
                             <S.Value color="#012E40">{level(jobVacancie?.level)}</S.Value>
                         </S.LabelValueContainer>
@@ -113,12 +136,22 @@ export const JobVacancieProfile = () => {
                 </S.Row>
             </S.Container>
             <S.BtnBox>
-            <S.Btn>Encerrar vaga</S.Btn>
+            <S.Btn onClick={() => setShow(true)}>Encerrar vaga</S.Btn>
             <S.Btn>Editar vaga</S.Btn>
             <S.Label color="#023859">Conheça os candidatos!</S.Label>
             <span>foto foto foto</span>
             <S.Btn w="150px" h="22px" bold> conhecer candidatos</S.Btn>
             </S.BtnBox>
+            {show && (
+                <YesNoModal
+                    title="Tem certeza que deseja encerrar esta vaga?"
+                    handleClose={() => setShow(false)}
+                    open={show}
+                    width="330px"
+                    height="180px"
+                    onYes={() =>deleteJobVacancie()}
+                />
+            )}
         </S.Content>
     )
 

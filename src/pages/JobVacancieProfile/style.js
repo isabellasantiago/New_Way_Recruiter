@@ -118,8 +118,10 @@ export const LabelValueContainer = styled.div`
     max-height: 60px;
     display: flex;
     align-items: center;
-    justify-content: ${({justify}) => justify || 'space-evenly'};
+    justify-content: ${({ justify }) => justify || 'space-evenly'};
     gap: 5px;
+    flex-flow: ${({ flow }) => flow };
+    margin-bottom: 15px;
 `;
 
 export const IconContainer = styled.div`
