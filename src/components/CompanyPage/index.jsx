@@ -7,7 +7,7 @@ import JobVacancieModal from '../JobVacancieModal';
 
 const CompanyPage = ({
     children,
-    companyID
+    companyID,
 }) => {
     const [openModal, setOpenModal] = useState(false);
 

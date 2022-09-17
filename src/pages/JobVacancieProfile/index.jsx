@@ -104,6 +104,7 @@ export const JobVacancieProfile = () => {
         about: '',
     });
     const [show, setShow] = useState(false);
+    const [hide, setHide] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showCandidatesModal, setShowCandidatesModal] = useState(false);
     const { authenticated, user } = useContext(AuthContext);
@@ -218,7 +219,7 @@ export const JobVacancieProfile = () => {
             <S.BtnBox>
             <S.Btn onClick={() => setShow(true)}>Encerrar vaga</S.Btn>
             <S.Btn onClick={() => setShowUpdateModal(true)}>Editar vaga</S.Btn>
-            {candidates.length ? (
+            {candidates.length && !hide ? (
                 <>
                 <S.Label color="#023859">Conheça os candidatos!</S.Label>
                 <S.PhotoContainer>
@@ -231,6 +232,10 @@ export const JobVacancieProfile = () => {
                 <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>
                 </>
             ) : (<S.Label color="#023859" ws="normal" align="center" w="140px">Nenhum candidato nessa vaga :'(</S.Label>)}
+            {hide && (
+                    <p>botao</p>
+                )
+            }
             </S.BtnBox>
             {show && (
                 <YesNoModal

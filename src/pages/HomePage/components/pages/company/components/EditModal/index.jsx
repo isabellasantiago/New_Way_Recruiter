@@ -73,8 +73,8 @@ export const EditModal = ({
             if(response.status === 201 || response.status === 200) {
                 notify(successMessage || 'Perfil atualizado com sucesso', 'success');
                 navigate('/home');
-                setOpen(false);
                 setReload(true);
+                setOpen(false);
             };
         }catch(err){  
             if(err) notify(`${err.message}`, 'error');

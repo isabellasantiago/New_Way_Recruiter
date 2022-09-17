@@ -19,7 +19,7 @@ const JobVacancieModal = ({
     update,
     successMessage,
     companyID,
-    setReload,
+    setReload = () => {},
 }) => {
     const navigate = useNavigate();
     const { authenticated, user } = useContext(AuthContext);
