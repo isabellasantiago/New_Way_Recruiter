@@ -1,177 +1,72 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
-import {makeStyles} from '@mui/styles';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import { useSpring, animated } from '@react-spring/web'; // web.cjs is required for IE 11 support
-import closeImg from '../../assets/images/close.svg';
-import './modal-candidato.scss';
-import Toggle from './Toggle';
-import Api from '../../services/mainApi';
-import { shadows } from '@material-ui/system';
-
-const useStyles = makeStyles((theme) => ({
-  modalButton:{
-    width:'100%',
-    height:'100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonClose:{
-    float: 'right',
-    background:'#F7F7F7',
-    border: '1px solid #F7F7F7',
-    cursor: 'pointer',
-  },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: 'rgba(0, 0, 0, 0.8)',
-  },
-  paper: {
-    borderRadius: 10,
-    width: 1008,
-    height: 700,
-    overflowY: 'auto',
-   
-    background: '#F7F7F7',
-    boxShadow: theme.shadows[5],
-  
-  },
-  modalcenter:{
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop:50,
-  },
-}));
-
-const Fade = React.forwardRef(function Fade(props, ref) {
-
-  
+import * as S from './style';
+import { ModalBase } from '../../components/Modal';
 
 
-  const { in: open, children, onEnter, onExited, ...other } = props;
-  const style = useSpring({
-    from: { opacity: 0 },
-    to: { opacity: open ? 1 : 0 },
-    onStart: () => {
-      if (open && onEnter) {
-        onEnter();
-      }
-    },
-    onRest: () => {
-      if (!open && onExited) {
-        onExited();
-      }
-    },
-  });
-
-  return (
-    <animated.div ref={ref} style={style} {...other}>
-      {children}
-    </animated.div>
-  );
-});
-
-Fade.propTypes = {
-  children: PropTypes.element,
-  in: PropTypes.bool.isRequired,
-  onEnter: PropTypes.func,
-  onExited: PropTypes.func,
-};
-
-
-export  function ModalCandidato() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+export  function ModalCandidato({ candidates, handleClose, open, title }) {
   const [users, setUsers] = useState([]);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
-   async function loadUsers(){
-      const response = await Api.get('Data/candidatos.json')
-      setUsers(response.data);
-
-    }
-
-    loadUsers();
-  }, []);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+    setUsers(candidates);
+  }, [candidates]);
   
   return (
-
-    <div className={classes.modalButton}>
-      <button type="button" onClick={handleOpen}>
-        Abrir Modal
-      </button>
-      <Modal
-        aria-labelledby="spring-modal-title"
-        aria-describedby="spring-modal-description"
-        className={classes.modal}
+      <ModalBase
         open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <div className={classes.paper}>
-                 <button className={classes.buttonClose} onClick={handleClose}> <img src={closeImg} alt="closeImg"/></button>
-            <div id="modalcenter" className={classes.modalcenter}>
-              
-            <h2 id="spring-modal-title"> Conheça  os  candidatos ! </h2>
-            
-            <p id="spring-modal-description">Vaga: Designer UX Júnior.</p>
-
-           
-              {users.map((user) => {
-          return(
-             <div key={users.id } className="candidatos">
-
-                <div className="perfilImg">
-                  <img src={user.foto}  alt="perfilImg"/>
-                </div>
-
-                <div className="info">
-                  <h2>{user.nome}</h2>
-                  <p>{user.info}</p>
-                  <p>{user.info2}</p>
-                </div>
-
-                <div className="percent">
-                    <h2>{user.percent}</h2>
-                    <h3>{user.span}</h3>
-                    <a href="#">conhecer o candidato</a>
-                  
-                </div>
-
-              </div>
-              )
-            })}
-
-              
-
-                  
-                  <Toggle />
-
-            </div>
-            
-          </div>
-        </Fade>
-      </Modal>
-    </div>
+        handleClose={handleClose}
+        width='800px'
+        height='650px'
+        bgColor='#f6f6f6'
+      >   
+        <S.Container>
+              <S.TitleBox>
+                <S.Title> Conheça  os  candidatos! </S.Title>
+                <S.Phrase>Vaga: {title}.</S.Phrase>
+              </S.TitleBox>
+              <S.Content class="Content" showMore={showMore}>
+                {users.map((user, index) => {
+                  if(index < 4){
+                    return(
+                      <S.Candidates key={users.id }>
+                         <S.PhotoBox>
+                           <S.ProfileImage src={user.imageURL}  alt="perfilImg"/>
+                           <S.InfoContainer>
+                             <h2>{user.name} {user.lastName}</h2>
+                             <p>Profissão: {user.role}</p>
+                             <p>Experiência: {user.experienceTime}</p>
+                           </S.InfoContainer>
+                         </S.PhotoBox>
+                         <S.PercentContainter>
+                             <S.PercentValue>{user.percent}</S.PercentValue>
+                             <S.SubPercentTitle>Aderente à vaga</S.SubPercentTitle>
+                             <S.LinkProfile href="#">conhecer o candidato</S.LinkProfile>
+                         </S.PercentContainter>
+                      </S.Candidates>
+                    )
+                  }
+                  return showMore && (
+                    <S.Candidates key={users.id }>
+                         <S.PhotoBox>
+                           <S.ProfileImage src={user.imageURL}  alt="perfilImg"/>
+                           <S.InfoContainer>
+                             <h2>{user.name} {user.lastName}</h2>
+                             <p>Profissão: {user.role}</p>
+                             <p>Experiência: {user.experienceTime}</p>
+                           </S.InfoContainer>
+                         </S.PhotoBox>
+                         <S.PercentContainter>
+                             <S.PercentValue>{user.percent}</S.PercentValue>
+                             <S.SubPercentTitle>Aderente à vaga</S.SubPercentTitle>
+                             <S.LinkProfile href="#">conhecer o candidato</S.LinkProfile>
+                         </S.PercentContainter>
+                      </S.Candidates>
+                  )
+                })}
+              </S.Content>
+              <S.SeeMore onClick={() => setShowMore(value => !value)}>{showMore ? 'Ver menos' : 'Ver mais'}</S.SeeMore>
+        </S.Container>
+      </ModalBase>
   );
 }
