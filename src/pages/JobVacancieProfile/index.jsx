@@ -14,40 +14,78 @@ import Api from "../../services/mainApi";
 import JobVacancieModal from "../../components/JobVacancieModal";
 import { ModalCandidato } from "../ModalCandidato/ModalCandidato";
 
-const candidates = [
-    {
-        name: 'Chandler',
-        lastName: 'Bing',
-        role: 'Ninguém sabe',
-        experienceTime: '1 e 2 meses',
-        imageURL: 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg',
-        percent: '98%',
-    },
-    {
-        name: 'Chandler',
-        lastName: 'Bing',
-        role: 'Office boy',
-        experienceTime: '9 meses',
-        imageURL: 'https://rollingstone.uol.com.br/media/_versions/chandle-bing-reproducao-imdb_widelg.jpg',
-        percent: '98%',
-    },
-    {
-        name: 'Chandler',
-        lastName: 'Bing',
-        role: 'Ator',
-        experienceTime: '1 ano',
-        percent: '98%',
-        imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
-    },
-    {
-        name: 'Chandler',
-        lastName: 'Bing',
-        role: 'Gogo boy',
-        experienceTime: '5 meses',
-        percent: '98%',
-        imageURL: 'https://claudia.abril.com.br/wp-content/uploads/2019/08/chandler.jpg'
-    }
-]
+const candidates = [{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Ninguém sabe',
+    experienceTime: '1 e 2 meses',
+    imageURL: 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg',
+    percent: '98%',
+},
+{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Office boy',
+    experienceTime: '9 meses',
+    imageURL: 'https://rollingstone.uol.com.br/media/_versions/chandle-bing-reproducao-imdb_widelg.jpg',
+    percent: '98%',
+},
+{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Ator',
+    experienceTime: '1 ano',
+    percent: '98%',
+    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
+},
+{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Gogo boy',
+    experienceTime: '5 meses',
+    percent: '98%',
+    imageURL: 'https://claudia.abril.com.br/wp-content/uploads/2019/08/chandler.jpg'
+},
+{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Ator',
+    experienceTime: '1 ano',
+    percent: '98%',
+    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
+},
+{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Gogo boy',
+    experienceTime: '5 meses',
+    percent: '98%',
+    imageURL: 'https://claudia.abril.com.br/wp-content/uploads/2019/08/chandler.jpg'
+},
+{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Ninguém sabe',
+    experienceTime: '1 e 2 meses',
+    imageURL: 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg',
+    percent: '98%',
+},
+{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Office boy',
+    experienceTime: '9 meses',
+    imageURL: 'https://rollingstone.uol.com.br/media/_versions/chandle-bing-reproducao-imdb_widelg.jpg',
+    percent: '98%',
+},
+{
+    name: 'Chandler',
+    lastName: 'Bing',
+    role: 'Ator',
+    experienceTime: '1 ano',
+    percent: '98%',
+    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
+}]
 
 export const JobVacancieProfile = () => {
     const navigate = useNavigate();
@@ -129,8 +167,7 @@ export const JobVacancieProfile = () => {
                             <S.Label>Nível:</S.Label>
                             <S.Value color="#012E40">{levelDescription(jobVacancie?.level)}</S.Value>
                         </S.LabelValueContainer>
-                        </S.LabelValueContainer>
-                        
+                        </S.LabelValueContainer>                    
                         <S.LabelValueContainer justify="space-between">
                             <S.IconBox>
                                 <div>
@@ -181,11 +218,19 @@ export const JobVacancieProfile = () => {
             <S.BtnBox>
             <S.Btn onClick={() => setShow(true)}>Encerrar vaga</S.Btn>
             <S.Btn onClick={() => setShowUpdateModal(true)}>Editar vaga</S.Btn>
-            <S.Label color="#023859">Conheça os candidatos!</S.Label>
-            <S.PhotoContainer>
-                {candidates.map(({imageURL}) => <S.Candidates src={imageURL}/>)}
-            </S.PhotoContainer>
-            <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>
+            {candidates.length ? (
+                <>
+                <S.Label color="#023859">Conheça os candidatos!</S.Label>
+                <S.PhotoContainer>
+                    {candidates.map(({imageURL}, index) => {
+                        if(index < 4){
+                            return <S.Candidates src={imageURL}/>
+                        }
+                    })}
+                </S.PhotoContainer>
+                <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>
+                </>
+            ) : (<S.Label color="#023859" ws="normal" align="center" w="140px">Nenhum candidato nessa vaga :'(</S.Label>)}
             </S.BtnBox>
             {show && (
                 <YesNoModal
@@ -211,7 +256,7 @@ export const JobVacancieProfile = () => {
             {showCandidatesModal && (
                 <ModalCandidato
                     candidates={candidates}
-                    setOpen={setShowCandidatesModal}
+                    handleClose={() => setShowCandidatesModal(false)}
                     open={showCandidatesModal}
                     title={jobVacancie?.title}
                 />

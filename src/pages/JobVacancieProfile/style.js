@@ -40,7 +40,10 @@ export const DataBox = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 10px;
+
+    > &:nth-child(2){
+        gap: 10px;
+    }
 `;
 
 export const Row2 = styled(Row)`
@@ -92,12 +95,12 @@ export const CompanyName = styled.span`
 export const Label = styled(CompanyName)`
     font-weight: 600;
     font-size: ${({fontSize}) => fontSize};
-    line-height: 14px;
+    line-height: 18px;
     margin-left: ${({ml}) => ml || '0px'};
-    
-    ${({color}) => color && (css`
-        color: ${color};
-    `)}
+    white-space: ${({ ws }) => ws || 'nowrap'};
+    text-align: ${({ align}) => align};
+    color:${({color}) => color || '#012e41'};
+    width: ${({w}) => w};
 `;
 
 export const Value = styled(Label)`

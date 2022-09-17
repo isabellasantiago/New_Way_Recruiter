@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Section = styled.div`
     width: ${({width}) => width || '700px'};
     height: ${({height}) => height || '650px'};
-    background-color: #fff;
+    background-color: ${({bgColor}) => bgColor || '#fff'};
     border-radius: 8px;
 
     padding: 15px;

@@ -1,60 +1,72 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
-import {makeStyles} from '@mui/styles';
-import './modal-candidato.scss';
-import Toggle from './Toggle';
+import * as S from './style';
 import { ModalBase } from '../../components/Modal';
 
 
-export  function ModalCandidato({ candidates, setOpen, open, title }) {
+export  function ModalCandidato({ candidates, handleClose, open, title }) {
   const [users, setUsers] = useState([]);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     setUsers(candidates);
   }, [candidates]);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   
   return (
       <ModalBase
         open={open}
-        onClose={handleClose}
+        handleClose={handleClose}
+        width='800px'
+        height='650px'
+        bgColor='#f6f6f6'
       >   
-        <div id="modalcenter">
-              <div class="titleBox">
-                <h2 id="spring-modal-title"> Conheça  os  candidatos ! </h2>
-              
-                <p id="spring-modal-description">Vaga: {title}.</p>
-              </div>
-                {users.map((user) => (
-               <div key={users.id } className="candidatos">
-                  <div class="photoBox">
-                    <div className="perfilImg">
-                      <img src={user.imageURL}  alt="perfilImg"/>
-                    </div>
-                    <div className="info">
-                      <h2>{user.name} {user.lastName}</h2>
-                      <p>Profissão anterior: {user.role}</p>
-                      <p>Experiência: {user.experience}</p>
-                    </div>
-                  </div>
-                  <div className="percent">
-                      <h2>{user.percent}</h2>
-                      <h3>Aderente à vaga</h3>
-                      <a href="#">conhecer o candidato</a>
-              
-                  </div>
-                </div>
-                )
-              )}
-              <Toggle />            
-        </div>
+        <S.Container>
+              <S.TitleBox>
+                <S.Title> Conheça  os  candidatos! </S.Title>
+                <S.Phrase>Vaga: {title}.</S.Phrase>
+              </S.TitleBox>
+              <S.Content class="Content" showMore={showMore}>
+                {users.map((user, index) => {
+                  if(index < 4){
+                    return(
+                      <S.Candidates key={users.id }>
+                         <S.PhotoBox>
+                           <S.ProfileImage src={user.imageURL}  alt="perfilImg"/>
+                           <S.InfoContainer>
+                             <h2>{user.name} {user.lastName}</h2>
+                             <p>Profissão: {user.role}</p>
+                             <p>Experiência: {user.experienceTime}</p>
+                           </S.InfoContainer>
+                         </S.PhotoBox>
+                         <S.PercentContainter>
+                             <S.PercentValue>{user.percent}</S.PercentValue>
+                             <S.SubPercentTitle>Aderente à vaga</S.SubPercentTitle>
+                             <S.LinkProfile href="#">conhecer o candidato</S.LinkProfile>
+                         </S.PercentContainter>
+                      </S.Candidates>
+                    )
+                  }
+                  return showMore && (
+                    <S.Candidates key={users.id }>
+                         <S.PhotoBox>
+                           <S.ProfileImage src={user.imageURL}  alt="perfilImg"/>
+                           <S.InfoContainer>
+                             <h2>{user.name} {user.lastName}</h2>
+                             <p>Profissão: {user.role}</p>
+                             <p>Experiência: {user.experienceTime}</p>
+                           </S.InfoContainer>
+                         </S.PhotoBox>
+                         <S.PercentContainter>
+                             <S.PercentValue>{user.percent}</S.PercentValue>
+                             <S.SubPercentTitle>Aderente à vaga</S.SubPercentTitle>
+                             <S.LinkProfile href="#">conhecer o candidato</S.LinkProfile>
+                         </S.PercentContainter>
+                      </S.Candidates>
+                  )
+                })}
+              </S.Content>
+              <S.SeeMore onClick={() => setShowMore(value => !value)}>{showMore ? 'Ver menos' : 'Ver mais'}</S.SeeMore>
+        </S.Container>
       </ModalBase>
   );
 }
