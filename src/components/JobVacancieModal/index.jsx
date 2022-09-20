@@ -24,6 +24,8 @@ const JobVacancieModal = ({
     const navigate = useNavigate();
     const { authenticated, user } = useContext(AuthContext);
     const token = localStorage.getItem('token');
+
+    console.log('jobvacancie', jobVacancie);
     
 
     if(!authenticated || !user || !token) {
@@ -32,6 +34,7 @@ const JobVacancieModal = ({
 
     const defaultFormValues = () => {
         if(update && jobVacancie){
+            console.log('caiu default')
             const response = {
                 title: jobVacancie.title,
                 salary: jobVacancie.salary,
@@ -65,10 +68,8 @@ const JobVacancieModal = ({
 
     const handleClose = () => setOpen(false);
 
-    const onSubmit = async (data) => {
-        try{
-            if(update) {
-                const response = await Api.put(`/jobVacancie/${jobVacancie.id}`,
+    const onSubmitUpdate = async (data) => {
+        const response = await Api.put(`/jobVacancie/${jobVacancie.id}`,
                 {
                     ...data,
                     companyID,
@@ -77,26 +78,33 @@ const JobVacancieModal = ({
                         'Authorization': `Bearer ${token}`
                     }
                 });
+                console.log('response', response)
+                if(response.status === 200 || response.status === 201) {
+                    notify(successMessage || 'vaga cadastrada!', 'success');
+                    setOpen(false);
+                    setReload(true);
+                };
+                return response;
+    }
 
+    const onSubmit = async (data) => {
+        try{
+                console.log('caiu fora onsubmit')
+                const response = await Api.post('/jobVacancie', {
+                    ...data,
+                    companyID,
+                }, {
+                    headers:{
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                console.log('response out', response)
                 if(response.status === 201 || response.status === 200) {
                     notify(successMessage || 'vaga cadastrada!', 'success');
                     setOpen(false);
                     setReload(true);
                 };
-            }
-            const response = await Api.post('/jobVacancie', {
-                ...data,
-                companyID,
-            }, {
-                headers:{
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-            if(response.status === 201 || response.status === 200) {
-                notify(successMessage || 'vaga cadastrada!', 'success');
-                setOpen(false);
-                setReload(true);
-            };
+                return response;
         }catch(err){
             if(err) notify(`${err.message}`, 'error');
         }
@@ -104,7 +112,7 @@ const JobVacancieModal = ({
 
     const form = (
         <Section>
-            <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form onSubmit={handleSubmit(update ? onSubmitUpdate : onSubmit)}>
                     <InputDiv>
                         <label> Title </label>
                         <InputText
@@ -173,7 +181,7 @@ const JobVacancieModal = ({
                             <span>{errors?.level?.message}</span>
                         </InputDiv>
                     </WrapperVaga>
-                    <ButtonNext type="submit" value="Cadastrar Vaga" />
+                    <ButtonNext type="submit" value={`${update ? 'Atualizar vaga' : 'Cadastrar Vaga'}`} />
             </Form>
         </Section>
     )

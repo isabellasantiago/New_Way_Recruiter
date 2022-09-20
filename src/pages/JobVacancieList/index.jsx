@@ -67,7 +67,7 @@ export const JobVacanciesList = () => {
                 />
                 <S.Container>
                     <S.Content>
-                        {list?.length > 0 && (
+                        {list?.length > 0 ? (
                             list?.map(jv => (
                                 <Item
                                     key={jv.id}
@@ -75,7 +75,7 @@ export const JobVacanciesList = () => {
                                     company={company}
                                 />
                             ))
-                        )}
+                        ): (<p>Nenhuma vaga cadastrada ainda :(</p>)}
 
                     </S.Content>
                 </S.Container>

@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useContext } from "react";
+import React, { useState, useLayoutEffect, useContext, useEffect } from "react";
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import CompanyPage from '../../components/CompanyPage';
@@ -110,6 +110,8 @@ export const JobVacancieProfile = () => {
     const { authenticated, user } = useContext(AuthContext);
     const [reload, setReload] = useState(false);
     const token = localStorage.getItem('token');
+
+    useLayoutEffect(() => {}, []);
 
     useLayoutEffect(() => {
         const getJobVacancie = async () => {
