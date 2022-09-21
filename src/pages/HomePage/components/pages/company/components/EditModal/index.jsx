@@ -22,7 +22,7 @@ let schema = yup.object().shape({
     mission: yup.string().max(178, 'max. 177 caracteres'),
     values: yup.string().max(178, 'max. 177 caracteres'),
     vision: yup.string().max(178, 'max. 177 caracteres'),
-    aboutCompany: yup.string().max(178, 'max. 177 caracteres'),
+    aboutCompany: yup.string().max(450, 'max. 450 caracteres'),
     address: yup.string().required('campo obrigatório')
 })
 
@@ -145,7 +145,7 @@ export const EditModal = ({
                             <S.Label>Sobre a empresa</S.Label>
                             <S.TextArea
                                 {...register('aboutCompany')}
-                                maxmax="177"
+                                maxLength="450"
                             />
                             <span>{errors?.aboutCompany?.message}</span>
                         </S.InputContainer>
@@ -153,7 +153,7 @@ export const EditModal = ({
                             <S.Label>Visão</S.Label>
                             <S.TextArea
                                 {...register('vision')}
-                                maxmax="177"
+                                maxLength="177"
                             />
                             <span>{errors?.vision?.message}</span>
                         </S.InputContainer>
@@ -184,7 +184,7 @@ export const EditModal = ({
                             <S.Label>Missão</S.Label>
                             <S.TextArea
                                 {...register('mission')}
-                                maxmax="177"
+                                maxLength="177"
                             />
                             <span>{errors?.mission?.message}</span>
                         </S.InputContainer>
@@ -192,7 +192,7 @@ export const EditModal = ({
                             <S.Label>Valores</S.Label>
                             <S.TextArea
                                 {...register('values')}
-                                maxmax="177"
+                                maxLength="177"
 
                             />
                             <span>{errors?.values?.message}</span>

@@ -5,6 +5,8 @@ import { PageLogin, Register } from './styles.js';
 import {ReactComponent as LoginPic} from '../../assets/images/loginPic.svg';
 import { AuthContext } from '../../services/contexts/auth.js';
 import { getUserByEmail } from '../../shared/functions/user';
+import { notify } from '../../shared/functions/notify/notify.js';
+import { Toaster } from 'react-hot-toast';
 
 
 export function Login(){
@@ -15,19 +17,22 @@ export function Login(){
     const { login } = useContext(AuthContext);
 
     const handleLogin = async (ev) => {
-        ev.preventDefault();
-
-        const userExists = await getUserByEmail(email);
-
-        if(!userExists) setShowRegister(true);
-
-        login(email, senha);
-
+        try{
+            ev.preventDefault();
+            const userExists = await getUserByEmail(email);
+            console.log(userExists)
+            
+            login(email, senha);
+        }catch(err){
+            console.log('caiu erro')
+            if(err) notify(`${err.message}`, 'error')
+            setShowRegister(true);
+        }
     }
 
     return(
+        <>
         <PageLogin>
-            
             <div id="image-description">
                 <div id="image">
                     <LoginPic/>
@@ -68,5 +73,7 @@ export function Login(){
                 </form>
             </div>
         </PageLogin>
+        <Toaster />
+        </>
     );
 }

@@ -25,7 +25,7 @@ export function EmpresaForm(){
             address: data.endereco,
             aboutCompany:data.sobre,
             linkedinURL: data.linkedin,
-            type: data.estilo,
+            type: Number(data.estilo),
             imageURL: data.logo,
       })
         if(post) history('/login')

@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Cd } from './styles' ;
 import profile from '../../assets/images/profile.svg';
 import MaskInput from '../../MaskInput';
 import {useForm} from 'react-hook-form';
 import Api from '../../services/mainApi';
 import { useNavigate } from 'react-router-dom';
-
-
-const initialValues = {
-  cpf:'',
-  cnpj: ''
-};
+import { notify } from '../../shared/functions/notify/notify';
+import { Toaster } from 'react-hot-toast';
 
 
 export function CandidatoForm(){
-  const [isBusy, setIsBusy] = useState(false);
   const {
     register,
     formState: { errors },
@@ -23,17 +18,9 @@ export function CandidatoForm(){
   } = useForm();
   const navigate = useNavigate();
 
-    const [values,setValues] = useState(initialValues);
-
-    function handleChange(event) {
-      setValues({
-        ...values,
-      [event.target.name]: event.target.value
-      });
-    }
-
   async function onSubmit (data)  {
-     const response = await Api.post('/candidate', {
+     try{
+      const response = await Api.post('/candidate', {
         name: data.nome,
         lastName: data.sobrenome,
         cpf:data.cpf,
@@ -42,9 +29,18 @@ export function CandidatoForm(){
         password:data.passwordConfirmation,
      })
 
-     navigate('/login');
+     if(response){
+      notify('candidato cadastrado','success');
+      navigate('/login');
+     }
 
      return response;
+     }catch(err){
+      if(err) {
+        console.log(err.message);
+        notify(`${err.message}`,'error');
+      }
+     }
     }
 
 
@@ -55,18 +51,12 @@ export function CandidatoForm(){
               <h1>New <span>Way</span> Recruiter</h1>
           </a>
     </header>
-
     <main>
-      
       <div className="form-description">
-
           <h2>Faça agora seu cadastro como candidato!</h2>
-          
               <p className="form-paragrafo">Insira seus dados abaixo para efetuar seu cadastro!</p>
             <form onSubmit={handleSubmit(onSubmit)}>
-
               <div className="form-start">
-                
              <div className="control-group">
               <label>Nome*</label>
               <input type="text" 
@@ -75,9 +65,8 @@ export function CandidatoForm(){
               {errors.nome && (
                 <p style={{ color: "red" }}>{errors.nome.message}</p>
               )}
-
               </div>
-                
+
               <div className="control-group">
               <label>Sobrenome*</label>
               <input type="text"
@@ -86,13 +75,9 @@ export function CandidatoForm(){
               {errors.sobrenome && (
                 <p style={{ color: "red" }}>{errors.sobrenome.message}</p>
               )} 
-
               </div>
-
               </div>
-
               <div className="form-start">
-                
               <div className="control-group">
               <label>CPF*</label>
               <MaskInput
@@ -104,9 +89,7 @@ export function CandidatoForm(){
               {errors.cpf && (
                 <p style={{ color: "red" }}>{errors.cpf.message}</p>
               )}
-              
               </div>
-
               <div className="control-group">
               <label>Número de telefone*</label>
               <input type="phone" 
@@ -115,13 +98,9 @@ export function CandidatoForm(){
               {errors.phoneNumber && (
                 <p style={{ color: "red" }}>{errors.phoneNumber.message}</p>
               )}
-
               </div>
-
               </div>
-
               <br/>
-
               <div className="form-end">
               <label>E-mail*</label>
               <input type="email" 
@@ -130,8 +109,6 @@ export function CandidatoForm(){
               {errors.email && (
                 <p style={{ color: "red" }}>{errors.email.message}</p>
               )}
-              
-              
               <label>Senha*</label>
               <input type="password" 
               {...register("password", { required: "Senha é obrigatória!", 
@@ -161,17 +138,13 @@ export function CandidatoForm(){
                 {errors.passwordConfirmation.message}
               </p>
             )}
-
             </div>
-
             <button className="candidato-submit"  type="submit" >Cadastrar</button>
             </form>
-
             <img src={profile} alt="profile-candidato" className="cdprofile"/>
-
        </div>
-
     </main>
+    <Toaster/>
   </Cd>
   );
 }

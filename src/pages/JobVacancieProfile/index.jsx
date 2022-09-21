@@ -111,6 +111,8 @@ export const JobVacancieProfile = () => {
     const [reload, setReload] = useState(false);
     const token = localStorage.getItem('token');
 
+    useLayoutEffect(() => {}, []);
+
     useLayoutEffect(() => {
         const getJobVacancie = async () => {
             const { data: jv } = await getJobVacancieByID(id);
