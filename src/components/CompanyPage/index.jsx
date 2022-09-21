@@ -8,6 +8,7 @@ import JobVacancieModal from '../JobVacancieModal';
 const CompanyPage = ({
     children,
     companyID,
+    setReload = () => {},
 }) => {
     const [openModal, setOpenModal] = useState(false);
 
@@ -18,6 +19,7 @@ const CompanyPage = ({
                 open={openModal}
                 setOpen={setOpenModal}
                 companyID={companyID}
+                setReload={setReload}
             />
         )}
         <Body>

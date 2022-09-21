@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { JobVacancieDropDown } from './components/JobVacancieDropDown';
@@ -8,14 +8,14 @@ import { AuthContext } from '../../services/contexts/auth';
 import {HeaderStyle} from './style';
 
 export function HeaderComponent({
-    candidato,
+    candidate,
     perfil,
     vagas,
     config,
     processos,
-    setOpenModal,
+    setOpenModal = () => {},
+    noMargin,
 }){
-    const [candidate ] = useState(candidato)
 
     const {logout} = useContext(AuthContext);
 
@@ -30,17 +30,21 @@ export function HeaderComponent({
     <HeaderStyle>
         <header>
             <div>
-                <a href="/" id='logo'>
+                <NavLink exact to="/home" id='logo'>
                     <h1>New <span>Way</span> Recuiter</h1>
-                </a>
+                </NavLink>
                 <p>Candidato</p>
             </div>
             <nav id='links'>
-                    <NavLink exact to="#" activeClassName={perfil}>Perfil</NavLink>
-                    <NavLink exact to="#" activeClassName={vagas}> Vagas</NavLink>
-                    <NavLink exact to="/editdeletecandidato" activeClassName={processos}> Processos</NavLink>
-                    <NavLink exact to="/edit_or_delete/candidato" activeClassName={config} > <SettingsOutlinedIcon/> </NavLink>
-                    <button onClick={ev => logout()}>
+                    <NavLink exact to="#" activeClassName={perfil}>
+                        Perfil
+                    </NavLink>
+                    <NavLink exact to="/editdeletecandidato" activeClassName={processos}>
+                        Processos
+                    </NavLink>
+                    <NavLink exact to="/edit_or_delete/candidato" activeClassName={config} > <SettingsOutlinedIcon/>
+                    </NavLink>
+                    <button onClick={handleLogout}>
                         <LogoutIcon color="white"/>
                     </button>
             </nav>

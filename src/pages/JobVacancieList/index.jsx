@@ -59,6 +59,7 @@ export const JobVacanciesList = () => {
         <>
             <CompanyPage
                 companyID={company?.id}
+                setReload={setReload}
             >
                 <HeaderCompanyPage 
                     cover={company?.cover}
