@@ -3,9 +3,6 @@ import { Form, Row } from './style';
 import { Wrapper } from '../../../components/Wrapper'
 import { SelectArea } from '../../../../../components/SelectArea'
 import { SelectProfession } from '../../../../../components/SelectProfession'
-import Button from '../../../../../components/Button/Button'
-
-import {ReactComponent as OnlineCV } from '../../../../../assets/images/onlineCV.svg'
 
 export function FormContratacao(){
     const [areaDesejada, setAreaDesejada] = useState('');
@@ -50,15 +47,6 @@ export function FormContratacao(){
                     <label htmlFor="profession">Profissão</label>
                     <SelectProfession name="profession" id="profession" area={areaDesejada} value={profissao} onChage={ev => setProfissao(ev.target.value)}/>
                 </Wrapper>
-            </Row>
-            <Row>
-                <Button>Finalizar cadastro</Button>
-                    <OnlineCV style={
-                        {
-                            maxWidth:"250px",
-                            maxHeight:"250px"
-                        }
-                    }/>
             </Row>
         </Form>
     )

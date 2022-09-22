@@ -5,9 +5,10 @@ import { InfoAcademicas } from './sections/infoAcademicas/InfoAcademicas';
 import {HeaderComponent} from '../../components/HeaderComponent/HeaderComponent';
 import Button from '../../components/Button/Button';
 import { Idiomas } from './sections/idiomas/Idiomas';
-import { SkillsInput } from './sections/Skills';
 import {ProfessionalExpierence} from './sections/professionalExperience/index';
 import { DadosContratacao } from './sections/contratacao';
+
+import {ReactComponent as OnlineCV } from '../../assets/images/onlineCV.svg'
 
 
 const Cv = styled.div`
@@ -34,7 +35,6 @@ const Cv = styled.div`
 `;
 
 export function Curriculo(){
-    
     return(
     <Cv>
     <HeaderComponent candidato={true}/>
@@ -46,9 +46,17 @@ export function Curriculo(){
     <DadosPessoaisSection/>
     <InfoAcademicas />
     <Idiomas />
-    <SkillsInput />
     <ProfessionalExpierence />
     <DadosContratacao />
+    <Button>Finalizar cadastro</Button>
+    <OnlineCV style={
+        {
+            maxWidth:"250px",
+            maxHeight:"250px",
+            position: 'absolute',
+            bottom: 0,
+        }
+    }/>
     </Cv>
     );
 }

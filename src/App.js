@@ -33,10 +33,10 @@ function App() {
         <Route path="/register/company" element={<EmpresaForm/>}/>
         <Route path="/job-vacancie/profile/:id" element={<JobVacancieProfile />} />
         <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
-        <Route exact path="/candidato/profile" element={<ProfileVCand/>}/>
+        <Route exact path="/candidate/profile/:id" element={<ProfileVCand/>}/>
         <Route exact path="/profile" element={<ProfileVEmp/>}/>
-        <Route path="/candidatos" element={<ModalCandidato/>}/>
-        <Route path="/cv" element={<Curriculo/>}/>
+        <Route path="/candidates" element={<ModalCandidato/>}/>
+        <Route exact path="/candidate/resume/:id" element={<Curriculo/>}/>
         <Route path="/job-vacancies-list" element={<JobVacanciesList />}/>
       </Routes>
     </AuthProvider>
