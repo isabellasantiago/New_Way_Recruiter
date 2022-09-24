@@ -23,6 +23,11 @@ const Button = styled.button`
     white-space: nowrap;
     text-decoration: none;
 
+    a{
+        color: #fff;
+        text-decoration: none;
+    }
+
 `;
 
 export default Button;

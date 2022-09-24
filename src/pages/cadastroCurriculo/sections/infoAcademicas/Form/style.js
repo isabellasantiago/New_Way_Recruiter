@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const Form = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -44,5 +44,18 @@ export const FormWrapper = styled.div`
 
     >div{
         margin-bottom: 18px;
+    }
+
+    button{
+        /* border: 1px solid #000; */
+        border: none;
+        background: none;
+        cursor: pointer;
+        height: 36px;
+        width: 20px;
+        
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
     }
 `;

@@ -1,14 +1,13 @@
 import React from 'react';
 import { SelectEstado } from '../../../../components/SelectEstado';
 import { SelectCidade } from '../../../../components/SelectCidade';
-import Button from '../../../../components/Button/Button';
 
 import { DadosPessoais, TitleForm, DadosPessoaisForm, Grid} from './style.js';
 import {Wrapper} from '../../components/Wrapper';
 
 
 export function DadosPessoaisSection({useForm}){
-    const { register, errors } = useForm;
+    const { register, errors, watch } = useForm;
 
 
     return(
@@ -63,7 +62,7 @@ export function DadosPessoaisSection({useForm}){
 
                     <Wrapper>
                         <label htmlFor="city" className="city">Cidade*</label>
-                        <SelectCidade id="city" name="city" register={register}/>
+                        <SelectCidade id="city" name="city" state={watch('personalDatas.state')} register={register}/>
                         {errors?.city &&
                             <span>{errors?.city.message}</span>
                         }

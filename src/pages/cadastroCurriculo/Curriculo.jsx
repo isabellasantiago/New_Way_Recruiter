@@ -63,7 +63,14 @@ export function Curriculo(){
           level: '',
           role: '',
         },
-        academicsInfo: [],
+        academicsInfo: [{
+            instituitionName: '',
+            courseName: '',
+            academicFormation: '',
+            academicFormationStatus: '',
+            graduationEndDate: '',
+            graduationStartDate: '',
+        }],
         languagesInfo: [],
         previousJobsInfo: []
     });
@@ -87,9 +94,11 @@ export function Curriculo(){
     }, [id]);
 
 
-    const { register, formState: errors, handleSubmit } = useForm({
+    const { register, formState: errors, handleSubmit, control, watch } = useForm({
         defaultValues: resume,
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schema),
+        mode: 'onSubmit',
+        reValidateMode: 'onChange'
     });
 
     const onSubmit = (data) => {
@@ -97,7 +106,7 @@ export function Curriculo(){
     }
 
     return(
-    <Cv onSubmit={handleSubmit()}>
+    <Cv onSubmit={handleSubmit(onSubmit)}>
     <HeaderComponent candidato={true}/>
     <div id="cabecalho">
         <h1>Cadastre seus dados</h1>
@@ -107,25 +116,31 @@ export function Curriculo(){
     <DadosPessoaisSection
         useForm={{
             register,
-            errors
+            errors,
+            watch
         }}
     />
     <InfoAcademicas
         useForm={{
             register,
-            errors
+            errors,
+            control,
+            watch
         }}
     />
     <Idiomas
         useForm={{
             register,
-            errors
+            errors,
+            control,
+            watch
         }}
     />
     <ProfessionalExpierence
         useForm={{
             register,
-            errors
+            errors,
+            control
         }}
     />
     <DadosContratacao
