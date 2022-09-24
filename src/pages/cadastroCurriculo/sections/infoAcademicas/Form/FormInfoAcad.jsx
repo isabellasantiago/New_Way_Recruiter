@@ -34,19 +34,25 @@ export function FormInfoAcad(props){
     return(
         <Form onSubmit={e => e.preventDefault()}>
             <FormWrapper>
-                {/* <Field.Text  label="Instituição de ensino" type="text" name="instituicao" onChange={(e) => setInstituicao(e.target.value)} value={instituicao || ""} />
-                <Field.Text  label="Curso" type="text" name="curso" onChange={(e) => setCurso(e.target.value)} value={curso || ""}/> */}
+                <Wrapper>
+                    <label>Instituição de ensino</label>
+                    <input type="text" name="instituicao"/>
+                </Wrapper>
+                <Wrapper>
+                    <label>Curso</label>
+                    <input type="text" name="curso"/>
+                </Wrapper>
                 <Wrapper>
                     <label htmlFor="tipoFormacao">Formação</label>
                     <select id="tipoFormacao" name="tipoFormacao" onChange={(e) => {setTipoFormacao(e.target.value)}} value={tipoFormacao || ""} >
                         <option value="">Selecione</option>
-                        <option value="ensinoRegular">Ensino regular</option>
-                        <option value="extraCurricular">Extra curricular</option>
-                        <option value="tecnico">Tecnico</option>
-                        <option value="superior">Superior</option>
-                        <option value="posGraduação">Pós graduação</option>
-                        <option value="mestrado">Mestrado</option>
-                        <option value="doutorado">Doutorado</option>
+                        <option value={1}>Ensino regular</option>
+                        <option value={7}>Extra curricular</option>
+                        <option value={2}>Tecnico</option>
+                        <option value={3}>Superior</option>
+                        <option value={4}>Pós graduação</option>
+                        <option value={5}>Mestrado</option>
+                        <option value={6}>Doutorado</option>
                     </select>
                 </Wrapper>
             </FormWrapper>
@@ -60,18 +66,15 @@ export function FormInfoAcad(props){
                         <option value="trancado">Trancado</option>
                     </select>
                 </Wrapper>
-                {/* <Field.Text label="Data de inicio" type="date" name="dataInicio" onChange={(e) => setDataInicio(e.target.value)} value={dataInicio || ""} />
-                <Field.Text label="Data de término" type="date" name="dataTermino"  onChange={(e) => setDataTermino(e.target.value)} value={dataTermino || ""} /> */}
-                <Button type="submit"
-                onClick={(ev) => {
-                    onSave(ev, instituicao, curso, tipoFormacao, statusFormacao, dataInicio, dataTermino)
-                    setInstituicao("")
-                    setCurso("")
-                    setTipoFormacao("")
-                    setStatusFormacao("")
-                    setDataInicio("")
-                    setDataTermino("")
-                }}>Adicionar</Button>
+                <Wrapper>
+                    <label>Data de inicio</label>
+                    <input label="" type="date"/>
+                </Wrapper>
+                <Wrapper>
+                    <label>Data de término</label>
+                    <input type="date" />
+                </Wrapper>
+                <Button type="submit">Adicionar</Button>
             </FormWrapper>
         </Form>
     )

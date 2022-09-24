@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 import { DadosPessoaisSection } from './sections/dadosPessoais/DadosPessoais';
 import { InfoAcademicas } from './sections/infoAcademicas/InfoAcademicas';
@@ -9,9 +9,14 @@ import {ProfessionalExpierence} from './sections/professionalExperience/index';
 import { DadosContratacao } from './sections/contratacao';
 
 import {ReactComponent as OnlineCV } from '../../assets/images/onlineCV.svg'
+import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import { getCandidateById, getResume } from '../../shared/functions/candidate';
+import { yupResolver } from '@hookform/resolvers/yup';
+import schema from '../../validation/validation';
 
 
-const Cv = styled.div`
+const Cv = styled.form`
     display: flex;
     align-items: center;
     flex-flow: column nowrap;
@@ -32,31 +37,114 @@ const Cv = styled.div`
             font-weight: 500;
         }
     }
+
+    #row {
+        width: 100%;
+        position: relative;
+        padding: 20px;
+    }
 `;
 
 export function Curriculo(){
+    const { id } = useParams();
+    const [candidate, setCandidate] = useState();
+    const [resume, setResume] = useState({
+        personalData: {
+          id: '',
+          candidateID: '',
+          imageURL: '' ,
+          linkedinURL: '',
+          naturalness: '',
+          city: '',
+          state: '',
+          phone: '',
+          field: '',
+          contractType: '',
+          level: '',
+          role: '',
+        },
+        academicsInfo: [],
+        languagesInfo: [],
+        previousJobsInfo: []
+    });
+
+    useLayoutEffect(() => {
+        const getCandidate = async () => {
+            const { data } = await getCandidateById(id);
+            setCandidate(data);
+            return;
+        }
+        getCandidate();
+    }, [id]);
+
+    useLayoutEffect(() => {
+        const getCv = async () => {
+            const { data: cv } = await getResume(id);
+            setResume(cv);
+            return;
+        }
+        getCv();
+    }, [id]);
+
+
+    const { register, formState: errors, handleSubmit } = useForm({
+        defaultValues: resume,
+        resolver: yupResolver(schema)
+    });
+
+    const onSubmit = (data) => {
+        console.log('data', data)
+    }
+
     return(
-    <Cv>
+    <Cv onSubmit={handleSubmit()}>
     <HeaderComponent candidato={true}/>
     <div id="cabecalho">
         <h1>Cadastre seus dados</h1>
         <p>Lembre-se de sempre manter seu currículo atualizado!</p>
         <Button id="cancelar">Cancelar</Button>
     </div>
-    <DadosPessoaisSection/>
-    <InfoAcademicas />
-    <Idiomas />
-    <ProfessionalExpierence />
-    <DadosContratacao />
-    <Button>Finalizar cadastro</Button>
+    <DadosPessoaisSection
+        useForm={{
+            register,
+            errors
+        }}
+    />
+    <InfoAcademicas
+        useForm={{
+            register,
+            errors
+        }}
+    />
+    <Idiomas
+        useForm={{
+            register,
+            errors
+        }}
+    />
+    <ProfessionalExpierence
+        useForm={{
+            register,
+            errors
+        }}
+    />
+    <DadosContratacao
+        useForm={{
+            register,
+            errors
+        }}
+    />
+    <div id="row">
+    <Button type="submit">Finalizar cadastro</Button>
     <OnlineCV style={
         {
             maxWidth:"250px",
             maxHeight:"250px",
-            position: 'absolute',
-            bottom: 0,
+            position: "absolute",
+            right: 60,
         }
     }/>
+    </div>
     </Cv>
     );
 }

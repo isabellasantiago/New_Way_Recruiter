@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import { fetchStates, parseStates } from '../../helpers/ibge';
 
-export const SelectEstado = ({className, id, name, onChange = ()=>{}}) => {
+export const SelectEstado = ({className, id, name, onChange = ()=>{}, register}) => {
     const [states, setStates] = useState([]);
 
     useEffect(()=>{
@@ -9,7 +9,7 @@ export const SelectEstado = ({className, id, name, onChange = ()=>{}}) => {
     }, []);
 
     return (
-        <select class={className} id={id || name} name={name || id} onChange={onChange}>
+        <select class={className} id={id || name} name={name || id} onChange={onChange} {...register(`${name}`)}>
             <option value="">Seleciona um estado</option>
             {states.map((state)=>{
                 const {label, value} = state;

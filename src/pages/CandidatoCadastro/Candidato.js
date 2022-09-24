@@ -16,6 +16,7 @@ export function CandidatoForm(){
     getValues,
     handleSubmit
   } = useForm();
+
   const navigate = useNavigate();
 
   async function onSubmit (data)  {

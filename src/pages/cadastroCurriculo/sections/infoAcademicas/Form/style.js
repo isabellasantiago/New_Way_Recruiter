@@ -15,6 +15,16 @@ export const Form = styled.form`
         max-width: 200px;
     }
 
+    input{
+        font-family: 'Poppins';
+        font-size: 0.8rem;
+        border: 1px solid #c4c4c4;
+        border-radius: 8px;
+        ;
+        padding: 5px 15px;
+        height: 35px;
+    }
+
     button{
         margin-top: 10px;
     }
