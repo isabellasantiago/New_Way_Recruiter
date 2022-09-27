@@ -71,8 +71,20 @@ export function Curriculo(){
             graduationEndDate: '',
             graduationStartDate: '',
         }],
-        languagesInfo: [],
-        previousJobsInfo: []
+        languagesInfo: [
+            {
+                languageName: '',
+                languageLevel: 0
+            }
+        ],
+        previousJobsInfo: [{
+            previousCompanyName: '',
+            role: '',
+            level: 0,
+            fromDate: '',
+            toDate: '',
+            jobDescription: '',
+        }]
     });
 
     useLayoutEffect(() => {
@@ -97,7 +109,7 @@ export function Curriculo(){
     const { register, formState: errors, handleSubmit, control, watch } = useForm({
         defaultValues: resume,
         resolver: yupResolver(schema),
-        mode: 'onSubmit',
+        mode: 'onBlur',
         reValidateMode: 'onChange'
     });
 
@@ -133,7 +145,6 @@ export function Curriculo(){
             register,
             errors,
             control,
-            watch
         }}
     />
     <ProfessionalExpierence

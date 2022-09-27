@@ -1,72 +1,116 @@
-import React, {useState} from 'react';
-import {Form} from './style';
-// import Field from '../../../../../components/forms/Field';
-import {Wrapper} from '../../../components/Wrapper';
+import React from 'react';
+import { Form } from './style';
+import { Wrapper } from '../../../components/Wrapper';
 import Button from '../../../../../components/Button/Button'
-import {FormWrapper} from '../../infoAcademicas/Form/style'
+import { FormWrapper } from '../../infoAcademicas/Form/style'
+import { useFieldArray } from 'react-hook-form';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 
-export function ProfessionalExpierenceForm(props){
-    const {onSave} = props;
-    const [nomeEmpresa, setNomeEmpresa] = useState('')
-    const [cargo, setCargo] = useState('')
-    const [nivelOperacional, setNivelOperacional] = useState('')
-    const [dataInicioEmprego, setDataInicioEmprego] = useState('')
-    const [dataFinalEmprego, setDataFinalEmprego] = useState('')
-    const [trabalhoAqui, setTrabalhoAqui] = useState(false)
-    const [descricaoFuncoes, setDescricaoFuncoes] = useState('')
-    
-    return(
-        <Form onSubmit={e => e.preventDefault()}>
-            <FormWrapper id="row1">
-                {/* <Field.Text label="Nome da empresa" name="nomeEmpresa" type="text" value={nomeEmpresa || ''} onChange={(ev) => setNomeEmpresa(ev.target.value)}/>
-                <Field.Text label="Cargo" name="cargo" type="text" value={cargo || ''} onChange={(ev) => setCargo(ev.target.value)}/> */}
-                <Wrapper>
-                    <label htmlFor="nivelOperacional">Nível operacional</label>
-                    <select name="nivelOperacional" id="nivelOperacional" value={nivelOperacional || ''} onChange={(ev) => setNivelOperacional(ev.target.value)}>
-                        <option value="">Selecione</option>
-                        <option value="operacional">Operacional</option>
-                        <option value="estagio">Estágio</option>
-                        <option value="auxiliar">Auxiliar</option>
-                        <option value="assistente">Assistente</option>
-                        <option value="trainee">Trainee</option>
-                        <option value="tecnico">Técnico</option>
-                        <option value="analista">Analista</option>
-                        <option value="junior">Junior</option>
-                        <option value="pleno">Pleno</option>
-                        <option value="senior">Senior</option>
-                    </select>
-                </Wrapper>
-            </FormWrapper>
-            <FormWrapper>
-                {/* <Field.Text type="date" label="Data de inicio" name="dataInicioEmprego" value={dataInicioEmprego || ''} onChange={(ev) => setDataInicioEmprego(ev.target.value)}/>
-                <Field.Text type="date" label="Data final" name="dataFinalEmprego" value={dataFinalEmprego || ''} onChange={(ev) => setDataFinalEmprego(ev.target.value)} disable={trabalhoAqui ? true : false}/> */}
-                <div id="checkbox">
-                <input type="checkbox" name="trabalhoAqui" onChange={() => setTrabalhoAqui(!trabalhoAqui)}/>
-                <span>Trabalho aqui</span>
-                </div>
-            </FormWrapper>
-            <FormWrapper>
-                <Wrapper>
-                    <label htmlFor="descricaoFuncoes" id="label">DESCRIÇÃO DAS FUNÇÕES</label>
-                    <textarea name="descricaoFuncoes" id="descricaoFuncoes" cols="30" rows="10" value={descricaoFuncoes || ''} onChange={(ev) => setDescricaoFuncoes(ev.target.value)} ></textarea>
-                </Wrapper>
-                <Button
-                onClick={(ev)=> {
-                    onSave(ev, nomeEmpresa, cargo, nivelOperacional, dataInicioEmprego, dataFinalEmprego, trabalhoAqui, descricaoFuncoes)
-                    setNomeEmpresa("")
-                    setCargo("")
-                    setNivelOperacional("")
-                    setDataInicioEmprego("")
-                    setDataFinalEmprego("")
-                    setTrabalhoAqui(false);
-                    setDescricaoFuncoes("");
-                    console.log(nomeEmpresa, cargo)
-                }}
-                >
+export function ProfessionalExpierenceForm({ useForm }) {
+    const { register, control, errors } = useForm;
+    const { append, remove, fields } = useFieldArray({
+        name: 'previousJobsInfo',
+        control
+    });
+
+    const add = () => {
+        append({
+            previousCompanyName: '',
+            role: '',
+            level: 0,
+            fromDate: '',
+            toDate: '',
+            jobDescription: '',
+        })
+    }
+
+    return (
+        <Form>
+            <Button onClick={add}>
                 Adicionar
-                </Button>
-            </FormWrapper>
+            </Button>
+            {fields.map((field, index) => {
+                return (
+                    <>
+                        <FormWrapper id="row1">
+                            <Wrapper>
+                                <label htmlFor="previousCompanyName">Empresa</label>
+                                <input type="text" name="previousCompanyName" defaultValue={field.previousCompanyName} {...register(`previousJobsInfo.${index}.previousCompanyName`)} />
+                                {errors.previousJobsInfo?.[index]?.previousCompanyName && (
+                                    <span>
+                                        {errors.previousJobsInfo?.[index]?.previousCompanyName.message}
+                                    </span>
+                                )}
+                            </Wrapper>
+                            <Wrapper>
+                                <label htmlFor="role">Cargo</label>
+                                <input type="text" defaultValue={field.role} {...register(`previousJobsInfo.${index}.role`)} />
+                                {errors.previousJobsInfo?.[index]?.role && (
+                                    <span>
+                                        {errors.previousJobsInfo?.[index]?.role.message}
+                                    </span>
+                                )}
+                            </Wrapper>
+                        </FormWrapper>
+                        <FormWrapper>
+                        <Wrapper>
+                                <label htmlFor="level">Nível operacional</label>
+                                <select name="level" defaultValue={field.level} {...register(`previousJobsInfo.${index}.level`)}>
+                                    <option value="">Selecione</option>
+                                    <option value={1}>Estágio</option>
+                                    <option value={6}>Agente</option>
+                                    <option value={5}>Analista</option>
+                                    <option value={2}>Junior</option>
+                                    <option value={3}>Pleno</option>
+                                    <option value={4}>Senior</option>
+                                </select>
+                                {errors.previousJobsInfo?.[index]?.level && (
+                                    <span>
+                                        {errors.previousJobsInfo?.[index]?.level.message}
+                                    </span>
+                                )}
+                            </Wrapper>
+                            <Wrapper>
+                                <label>Data de inicio</label>
+                                <input type="date" name="fromDate" defaultValue={field.fromDate} {...register(`previousJobsInfo.${index}.fromDate`)} />
+                                {errors.previousJobsInfo?.[index]?.fromDate && (
+                                    <span>
+                                        {errors.previousJobsInfo?.[index]?.fromDate.message}
+                                    </span>
+                                )}
+                            </Wrapper>
+                            <Wrapper>
+                                <label htmlFor="toDate">Data final</label>
+                                <input type="date" name="toDate" defaultValue={field.toDate} {...register(`previousJobsInfo.${index}.toDate`)} />
+                                {errors.previousJobsInfo?.[index]?.toDate && (
+                                    <span>
+                                        {errors.previousJobsInfo?.[index]?.toDate.message}
+                                    </span>
+                                )}
+                            </Wrapper>
+                        </FormWrapper>
+                        <FormWrapper justify="space-evenly">
+                            <Wrapper>
+                                <label htmlFor="jobDescription">Descrição</label>
+                                <textarea name="jobDescription" cols="30" rows="10" defaultValue={field.jobDescription} maxLength="600"></textarea>
+                                {errors.previousJobsInfo?.[index]?.jobDescription && (
+                                    <span>
+                                        {errors.previousJobsInfo?.[index]?.jobDescription.message}
+                                    </span>
+                                )}
+                            </Wrapper>
+                            <button onClick={() => remove(field.id)}>
+                                <DeleteOutlineIcon
+                                    color="#fff"
+                                >
+                                    <a href="#infoac" />
+                                </DeleteOutlineIcon>
+                            </button>
+                        </FormWrapper>
+                    </>
+                )
+            })}
         </Form>
     )
 }

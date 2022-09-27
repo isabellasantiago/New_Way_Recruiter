@@ -177,6 +177,8 @@ const JobVacancieModal = ({
                                 <option value={2}>JR</option>
                                 <option value={3}>PL</option>
                                 <option value={4}>SR</option>
+                                <option value={4}>ANALISTA</option>
+                                <option value={5}>AGENTE</option>
                             </select>
                             <span>{errors?.level?.message}</span>
                         </InputDiv>

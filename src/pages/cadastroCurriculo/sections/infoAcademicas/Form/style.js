@@ -5,7 +5,7 @@ export const Form = styled.section`
     flex-direction: column;
     justify-content: space-between;
 
-    gap:30px;
+    gap: 30px;
 
     input, select{
         max-width: 230px;
@@ -38,16 +38,15 @@ export const FormWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: ${(justify) => justify || 'space-between'};
     gap: 20px;
     align-items: center;
 
-    >div{
+    > div{
         margin-bottom: 18px;
     }
 
     button{
-        /* border: 1px solid #000; */
         border: none;
         background: none;
         cursor: pointer;
@@ -57,5 +56,11 @@ export const FormWrapper = styled.div`
         display: flex;
         align-items: flex-start;
         justify-content: center;
+    }
+    
+    textArea{
+        resize: none;
+        font: 500 14px 'Poppins', sans-serif;
+        padding:10px 15px;
     }
 `;

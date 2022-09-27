@@ -16,16 +16,19 @@ export const Form = styled.form`
         gap: 5px;
     }
 
-    #label{
-        color: rgba(0,0,0, 0.68);
-    }
-
-    button{
-        align-self: flex-end;
-        margin-bottom: 18px;
-    }
     select{
         background: #fff;
+    }
+
+    input{
+        font-family: 'Poppins';
+        font-size: 0.8rem;
+        border: 1px solid #c4c4c4;
+        border-radius: 8px;
+        padding: 5px 15px;
+        height: 35px;
+
+        max-width: 200px;
     }
 
     #row1{

@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     white-space: nowrap;
     width: 60%;
     font-family: "Poppins", sans-serif;
+    position: relative;
 
     select{
         font-family: "Poppins", sans-serif;

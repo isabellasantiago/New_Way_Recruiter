@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FormIdioma = styled.form`
+export const FormIdioma = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,6 +9,15 @@ export const FormIdioma = styled.form`
 
     select{
         background: #fff;
+    }
+    input{
+        font-family: 'Poppins';
+        font-size: 0.8rem;
+        border: 1px solid #c4c4c4;
+        border-radius: 8px;
+        ;
+        padding: 5px 15px;
+        height: 35px;
     }
 `;
 
@@ -29,8 +38,17 @@ export const InputWrapper = styled.section`
     div{
         margin-bottom: 10px;
     }
+
     button{
         margin-top: 10px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        height: 36px;
+        width: 20px;
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    
 `;

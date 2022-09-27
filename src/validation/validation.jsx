@@ -9,12 +9,24 @@ import * as yup from 'yup';
     state: yup.string().required('Estado é um campo é obrigatório'),// estado
     city: yup.string().required('Cidade é um campo é obrigatório'),// cidade
     phone: yup.string().matches(/^\([1-9]{2}\) 9[0-9]{1}[0-9]{3}\-[0-9]{4}$/, { message: 'Número de telefone invalido'}),
-    instituitionName: yup.string().required('Este campo é um campo é obrigatório'),
-    courseName: yup.string().required('Este campo é um campo é obrigatório'),
-    academicFormation: yup.string().required('Este campo é um campo é obrigatório'),
-    academicFormationStatus: yup.string().required('Este campo é um campo é obrigatório'),
-    graduationEndDate: yup.date().required('Este campo é um campo é obrigatório'),
-    graduationStartDate: yup.date().required('Este campo é um campo é obrigatório'),
+    academicsInfo: yup.array().of(
+        yup.object().shape({
+            instituitionName: yup.string().required('Este campo é um campo é obrigatório'),
+            courseName: yup.string().required('Este campo é um campo é obrigatório'),
+            academicFormation: yup.string().required('Este campo é um campo é obrigatório'),
+            academicFormationStatus: yup.string().required('Este campo é um campo é obrigatório'),
+            graduationEndDate: yup.date().required('Este campo é um campo é obrigatório'),
+            graduationStartDate: yup.date().required('Este campo é um campo é obrigatório'),
+        }).nullable()
+    ),
+    languagesInfo: yup.array().of(
+        yup.object().shape({
+            languageName: yup.string().required('Campo vazio'),
+            languageLevel: yup.number().integer().required('Selecione um campo'),
+        })
+    ).nullable(),
+    
+    
 
 })
 
