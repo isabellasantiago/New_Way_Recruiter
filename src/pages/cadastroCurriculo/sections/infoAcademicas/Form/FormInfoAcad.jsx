@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '../../../../../components/Button/Button';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { Wrapper } from '../../../components/Wrapper';
@@ -30,25 +30,21 @@ export function FormInfoAcad({ useForm }) {
                 <a href="#infoac">Adicionar</a>
             </Button>
             {fields.map((field, index) => {
-                const moment = watch(`academicsInfo[${index}].academicFormationStatus`)
+                const moment = watch(`academicsInfo[${index}].academicFormationStatus`);
                 return (
                     <Form key={field.id} id="infoac">
                         <FormWrapper>
                             <Wrapper>
                                 <label>Instituição de ensino</label>
                                 <input type="text" name="instituitionName" {...register(`academicsInfo.${index}.instituitionName`)} defaultValue={field?.instituitionName} />
-                                {errors?.academicsInfo?.[index]?.instituitionName && (
-                                    <span>
-                                        {errors.academicsInfo?.[index]?.instituitionName.message}
-                                    </span>)}
+                                <span>{errors?.academicsInfo?.[index]?.instituitionName?.message}</span>
                             </Wrapper>
                             <Wrapper>
                                 <label>Curso</label>
                                 <input type="text" name="courseName" {...register(`academicsInfo.${index}.courseName`)} defaultValue={field.coursenName} />
-                                {errors.academicsInfo?.[index]?.courseName && (
                                 <span>
-                                    {errors.academicsInfo?.[index]?.courseName.message}
-                                </span>)}
+                                    {errors?.academicsInfo?.[index]?.courseName?.message}
+                                </span>
                             </Wrapper>
                             <Wrapper>
                                 <label htmlFor="tipoFormacao">Formação</label>
@@ -62,11 +58,9 @@ export function FormInfoAcad({ useForm }) {
                                     <option value={5}>Mestrado</option>
                                     <option value={6}>Doutorado</option>
                                 </select>
-                                {errors.academicsInfo?.[index]?.academicFormation && (
-                                    <span>
-                                        {errors.academicsInfo?.[index]?.academicFormation.message}
-                                    </span>
-                                )}
+                                <span>
+                                    {errors?.academicsInfo?.[index]?.academicFormation?.message}
+                                </span>
                             </Wrapper>
                         </FormWrapper>
                         <FormWrapper>
@@ -78,30 +72,24 @@ export function FormInfoAcad({ useForm }) {
                                     <option value={2}>Concluído</option>
                                     <option value={3}>Trancado</option>
                                 </select>
-                                {errors.academicsInfo?.[index]?.instituitionName && (
-                                    <span>
-                                        {errors.academicsInfo?.[index]?.instituitionName.message}
-                                    </span>
-                                )}
+                                <span>
+                                    {errors?.academicsInfo?.[index]?.instituitionName?.message}
+                                </span>
                             </Wrapper>
                             <Wrapper>
                                 <label>Data de inicio</label>
                                 <input type="date" {...register(`academicsInfo.${index}.graduationStartDate`)} defaultValue={field.graduationStartDate} />
-                                {errors.academicsInfo?.[index]?.graduationStartDate && (
-                                    <span>
-                                        {errors.academicsInfo?.[index]?.graduationStartDate.message}
-                                    </span>
-                                )}
+                                <span>
+                                    {errors?.academicsInfo?.[index]?.graduationStartDate?.message}
+                                </span>
                             </Wrapper>
-                            {moment !== 'cursando' && (
+                            {moment !== '1' && (
                                 <Wrapper>
                                     <label>Data de término</label>
                                     <input type="date" {...register(`academicsInfo.${index}.graduationEndDate`)} defaultValue={field.graduationEndDate} />
-                                    {errors.academicsInfo?.[index]?.graduationEndDate && (
-                                        <span>
-                                            {errors.academicsInfo?.[index]?.graduationEndDate.message}
-                                        </span>
-                                    )}
+                                    <span>
+                                        {errors?.academicsInfo?.[index]?.graduationEndDate?.message}
+                                    </span>
                                 </Wrapper>
                             )}
                             <button onClick={() => remove(field.id)}>

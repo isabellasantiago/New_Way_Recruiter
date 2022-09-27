@@ -1,5 +1,5 @@
-import React from 'react';
-import { Form } from './style';
+import React, { useState } from 'react';
+import { Form, Division } from './style';
 import { Wrapper } from '../../../components/Wrapper';
 import Button from '../../../../../components/Button/Button'
 import { FormWrapper } from '../../infoAcademicas/Form/style'
@@ -8,6 +8,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 
 
 export function ProfessionalExpierenceForm({ useForm }) {
+    const [moment, setMoment] = useState(false);
     const { register, control, errors } = useForm;
     const { append, remove, fields } = useFieldArray({
         name: 'previousJobsInfo',
@@ -26,31 +27,27 @@ export function ProfessionalExpierenceForm({ useForm }) {
     }
 
     return (
-        <Form>
-            <Button onClick={add}>
-                Adicionar
+        <Form id="pvJobs">
+            <Button onClick={add} style={{marginBottom: '10px'}}>
+                <a href="#pvJobs">Adicionar</a>
             </Button>
             {fields.map((field, index) => {
                 return (
-                    <>
-                        <FormWrapper id="row1">
+                    <Division key={field.id}>
+                        <FormWrapper id="row1" >
                             <Wrapper>
                                 <label htmlFor="previousCompanyName">Empresa</label>
-                                <input type="text" name="previousCompanyName" defaultValue={field.previousCompanyName} {...register(`previousJobsInfo.${index}.previousCompanyName`)} />
-                                {errors.previousJobsInfo?.[index]?.previousCompanyName && (
-                                    <span>
-                                        {errors.previousJobsInfo?.[index]?.previousCompanyName.message}
-                                    </span>
-                                )}
+                                <input type="text" name="previousCompanyName" defaultValue={field.previousCompanyName} {...register(`previousJobsInfo.${index}.previousCompanyName`)}/>
+                                <span>
+                                    {errors?.previousJobsInfo?.[index]?.previousCompanyName?.message}
+                                </span>
                             </Wrapper>
                             <Wrapper>
                                 <label htmlFor="role">Cargo</label>
                                 <input type="text" defaultValue={field.role} {...register(`previousJobsInfo.${index}.role`)} />
-                                {errors.previousJobsInfo?.[index]?.role && (
-                                    <span>
-                                        {errors.previousJobsInfo?.[index]?.role.message}
-                                    </span>
-                                )}
+                                <span>
+                                    {errors?.previousJobsInfo?.[index]?.role?.message}
+                                </span>
                             </Wrapper>
                         </FormWrapper>
                         <FormWrapper>
@@ -65,40 +62,38 @@ export function ProfessionalExpierenceForm({ useForm }) {
                                     <option value={3}>Pleno</option>
                                     <option value={4}>Senior</option>
                                 </select>
-                                {errors.previousJobsInfo?.[index]?.level && (
-                                    <span>
-                                        {errors.previousJobsInfo?.[index]?.level.message}
-                                    </span>
-                                )}
+                                <span>
+                                    {errors?.previousJobsInfo?.[index]?.level?.message}
+                                </span>
                             </Wrapper>
                             <Wrapper>
                                 <label>Data de inicio</label>
                                 <input type="date" name="fromDate" defaultValue={field.fromDate} {...register(`previousJobsInfo.${index}.fromDate`)} />
-                                {errors.previousJobsInfo?.[index]?.fromDate && (
-                                    <span>
-                                        {errors.previousJobsInfo?.[index]?.fromDate.message}
-                                    </span>
-                                )}
+                                <span>
+                                    {errors?.previousJobsInfo?.[index]?.fromDate?.message}
+                                </span>
                             </Wrapper>
-                            <Wrapper>
+                            {!moment && (
+                                <Wrapper>
                                 <label htmlFor="toDate">Data final</label>
                                 <input type="date" name="toDate" defaultValue={field.toDate} {...register(`previousJobsInfo.${index}.toDate`)} />
-                                {errors.previousJobsInfo?.[index]?.toDate && (
-                                    <span>
-                                        {errors.previousJobsInfo?.[index]?.toDate.message}
-                                    </span>
-                                )}
+                                <span>
+                                    {errors?.previousJobsInfo?.[index]?.toDate?.message}
+                                </span>
+                            </Wrapper>
+                            )}
+                            <Wrapper>
+                                <p>Trabalho aqui atualmente</p>
+                                <input type="checkbox" onClick={() => setMoment(value => !value)}/>
                             </Wrapper>
                         </FormWrapper>
                         <FormWrapper justify="space-evenly">
                             <Wrapper>
                                 <label htmlFor="jobDescription">Descrição</label>
                                 <textarea name="jobDescription" cols="30" rows="10" defaultValue={field.jobDescription} maxLength="600"></textarea>
-                                {errors.previousJobsInfo?.[index]?.jobDescription && (
-                                    <span>
-                                        {errors.previousJobsInfo?.[index]?.jobDescription.message}
-                                    </span>
-                                )}
+                                <span>
+                                    {errors?.previousJobsInfo?.[index]?.jobDescription?.message}
+                                </span>
                             </Wrapper>
                             <button onClick={() => remove(field.id)}>
                                 <DeleteOutlineIcon
@@ -108,7 +103,7 @@ export function ProfessionalExpierenceForm({ useForm }) {
                                 </DeleteOutlineIcon>
                             </button>
                         </FormWrapper>
-                    </>
+                    </Division>
                 )
             })}
         </Form>

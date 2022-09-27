@@ -9,6 +9,7 @@ import {Wrapper} from '../../components/Wrapper';
 export function DadosPessoaisSection({useForm}){
     const { register, errors, watch } = useForm;
 
+    const personalData = watch('personalData');
 
     return(
         <DadosPessoais>
@@ -17,64 +18,50 @@ export function DadosPessoaisSection({useForm}){
                 <Grid>
                     <Wrapper>
                         <label htmlFor="image">Imagem</label>
-                        <input type="url" name="image" className="image" placeholder="Adicione o link da sua imagem" {...register('imageURL')}/>
-                        {errors?.imageURL &&
-                            <span>{errors?.imageURL.message}</span>
-                        }
+                        <input type="url" name="image" className="image" placeholder="Adicione o link da sua imagem" {...register('personalData.imageURL')} defaultValue={personalData.imageURL}/>
+                        <span>{errors?.personalData?.imageURL?.message}</span>
                     </Wrapper>
                 
                     <Wrapper>
                         <label htmlFor="linkedin">Linkedin</label>
-                        <input type="url" name="linkedin" className="linkedin" {...register('linkedinURL')}/>
-                        {errors?.linkedinURL &&
-                            <span>{errors?.linkedinURL.message}</span>
-                        }
+                        <input type="url" name="linkedin" className="linkedin" {...register('personalData.linkedinURL')} defaultValue={personalData.linkedinURL}/>
+                        <span>{errors?.personalData?.linkedinURL?.message}</span>
                     </Wrapper>
                 </Grid>
                 <Grid>
                     <Wrapper>
                         <label htmlFor="naturalness">Naturalidade *</label>
-                        <select name="naturalness" id="naturalness" className="naturalness" {...register('naturalness')}>
+                        <select name="naturalness" id="naturalness" className="naturalness" {...register('personalData.naturalness')} defaultValue={personalData.naturalness}>
                             <option value="">Selecione</option>
                             <option value="br">Brasileira(o)</option>
                             <option value="estrangeiro">Estrangeira(o)</option>
                         </select>
-                        {errors?.naturalness &&
-                            <span>{errors?.naturalness.message}</span>
-                        }
+                        <span>{errors?.personalData?.naturalness?.message}</span>
                     </Wrapper>
                     <Wrapper>
                         <label htmlFor="birthDate">Data de nascimento*</label>
-                        <input type="date" className="birthDate" name="birthDate" {...register('birthDate')}/>
-                        {errors?.birthDate &&
-                            <span>{errors?.birthDate.message}</span>
-                        }
+                        <input type="date" className="birthDate" name="birthDate" {...register('personalData.birthDate')} defaultValue={personalData.birthDate}/>
+                        <span>{errors?.personalData?.birthDate?.message}</span>
                     </Wrapper>
                 </Grid>
                 <Grid>
                     <Wrapper>
-                        <label htmlFor="state" >Estado*</label>
-                        <SelectEstado className="state" name="state" register={register}/>
-                        {errors?.state &&
-                            <span>{errors?.state.message}</span>
-                        }
+                        <label htmlFor="personalData.state" >Estado*</label>
+                        <SelectEstado className="state" name="personalData.state" register={register} defaultValue={personalData.state}/>
+                        <span>{errors?.personalData?.state?.message}</span>
                     </Wrapper>
 
                     <Wrapper>
                         <label htmlFor="city" className="city">Cidade*</label>
-                        <SelectCidade id="city" name="city" state={watch('personalDatas.state')} register={register}/>
-                        {errors?.city &&
-                            <span>{errors?.city.message}</span>
-                        }
+                        <SelectCidade id="city" name="personalData.city" state={personalData.state} register={register} defaultValue={personalData.city}/>
+                        <span>{errors?.personalData?.city?.message}</span>
                     </Wrapper>
                 </Grid>
                 <Grid>
                     <Wrapper>
                         <label htmlFor="phone" className="phone">Celular</label>
-                        <input type="tel" name="phone" className="phone" {...register('phone')}/>
-                        {errors?.phone &&
-                            <span>{errors?.phone.message}</span>
-                        }
+                        <input type="tel" name="phone" placeholder="(11) 91111-4112" className="phone" {...register('personalData.phone')} defaultValue={personalData.phone}/>
+                        <span>{errors?.personalData?.phone?.message}</span>
                     </Wrapper>
                 </Grid>
             </DadosPessoaisForm>

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const Form = styled.section`
     width: 90%;
     height: 100%;
     font-family:"Poppins", Sans-serif;
 
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: space-between;
 
@@ -36,4 +36,11 @@ export const Form = styled.form`
             max-width: 300px;
         }
     }
+`;
+
+export const Division = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;

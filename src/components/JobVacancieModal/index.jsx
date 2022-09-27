@@ -25,16 +25,12 @@ const JobVacancieModal = ({
     const { authenticated, user } = useContext(AuthContext);
     const token = localStorage.getItem('token');
 
-    console.log('jobvacancie', jobVacancie);
-    
-
     if(!authenticated || !user || !token) {
         navigate('/login')
     }
 
     const defaultFormValues = () => {
         if(update && jobVacancie){
-            console.log('caiu default')
             const response = {
                 title: jobVacancie.title,
                 salary: jobVacancie.salary,
@@ -78,7 +74,6 @@ const JobVacancieModal = ({
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                console.log('response', response)
                 if(response.status === 200 || response.status === 201) {
                     notify(successMessage || 'vaga cadastrada!', 'success');
                     setOpen(false);
@@ -89,7 +84,6 @@ const JobVacancieModal = ({
 
     const onSubmit = async (data) => {
         try{
-                console.log('caiu fora onsubmit')
                 const response = await Api.post('/jobVacancie', {
                     ...data,
                     companyID,

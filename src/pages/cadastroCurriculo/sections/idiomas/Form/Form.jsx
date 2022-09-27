@@ -32,27 +32,23 @@ export function Form({ useForm }) {
                             <InputWrapper>
                                 <Wrapper>
                                     <label>Idioma</label>
-                                    <input name="languageName" type="text" {...register(`languageInfo.${index}.languageName`)} defaultValue={field.languageName}/>
-                                    {errors.languagesInfo?.[index]?.languageName && (
-                                        <span>
-                                            {errors.languagesInfo?.[index]?.languageName.message}
-                                        </span>
-                                    )}
+                                    <input name="languageName" type="text" {...register(`languagesInfo.${index}.languageName`)} defaultValue={field.languageName}/>
+                                    <span>
+                                        {errors?.languagesInfo?.[index]?.languageName?.message}
+                                    </span>
                                 </Wrapper>
                                 <Wrapper>
                                     <label htmlFor="languageLevel">Nível</label>
-                                    <select name="languageLevel" {...register(`languageInfo.${index}.languageLevel`)} defaultValue={field.languageLevel}>
+                                    <select name="languageLevel" {...register(`languagesInfo.${index}.languageLevel`)} defaultValue={field.languageLevel}>
                                         <option value="">Selecione</option>
                                         <option value={1}>Básico</option>
                                         <option value={2}>Intermediario</option>
                                         <option value={3}>Avançado</option>
                                         <option value={4}>Fluente</option>
                                     </select>
-                                    {errors.languageInfo?.[index]?.languageLevel && (
-                                        <span>
-                                            {errors.languageInfo?.[index]?.languageLevel.message}
-                                        </span>
-                                    )}
+                                    <span>
+                                        {errors?.languagesInfo?.[index]?.languageLevel?.message}
+                                    </span>
                                 </Wrapper>
                                 <button onClick={() => remove(field.id)}>
                                 <DeleteOutlineIcon

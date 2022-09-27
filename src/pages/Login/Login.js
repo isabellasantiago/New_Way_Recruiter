@@ -20,11 +20,11 @@ export function Login(){
         try{
             ev.preventDefault();
             const userExists = await getUserByEmail(email);
-            console.log(userExists)
+            if(userExists){
+             login(email, senha);
+            }
             
-            login(email, senha);
         }catch(err){
-            console.log('caiu erro')
             if(err) notify(`${err.message}`, 'error')
             setShowRegister(true);
         }

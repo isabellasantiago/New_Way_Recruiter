@@ -8,8 +8,12 @@ export const Wrapper = styled.div`
     font-family: "Poppins", sans-serif;
     position: relative;
 
-    select{
+    select, p{
         font-family: "Poppins", sans-serif;
+    }
+
+    p {
+        font-size: 14px;
     }
 
     input, select{

@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useContext, useLayoutEffect, useState } from 'react';
+import { Cv, ButtonNext } from './style';
 import { DadosPessoaisSection } from './sections/dadosPessoais/DadosPessoais';
 import { InfoAcademicas } from './sections/infoAcademicas/InfoAcademicas';
 import {HeaderComponent} from '../../components/HeaderComponent/HeaderComponent';
@@ -10,48 +10,22 @@ import { DadosContratacao } from './sections/contratacao';
 
 import {ReactComponent as OnlineCV } from '../../assets/images/onlineCV.svg'
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getCandidateById, getResume } from '../../shared/functions/candidate';
 import { yupResolver } from '@hookform/resolvers/yup';
-import schema from '../../validation/validation';
+import { schema } from '../../validation/validation';
+import Api from '../../services/mainApi';
+import { AuthContext } from '../../services/contexts/auth';
 
-
-const Cv = styled.form`
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
-
-    #cabecalho{
-        margin-top: 20px;
-
-        display: flex;
-        flex-flow: column nowrap;
-
-        text-align: center;
-        gap: 16px;
-        align-items: center;
-        justify-content: center;
-    
-
-        h1{
-            font-weight: 500;
-        }
-    }
-
-    #row {
-        width: 100%;
-        position: relative;
-        padding: 20px;
-    }
-`;
 
 export function Curriculo(){
+    const navigate = useNavigate();
     const { id } = useParams();
     const [candidate, setCandidate] = useState();
     const [resume, setResume] = useState({
+        candidateID: '',
+        id: '',
         personalData: {
-          id: '',
-          candidateID: '',
           imageURL: '' ,
           linkedinURL: '',
           naturalness: '',
@@ -71,12 +45,10 @@ export function Curriculo(){
             graduationEndDate: '',
             graduationStartDate: '',
         }],
-        languagesInfo: [
-            {
-                languageName: '',
-                languageLevel: 0
-            }
-        ],
+        languagesInfo: [{
+            languageName: '',
+            languageLevel: 0
+        }],
         previousJobsInfo: [{
             previousCompanyName: '',
             role: '',
@@ -84,12 +56,15 @@ export function Curriculo(){
             fromDate: '',
             toDate: '',
             jobDescription: '',
-        }]
+        }],
+        
     });
+    const { authenticated, user } = useContext(AuthContext);
+    const token = localStorage.getItem('token');
 
     useLayoutEffect(() => {
         const getCandidate = async () => {
-            const { data } = await getCandidateById(id);
+            const { data } = await getCandidateById(user?.id);
             setCandidate(data);
             return;
         }
@@ -106,15 +81,45 @@ export function Curriculo(){
     }, [id]);
 
 
-    const { register, formState: errors, handleSubmit, control, watch } = useForm({
+    const { register, formState: { errors } , handleSubmit, control, watch } = useForm({
         defaultValues: resume,
         resolver: yupResolver(schema),
         mode: 'onBlur',
-        reValidateMode: 'onChange'
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        const { personalData, academicsInfo, languagesInfo, previousJobsInfo } = data;
+        const cv = {
+            candidateID: candidate?.id,
+            imageURL: personalData.imageURL,
+            linkedinURL: personalData.linkedinURL,
+            naturalness: personalData.naturalness,
+            city: personalData.city,
+            state: personalData.state,
+            phone: personalData.phone,
+            field: personalData.field,
+            contractType: personalData.contractType,
+            level: personalData.level,
+            role: personalData.role,
+            academics: academicsInfo,
+            languages: languagesInfo,
+            previousJobs: previousJobsInfo,
+        }
+
+        if(resume.id === ''){
+            const response = await Api.post(`/cv/${candidate?.id}`, {
+                cv,
+            }, {
+                    headers:{
+                        'Authorization': `Bearer ${token}`
+                    }
+            })
+        }
         console.log('data', data)
+    }
+
+    if(candidate?.id !== id || !authenticated || !user){
+        navigate('/home');
     }
 
     return(
@@ -157,17 +162,19 @@ export function Curriculo(){
     <DadosContratacao
         useForm={{
             register,
-            errors
+            errors,
+            watch
         }}
     />
     <div id="row">
-    <Button type="submit">Finalizar cadastro</Button>
+    <ButtonNext type="submit" value="Finalizar Cadastro"/>
     <OnlineCV style={
         {
             maxWidth:"250px",
             maxHeight:"250px",
             position: "absolute",
-            right: 60,
+            right: 0,
+            bottom: -100,
         }
     }/>
     </div>
