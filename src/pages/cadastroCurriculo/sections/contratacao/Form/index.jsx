@@ -21,10 +21,10 @@ export function FormContratacao({useForm}){
                     <label htmlFor="contractType">Contrato</label>
                     <select name="personalData.contractType" id="contractType" {...register('personalData.contractType')} defaultValue={personalData.contractType}>
                         <option value="">Selecione</option>
-                        <option value={2}>CLT</option>
-                        <option value={1}>PJ</option>
-                        <option value={3}>CLT e PJ</option>
-                        <option value={4}>Outros</option>
+                        <option value={Number(2)}>CLT</option>
+                        <option value={Number(1)}>PJ</option>
+                        <option value={Number(3)}>CLT e PJ</option>
+                        <option value={Number(4)}>Outros</option>
                     </select>
                     <span>{errors?.personalData?.contractType?.message}</span>
                 </Wrapper>
@@ -34,12 +34,12 @@ export function FormContratacao({useForm}){
                     <label htmlFor="level">Nível</label>
                     <select name="level" id="level" {...register('personalData.level')} defaultValue={personalData.level}>
                         <option value="">Selecione</option>
-                        <option value={1}>Estágio</option>
-                        <option value={6}>Agente</option>
-                        <option value={5}>Analista</option>
-                        <option value={2}>Júnior</option>
-                        <option value={3}>Pleno</option>
-                        <option value={4}>Sênior</option>
+                        <option value={Number(1)}>Estágio</option>
+                        <option value={Number(6)}>Agente</option>
+                        <option value={Number(5)}>Analista</option>
+                        <option value={Number(2)}>Júnior</option>
+                        <option value={Number(3)}>Pleno</option>
+                        <option value={Number(4)}>Sênior</option>
                     </select>
                     <span>{errors?.personalData?.level?.message}</span>
                 </Wrapper>

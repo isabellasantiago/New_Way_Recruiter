@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const jobVacancies = [
     {
-        imageURL: 'https://scontent.fcgh13-1.fna.fbcdn.net/v/t39.30808-6/277177471_3168568876765696_3587173016852867370_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9u351O-reh0AX8qTwgO&_nc_ht=scontent.fcgh13-1.fna&oh=00_AT-HYWw3LWb4GhaNi0RIvubzPyTdKjOSxo4CnAicktmo8Q&oe=632F7EC8',
+        imageURL: 'https://s3.amazonaws.com/gupy5/production/companies/477/career/512/images/2022-03-07_18-28_logo.png',
         corporateName: 'RankMyApp',
         title: 'Agile Master',
         cityAndState: 'Remoto',
@@ -15,7 +15,7 @@ const jobVacancies = [
         id: 1,
     },
     {
-        imageURL: 'https://scontent.fcgh13-1.fna.fbcdn.net/v/t39.30808-6/277177471_3168568876765696_3587173016852867370_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9u351O-reh0AX8qTwgO&_nc_ht=scontent.fcgh13-1.fna&oh=00_AT-HYWw3LWb4GhaNi0RIvubzPyTdKjOSxo4CnAicktmo8Q&oe=632F7EC8',
+        imageURL: 'https://s3.amazonaws.com/gupy5/production/companies/477/career/512/images/2022-03-07_18-28_logo.png',
         corporateName: 'RankMyApp',
         title: 'Desenvolvedor Web',
         cityAndState: 'Remoto',
@@ -24,7 +24,7 @@ const jobVacancies = [
         id: 2,
     },
     {
-        imageURL: 'https://scontent.fcgh13-1.fna.fbcdn.net/v/t39.30808-6/277177471_3168568876765696_3587173016852867370_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9u351O-reh0AX8qTwgO&_nc_ht=scontent.fcgh13-1.fna&oh=00_AT-HYWw3LWb4GhaNi0RIvubzPyTdKjOSxo4CnAicktmo8Q&oe=632F7EC8',
+        imageURL: 'https://s3.amazonaws.com/gupy5/production/companies/477/career/512/images/2022-03-07_18-28_logo.png',
         corporateName: 'RankMyApp',
         title: 'Product Owner SR',
         cityAndState: 'Remoto',
@@ -33,7 +33,7 @@ const jobVacancies = [
         id: 3,
     },
     {
-        imageURL: 'https://scontent.fcgh13-1.fna.fbcdn.net/v/t39.30808-6/277177471_3168568876765696_3587173016852867370_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9u351O-reh0AX8qTwgO&_nc_ht=scontent.fcgh13-1.fna&oh=00_AT-HYWw3LWb4GhaNi0RIvubzPyTdKjOSxo4CnAicktmo8Q&oe=632F7EC8',
+        imageURL: 'https://s3.amazonaws.com/gupy5/production/companies/477/career/512/images/2022-03-07_18-28_logo.png',
         corporateName: 'RankMyApp',
         title: 'Agile Especialist',
         cityAndState: 'Remoto',
@@ -42,7 +42,7 @@ const jobVacancies = [
         id: 4,
     },
     {
-        imageURL: 'https://scontent.fcgh13-1.fna.fbcdn.net/v/t39.30808-6/277177471_3168568876765696_3587173016852867370_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9u351O-reh0AX8qTwgO&_nc_ht=scontent.fcgh13-1.fna&oh=00_AT-HYWw3LWb4GhaNi0RIvubzPyTdKjOSxo4CnAicktmo8Q&oe=632F7EC8',
+        imageURL: 'https://s3.amazonaws.com/gupy5/production/companies/477/career/512/images/2022-03-07_18-28_logo.png',
         corporateName: 'RankMyApp',
         title: 'Product Owner',
         cityAndState: 'Remoto',
@@ -51,7 +51,7 @@ const jobVacancies = [
         id: 5,
     },
     {
-        imageURL: 'https://scontent.fcgh13-1.fna.fbcdn.net/v/t39.30808-6/277177471_3168568876765696_3587173016852867370_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9u351O-reh0AX8qTwgO&_nc_ht=scontent.fcgh13-1.fna&oh=00_AT-HYWw3LWb4GhaNi0RIvubzPyTdKjOSxo4CnAicktmo8Q&oe=632F7EC8',
+        imageURL: 'https://s3.amazonaws.com/gupy5/production/companies/477/career/512/images/2022-03-07_18-28_logo.png',
         corporateName: 'RankMyApp',
         title: 'Desenvolvedor Flutter',
         cityAndState: 'Remoto',

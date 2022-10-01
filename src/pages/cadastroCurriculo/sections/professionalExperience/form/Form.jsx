@@ -55,12 +55,12 @@ export function ProfessionalExpierenceForm({ useForm }) {
                                 <label htmlFor="level">Nível operacional</label>
                                 <select name="level" defaultValue={field.level} {...register(`previousJobsInfo.${index}.level`)}>
                                     <option value="">Selecione</option>
-                                    <option value={1}>Estágio</option>
-                                    <option value={6}>Agente</option>
-                                    <option value={5}>Analista</option>
-                                    <option value={2}>Junior</option>
-                                    <option value={3}>Pleno</option>
-                                    <option value={4}>Senior</option>
+                                    <option value={Number(1)}>Estágio</option>
+                                    <option value={Number(6)}>Agente</option>
+                                    <option value={Number(5)}>Analista</option>
+                                    <option value={Number(2)}>Junior</option>
+                                    <option value={Number(3)}>Pleno</option>
+                                    <option value={Number(4)}>Senior</option>
                                 </select>
                                 <span>
                                     {errors?.previousJobsInfo?.[index]?.level?.message}
@@ -76,7 +76,7 @@ export function ProfessionalExpierenceForm({ useForm }) {
                             {!moment && (
                                 <Wrapper>
                                 <label htmlFor="toDate">Data final</label>
-                                <input type="date" name="toDate" defaultValue={field.toDate} {...register(`previousJobsInfo.${index}.toDate`)} />
+                                <input type="date" name="toDate" defaultValue={''} {...register(`previousJobsInfo.${index}.toDate`)} />
                                 <span>
                                     {errors?.previousJobsInfo?.[index]?.toDate?.message}
                                 </span>
@@ -90,7 +90,7 @@ export function ProfessionalExpierenceForm({ useForm }) {
                         <FormWrapper justify="space-evenly">
                             <Wrapper>
                                 <label htmlFor="jobDescription">Descrição</label>
-                                <textarea name="jobDescription" cols="30" rows="10" defaultValue={field.jobDescription} maxLength="600"></textarea>
+                                <textarea name="jobDescription" cols="30" rows="10" defaultValue={field.jobDescription} maxLength="600" {...register(`previousJobsInfo.${index}.jobDescription`)}></textarea>
                                 <span>
                                     {errors?.previousJobsInfo?.[index]?.jobDescription?.message}
                                 </span>

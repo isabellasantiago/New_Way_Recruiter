@@ -107,7 +107,7 @@ export const JobVacancieProfile = () => {
     const [hide, setHide] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showCandidatesModal, setShowCandidatesModal] = useState(false);
-    const { authenticated, user } = useContext(AuthContext);
+    const { authenticated, user, logout } = useContext(AuthContext);
     const [reload, setReload] = useState(false);
     const token = localStorage.getItem('token');
 
@@ -134,6 +134,12 @@ export const JobVacancieProfile = () => {
             }
 
         }catch(err){
+            const message = err.message.split(' ')
+            if(message[message.length - 1] === '401') {
+                notify('Desculpe, ocorreu um erro, precisamos que você logue novamente.', 'error');
+                logout();
+                return;
+            }
             if(err) notify(`${err.message}`, 'error');
         }
     }

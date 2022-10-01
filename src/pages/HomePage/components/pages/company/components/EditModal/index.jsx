@@ -37,7 +37,7 @@ export const EditModal = ({
     const [openModal, setOpenModal] = useState(false);
 
     const navigate = useNavigate();
-    const { authenticated, user } = useContext(AuthContext);
+    const { authenticated, user, logout } = useContext(AuthContext);
     const token = localStorage.getItem('token');
     
 
@@ -76,7 +76,13 @@ export const EditModal = ({
                 setReload(true);
                 setOpen(false);
             };
-        }catch(err){  
+        }catch(err){
+            const message = err.message.split(' ')
+            if(message[message.length - 1] === '401') {
+                notify('Desculpe, ocorreu um erro, precisamos que você logue novamente.', 'error');
+                logout();
+                return;
+            } 
             if(err) notify(`${err.message}`, 'error');
         }
     }

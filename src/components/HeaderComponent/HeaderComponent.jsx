@@ -23,7 +23,7 @@ export function HeaderComponent({
     }
     return (
     <>
-    {candidate ? (
+    {candidate === true ? (
     <HeaderStyle>
         <header>
             <div>

@@ -41,7 +41,7 @@ export function ProfileVCand(){
   }
   return(
     <>
-      <HeaderComponent candidato={true} perfil="selected"/>
+      <HeaderComponent candidate={true} perfil="selected"/>
       <S.Section>
           <S.ProfileInfo>
               <ProfilePic 
@@ -54,7 +54,7 @@ export function ProfileVCand(){
               <p>Designer UX Pleno - há 1 ano</p>
               </S.ProfileDescription>
               <S.ControlBtn>
-               {user?.id && candidate?.id ? (
+               {user?.id === candidate?.id ? (
                 <S.IconBtn onClick={handleClick}>
                 <S.Icon alt="editar perfil" className="editicon" src={editPencil}/>
                </S.IconBtn>

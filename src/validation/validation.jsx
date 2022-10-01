@@ -12,8 +12,8 @@ import * as yup from 'yup';
         phone: yup.string().matches(/^\([1-9]{2}\) 9[0-9]{1}[0-9]{3}\-[0-9]{4}$/, { message: 'Número de telefone invalido'}),
         role: yup.string().required('Campo obrigatório'),
         field: yup.string().required('Selecione um campo'),
-        contractType: yup.number('Selecione um campo').integer('Selectione um campo').required('Campo obrigatório'),
-        level: yup.number({message: 'Selecione um campo'}).integer('Selecione um campo').required('campo obrigatório'),
+        contractType: yup.number('Selecione um campo').integer('Selectione um campo').typeError('Selecione um campo').required('Campo obrigatório'),
+        level: yup.number({message: 'Selecione um campo'}).integer('Selecione um campo').typeError('Selecione um campo').required('campo obrigatório'),
     }),
     academicsInfo: yup.array().of(
         yup.object().shape({
@@ -21,14 +21,14 @@ import * as yup from 'yup';
             courseName: yup.string().required('Este campo é um campo é obrigatório'),
             academicFormation: yup.string().required('Este campo é um campo é obrigatório'),
             academicFormationStatus: yup.string().required('Este campo é um campo é obrigatório'),
-            graduationEndDate: yup.date('Data inválida').required('Este campo é um campo é obrigatório'),
-            graduationStartDate: yup.date('Data inválida').required('Este campo é um campo é obrigatório'),
+            graduationEndDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').default(null).nullable(),
+            graduationStartDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').required('Este campo é um campo é obrigatório'),
         }).nullable()
     ),
     languagesInfo: yup.array().of(
         yup.object().shape({
             languageName: yup.string().required('Campo vazio'),
-            languageLevel: yup.number('Selecione um campo').integer().required('Selecione um campo'),
+            languageLevel: yup.number('Selecione um campo').integer('Selecione um campo').typeError('Selecione um campo').required('Selecione um campo'),
         })
     ).nullable(),
     previousJobsInfo: yup.array().of(
@@ -36,8 +36,8 @@ import * as yup from 'yup';
             previousCompanyName: yup.string().required('campo obrigatório'),
             role: yup.string().required('campo obrigatório'),
             level: yup.number('Selecione um campo').integer('Selecione um campo').required('campo obrigatório'),
-            fromDate: yup.date('data inválida').required('campo obrigatorio'),
-            toDate: yup.date('data inválida').nullable(),
+            fromDate: yup.date('Data inválida').typeError('Data inválida').required('campo obrigatorio'),
+            toDate: yup.date('Data inválida').default(null).nullable().typeError('Data inválida'),
             jobDescription: yup.string(),
         })
     ).nullable(),

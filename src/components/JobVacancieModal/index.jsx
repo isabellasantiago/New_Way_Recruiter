@@ -22,7 +22,7 @@ const JobVacancieModal = ({
     setReload = () => {},
 }) => {
     const navigate = useNavigate();
-    const { authenticated, user } = useContext(AuthContext);
+    const { authenticated, user, logout } = useContext(AuthContext);
     const token = localStorage.getItem('token');
 
     if(!authenticated || !user || !token) {
@@ -100,6 +100,12 @@ const JobVacancieModal = ({
                 };
                 return response;
         }catch(err){
+            const message = err.message.split(' ')
+            if(message[message.length - 1] === '401') {
+                notify('Desculpe, ocorreu um erro, precisamos que você logue novamente.', 'error');
+                logout();
+                return;
+            }
             if(err) notify(`${err.message}`, 'error');
         }
     }
@@ -134,10 +140,10 @@ const JobVacancieModal = ({
                             style={{ maxWidth: '130px' }}
                             name="contractType"
                             {...register('contractType')}>
-                            <option value={1}>PJ</option>
-                            <option value={2}>CLT</option>
-                            <option value={3}>CLT ou PJ</option>
-                            <option value={4}>OUTROS</option>
+                            <option value={Number(1)}>PJ</option>
+                            <option value={Number(2)}>CLT</option>
+                            <option value={Number(3)}>CLT ou PJ</option>
+                            <option value={Number(4)}>OUTROS</option>
                         </select>
                         <span>{errors?.contractType?.message}</span>
                     </InputDiv>
@@ -167,12 +173,12 @@ const JobVacancieModal = ({
                             <select
                                 name="level"
                                 {...register('level')}>
-                                <option value={1}>ESTÁGIO</option>
-                                <option value={2}>JR</option>
-                                <option value={3}>PL</option>
-                                <option value={4}>SR</option>
-                                <option value={4}>ANALISTA</option>
-                                <option value={5}>AGENTE</option>
+                                <option value={Number(1)}>ESTÁGIO</option>
+                                <option value={Number(2)}>JR</option>
+                                <option value={Number(3)}>PL</option>
+                                <option value={Number(4)}>SR</option>
+                                <option value={Number(4)}>ANALISTA</option>
+                                <option value={Number(5)}>AGENTE</option>
                             </select>
                             <span>{errors?.level?.message}</span>
                         </InputDiv>

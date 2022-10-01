@@ -41,10 +41,10 @@ export function Form({ useForm }) {
                                     <label htmlFor="languageLevel">Nível</label>
                                     <select name="languageLevel" {...register(`languagesInfo.${index}.languageLevel`)} defaultValue={field.languageLevel}>
                                         <option value="">Selecione</option>
-                                        <option value={1}>Básico</option>
-                                        <option value={2}>Intermediario</option>
-                                        <option value={3}>Avançado</option>
-                                        <option value={4}>Fluente</option>
+                                        <option value={Number(1)}>Básico</option>
+                                        <option value={Number(2)}>Intermediario</option>
+                                        <option value={Number(3)}>Avançado</option>
+                                        <option value={Number(4)}>Fluente</option>
                                     </select>
                                     <span>
                                         {errors?.languagesInfo?.[index]?.languageLevel?.message}

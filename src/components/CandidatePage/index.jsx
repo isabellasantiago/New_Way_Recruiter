@@ -13,7 +13,7 @@ export const CandidatePage = ({
         <>
         <Body>
             <HeaderComponent
-                candidate
+                candidate={true}
             />
             {children}
         </Body>

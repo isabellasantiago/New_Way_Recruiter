@@ -38,7 +38,6 @@ export function CandidatoForm(){
      return response;
      }catch(err){
       if(err) {
-        console.log(err.message);
         notify(`${err.message}`,'error');
       }
      }
