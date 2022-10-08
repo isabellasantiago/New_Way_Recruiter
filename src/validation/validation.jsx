@@ -21,7 +21,7 @@ import * as yup from 'yup';
             courseName: yup.string().required('Este campo é um campo é obrigatório'),
             academicFormation: yup.string().required('Este campo é um campo é obrigatório'),
             academicFormationStatus: yup.string().required('Este campo é um campo é obrigatório'),
-            graduationEndDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').default(null).nullable(),
+            graduationEndDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').default(null).nullable(true).notRequired(true),
             graduationStartDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').required('Este campo é um campo é obrigatório'),
         }).nullable()
     ),
@@ -37,7 +37,7 @@ import * as yup from 'yup';
             role: yup.string().required('campo obrigatório'),
             level: yup.number('Selecione um campo').integer('Selecione um campo').required('campo obrigatório'),
             fromDate: yup.date('Data inválida').typeError('Data inválida').required('campo obrigatorio'),
-            toDate: yup.date('Data inválida').default(null).nullable().typeError('Data inválida'),
+            toDate: yup.date('Data inválida').default(null).nullable(true).typeError('Data inválida').notRequired(true),
             jobDescription: yup.string(),
         })
     ).nullable(),

@@ -1,4 +1,5 @@
 import React from "react";
+import { QueryClientProvider, QueryClient } from 'react-query'
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import { CandidatoForm } from "./pages/CandidatoCadastro/Candidato";
 import { EditarExcluirCandidato } from "./pages/Editar-Excluir/Candidato/EditarExcluirCandidato";
@@ -15,32 +16,35 @@ import { HomePage } from "./pages/HomePage";
 import { JobVacanciesList } from "./pages/JobVacancieList";
 import { JobVacancieProfile } from "./pages/JobVacancieProfile";
 
+const queryClient = new QueryClient();
 
 function App() {
 
   return (
-    <BrowserRouter>
-    <AuthProvider>
-      <Routes>
-        <Route path="/" exact element={<Home/>}/>
-        <Route
-            exact
-            path="/login"
-            element={<Login/>}
-        />
-        <Route path="/home" exact element={<PrivateRoute Item={HomePage}/>}/>
-        <Route path="/register/candidate" element={<CandidatoForm/>}/>
-        <Route path="/register/company" element={<EmpresaForm/>}/>
-        <Route path="/job-vacancie/profile/:id" element={<JobVacancieProfile />} />
-        <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
-        <Route exact path="/candidate/profile/:id" element={<ProfileVCand/>}/>
-        <Route exact path="/profile" element={<ProfileVEmp/>}/>
-        <Route path="/candidates" element={<ModalCandidato/>}/>
-        <Route exact path="/candidate/resume/:id" element={<Curriculo/>}/>
-        <Route path="/job-vacancies-list" element={<JobVacanciesList />}/>
-      </Routes>
-    </AuthProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" exact element={<Home/>}/>
+          <Route
+              exact
+              path="/login"
+              element={<Login/>}
+          />
+          <Route path="/home" exact element={<PrivateRoute Item={HomePage}/>}/>
+          <Route path="/register/candidate" element={<CandidatoForm/>}/>
+          <Route path="/register/company" element={<EmpresaForm/>}/>
+          <Route path="/job-vacancie/profile/:id" element={<JobVacancieProfile />} />
+          <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
+          <Route exact path="/candidate/profile/:id" element={<ProfileVCand/>}/>
+          <Route exact path="/profile" element={<ProfileVEmp/>}/>
+          <Route path="/candidates" element={<ModalCandidato/>}/>
+          <Route exact path="/candidate/resume/:id" element={<Curriculo/>}/>
+          <Route path="/job-vacancies-list" element={<JobVacanciesList />}/>
+        </Routes>
+      </AuthProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

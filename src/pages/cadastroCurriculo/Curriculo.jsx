@@ -1,4 +1,5 @@
 import React, { useContext, useLayoutEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { Cv, ButtonNext } from './style';
 import { DadosPessoaisSection } from './sections/dadosPessoais/DadosPessoais';
 import { InfoAcademicas } from './sections/infoAcademicas/InfoAcademicas';
@@ -7,7 +8,7 @@ import Button from '../../components/Button/Button';
 import { Idiomas } from './sections/idiomas/Idiomas';
 import {ProfessionalExpierence} from './sections/professionalExperience/index';
 import { DadosContratacao } from './sections/contratacao';
-
+import { format } from 'date-fns';
 import {ReactComponent as OnlineCV } from '../../assets/images/onlineCV.svg'
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -17,102 +18,128 @@ import { schema } from '../../validation/validation';
 import Api from '../../services/mainApi';
 import { AuthContext } from '../../services/contexts/auth';
 import { notify } from '../../shared/functions/notify/notify';
+import { contract, level } from '../../shared/functions/convert';
 
+const INITIAL_DATA = {
+    candidateID: 0,
+    id: 0,
+    personalData: {
+      imageURL: '' ,
+      linkedinURL: '',
+      naturalness: '',
+      birthDate: '',
+      city: 'São Paulo',
+      state: 'SP',
+      phone: '',
+      field: '',
+      contractType: 0,
+      level: 0,
+      role: '',
+    },
+    academicsInfo: [{
+        id: 0,
+        candidateID: 0,
+        instituitionName: '',
+        courseName: '',
+        academicFormation: '',
+        academicFormationStatus: '',
+        graduationEndDate: null,
+        graduationStartDate: '',
+    }],
+    languagesInfo: [{
+        id: 0,
+        candidateID: 0,
+        languageName: '',
+        languageLevel: 0
+    }],
+    previousJobsInfo: [{
+        id: 0,
+        candidateID: 0,
+        previousCompanyName: '',
+        role: '',
+        level: 0,
+        fromDate: '',
+        toDate: null,
+        jobDescription: '',
+    }],
+}
 
 export function Curriculo(){
     const navigate = useNavigate();
-    const [candidate, setCandidate] = useState();
-    const [resume, setResume] = useState({
-        candidateID: '',
-        id: '',
-        personalData: {
-          imageURL: '' ,
-          linkedinURL: '',
-          naturalness: '',
-          city: '',
-          state: '',
-          phone: '',
-          field: '',
-          contractType: 0,
-          level: 0,
-          role: '',
-        },
-        academicsInfo: [{
-            instituitionName: '',
-            courseName: '',
-            academicFormation: '',
-            academicFormationStatus: '',
-            graduationEndDate: null,
-            graduationStartDate: '',
-        }],
-        languagesInfo: [{
-            languageName: '',
-            languageLevel: 0
-        }],
-        previousJobsInfo: [{
-            previousCompanyName: '',
-            role: '',
-            level: 0,
-            fromDate: '',
-            toDate: null,
-            jobDescription: '',
-        }],
-        
-    });
     const { authenticated, user, logout } = useContext(AuthContext);
     const token = localStorage.getItem('token');
 
-    useLayoutEffect(() => {
-        const getCandidate = async () => {
-            const { data } = await getCandidateById(user?.id);
-            setCandidate(data);
-            return;
+    const { status, data: resume, error, isLoading } = useQuery('resume', async () => {
+        const { data: cv } = await getResume(user?.id);
+        return cv;
+    })
+
+    const { data: candidate, isLoading: LoadingCandidate } = useQuery('candidate', async () => {
+        const { data } = await getCandidateById(user?.id);
+        return data;
+    })
+
+    const defaultValues = () => {
+        if(resume) {
+            const { personalData, academicsInfo, languagesInfo, previousJobsInfo } = resume;
+            const birthDate = format(new Date(personalData?.birthDate), 'yyyy-MM-dd');
+            const response = {
+                id: resume?.id,
+                candidateId: resume?.candidateID,
+                personalData: {
+                    id: personalData?.id,
+                    candidateID: personalData?.candidateID,
+                    imageURL: personalData?.imageURL,
+                    linkedinURL: personalData?.linkedinURL,
+                    naturalness: personalData?.naturalness,
+                    birthDate,
+                    state: "SP",
+                    city: "São Paulo",
+                    phone: personalData?.phone,
+                    field: personalData?.field,
+                    contractType: contract(personalData?.contractType),
+                    level: level(personalData?.level),
+                    role: personalData?.role,
+                },
+                academicsInfo,
+                languagesInfo,
+                previousJobsInfo
+            }
+            console.log('response', response)
+            
+
+            return response || INITIAL_DATA;
         }
-        getCandidate();
-    }, [user?.id]);
+    }
 
-    useLayoutEffect(() => {
-        const getCv = async () => {
-            const { data: cv } = await getResume(user?.id);
-            setResume(cv);
-            return;
-        }
-        getCv();
-    }, [user?.id]);
-
-
-    const { register, formState: { errors } , handleSubmit, control, watch } = useForm({
+    const { register, formState: { errors } , handleSubmit, control, watch, getValues, setValue } = useForm({
         mode: 'onBlur',
-        defaultValues: resume,
+        defaultValues: defaultValues(),
         resolver: yupResolver(schema),
     });
 
     console.log('errors', errors)
-
     const onSubmit = async (data) => {
-        console.log('data', candidate?.id);
         try{
             const { personalData, academicsInfo, languagesInfo, previousJobsInfo } = data;
-            const cv = {
-                candidateID: candidate?.id,
-                imageURL: personalData.imageURL,
-                linkedinURL: personalData.linkedinURL,
-                naturalness: personalData.naturalness,
-                city: personalData.city,
-                state: personalData.state,
-                phone: personalData.phone,
-                field: personalData.field,
-                contractType: personalData.contractType,
-                level: personalData.level,
-                role: personalData.role,
-                academics: academicsInfo,
-                languages: languagesInfo,
-                previousJobs: previousJobsInfo,
-            }
+            const birthDate = new Date(personalData.birthDate);
     
             if(!resume.id || resume.id === ''){
-                const response = await Api.post(`/cv`, {
-                    cv,
+                const response = await Api.post(`/cv/${candidate?.id}`, {
+                    imageURL: personalData.imageURL,
+                    linkedinURL: personalData.linkedinURL,
+                    naturalness: personalData.naturalness,
+                    birthDate,
+                    city: personalData.city,
+                    state: personalData.state,
+                    phone: personalData.phone,
+                    field: personalData.field,
+                    contractType: Number(personalData.contractType),
+                    level: Number(personalData.level),
+                    role: personalData.role,
+                    academics: academicsInfo,
+                    languages: languagesInfo,
+                    previousJobs: previousJobsInfo,
                 }, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -121,10 +148,8 @@ export function Curriculo(){
     
                 if(response.status === 200 || response.status === 201){
                     notify('Curriculo atualizado com sucesso', 'success');
-                    navigate(`/profile/${candidate?.id}`)
+                    navigate(`/candidate/profile/${candidate?.id}`)
                 }
-    
-                return response;
             }
         }catch(err){
             const message = err.message.split(' ')
@@ -137,7 +162,11 @@ export function Curriculo(){
         }
     }
 
-    if(candidate?.id !== user?.id|| !authenticated || !user){
+    if(isLoading || LoadingCandidate){
+        return <h2>Loading...</h2>
+    }
+
+    if(candidate?.id !== user?.id|| !authenticated ){
         navigate('/home');
     }
 
@@ -155,13 +184,16 @@ export function Curriculo(){
                 errors,
                 watch
             }}
+            personalData={resume?.personalData}
         />
         <InfoAcademicas
             useForm={{
                 register,
                 errors,
                 control,
-                watch
+                watch,
+                getValues,
+                setValue
             }}
         />
         <Idiomas
@@ -184,6 +216,7 @@ export function Curriculo(){
                 errors,
                 watch
             }}
+            personalData={resume?.personalData}
         />
         <div id="row">
         <ButtonNext type="submit" value="Finalizar Cadastro"/>

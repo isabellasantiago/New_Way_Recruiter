@@ -7,7 +7,7 @@ import { useFieldArray } from 'react-hook-form';
 
 
 export function FormInfoAcad({ useForm }) {
-    const { register, errors, control, watch } = useForm;
+    const { register, errors, control, watch, getValues, setValue } = useForm;
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'academicsInfo'
@@ -30,8 +30,7 @@ export function FormInfoAcad({ useForm }) {
                 <a href="#infoac">Adicionar</a>
             </Button>
             {fields.map((field, index) => {
-                const moment = watch(`academicsInfo[${index}].academicFormationStatus`);
-                console.log(watch(`academicsInfo[${index}].academicFormationStatus`))
+                const moment = getValues(`academicsInfo.${index}.academicFormationStatus`)
 
                 return (
                     <Form key={field.id} id="infoac">
@@ -43,14 +42,14 @@ export function FormInfoAcad({ useForm }) {
                             </Wrapper>
                             <Wrapper>
                                 <label>Curso</label>
-                                <input type="text" name="courseName" {...register(`academicsInfo.${index}.courseName`)} defaultValue={field.coursenName} />
+                                <input type="text" name="courseName" {...register(`academicsInfo.${index}.courseName`)} defaultValue={field?.coursenName} />
                                 <span>
                                     {errors?.academicsInfo?.[index]?.courseName?.message}
                                 </span>
                             </Wrapper>
                             <Wrapper>
                                 <label htmlFor="tipoFormacao">Formação</label>
-                                <select id="tipoFormacao" name="academicFormation" {...register(`academicsInfo.${index}.academicFormation`)} defaultValue={field.academicFormation}>
+                                <select id="tipoFormacao" name="academicFormation" {...register(`academicsInfo.${index}.academicFormation`)} defaultValue={field?.academicFormation}>
                                     <option value="">Selecione</option>
                                     <option value={Number(1)}>Ensino regular</option>
                                     <option value={Number(7)}>Extra curricular</option>
@@ -68,7 +67,7 @@ export function FormInfoAcad({ useForm }) {
                         <FormWrapper>
                             <Wrapper>
                                 <label htmlFor="statusFormacao">Status</label>
-                                <select id="statusFormacao" name="academicFormationStatus" {...register(`academicsInfo.${index}.academicFormationStatus`)} defaultValue={field.academicFormationStatus}>
+                                <select id="statusFormacao" name="academicFormationStatus" {...register(`academicsInfo.${index}.academicFormationStatus`)} defaultValue={field?.academicFormationStatus} onChange={(e) => setValue(`academicsInfo.${index}.academicFormationStatus`, e.target.value)}>
                                     <option value="">Selecione</option>
                                     <option value={Number(1)}>Cursando</option>
                                     <option value={Number(2)}>Concluído</option>
@@ -80,7 +79,7 @@ export function FormInfoAcad({ useForm }) {
                             </Wrapper>
                             <Wrapper>
                                 <label>Data de inicio</label>
-                                <input type="date" {...register(`academicsInfo.${index}.graduationStartDate`)} defaultValue={field.graduationStartDate} />
+                                <input type="date" {...register(`academicsInfo.${index}.graduationStartDate`)} defaultValue={field?.graduationStartDate} />
                                 <span>
                                     {errors?.academicsInfo?.[index]?.graduationStartDate?.message}
                                 </span>
@@ -88,13 +87,13 @@ export function FormInfoAcad({ useForm }) {
                             {moment !== '1' && (
                                 <Wrapper>
                                     <label>Data de término</label>
-                                    <input type="date" {...register(`academicsInfo.${index}.graduationEndDate`)} defaultValue={null} />
+                                    <input type="date" {...register(`academicsInfo.${index}.graduationEndDate`)} defaultValue={field?.graduationEndDate} />
                                     <span>
                                         {errors?.academicsInfo?.[index]?.graduationEndDate?.message}
                                     </span>
                                 </Wrapper>
                             )}
-                            <button onClick={() => remove(field.id)}>
+                            <button onClick={() => remove(field?.id)}>
                                 <DeleteOutlineIcon
                                     color="#fff"
                                 >

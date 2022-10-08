@@ -76,7 +76,7 @@ export function ProfessionalExpierenceForm({ useForm }) {
                             {!moment && (
                                 <Wrapper>
                                 <label htmlFor="toDate">Data final</label>
-                                <input type="date" name="toDate" defaultValue={''} {...register(`previousJobsInfo.${index}.toDate`)} />
+                                <input type="date" name="toDate" defaultValue={field.toDate} {...register(`previousJobsInfo.${index}.toDate`)} />
                                 <span>
                                     {errors?.previousJobsInfo?.[index]?.toDate?.message}
                                 </span>

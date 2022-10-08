@@ -4,22 +4,21 @@ import { Wrapper } from '../../../components/Wrapper'
 import { SelectArea } from '../../../../../components/SelectArea'
 import { SelectProfession } from '../../../../../components/SelectProfession'
 
-export function FormContratacao({useForm}){
-    const {register, errors, watch} = useForm;
-    const personalData = watch('personalData');
-    const area = personalData.field
+export function FormContratacao({ useForm, personalData }){
+    const {register, errors } = useForm;
+    const area = personalData?.field
 
     return(
         <Form>
             <Row>
                 <Wrapper>
                 <label htmlFor="area">Área desejada</label>
-                <SelectArea id="field" name="personalData.field" register={register} defaultValue={personalData.field}/>
+                <SelectArea id="field" name="personalData.field" register={register} />
                 <span>{errors?.personalData?.field?.message}</span>
                 </Wrapper>
                 <Wrapper>
                     <label htmlFor="contractType">Contrato</label>
-                    <select name="personalData.contractType" id="contractType" {...register('personalData.contractType')} defaultValue={personalData.contractType}>
+                    <select name="personalData.contractType" id="contractType" {...register('personalData.contractType')} >
                         <option value="">Selecione</option>
                         <option value={Number(2)}>CLT</option>
                         <option value={Number(1)}>PJ</option>
@@ -32,7 +31,7 @@ export function FormContratacao({useForm}){
             <Row>
                 <Wrapper>
                     <label htmlFor="level">Nível</label>
-                    <select name="level" id="level" {...register('personalData.level')} defaultValue={personalData.level}>
+                    <select name="level" id="level" {...register('personalData.level')} >
                         <option value="">Selecione</option>
                         <option value={Number(1)}>Estágio</option>
                         <option value={Number(6)}>Agente</option>
@@ -45,7 +44,7 @@ export function FormContratacao({useForm}){
                 </Wrapper>
                 <Wrapper>
                     <label htmlFor="personalData.role">Profissão</label>
-                    <SelectProfession name="personalData.role" id="role" register={register} area={area} defaultValue={personalData.role}/>
+                    <SelectProfession name="personalData.role" id="role" register={register} area={area} />
                     <span>{errors?.personalData?.role?.message}</span>
                 </Wrapper>
             </Row>
