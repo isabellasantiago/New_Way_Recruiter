@@ -12,6 +12,13 @@ export const Container = styled.div`
     margin: 20px 0px;
 `;
 
+export const IsApplied = styled.p`
+    font: 500 14px 'Poppins', sans-serif;
+    width: 180px;
+
+    text-align: center;
+`;
+
 export const Content = styled.div`
     width: 100%;
     height: 100%;

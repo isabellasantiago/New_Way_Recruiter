@@ -132,7 +132,6 @@ export function Curriculo(){
                     birthDate,
                     city: personalData.city,
                     state: personalData.state,
-                    phone: personalData.phone,
                     field: personalData.field,
                     contractType: Number(personalData.contractType),
                     level: Number(personalData.level),
@@ -176,7 +175,6 @@ export function Curriculo(){
         <div id="cabecalho">
             <h1>Cadastre seus dados</h1>
             <p>Lembre-se de sempre manter seu currículo atualizado!</p>
-            <Button id="cancelar">Cancelar</Button>
         </div>
         <DadosPessoaisSection
             useForm={{

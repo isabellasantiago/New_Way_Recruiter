@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useContext } from "react";
+import React, { useState, useLayoutEffect, useContext, useEffect } from "react";
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import CompanyPage from '../../components/CompanyPage';
@@ -6,13 +6,16 @@ import { AuthContext } from "../../services/contexts/auth";
 import { UserTypeEnum } from "../../shared/enums/userType.enum";
 import * as S from './style';
 import { useNavigate, useParams } from "react-router-dom";
-import { getJobVacancieByID } from "../../shared/functions/jobVacancie";
+import { getAllCandidatesByJobVacancie, getAllJobVacanciesThatMatch, getJobVacancieByID } from "../../shared/functions/jobVacancie";
 import { companyTypeDescription, contractDescription, levelDescription } from "../../shared/functions/convert";
 import { YesNoModal } from "../../components/YesNoModal";
 import { notify } from "../../shared/functions/notify/notify";
 import Api from "../../services/mainApi";
 import JobVacancieModal from "../../components/JobVacancieModal";
 import { ModalCandidato } from "../ModalCandidato/ModalCandidato";
+import { CandidatePage } from "../../components/CandidatePage";
+import { useQuery } from "react-query";
+import { getCandidateById } from "../../shared/functions/candidate";
 
 const candidates = [{
     name: 'Chandler',
@@ -111,6 +114,34 @@ export const JobVacancieProfile = () => {
     const [reload, setReload] = useState(false);
     const token = localStorage.getItem('token');
 
+    const { status, data: candidate, errors} = useQuery('candidate', async () => {
+        if(user?.type !== UserTypeEnum.CANDIDATE) {
+            return undefined;
+        }
+
+        const { data } = await getCandidateById(user?.id);
+
+        return data
+    });
+
+    const { data: candidates } = useQuery('candidates', async () => {
+        if(user?.type !== UserTypeEnum.CANDIDATE) {
+            return undefined;
+        }
+
+        const { data } = await getAllJobVacanciesThatMatch(user?.id);
+
+        return data
+    });
+
+    console.log(candidates)
+
+    useEffect(() => {
+        if(user?.type === UserTypeEnum.CANDIDATE) {
+            setHide(true);
+        }
+    }, [user])
+
     useLayoutEffect(() => {
         const getJobVacancie = async () => {
             const { data: jv } = await getJobVacancieByID(id);
@@ -154,6 +185,45 @@ export const JobVacancieProfile = () => {
             setReload(false);
             window.location.reload(false);
         }
+    }
+
+    const handleApply = async () => {
+        try{
+            const response = await Api.post('/apply/', {
+                jobVacancieID: jobVacancie?.id,
+                candidateID: candidate?.id
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+            )
+
+            if(response.status === 201 || response.status === 200) {
+                notify('Vaga candidatada com sucesso', 'success');
+                navigate('/home');
+            }
+
+        }catch(err){
+            const message = err.message.split(' ')
+            if(message[message.length - 1] === '401') {
+                notify('Desculpe, ocorreu um erro, precisamos que você logue novamente.', 'error');
+                logout();
+                return;
+            }
+            if(err) notify(`${err.message}`, 'error');
+        }
+    }
+    
+    const findCandidate = (candidateID) => {
+        const candidate = candidates?.find(data => data.candidate?.id === candidateID)
+
+        return candidate && candidate?.isApplied ? (<S.IsApplied> Você ja é cadastrado nessa vaga!!</S.IsApplied>) : (
+            <>
+                <S.Btn onClick={() => handleApply()}>Candidatar</S.Btn>
+            </>
+        )
     }
 
     const profile = (
@@ -223,24 +293,23 @@ export const JobVacancieProfile = () => {
                 </S.Row>
             </S.Container>
             <S.BtnBox>
-            <S.Btn onClick={() => setShow(true)}>Encerrar vaga</S.Btn>
-            <S.Btn onClick={() => setShowUpdateModal(true)}>Editar vaga</S.Btn>
-            {candidates.length && !hide ? (
-                <>
-                <S.Label color="#023859">Conheça os candidatos!</S.Label>
-                <S.PhotoContainer>
-                    {candidates.map(({imageURL}, index) => {
-                        if(index < 4){
-                            return <S.Candidates src={imageURL}/>
-                        }
-                    })}
-                </S.PhotoContainer>
-                <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>
-                </>
-            ) : (<S.Label color="#023859" ws="normal" align="center" w="140px">Nenhum candidato nessa vaga :'(</S.Label>)}
-            {hide && (
-                    <p>botao</p>
-                )
+            {hide ? (
+                    findCandidate(candidate?.id)
+                ) : (candidates?.length  ? (
+                    <>
+                    <S.Btn onClick={() => setShow(true)}>Encerrar vaga</S.Btn>
+                    <S.Btn onClick={() => setShowUpdateModal(true)}>Editar vaga</S.Btn>
+                    <S.Label color="#023859">Conheça os candidatos!</S.Label>
+                    <S.PhotoContainer>
+                        {candidates?.map(({imageURL}, index) => {
+                            if(index < 4){
+                                return <S.Candidates src={imageURL}/>
+                            }
+                        })}
+                    </S.PhotoContainer>
+                    <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>
+                    </>
+                ) : (<S.Label color="#023859" ws="normal" align="center" w="140px">Nenhum candidato nessa vaga :'(</S.Label>))
             }
             </S.BtnBox>
             {show && (
@@ -283,9 +352,17 @@ export const JobVacancieProfile = () => {
         </>
     )
 
+    const bodyCandidate = (
+        <>
+            <CandidatePage>
+                {profile}
+            </CandidatePage>
+        </>
+    )
+
     return(
         <>
-        {user?.type === UserTypeEnum.COMPANY ? (bodyCompany) : 'uhu'}
+        {user?.type === UserTypeEnum.COMPANY ? (bodyCompany) : (bodyCandidate)}
         {needsReload()}
         </>
     )

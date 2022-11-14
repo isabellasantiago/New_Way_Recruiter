@@ -55,13 +55,6 @@ export function DadosPessoaisSection({useForm, personalData }){
                         <span>{errors?.personalData?.city?.message}</span>
                     </Wrapper>
                 </Grid>
-                <Grid>
-                    <Wrapper>
-                        <label htmlFor="phone" className="phone">Celular</label>
-                        <input type="tel" name="phone" placeholder="(11) 91111-4112" className="phone" {...register('personalData.phone')} />
-                        <span>{errors?.personalData?.phone?.message}</span>
-                    </Wrapper>
-                </Grid>
             </DadosPessoaisForm>
         </DadosPessoais>
     )

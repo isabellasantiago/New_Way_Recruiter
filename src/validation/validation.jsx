@@ -9,7 +9,6 @@ import * as yup from 'yup';
         linkedinURL:yup.string().url('Link inválido'),
         state: yup.string().required('Estado é um campo é obrigatório'),// estado
         city: yup.string().required('Cidade é um campo é obrigatório'),// cidade
-        phone: yup.string().matches(/^\([1-9]{2}\) 9[0-9]{1}[0-9]{3}\-[0-9]{4}$/, { message: 'Número de telefone invalido'}),
         role: yup.string().required('Campo obrigatório'),
         field: yup.string().required('Selecione um campo'),
         contractType: yup.number('Selecione um campo').integer('Selectione um campo').typeError('Selecione um campo').required('Campo obrigatório'),
