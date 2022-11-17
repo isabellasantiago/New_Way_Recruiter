@@ -6,7 +6,7 @@ import { AuthContext } from "../../services/contexts/auth";
 import { UserTypeEnum } from "../../shared/enums/userType.enum";
 import * as S from './style';
 import { useNavigate, useParams } from "react-router-dom";
-import { getAllCandidatesByJobVacancie, getAllJobVacanciesThatMatch, getJobVacancieByID } from "../../shared/functions/jobVacancie";
+import { getAllCandidatesByJobVacancie,  getJobVacancieByID } from "../../shared/functions/jobVacancie";
 import { companyTypeDescription, contractDescription, levelDescription } from "../../shared/functions/convert";
 import { YesNoModal } from "../../components/YesNoModal";
 import { notify } from "../../shared/functions/notify/notify";
@@ -17,82 +17,9 @@ import { CandidatePage } from "../../components/CandidatePage";
 import { useQuery } from "react-query";
 import { getCandidateById } from "../../shared/functions/candidate";
 
-const candidates = [{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ninguém sabe',
-    experienceTime: '1 e 2 meses',
-    imageURL: 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg',
-    percent: '98%',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Office boy',
-    experienceTime: '9 meses',
-    imageURL: 'https://rollingstone.uol.com.br/media/_versions/chandle-bing-reproducao-imdb_widelg.jpg',
-    percent: '98%',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ator',
-    experienceTime: '1 ano',
-    percent: '98%',
-    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Gogo boy',
-    experienceTime: '5 meses',
-    percent: '98%',
-    imageURL: 'https://claudia.abril.com.br/wp-content/uploads/2019/08/chandler.jpg'
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ator',
-    experienceTime: '1 ano',
-    percent: '98%',
-    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Gogo boy',
-    experienceTime: '5 meses',
-    percent: '98%',
-    imageURL: 'https://claudia.abril.com.br/wp-content/uploads/2019/08/chandler.jpg'
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ninguém sabe',
-    experienceTime: '1 e 2 meses',
-    imageURL: 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg',
-    percent: '98%',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Office boy',
-    experienceTime: '9 meses',
-    imageURL: 'https://rollingstone.uol.com.br/media/_versions/chandle-bing-reproducao-imdb_widelg.jpg',
-    percent: '98%',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ator',
-    experienceTime: '1 ano',
-    percent: '98%',
-    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
-}]
-
 export const JobVacancieProfile = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { id: jobVacancieId } = useParams();
 
     const [company, setCompany] = useState({
         imageURL: '',
@@ -125,16 +52,10 @@ export const JobVacancieProfile = () => {
     });
 
     const { data: candidates } = useQuery('candidates', async () => {
-        if(user?.type !== UserTypeEnum.CANDIDATE) {
-            return undefined;
-        }
+        const { data: candidates } = await getAllCandidatesByJobVacancie(jobVacancieId);
 
-        const { data } = await getAllJobVacanciesThatMatch(user?.id);
-
-        return data
+        return candidates;
     });
-
-    console.log(candidates)
 
     useEffect(() => {
         if(user?.type === UserTypeEnum.CANDIDATE) {
@@ -144,16 +65,16 @@ export const JobVacancieProfile = () => {
 
     useLayoutEffect(() => {
         const getJobVacancie = async () => {
-            const { data: jv } = await getJobVacancieByID(id);
+            const { data: jv } = await getJobVacancieByID(jobVacancieId);
             setJobVacancie(jv);
             setCompany(jv.company);
         }
         getJobVacancie();
-    }, [id]);
+    }, [jobVacancieId]);
 
     const deleteJobVacancie = async () => {
         try{
-            const response = await Api.delete(`/jobVacancie/${id}`, {
+            const response = await Api.delete(`/jobVacancie/${jobVacancieId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

@@ -18,8 +18,8 @@ export const getAllJobVacanciesThatMatch = async (candidateId) => {
     return data;
 }
 
-export const getAllCandidatesByJobVacancie = async () => {
-    const data = await Api.get(`/apply/`);
+export const getAllCandidatesByJobVacancie = async (jobVacancieId) => {
+    const data = await Api.get(`/apply/${jobVacancieId}/candidates`);
 
     return data;
 }
