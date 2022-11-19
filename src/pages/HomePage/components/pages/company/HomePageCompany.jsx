@@ -8,6 +8,7 @@ import { getCurrentUser } from '../../../../../shared/functions/user';
 import { Info } from './components/Info';
 import { EditModal } from './components/EditModal';
 import { Toaster } from 'react-hot-toast';
+import { needsReload } from '../../../../../shared/functions/reload';
 
 
 export const HomePageCompany = () => {
@@ -48,14 +49,6 @@ export const HomePageCompany = () => {
         }
         getUser();
     }, [])
-
-    const needsReload = () => {
-        if(reload){
-            window.location.reload(true);
-            setReload(false);
-            window.location.reload(false);
-        }
-    }
 
     const photo = company?.imageURL || <AccountCircleIcon />;
     const cover = company?.cover || '';

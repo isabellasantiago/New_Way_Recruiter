@@ -2,7 +2,6 @@ import React from "react";
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import { CandidatoForm } from "./pages/CandidatoCadastro/Candidato";
-import { EditarExcluirCandidato } from "./pages/Editar-Excluir/Candidato/EditarExcluirCandidato";
 import { EmpresaForm } from "./pages/EmpresaCadastro/EmpresaForm";
 import { Home } from "./pages/Home/Home";
 import { Login } from "./pages/Login/Login";
@@ -35,7 +34,6 @@ function App() {
           <Route path="/register/candidate" element={<CandidatoForm/>}/>
           <Route path="/register/company" element={<EmpresaForm/>}/>
           <Route path="/job-vacancie/profile/:id" element={<JobVacancieProfile />} />
-          <Route path="/edit-delete/candidato" element={<PrivateRoute Item={EditarExcluirCandidato}/>}/>
           <Route exact path="/candidate/profile/:id" element={<ProfileVCand/>}/>
           <Route exact path="/profile" element={<ProfileVEmp/>}/>
           <Route path="/candidates" element={<ModalCandidato/>}/>

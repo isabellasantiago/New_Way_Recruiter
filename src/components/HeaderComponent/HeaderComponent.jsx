@@ -39,8 +39,8 @@ export function HeaderComponent({
                     <NavLink exact to="/editdeletecandidato" activeClassName={processos}>
                         Processos
                     </NavLink>
-                    <NavLink exact to="/edit_or_delete/candidato" activeClassName={config} > <SettingsOutlinedIcon/>
-                    </NavLink>
+                    <button activeClassName={config} onClick={() => setOpenModal(value => !value)}> <SettingsOutlinedIcon/>
+                    </button>
                     <button onClick={handleLogout}>
                         <LogoutIcon color="white"/>
                     </button>

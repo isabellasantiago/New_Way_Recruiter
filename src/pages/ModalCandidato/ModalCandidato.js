@@ -26,7 +26,7 @@ export  function ModalCandidato({ candidates, handleClose, open, title }) {
                 <S.Phrase>Vaga: {title}.</S.Phrase>
               </S.TitleBox>
               <S.Content class="Content" showMore={showMore}>
-                {users.map((user, index) => {
+                {users?.map((user, index) => {
                   if(index < 4){
                     return(
                       <S.Candidates key={users.id }>

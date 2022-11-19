@@ -2,17 +2,18 @@ import React, { useState, useContext } from 'react';
 import { CandidatePage } from '../../../../../components/CandidatePage';
 import { useQuery } from 'react-query';
 import * as S from './style'
-import { ProfilePic } from '../../../../../components/ProfilePic';
 import { useNavigate } from 'react-router-dom';
 import { getAllJobVacanciesThatMatch } from '../../../../../shared/functions/jobVacancie';
 import { AuthContext } from '../../../../../services/contexts/auth';
 import { Toaster } from 'react-hot-toast';
+import { needsReload } from '../../../../../shared/functions/reload';
 
 
 export const CandidateHomePage = () => {
     const { user, authenticated } = useContext(AuthContext);
     const navigate = useNavigate();
 
+    const [reload, setReload] = useState(false);
     const [show, setShow] = useState(true);
 
     const { data: jobVacancieList, isLoading } = useQuery('jobVacancieList', async () => {
@@ -35,12 +36,11 @@ export const CandidateHomePage = () => {
 
     return(
         <>
-            <CandidatePage>
+            <CandidatePage candidateID={user.id}>
                 <S.Content>
                 <S.Title>Selecionamos as vagas que mais combinam com seu objetivo!</S.Title>
                 <S.List show={show}>
-                    {
-                        jobVacancieList?.length ? (
+                    {jobVacancieList?.length ? (
                             jobVacancieList?.map((data) => {        
                                 const { jobVacancie, isApplied } = data;
                                 return !isApplied && jobVacancie && (
@@ -68,6 +68,7 @@ export const CandidateHomePage = () => {
                     </S.List>
                 </S.Content>
                 <Toaster />
+                {needsReload(reload, setReload)}
             </CandidatePage>
         </>
     )
