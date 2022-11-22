@@ -11,6 +11,8 @@ export const SelectCidade = ({className, id, name, state, onChange=()=>{}, regis
         fetchCitiesForState(state).then(parseCity).then(setCities)
     }, [state]);
 
+    console.log('state', state)
+
     return (
         <select className={className} id={id || name} name={name || id} onChange={onChange} {...register(`${name}`)} defaultValue={defaultValue}>
             <option value="">Seleciona uma cidade</option>

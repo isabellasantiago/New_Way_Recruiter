@@ -29,10 +29,10 @@ export const companyTypeDescription = (number) => {
 
 export const level = (text) => {
     const textSplitted = text?.split("");
-    return Number(textSplitted[0]);
+    return textSplitted?.lenght > 0 ? Number(textSplitted[0]) : 0;
 }
 
 export const contract = (text) => {
     const textSplitted = text?.split("");
-    return Number(textSplitted[0]);
+    return textSplitted?.lenght > 0 ? Number(textSplitted[0]) : 0;
 }

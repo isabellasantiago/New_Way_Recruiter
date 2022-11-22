@@ -1,18 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import {useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import editPencil from  '../../../assets/images/pencil1.svg';
 import * as S from './style';
-import { HeaderComponent } from '../../../components/HeaderComponent/HeaderComponent';
-
 import { Experiencias } from './Components/Experiencias/Experiencias';
 import { Formacaoes } from './Components/Formacoes/Formacoes';
 import { Idiomas } from './Components/Idiomas/Idiomas';
 import { Preferencias } from './Components/Preferencias/Preferencias';
 import { AuthContext } from '../../../services/contexts/auth';
-import { ProfilePic } from '../../../components/ProfilePic';import { getCandidateById } from '../../../shared/functions/candidate';
-;
+import { ProfilePic } from '../../../components/ProfilePic';
+import { getCandidateById, getResume } from '../../../shared/functions/candidate';
+import { CandidatePage } from '../../../components/CandidatePage';
 
-const profilephoto = 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg'
 
 export function ProfileVCand(){
   const { id } = useParams();
@@ -21,37 +20,35 @@ export function ProfileVCand(){
 
   const navigate = useNavigate();
 
-  const [candidate, setCandidate] = useState();
-
   const handleClick = () => {
     navigate(`/candidate/resume/${user?.id}`);
   }
 
-  useEffect(() =>{
-    const getCandidate = async () => {
-      const { data: c } = await getCandidateById(id);
-      setCandidate(c);
-    }
-    getCandidate();
-  }, [id]);
-  
+  const { data: candidate} = useQuery('candidate', async () => {
+    const { data } = await getCandidateById(id);
+    return data
+  })
+
+  const { data: resume } = useQuery('resume', async () => {
+    const { data: r } = await getResume(user?.id);
+    return r;
+  })
 
   if(!authenticated || !user || !token) {
     navigate('/login');
   }
   return(
-    <>
-      <HeaderComponent candidate={true} perfil="selected"/>
+    <CandidatePage>
       <S.Section>
           <S.ProfileInfo>
               <ProfilePic 
                 size="177px"
-                link={profilephoto}
+                link={resume?.personalData?.imageURL}
                 border="7px solid #0367A5"
               />
               <S.ProfileDescription> 
               <h2>{candidate?.name} {candidate?.lastName}</h2>
-              <p>Designer UX Pleno - há 1 ano</p>
+              <p>{resume?.personalData?.role}</p>
               </S.ProfileDescription>
               <S.ControlBtn>
                {user?.id === candidate?.id ? (
@@ -69,6 +66,6 @@ export function ProfileVCand(){
             <Preferencias/>
           </S.Row>    
         </S.Section>
-    </>
+    </CandidatePage>
   );
 }

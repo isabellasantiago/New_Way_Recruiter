@@ -6,8 +6,12 @@ import { DadosPessoais, TitleForm, DadosPessoaisForm, Grid} from './style.js';
 import { Wrapper } from '../../components/Wrapper';
 
 
-export function DadosPessoaisSection({useForm, personalData }){
-    const { register, errors } = useForm;
+export function DadosPessoaisSection({useForm, personalData, }){
+    const { register, errors, watch } = useForm;
+
+    const state = watch('personalData.state');
+
+    console.log('state', state)
 
     return(
         <DadosPessoais>
@@ -48,10 +52,9 @@ export function DadosPessoaisSection({useForm, personalData }){
                         <SelectEstado className="state" name="personalData.state" register={register} />
                         <span>{errors?.personalData?.state?.message}</span>
                     </Wrapper>
-
                     <Wrapper>
                         <label htmlFor="city" className="city">Cidade*</label>
-                        <SelectCidade id="city" name="personalData.city" state={personalData?.state} register={register} />
+                        <SelectCidade id="city" name="personalData.city" state={state} register={register} />
                         <span>{errors?.personalData?.city?.message}</span>
                     </Wrapper>
                 </Grid>

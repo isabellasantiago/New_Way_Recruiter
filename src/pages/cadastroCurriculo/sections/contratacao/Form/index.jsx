@@ -5,8 +5,8 @@ import { SelectArea } from '../../../../../components/SelectArea'
 import { SelectProfession } from '../../../../../components/SelectProfession'
 
 export function FormContratacao({ useForm, personalData }){
-    const {register, errors } = useForm;
-    const area = personalData?.field
+    const {register, errors, watch } = useForm;
+    const area = watch('personalData.field')
 
     return(
         <Form>

@@ -38,7 +38,8 @@ export const CandidateHomePage = () => {
         <>
             <CandidatePage candidateID={user.id}>
                 <S.Content>
-                <S.Title>Selecionamos as vagas que mais combinam com seu objetivo!</S.Title>
+                <S.Title>Selecionamos as vagas que mais combinam com seu curriculo!</S.Title>
+                <span>Mantenha seu currículo atualizado para obter maiores vagas!</span>
                 <S.List show={show}>
                     {jobVacancieList?.length ? (
                             jobVacancieList?.map((data) => {        

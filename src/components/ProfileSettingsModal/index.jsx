@@ -35,7 +35,7 @@ export function ProfileSettings ({open, handleClose, candidateID, setReload = ()
     const onSubmit = async (data) => {
         try{
             const response = await Api.put(`/candidate/${candidateID}`, {
-                data
+                ...data
             }, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
