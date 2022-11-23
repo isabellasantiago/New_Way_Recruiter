@@ -20,7 +20,7 @@ import * as yup from 'yup';
             courseName: yup.string().required('Este campo é um campo é obrigatório'),
             academicFormation: yup.string().required('Este campo é um campo é obrigatório'),
             academicFormationStatus: yup.string().required('Este campo é um campo é obrigatório'),
-            graduationEndDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').default(null).nullable(true).notRequired(true),
+            graduationEndDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').nullable(true).default(null).notRequired(true).transform((curr, orig) => orig === '' ? null : curr),
             graduationStartDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').required('Este campo é um campo é obrigatório'),
         }).nullable()
     ),

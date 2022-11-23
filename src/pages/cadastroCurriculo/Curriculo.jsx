@@ -118,7 +118,8 @@ export function Curriculo(){
         resolver: yupResolver(schema),
     });
 
-    console.log('errors', errors)
+    console.log('watch', watch('academicsInfo'));
+    console.log('errors', errors);
     const onSubmit = async (data) => {
         try{
             const { personalData, academicsInfo, languagesInfo, previousJobsInfo } = data;
