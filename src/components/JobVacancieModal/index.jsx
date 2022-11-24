@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../services/contexts/auth';
 import { Section, Form, InputWrapper, WrapperVaga, ButtonNext, InputDiv, InputText } from './style'; 
 import { notify } from '../../shared/functions/notify/notify.js';
-import { contract, level } from '../../shared/functions/convert';
+import { textConvert } from '../../shared/functions/convert';
 
 
 const JobVacancieModal = ({
@@ -35,9 +35,9 @@ const JobVacancieModal = ({
                 title: jobVacancie.title,
                 salary: jobVacancie.salary,
                 about: jobVacancie.about,
-                level: level(jobVacancie?.level),
+                level: textConvert(jobVacancie?.level),
                 cityAndState: jobVacancie.cityAndState,
-                contractType: contract(jobVacancie?.contractType)
+                contractType: textConvert(jobVacancie?.contractType)
             }
             return response
         }

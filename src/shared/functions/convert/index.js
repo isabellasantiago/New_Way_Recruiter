@@ -1,4 +1,5 @@
 /* eslint-disable no-unreachable */
+import { format } from "date-fns";
 import { CompanyTypeEnum } from "../../enums/companyType.enum";
 import { ContractTypeEnum } from "../../enums/contractType.enum";
 import { LevelTypeEnum } from "../../enums/levelType.enum"
@@ -26,13 +27,13 @@ export const companyTypeDescription = (number) => {
     if(number === 2) return CompanyTypeEnum.tradicional;
 }
 
+export const textConvert = (text) => {
+    if(!text) return null;
 
-export const level = (text) => {
     const textSplitted = text?.split("");
-    return textSplitted?.lenght > 0 ? Number(textSplitted[0]) : 0;
+    return Number(textSplitted[0]);
 }
 
-export const contract = (text) => {
-    const textSplitted = text?.split("");
-    return textSplitted?.lenght > 0 ? Number(textSplitted[0]) : 0;
+export const formatDate = (date) => {
+    return format(new Date(date), 'yyyy-MM-dd');
 }

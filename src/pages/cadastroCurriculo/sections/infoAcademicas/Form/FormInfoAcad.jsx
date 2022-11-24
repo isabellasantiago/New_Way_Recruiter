@@ -30,7 +30,7 @@ export function FormInfoAcad({ useForm }) {
                 <a href="#infoac">Adicionar</a>
             </Button>
             {fields.map((field, index) => {
-                const moment = getValues(`academicsInfo.${index}.academicFormationStatus`)
+                const moment = Number(getValues(`academicsInfo.${index}.academicFormationStatus`))
 
                 return (
                     <Form key={field.id} id="infoac">
@@ -51,13 +51,12 @@ export function FormInfoAcad({ useForm }) {
                                 <label htmlFor="tipoFormacao">Formação</label>
                                 <select id="tipoFormacao" name="academicFormation" {...register(`academicsInfo.${index}.academicFormation`)} defaultValue={field?.academicFormation}>
                                     <option value="">Selecione</option>
-                                    <option value={Number(1)}>Ensino regular</option>
-                                    <option value={Number(7)}>Extra curricular</option>
-                                    <option value={Number(2)}>Tecnico</option>
-                                    <option value={Number(3)}>Superior</option>
-                                    <option value={Number(4)}>Pós graduação</option>
+                                    <option value={Number(0)}>Ensino regular</option>
+                                    <option value={Number(1)}>Tecnico</option>
+                                    <option value={Number(2)}>Superior</option>
+                                    <option value={Number(3)}>Pós graduação</option>
                                     <option value={Number(5)}>Mestrado</option>
-                                    <option value={Number(6)}>Doutorado</option>
+                                    <option value={Number(5)}>Doutorado</option>
                                 </select>
                                 <span>
                                     {errors?.academicsInfo?.[index]?.academicFormation?.message}
@@ -69,7 +68,7 @@ export function FormInfoAcad({ useForm }) {
                                 <label htmlFor="statusFormacao">Status</label>
                                 <select id="statusFormacao" name="academicFormationStatus" {...register(`academicsInfo.${index}.academicFormationStatus`)} defaultValue={field?.academicFormationStatus} onChange={(e) => setValue(`academicsInfo.${index}.academicFormationStatus`, e.target.value)}>
                                     <option value="">Selecione</option>
-                                    <option value={Number(1)}>Cursando</option>
+                                    <option value={Number(0)}>Cursando</option>
                                     <option value={Number(2)}>Concluído</option>
                                     <option value={Number(3)}>Trancado</option>
                                 </select>
@@ -84,7 +83,7 @@ export function FormInfoAcad({ useForm }) {
                                     {errors?.academicsInfo?.[index]?.graduationStartDate?.message}
                                 </span>
                             </Wrapper>
-                            {moment !== '1' && (
+                            {moment !== 1 && (
                                 <Wrapper>
                                     <label>Data de término</label>
                                     <input type="date" {...register(`academicsInfo.${index}.graduationEndDate`)} defaultValue={field?.graduationEndDate} />
