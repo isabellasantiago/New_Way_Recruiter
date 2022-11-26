@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Api from '../../services/mainApi';
 import { useQuery } from 'react-query';
 import { Cv, ButtonNext } from './style';
@@ -67,7 +67,7 @@ export function Curriculo() {
     const { authenticated, user, logout } = useContext(AuthContext);
     const token = localStorage.getItem('token');
 
-    const { status, data: resume, error, isLoading } = useQuery('resume', async () => {
+    const { status, data: resume, isLoading } = useQuery('resume', async () => {
         const { data: cv } = await getResume(user?.id);
         return cv;
     })
@@ -91,8 +91,8 @@ export function Curriculo() {
                     linkedinURL: personalData?.linkedinURL,
                     naturalness: personalData?.naturalness,
                     birthDate,
-                    state: "SP",
-                    city: "São Paulo",
+                    state: personalData?.state,
+                    city: personalData?.city,
                     phone: personalData?.phone,
                     field: personalData?.field,
                     contractType: textConvert(personalData?.contractType),
@@ -117,8 +117,10 @@ export function Curriculo() {
                 }))
             }
 
-            return response || INITIAL_DATA;
+            return response;
         }
+
+        return INITIAL_DATA;
     }
 
     const { register, formState: { errors }, handleSubmit, control, watch, getValues, setValue } = useForm({
@@ -169,11 +171,11 @@ export function Curriculo() {
         }
     }
 
-    if (isLoading || LoadingCandidate) {
+    if (isLoading || LoadingCandidate ) {
         return <h2>Carregando...</h2>
     }
 
-    if (candidate?.id !== user?.id || !authenticated) {
+    if (!authenticated) {
         navigate('/home');
     }
 

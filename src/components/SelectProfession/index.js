@@ -13,7 +13,8 @@ export const SelectProfession = ({className, id, name, onChange=()=>{}, area, re
         
     }, [area])
     return(
-        <Select className={className} id={id || name} name={name || id} onChange={onChange} {...register(`${name}`)} defaultValue={defaultValue}>
+        <Select className={className} id={id || name} name={name || id} onChange={onChange} {...register(`${name}`)} defaultValue={{ name: defaultValue}}>
+            {console.log()}
             <option value="">Selecione...</option>
             {professions?.map((profession) => {
                 const { name } = profession
