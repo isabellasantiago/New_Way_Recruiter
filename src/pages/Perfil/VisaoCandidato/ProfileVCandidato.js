@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import {useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import editPencil from  '../../../assets/images/pencil1.svg';
 import * as S from './style';
+import editPencil from  '../../../assets/images/pencil1.svg';
 import { Experiencias } from './Components/Experiencias/Experiencias';
 import { Formacaoes } from './Components/Formacoes/Formacoes';
 import { Idiomas } from './Components/Idiomas/Idiomas';
@@ -11,6 +11,10 @@ import { AuthContext } from '../../../services/contexts/auth';
 import { ProfilePic } from '../../../components/ProfilePic';
 import { getCandidateById, getResume } from '../../../shared/functions/candidate';
 import { CandidatePage } from '../../../components/CandidatePage';
+import { orderByLastDate } from '../../../shared/functions/candidate/functions';
+
+
+const today = new Date();
 
 
 export function ProfileVCand(){
@@ -24,19 +28,33 @@ export function ProfileVCand(){
     navigate(`/candidate/resume/${user?.id}`);
   }
 
-  const { data: candidate} = useQuery('candidate', async () => {
+  const { data: candidate, isLoading: loadingCandidate} = useQuery('candidate', async () => {
     const { data } = await getCandidateById(id);
     return data
   })
 
-  const { data: resume } = useQuery('resume', async () => {
+  const { data: resume, isLoading } = useQuery('resume', async () => {
     const { data: r } = await getResume(user?.id);
     return r;
   })
 
+  if(isLoading || loadingCandidate){
+   return ( <h2>Carregando...</h2>)
+  }
+
   if(!authenticated || !user || !token) {
     navigate('/login');
   }
+  const handlePreviousJobs = () => {
+    const dates = resume?.previousJobs?.map((job) => {
+      if(!job.toDate) return { ...job, toDate: today };
+      return job
+    });
+    const ordered = orderByLastDate(dates);
+
+  }
+  console.log('p', resume?.previousJobsInfo)
+
   return(
     <CandidatePage>
       <S.Section>
@@ -59,7 +77,7 @@ export function ProfileVCand(){
               {/* <button onClick={}className="entContato"  disabled  ><span>Entrar em contato</span></button> */}
               </S.ControlBtn>
           </S.ProfileInfo>
-          <Experiencias/>
+          <Experiencias jobs={resume?.previousJobsInfo}/>
           <Formacaoes/>
           <S.Row>
             <Idiomas/>
