@@ -8,6 +8,7 @@ export const CandidatePage = ({
     children,
     candidateID,
     setReload = () => {},
+    bgColor
 }) => {
     const [openModal, setOpenModal] = useState(false);
 
@@ -20,7 +21,7 @@ export const CandidatePage = ({
                 candidateID={candidateID}
             />
         )}
-        <Body>
+        <Body bgColor={bgColor}>
             <HeaderComponent
                 candidate={true}
                 setOpenModal={setOpenModal}

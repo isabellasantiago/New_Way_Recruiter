@@ -6,7 +6,7 @@ export const Body = styled.div`
     width: 100%;
     height: 100vh;
 
-    background: #fff;
+    background: ${({ bgColor }) => bgColor || '#fff'};
 
     display: flex;
     flex-flow: column nowrap;

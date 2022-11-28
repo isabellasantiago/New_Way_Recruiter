@@ -1,31 +1,42 @@
-import anhanguera from '../../../../../assets/images/anhanguera.png';
-import './style.scss';
+import { format } from 'date-fns';
+import React from 'react';
+import { ProfilePic } from '../../../../../components/ProfilePic';
+import { formationDescription, formationStatusDescription } from '../../../../../shared/functions/convert/texts';
+import * as S from './style.js';
 
-export function Formacaoes (){
-  return(
-    <div className="formacoes">
-                    <h2>Formações</h2>
-                  <div className="center">
-                    
-                 
-                    <div className="otherexperiences">
-                    <img src={anhanguera} alt="anhanguera"/>
-                            <div className="jobsline">
-                            
-                            <h3>Design Gráfico</h3>
-                            <h5>jan. 2014 - dez. 2018</h5>
-                            <div className="row">
-                            <h6 className="ensino">Bacharel</h6> 
-                            </div>
-                          
-                          
+export function Formacaoes({ formations }) {
+  return (
+    <S.Formacoes>
+      <S.Title>Formações</S.Title>
+      <S.Center>
+        {formations?.length > 0 ? (
+          formations?.map((formation) => {
+            const {
+              graduationEndDate,
+              graduationStartDate,
+              courseName,
+              academicFormation,
+            } = formation;
 
-                            </div>
-                          
-                            
-                    </div>
+            const endDate = graduationEndDate ? format(new Date(graduationEndDate), 'MMM yyyy') : ' o momento';
+            const startDate = graduationStartDate ? format(new Date(graduationStartDate), 'MMM yyyy') : null;
+            const type = formationDescription(academicFormation);
 
-                    </div>
-                </div>
+            return (
+              <S.LastExperience>
+                <ProfilePic border="4px solid #0367A5"/>
+                <S.JobsLine>
+                  <S.CourseName>{courseName}</S.CourseName>
+                  <S.Date>{startDate} - {endDate}</S.Date>
+                  <S.Row>
+                    <S.Level>{type}</S.Level>
+                  </S.Row>
+                </S.JobsLine>
+              </S.LastExperience>
+              )
+          })
+        ) : null}
+      </S.Center>
+    </S.Formacoes>
   );
 }

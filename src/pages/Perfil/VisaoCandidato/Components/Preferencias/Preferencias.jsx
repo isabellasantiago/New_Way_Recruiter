@@ -1,23 +1,26 @@
-import './style.scss';
+import * as S from './style.js';
 
-export function Preferencias (){
-  return(
-    <div className="preferencias">
-
-      <h1>Preferências</h1>
-      <div className="center">
-        <div className="row">
-      <span/>
-      <h2>Contrato:  </h2>
-      <h2 className="bold" >CLT ou PJ</h2>
-      </div>
-
-      <div className="row">
-      <span/>
-      <h2>Empresa:  </h2>
-      <h2 className="bold" >Startup</h2>
-      </div>
-    </div>
-    </div>
+export function Preferencias({ preferences }) {
+  const { contractType, level} = preferences;
+  return (
+    <S.Preferences>
+      <S.Title>Preferências</S.Title>
+      <S.Center>
+        {preferences ? (
+              <>
+                <S.Row>
+                <S.Circle />
+                <S.PrefInfo>Contrato:  </S.PrefInfo>
+                <S.PrefInfo bold={true} >{contractType}</S.PrefInfo>
+                </S.Row>
+                <S.Row>
+                <S.Circle />
+                <S.PrefInfo>Nível:  </S.PrefInfo>
+                <S.PrefInfo bold={true}>{level}</S.PrefInfo>
+                </S.Row>
+              </>
+            ) : null }
+      </S.Center>
+    </S.Preferences>
   );
 }

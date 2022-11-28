@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import * as S from './style';
 import { format } from 'date-fns'
-
-import google from '../../../../../assets/images/google.png';
-import flash from '../../../../../assets/images/flash.png';
 import { levelDescription } from '../../../../../shared/functions/convert/texts';
+import { ProfilePic } from '../../../../../components/ProfilePic';
 
 
 
 export function Experiencias({jobs}) {
-  const [complete, setComplete] = useState(true);
-
-  console.log('jobs', jobs)
-  const promotionJob = ('uhu');
+  const [complete, setComplete] = useState(false);
 
   const oldJobs = (
     <>
@@ -23,7 +18,7 @@ export function Experiencias({jobs}) {
       return (
         <>
         <S.LastExperience>
-           {/* IMG Profile component */}
+          <ProfilePic border="4px solid #0367A5"/>
           <S.JobsLine>
             <S.CompanyName complete={complete}>{job?.previousCompanyName}</S.CompanyName>
             <S.Date>{fromDate} - {toDate}</S.Date>

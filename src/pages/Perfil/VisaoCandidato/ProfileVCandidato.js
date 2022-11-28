@@ -12,6 +12,7 @@ import { ProfilePic } from '../../../components/ProfilePic';
 import { getCandidateById, getResume } from '../../../shared/functions/candidate';
 import { CandidatePage } from '../../../components/CandidatePage';
 import { orderByLastDate } from '../../../shared/functions/candidate/functions';
+import { contractDescription, levelDescription } from '../../../shared/functions/convert/texts';
 
 
 const today = new Date();
@@ -53,10 +54,15 @@ export function ProfileVCand(){
     const ordered = orderByLastDate(dates);
 
   }
-  console.log('p', resume?.previousJobsInfo)
+  console.log('resume', resume)
+
+  const pref = {
+    contractType: contractDescription(resume?.personalData.contractType),
+    level: levelDescription(resume?.personalData.level),
+  }
 
   return(
-    <CandidatePage>
+    <CandidatePage bgColor='#F6F6F6'>
       <S.Section>
           <S.ProfileInfo>
               <ProfilePic 
@@ -74,14 +80,13 @@ export function ProfileVCand(){
                 <S.Icon alt="editar perfil" className="editicon" src={editPencil}/>
                </S.IconBtn>
                ) : null}
-              {/* <button onClick={}className="entContato"  disabled  ><span>Entrar em contato</span></button> */}
               </S.ControlBtn>
           </S.ProfileInfo>
           <Experiencias jobs={resume?.previousJobsInfo}/>
-          <Formacaoes/>
+          <Formacaoes formations={resume?.academicsInfo}/>
           <S.Row>
-            <Idiomas/>
-            <Preferencias/>
+            <Idiomas languages={resume?.languagesInfo}/>
+            <Preferencias preferences={pref}/>
           </S.Row>    
         </S.Section>
     </CandidatePage>

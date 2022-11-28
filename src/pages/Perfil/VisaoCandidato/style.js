@@ -1,19 +1,27 @@
 import styled from 'styled-components';
 
 export const Section = styled.section`
+  box-sizing: border-box;
   display: flex;
+  max-width: 60%;
   align-items: center;
+
   justify-content: center;
   flex-direction: column;
+  padding: 20px;
+  gap: 50px;
 `;
 
 export const ProfileInfo = styled.div`
+  box-sizing: border-box;
+  width: 100%;
   background: #FEFEFE;
   border-radius: 8px;
 
   display: flex;
   align-items: center;
-  flex-direction:row;
+  flex-direction: row;
+  padding-left: 25px;
 `;
 
 export const ProfileDescription = styled.div`
@@ -26,12 +34,10 @@ export const ProfileDescription = styled.div`
   text-align: left;
   padding-left:23px;
 
-  h2{
-    font-family: 'Poppins', sans-serif;
+  h2 {
+    font: 600 28px 'Poppins', sans-serif;
     font-style: normal;
-    font-weight: bold;
     font-size: 28px;
-    line-height: 42px;
     display: flex;
     align-items: center;
     
@@ -39,11 +45,9 @@ export const ProfileDescription = styled.div`
     text-transform: capitalize;
         
   }
-  p{
-   font-family: 'Poppins', sans-serif;
+  p {
+  font: 500 16px 'Poppins', sans-serif;
    font-style: normal;
-   font-weight: normal;
-   font-size: 16px;
    line-height: 24px;
    display: flex;
    align-items: center;
@@ -111,8 +115,11 @@ export const ContactBtn = styled.button`
 `;
 
 export const Row = styled.div`
-  width:858px;
+  width: 100%;
+
   display: flex;
-  flex-direction:row ;
-  align-items:center;
+  flex-direction: row;
+  align-items: flex-start;
+
+  gap: 20px;
 `;
