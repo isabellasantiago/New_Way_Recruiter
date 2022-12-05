@@ -1,8 +1,10 @@
+import axios from "axios";
+
 const BASE_URL = 'https://servicodados.ibge.gov.br/api/v1'
 
 const responseToJson = (response) => response.json();
 const sortByLabelAscending = (a, b) => {
-    return a.label.localeCompare(b.label);
+    return a.label.localeCompare(b.label, { sensitivity: 'case' });
 }
 
 
@@ -18,13 +20,15 @@ export const parseCity = (cities) => {
     .sort(sortByLabelAscending)
  }
 
-export const fetchStates = () => {
+export const fetchStates = async () => {
     const url = `${BASE_URL}/localidades/estados`;
-    return fetch(url).then(responseToJson)
+    const { data } = await axios.get(`${url}`)
+    return data
 }
 
-export const fetchCitiesForState = (state) => {
+export const fetchCitiesForState = async (state) => {
     if(!state) return Promise.resolve([]);
     const url = `${BASE_URL}/localidades/estados/${state}/municipios`;
-    return fetch(url).then(responseToJson);
+    const { data } = await axios.get(`${url}`)
+    return data;
 }

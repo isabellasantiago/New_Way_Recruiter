@@ -41,7 +41,7 @@ export const JobVacancieProfile = () => {
     const [reload, setReload] = useState(false);
     const token = localStorage.getItem('token');
 
-    const { status, data: candidate, errors} = useQuery('candidate', async () => {
+    const { data: candidate } = useQuery('candidate', async () => {
         if(user?.type !== UserTypeEnum.CANDIDATE) {
             return undefined;
         }
@@ -226,6 +226,7 @@ export const JobVacancieProfile = () => {
                             if(index < 4){
                                 return <S.Candidates src={imageURL}/>
                             }
+                            return;
                         })}
                     </S.PhotoContainer>
                     <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import { fetchStates, parseStates, fetchCitiesForState, parseCity } from '../../../../helpers/ibge';
 import { SelectEstado } from '../../../../components/SelectEstado';
 import { SelectCidade } from '../../../../components/SelectCidade';
 
@@ -6,10 +8,24 @@ import { DadosPessoais, TitleForm, DadosPessoaisForm, Grid} from './style.js';
 import { Wrapper } from '../../components/Wrapper';
 
 
+
 export function DadosPessoaisSection({useForm, personalData }){
+    const [selectedState, setSelectedState] = useState();
     const { register, errors, watch } = useForm;
 
     const state = watch('personalData.state');
+    console.log('state', state)
+
+    const { data: states } = useQuery('states', async () => {
+        const data  = await fetchStates();
+        return parseStates(data);
+    })
+
+    const { data: cities } = useQuery('cities', async () => {
+        const result = await fetchCitiesForState(state);
+
+        return parseCity(result);
+    })
 
     return(
         <DadosPessoais>
@@ -47,12 +63,12 @@ export function DadosPessoaisSection({useForm, personalData }){
                 <Grid>
                     <Wrapper>
                         <label htmlFor="personalData.state" >Estado*</label>
-                        <SelectEstado className="state" name="personalData.state" register={register} defaultValue={personalData?.state} />
+                        <SelectEstado className="state" name="personalData.state" register={register} defaultValue={state} states={states}/>
                         <span>{errors?.personalData?.state?.message}</span>
                     </Wrapper>
                     <Wrapper>
                         <label htmlFor="city" className="city">Cidade*</label>
-                        <SelectCidade id="city" name="personalData.city" state={personalData?.state ? personalData?.state : state} register={register} />
+                        <SelectCidade id="city" name="personalData.city" state={personalData?.state ? personalData?.state : state} register={register} cities={cities}/>
                         <span>{errors?.personalData?.city?.message}</span>
                     </Wrapper>
                 </Grid>

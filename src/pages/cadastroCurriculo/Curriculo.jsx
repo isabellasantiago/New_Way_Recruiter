@@ -1,6 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import Api from '../../services/mainApi';
 import { useQuery } from 'react-query';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { Cv, ButtonNext } from './style';
 import { DadosPessoaisSection } from './sections/dadosPessoais/DadosPessoais';
 import { InfoAcademicas } from './sections/infoAcademicas/InfoAcademicas';
@@ -9,8 +11,6 @@ import { Idiomas } from './sections/idiomas/Idiomas';
 import { ProfessionalExpierence } from './sections/professionalExperience/index';
 import { DadosContratacao } from './sections/contratacao';
 import { ReactComponent as OnlineCV } from '../../assets/images/onlineCV.svg'
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import { getCandidateById, getResume } from '../../shared/functions/candidate';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schema } from '../../validation/validation';
@@ -116,10 +116,8 @@ export function Curriculo() {
                     toDate: formatDate(info?.toDate)
                 }))
             }
-
             return response;
         }
-
         return INITIAL_DATA;
     }
 

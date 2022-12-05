@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Row } from './style';
 import { Wrapper } from '../../../components/Wrapper'
 import { SelectArea } from '../../../../../components/SelectArea'
 import { SelectProfession } from '../../../../../components/SelectProfession'
+import { areasAtuacao } from '../../../../../helpers/areaAtuacao';
 
 export function FormContratacao({ useForm, personalData }){
     const {register, errors, watch } = useForm;
     const area = watch('personalData.field')
+    const role = watch('personalData.role')
+
+    const [professions, setProfessions] = useState([]);
+
+    useEffect(() => {
+        const areaProfissao = areasAtuacao.filter(areaP => areaP.name === area)
+        if(areaProfissao.length !== 0){
+            setProfessions(areaProfissao[0].professions)
+        }
+        
+    }, [area])
 
     return(
         <Form>
@@ -44,7 +56,7 @@ export function FormContratacao({ useForm, personalData }){
                 </Wrapper>
                 <Wrapper>
                     <label htmlFor="personalData.role">Profissão</label>
-                    <SelectProfession name="personalData.role" id="role" register={register} area={area} />
+                    <SelectProfession name="personalData.role" id="role" register={register} professions={professions} defaultValue={role}/>
                     <span>{errors?.personalData?.role?.message}</span>
                 </Wrapper>
             </Row>

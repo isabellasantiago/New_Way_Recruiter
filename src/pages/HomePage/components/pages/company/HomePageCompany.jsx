@@ -15,7 +15,7 @@ export const HomePageCompany = () => {
     const [company, setCompany] = useState();
     const [shouldUpdate, setShouldUpdate] = useState(false);
     const [open, setOpen] = useState(false);
-    const [reload, setReload] = useState(false);
+    const [_, setReload] = useState(false);
 
     const companyRef = useRef();
 

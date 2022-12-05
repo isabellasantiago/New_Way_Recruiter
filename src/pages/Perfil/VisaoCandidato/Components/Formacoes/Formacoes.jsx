@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import React from 'react';
 import { ProfilePic } from '../../../../../components/ProfilePic';
-import { formationDescription, formationStatusDescription } from '../../../../../shared/functions/convert/texts';
+import { formationDescription } from '../../../../../shared/functions/convert/texts';
 import * as S from './style.js';
 
 export function Formacaoes({ formations }) {

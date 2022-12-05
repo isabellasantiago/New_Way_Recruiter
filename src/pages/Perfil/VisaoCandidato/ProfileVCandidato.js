@@ -46,15 +46,6 @@ export function ProfileVCand(){
   if(!authenticated || !user || !token) {
     navigate('/login');
   }
-  const handlePreviousJobs = () => {
-    const dates = resume?.previousJobs?.map((job) => {
-      if(!job.toDate) return { ...job, toDate: today };
-      return job
-    });
-    const ordered = orderByLastDate(dates);
-
-  }
-  console.log('resume', resume)
 
   const pref = {
     contractType: contractDescription(resume?.personalData.contractType),

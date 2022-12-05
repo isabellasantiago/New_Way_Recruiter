@@ -14,7 +14,7 @@ export const CandidateHomePage = () => {
     const navigate = useNavigate();
 
     const [reload, setReload] = useState(false);
-    const [show, setShow] = useState(true);
+    const [show ] = useState(true);
 
     const { data: jobVacancieList, isLoading } = useQuery('jobVacancieList', async () => {
         const { data } = await getAllJobVacanciesThatMatch(user?.id);
