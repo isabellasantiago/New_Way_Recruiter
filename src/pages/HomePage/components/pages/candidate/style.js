@@ -40,7 +40,7 @@ export const List = styled.div`
 
 export const Card = styled.div`
     width: 180px;
-    height: 350px;
+    height: 200px;
 
     display: flex;
     flex-direction: column;
@@ -62,7 +62,7 @@ export const CompanyName = styled(Title)`
 
 export const JVContainer = styled.div`
     width: 100%;
-    height: calc(100%/2);
+    height: 90%;
     background: #3F779A;
     border-radius: 20px;
 
@@ -90,4 +90,6 @@ export const SeeMoreLink = styled.button`
     text-decoration: underline;
     background: none;
     border: none;
+
+    cursor: pointer;
 `;

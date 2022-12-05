@@ -1,20 +1,15 @@
-import {useEffect, useState} from 'react';
-import { fetchStates, parseStates } from '../../helpers/ibge';
+import React from 'react';
 
-export const SelectEstado = ({className, id, name, onChange = ()=>{}}) => {
-    const [states, setStates] = useState([]);
-
-    useEffect(()=>{
-        fetchStates().then(parseStates).then(setStates);
-    }, []);
-
+export const SelectEstado = ({className, id, name, onChange = ()=>{}, register, defaultValue, states }) => {    
     return (
-        <select class={className} id={id || name} name={name || id} onChange={onChange}>
+        <>
+        <select value={defaultValue} class={className} id={id || name} name={name || id} onChange={onChange} {...register(`${name}`)} >
             <option value="">Seleciona um estado</option>
-            {states.map((state)=>{
-                const {label, value} = state;
+            {states?.map((state)=>{
+                const { label, value } = state;
                 return (<option key={value} value={value}>{label}</option>)
             })}
         </select>
+        </>
     );
 }

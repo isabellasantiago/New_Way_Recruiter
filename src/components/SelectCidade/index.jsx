@@ -1,23 +1,17 @@
-import { useEffect, useState } from 'react';
-import { fetchCitiesForState, parseCity } from '../../helpers/ibge';
-
-
+import React from 'react';
 import '../SelectEstado/select.scss';
 
 
-export const SelectCidade = ({className, id, name, state, onChange=()=>{}}) => {
-    const [cities, setCities] = useState([]);
-    useEffect(()=>{
-        fetchCitiesForState(state).then(parseCity).then(setCities)
-    }, [state]);
-
+export const SelectCidade = ({className, id, name, onChange = ()=>{}, register, defaultValue, cities }) => { 
     return (
-        <select className={className} id={id || name} name={name || id} onChange={onChange}>
+        <>
+        <select value={defaultValue} className={className} id={id || name} name={name || id} onChange={onChange} {...register(`${name}`)} >
             <option value="">Seleciona uma cidade</option>
-            {cities.map((city)=>{
+            {cities?.map((city)=>{
                 const {label, value} = city;
-                return(<option key={value} value={value}>{label}</option>)
+                return(<option key={value} value={label}>{label}</option>)
             })}
         </select>
+        </>
     );
 }

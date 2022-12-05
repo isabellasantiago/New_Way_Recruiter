@@ -16,6 +16,7 @@ export const DadosPessoais = styled.section`
     border-radius: 8px;
     margin-top: 50px;
     margin-bottom: 50px;
+    padding: 20px 0px;
 
     background: #fff;
 
@@ -62,7 +63,7 @@ export const TitleForm = styled.h1`
 `;
 
 
-export const DadosPessoaisForm = styled.form`
+export const DadosPessoaisForm = styled.div`
     display: flex;
     align-items: center;
     gap: 40px;

@@ -6,13 +6,22 @@ export const Wrapper = styled.div`
     white-space: nowrap;
     width: 60%;
     font-family: "Poppins", sans-serif;
+    position: relative;
 
-    select{
+    select, p{
         font-family: "Poppins", sans-serif;
     }
 
-    > span {
-        font-size: 0.8rem;
+    p {
+        font-size: 14px;
+    }
+
+    input, select{
+        position: relative;
+    }
+
+    span{
+        font: 400 10px "Poppins", sans-serif;
         white-space: nowrap;
         color: #C73E1D;
         position: absolute;

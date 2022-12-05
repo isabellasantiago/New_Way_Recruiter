@@ -6,6 +6,23 @@ export const getJobVacancieList = async (companyId) => {
     return jvList;
 }
 
+export const getAllJobVacanciesByCandidate = async (candidateId) => {
+    const data = await Api.get(`/apply/${candidateId}/all`);
+
+    return data;
+}
+
+export const getAllJobVacanciesThatMatch = async (candidateId) => {
+    const data = await Api.get(`/apply/${candidateId}/possible-match`);
+
+    return data;
+}
+
+export const getAllCandidatesByJobVacancie = async (jobVacancieId) => {
+    const data = await Api.get(`/apply/${jobVacancieId}/candidates`);
+
+    return data;
+}
 
 export const getJobVacancieByID = async (id) => {
     const jobVacancie = await Api.get(`/jobVacancie/${id}`);

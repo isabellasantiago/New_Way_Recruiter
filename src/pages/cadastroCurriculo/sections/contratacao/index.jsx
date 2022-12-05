@@ -2,12 +2,12 @@ import React from 'react';
 import Dados from '../../components/dados/Dados';
 import { FormContratacao } from './Form';
 
-export function DadosContratacao(){
+export function DadosContratacao({useForm, personalData}){
 
     return(
         <Dados>
             <h1>Dados para contratação</h1>
-        <FormContratacao />
+        <FormContratacao useForm={useForm} personalData={personalData}/>
         </Dados>
     )
 }

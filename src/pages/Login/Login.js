@@ -4,7 +4,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { PageLogin, Register } from './styles.js';
 import {ReactComponent as LoginPic} from '../../assets/images/loginPic.svg';
 import { AuthContext } from '../../services/contexts/auth.js';
-import { getUserByEmail } from '../../shared/functions/user';
 import { notify } from '../../shared/functions/notify/notify.js';
 import { Toaster } from 'react-hot-toast';
 
@@ -16,15 +15,16 @@ export function Login(){
 
     const { login } = useContext(AuthContext);
 
-    const handleLogin = async (ev) => {
+    const handleLogin = (ev) => {
         try{
             ev.preventDefault();
-            const userExists = await getUserByEmail(email);
-            console.log(userExists)
-            
             login(email, senha);
         }catch(err){
-            console.log('caiu erro')
+            const message = err.message.split(' ')
+            if(message[message.length - 1] === '404') {
+                notify('Usuário não encontrado, verifique seu email e senha', 'error');
+                return;
+            }
             if(err) notify(`${err.message}`, 'error')
             setShowRegister(true);
         }

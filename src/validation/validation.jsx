@@ -1,26 +1,44 @@
 import * as yup from 'yup';
 
- const schema = yup.object().shape({
+ export let schema = yup.object().shape({
     //schema de validações com valores do name="" atributo da tag html
-    name: yup.string().min(2, 'Mínimo 2 catacteres').required('Nome é um campo obrigatório'),//nome
-    email: yup.string().email('E-mail inválido').required('E-mail é um campo obrigatório'),//email
-    birthDate: yup.string().required('Data de nascimento é um campo obrigatório'),//data de nascimento
-    naturalness: yup.string().required('Naturalidade é um campo obrigatório'),
-    image: yup.string().url().required('Link do seu avatar é um campo obrigatório'),//link da imagem
-    gender: yup.string().required('Sexo é um campo obrigatório'),//genero (feminio, masculino...)
-    state: yup.string().required('Estado é um campo é obrigatório'),// estado
-    city: yup.string().required('Cidade é um campo é obrigatório'),// cidade
-    etnia: yup.string().required('Etnia é um campo obrigatório'),
-    pcd: yup.string().required('PCD é um campo é obrigatório'),//pessoa com deficiendia
-    typePcd: yup.string().required('Tipo é um campo é obrigatório'),//tipo da deficiencia
-    contactViaWhatsapp: yup.string().required(''),//contato via whatsapp
-    instituicao: yup.string().required('Este campo é um campo é obrigatório'),
-    curso: yup.string().required('Este campo é um campo é obrigatório'),
-    tipoFormacao: yup.string().required('Este campo é um campo é obrigatório'),
-    statusFormacao: yup.string().required('Este campo é um campo é obrigatório'),
-    dataInicio: yup.date().required('Este campo é um campo é obrigatório'),
-    dataTermino: yup.date().required('Este campo é um campo é obrigatório'),
+    personalData: yup.object().shape({
+        birthDate: yup.string().required('Data de nascimento é um campo obrigatório'),//data de nascimento
+        naturalness: yup.string().required('Naturalidade é um campo obrigatório'),
+        imageURL: yup.string().url('Link inválido').required('Sua foto de perfil é um campo obrigatório'),//link da imagem
+        linkedinURL:yup.string().url('Link inválido'),
+        state: yup.string().required('Estado é um campo é obrigatório'),// estado
+        city: yup.string().required('Cidade é um campo é obrigatório'),// cidade
+        role: yup.string().required('Campo obrigatório'),
+        field: yup.string().required('Selecione um campo'),
+        contractType: yup.number('Selecione um campo').integer('Selectione um campo').typeError('Selecione um campo').required('Campo obrigatório'),
+        level: yup.number({message: 'Selecione um campo'}).integer('Selecione um campo').typeError('Selecione um campo').required('campo obrigatório'),
+    }),
+    academicsInfo: yup.array().of(
+        yup.object().shape({
+            instituitionName: yup.string().required('Este campo é um campo é obrigatório'),
+            courseName: yup.string().required('Este campo é um campo é obrigatório'),
+            academicFormation: yup.string().required('Este campo é um campo é obrigatório'),
+            academicFormationStatus: yup.string().required('Este campo é um campo é obrigatório'),
+            graduationEndDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').nullable(true).default(null).notRequired(true).transform((curr, orig) => orig === '' ? null : curr),
+            graduationStartDate: yup.date({ message: 'Data inválida'}).typeError('Data inválida').required('Este campo é um campo é obrigatório'),
+        }).nullable()
+    ),
+    languagesInfo: yup.array().of(
+        yup.object().shape({
+            languageName: yup.string().required('Campo vazio'),
+            languageLevel: yup.number('Selecione um campo').integer('Selecione um campo').typeError('Selecione um campo').required('Selecione um campo'),
+        })
+    ).nullable(),
+    previousJobsInfo: yup.array().of(
+        yup.object().shape({
+            previousCompanyName: yup.string().required('campo obrigatório'),
+            role: yup.string().required('campo obrigatório'),
+            level: yup.number('Selecione um campo').integer('Selecione um campo').required('campo obrigatório'),
+            fromDate: yup.date('Data inválida').typeError('Data inválida').required('campo obrigatorio'),
+            toDate: yup.date('Data inválida').default(null).nullable(true).typeError('Data inválida').notRequired(true),
+            jobDescription: yup.string(),
+        })
+    ).nullable(),
 
-})
-
-export default schema
+}).required();

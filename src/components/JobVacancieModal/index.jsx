@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../services/contexts/auth';
 import { Section, Form, InputWrapper, WrapperVaga, ButtonNext, InputDiv, InputText } from './style'; 
 import { notify } from '../../shared/functions/notify/notify.js';
-import { contract, level } from '../../shared/functions/convert';
+import { textConvert } from '../../shared/functions/convert';
 
 
 const JobVacancieModal = ({
@@ -22,11 +22,8 @@ const JobVacancieModal = ({
     setReload = () => {},
 }) => {
     const navigate = useNavigate();
-    const { authenticated, user } = useContext(AuthContext);
+    const { authenticated, user, logout } = useContext(AuthContext);
     const token = localStorage.getItem('token');
-
-    console.log('jobvacancie', jobVacancie);
-    
 
     if(!authenticated || !user || !token) {
         navigate('/login')
@@ -34,14 +31,13 @@ const JobVacancieModal = ({
 
     const defaultFormValues = () => {
         if(update && jobVacancie){
-            console.log('caiu default')
             const response = {
                 title: jobVacancie.title,
                 salary: jobVacancie.salary,
                 about: jobVacancie.about,
-                level: level(jobVacancie?.level),
+                level: textConvert(jobVacancie?.level),
                 cityAndState: jobVacancie.cityAndState,
-                contractType: contract(jobVacancie?.contractType)
+                contractType: textConvert(jobVacancie?.contractType)
             }
             return response
         }
@@ -78,7 +74,6 @@ const JobVacancieModal = ({
                         'Authorization': `Bearer ${token}`
                     }
                 });
-                console.log('response', response)
                 if(response.status === 200 || response.status === 201) {
                     notify(successMessage || 'vaga cadastrada!', 'success');
                     setOpen(false);
@@ -89,7 +84,6 @@ const JobVacancieModal = ({
 
     const onSubmit = async (data) => {
         try{
-                console.log('caiu fora onsubmit')
                 const response = await Api.post('/jobVacancie', {
                     ...data,
                     companyID,
@@ -106,6 +100,12 @@ const JobVacancieModal = ({
                 };
                 return response;
         }catch(err){
+            const message = err.message.split(' ')
+            if(message[message.length - 1] === '401') {
+                notify('Desculpe, ocorreu um erro, precisamos que você logue novamente.', 'error');
+                logout();
+                return;
+            }
             if(err) notify(`${err.message}`, 'error');
         }
     }
@@ -140,10 +140,10 @@ const JobVacancieModal = ({
                             style={{ maxWidth: '130px' }}
                             name="contractType"
                             {...register('contractType')}>
-                            <option value={1}>PJ</option>
-                            <option value={2}>CLT</option>
-                            <option value={3}>CLT ou PJ</option>
-                            <option value={4}>OUTROS</option>
+                            <option value={Number(1)}>PJ</option>
+                            <option value={Number(2)}>CLT</option>
+                            <option value={Number(3)}>CLT ou PJ</option>
+                            <option value={Number(4)}>OUTROS</option>
                         </select>
                         <span>{errors?.contractType?.message}</span>
                     </InputDiv>
@@ -173,10 +173,12 @@ const JobVacancieModal = ({
                             <select
                                 name="level"
                                 {...register('level')}>
-                                <option value={1}>ESTÁGIO</option>
-                                <option value={2}>JR</option>
-                                <option value={3}>PL</option>
-                                <option value={4}>SR</option>
+                                <option value={Number(1)}>ESTÁGIO</option>
+                                <option value={Number(2)}>JR</option>
+                                <option value={Number(3)}>PL</option>
+                                <option value={Number(4)}>SR</option>
+                                <option value={Number(4)}>ANALISTA</option>
+                                <option value={Number(5)}>AGENTE</option>
                             </select>
                             <span>{errors?.level?.message}</span>
                         </InputDiv>

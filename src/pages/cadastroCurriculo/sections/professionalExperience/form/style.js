@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+export const Form = styled.section`
     width: 90%;
     height: 100%;
     font-family:"Poppins", Sans-serif;
 
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
     align-items: center;
     justify-content: space-between;
 
@@ -16,16 +16,19 @@ export const Form = styled.form`
         gap: 5px;
     }
 
-    #label{
-        color: rgba(0,0,0, 0.68);
-    }
-
-    button{
-        align-self: flex-end;
-        margin-bottom: 18px;
-    }
     select{
         background: #fff;
+    }
+
+    input{
+        font-family: 'Poppins';
+        font-size: 0.8rem;
+        border: 1px solid #c4c4c4;
+        border-radius: 8px;
+        padding: 5px 15px;
+        height: 35px;
+
+        max-width: 200px;
     }
 
     #row1{
@@ -33,4 +36,11 @@ export const Form = styled.form`
             max-width: 300px;
         }
     }
+`;
+
+export const Division = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;

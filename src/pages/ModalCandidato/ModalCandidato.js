@@ -26,7 +26,7 @@ export  function ModalCandidato({ candidates, handleClose, open, title }) {
                 <S.Phrase>Vaga: {title}.</S.Phrase>
               </S.TitleBox>
               <S.Content class="Content" showMore={showMore}>
-                {users.map((user, index) => {
+                {users?.map((user, index) => {
                   if(index < 4){
                     return(
                       <S.Candidates key={users.id }>
@@ -34,12 +34,12 @@ export  function ModalCandidato({ candidates, handleClose, open, title }) {
                            <S.ProfileImage src={user.imageURL}  alt="perfilImg"/>
                            <S.InfoContainer>
                              <h2>{user.name} {user.lastName}</h2>
-                             <p>Profissão: {user.role}</p>
-                             <p>Experiência: {user.experienceTime}</p>
+                             <p>Profissão: {user.profession}</p>
+                             <p>Experiência: {user.experienceTime === 0 ? '-' : user.experienceTime === 1 ? `${user.experienceTime} ano` : `${user.experienceTime} anos`}</p>
                            </S.InfoContainer>
                          </S.PhotoBox>
                          <S.PercentContainter>
-                             <S.PercentValue>{user.percent}</S.PercentValue>
+                             <S.PercentValue>{user.percentage}%</S.PercentValue>
                              <S.SubPercentTitle>Aderente à vaga</S.SubPercentTitle>
                              <S.LinkProfile href="#">conhecer o candidato</S.LinkProfile>
                          </S.PercentContainter>

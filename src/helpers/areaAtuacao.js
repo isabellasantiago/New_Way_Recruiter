@@ -188,6 +188,18 @@ export const areasAtuacao = [
             },
             {
                 name: "Webdesign"
+            },
+            {
+                name: "Desenvolvedor"
+            },
+            {
+                name: 'Web Design UI',
+            },
+            {
+                name: "Web Design UX",
+            },
+            {
+                name: 'Web Design UX/UI'
             }
         ]
     },

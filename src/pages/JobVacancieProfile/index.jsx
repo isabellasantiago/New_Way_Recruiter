@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useContext } from "react";
+import React, { useState, useLayoutEffect, useContext, useEffect } from "react";
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import CompanyPage from '../../components/CompanyPage';
@@ -6,90 +6,20 @@ import { AuthContext } from "../../services/contexts/auth";
 import { UserTypeEnum } from "../../shared/enums/userType.enum";
 import * as S from './style';
 import { useNavigate, useParams } from "react-router-dom";
-import { getJobVacancieByID } from "../../shared/functions/jobVacancie";
+import { getAllCandidatesByJobVacancie,  getJobVacancieByID } from "../../shared/functions/jobVacancie";
 import { companyTypeDescription, contractDescription, levelDescription } from "../../shared/functions/convert";
 import { YesNoModal } from "../../components/YesNoModal";
 import { notify } from "../../shared/functions/notify/notify";
 import Api from "../../services/mainApi";
 import JobVacancieModal from "../../components/JobVacancieModal";
 import { ModalCandidato } from "../ModalCandidato/ModalCandidato";
-
-const candidates = [{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ninguém sabe',
-    experienceTime: '1 e 2 meses',
-    imageURL: 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg',
-    percent: '98%',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Office boy',
-    experienceTime: '9 meses',
-    imageURL: 'https://rollingstone.uol.com.br/media/_versions/chandle-bing-reproducao-imdb_widelg.jpg',
-    percent: '98%',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ator',
-    experienceTime: '1 ano',
-    percent: '98%',
-    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Gogo boy',
-    experienceTime: '5 meses',
-    percent: '98%',
-    imageURL: 'https://claudia.abril.com.br/wp-content/uploads/2019/08/chandler.jpg'
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ator',
-    experienceTime: '1 ano',
-    percent: '98%',
-    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Gogo boy',
-    experienceTime: '5 meses',
-    percent: '98%',
-    imageURL: 'https://claudia.abril.com.br/wp-content/uploads/2019/08/chandler.jpg'
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ninguém sabe',
-    experienceTime: '1 e 2 meses',
-    imageURL: 'https://epipoca.com.br/wp-content/uploads/2020/12/Matthew-Perry.jpg',
-    percent: '98%',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Office boy',
-    experienceTime: '9 meses',
-    imageURL: 'https://rollingstone.uol.com.br/media/_versions/chandle-bing-reproducao-imdb_widelg.jpg',
-    percent: '98%',
-},
-{
-    name: 'Chandler',
-    lastName: 'Bing',
-    role: 'Ator',
-    experienceTime: '1 ano',
-    percent: '98%',
-    imageURL: 'https://img.ibxk.com.br/2020/04/23/23162049076588.jpg',
-}]
+import { CandidatePage } from "../../components/CandidatePage";
+import { useQuery } from "react-query";
+import { getCandidateById } from "../../shared/functions/candidate";
 
 export const JobVacancieProfile = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { id: jobVacancieId } = useParams();
 
     const [company, setCompany] = useState({
         imageURL: '',
@@ -107,24 +37,44 @@ export const JobVacancieProfile = () => {
     const [hide, setHide] = useState(false);
     const [showUpdateModal, setShowUpdateModal] = useState(false);
     const [showCandidatesModal, setShowCandidatesModal] = useState(false);
-    const { authenticated, user } = useContext(AuthContext);
+    const { authenticated, user, logout } = useContext(AuthContext);
     const [reload, setReload] = useState(false);
     const token = localStorage.getItem('token');
 
-    useLayoutEffect(() => {}, []);
+    const { data: candidate } = useQuery('candidate', async () => {
+        if(user?.type !== UserTypeEnum.CANDIDATE) {
+            return undefined;
+        }
+
+        const { data } = await getCandidateById(user?.id);
+
+        return data
+    });
+
+    const { data: candidates } = useQuery('candidates', async () => {
+        const { data: candidates } = await getAllCandidatesByJobVacancie(jobVacancieId);
+
+        return candidates;
+    });
+
+    useEffect(() => {
+        if(user?.type === UserTypeEnum.CANDIDATE) {
+            setHide(true);
+        }
+    }, [user])
 
     useLayoutEffect(() => {
         const getJobVacancie = async () => {
-            const { data: jv } = await getJobVacancieByID(id);
+            const { data: jv } = await getJobVacancieByID(jobVacancieId);
             setJobVacancie(jv);
             setCompany(jv.company);
         }
         getJobVacancie();
-    }, [id]);
+    }, [jobVacancieId]);
 
     const deleteJobVacancie = async () => {
         try{
-            const response = await Api.delete(`/jobVacancie/${id}`, {
+            const response = await Api.delete(`/jobVacancie/${jobVacancieId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -136,6 +86,12 @@ export const JobVacancieProfile = () => {
             }
 
         }catch(err){
+            const message = err.message.split(' ')
+            if(message[message.length - 1] === '401') {
+                notify('Desculpe, ocorreu um erro, precisamos que você logue novamente.', 'error');
+                logout();
+                return;
+            }
             if(err) notify(`${err.message}`, 'error');
         }
     }
@@ -150,6 +106,45 @@ export const JobVacancieProfile = () => {
             setReload(false);
             window.location.reload(false);
         }
+    }
+
+    const handleApply = async () => {
+        try{
+            const response = await Api.post('/apply/', {
+                jobVacancieID: jobVacancie?.id,
+                candidateID: candidate?.id
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+            )
+
+            if(response.status === 201 || response.status === 200) {
+                notify('Vaga candidatada com sucesso', 'success');
+                navigate('/home');
+            }
+
+        }catch(err){
+            const message = err.message.split(' ')
+            if(message[message.length - 1] === '401') {
+                notify('Desculpe, ocorreu um erro, precisamos que você logue novamente.', 'error');
+                logout();
+                return;
+            }
+            if(err) notify(`${err.message}`, 'error');
+        }
+    }
+    
+    const findCandidate = (candidateID) => {
+        const candidate = candidates?.find(data => data.candidate?.id === candidateID)
+
+        return candidate && candidate?.isApplied ? (<S.IsApplied> Você ja é cadastrado nessa vaga!!</S.IsApplied>) : (
+            <>
+                <S.Btn onClick={() => handleApply()}>Candidatar</S.Btn>
+            </>
+        )
     }
 
     const profile = (
@@ -219,24 +214,24 @@ export const JobVacancieProfile = () => {
                 </S.Row>
             </S.Container>
             <S.BtnBox>
-            <S.Btn onClick={() => setShow(true)}>Encerrar vaga</S.Btn>
-            <S.Btn onClick={() => setShowUpdateModal(true)}>Editar vaga</S.Btn>
-            {candidates.length && !hide ? (
-                <>
-                <S.Label color="#023859">Conheça os candidatos!</S.Label>
-                <S.PhotoContainer>
-                    {candidates.map(({imageURL}, index) => {
-                        if(index < 4){
-                            return <S.Candidates src={imageURL}/>
-                        }
-                    })}
-                </S.PhotoContainer>
-                <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>
-                </>
-            ) : (<S.Label color="#023859" ws="normal" align="center" w="140px">Nenhum candidato nessa vaga :'(</S.Label>)}
-            {hide && (
-                    <p>botao</p>
-                )
+            {hide ? (
+                    findCandidate(candidate?.id)
+                ) : (candidates?.length  ? (
+                    <>
+                    <S.Btn onClick={() => setShow(true)}>Encerrar vaga</S.Btn>
+                    <S.Btn onClick={() => setShowUpdateModal(true)}>Editar vaga</S.Btn>
+                    <S.Label color="#023859">Conheça os candidatos!</S.Label>
+                    <S.PhotoContainer>
+                        {candidates?.map(({imageURL}, index) => {
+                            if(index < 4){
+                                return <S.Candidates src={imageURL}/>
+                            }
+                            return;
+                        })}
+                    </S.PhotoContainer>
+                    <S.Btn w="150px" h="22px" bold onClick={() => setShowCandidatesModal(true)}> conhecer candidatos</S.Btn>
+                    </>
+                ) : (<S.Label color="#023859" ws="normal" align="center" w="140px">Nenhum candidato nessa vaga :'(</S.Label>))
             }
             </S.BtnBox>
             {show && (
@@ -279,9 +274,17 @@ export const JobVacancieProfile = () => {
         </>
     )
 
+    const bodyCandidate = (
+        <>
+            <CandidatePage>
+                {profile}
+            </CandidatePage>
+        </>
+    )
+
     return(
         <>
-        {user?.type === UserTypeEnum.COMPANY ? (bodyCompany) : 'uhu'}
+        {user?.type === UserTypeEnum.COMPANY ? (bodyCompany) : (bodyCandidate)}
         {needsReload()}
         </>
     )

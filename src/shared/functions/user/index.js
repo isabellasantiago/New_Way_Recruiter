@@ -7,7 +7,6 @@ export const getCurrentUser = async () => {
     
     if(userLoggedIn.type === UserTypeEnum.COMPANY){
         const user = await Api.get(`/company/${userLoggedIn.id}`)
-
         if(!user) throw Error('Not found');
 
         return user;
@@ -15,7 +14,6 @@ export const getCurrentUser = async () => {
 
     if(userLoggedIn.type === UserTypeEnum.CANDIDATE){
         const user = await Api.get(`/candidate/${userLoggedIn.id}`);
-
         if(!user) throw Error('Not found');
 
         return user;

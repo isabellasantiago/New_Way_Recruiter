@@ -16,6 +16,7 @@ export function CandidatoForm(){
     getValues,
     handleSubmit
   } = useForm();
+
   const navigate = useNavigate();
 
   async function onSubmit (data)  {
@@ -37,7 +38,6 @@ export function CandidatoForm(){
      return response;
      }catch(err){
       if(err) {
-        console.log(err.message);
         notify(`${err.message}`,'error');
       }
      }

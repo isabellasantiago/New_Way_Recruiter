@@ -1,10 +1,10 @@
 import {SelectAreas} from './style.js'
 import { areasAtuacao } from '../../helpers/areaAtuacao'
 
-export const SelectArea = ({className, id, name, onChange=()=>{}}) => {
+export const SelectArea = ({className, id, name, onChange=()=>{}, register, defaultValue }) => {
 
     return(
-        <SelectAreas className={className} id={id || name} name={name | id} onChange={onChange}>
+        <SelectAreas className={className} id={id || name} name={name | id} onChange={onChange} {...register(`${name}`)} defaultValue={defaultValue}>
             <option value="">Selecione</option>
             {areasAtuacao.map((area) => {
                 const { name } = area;
